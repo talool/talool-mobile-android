@@ -25,15 +25,17 @@ public final class R {
     }
     public static final class id {
         public static final int LinearLayout1=0x7f080000;
-        public static final int action_settings=0x7f080003;
+        public static final int action_settings=0x7f080004;
         public static final int btnLogin=0x7f080001;
+        public static final int btnRegister=0x7f080003;
         public static final int link_to_register=0x7f080002;
     }
     public static final class layout {
         public static final int find_deals_layout=0x7f030000;
         public static final int login_layout=0x7f030001;
         public static final int my_deals_layout=0x7f030002;
-        public static final int talool_activity_layout=0x7f030003;
+        public static final int registration_layout=0x7f030003;
+        public static final int talool_activity_layout=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f070000;

@@ -7,13 +7,11 @@ import org.apache.thrift.transport.TTransportException;
 
 import com.talool.api.thrift.CustomerService_t;
 
-import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
 
-public class LoginActivity extends Activity {
+public class RegistrationActivity extends Activity {
 	private static THttpClient tHttpClient;
 	private static TProtocol protocol;
 	private static CustomerService_t.Client client;
@@ -21,7 +19,7 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_layout);
+        setContentView(R.layout.registration_layout);
 		try {
 			tHttpClient = new THttpClient("http://dev-api.talool.com/1.1");
 			protocol = new TBinaryProtocol(tHttpClient);
@@ -33,18 +31,11 @@ public class LoginActivity extends Activity {
 
     }
 
-    public void onRegistrationClicked(View view)
-    {
-    
-    	Intent myIntent = new Intent(getApplicationContext(), RegistrationActivity.class);
-    	startActivity(myIntent);
-    }
-    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-    
 }

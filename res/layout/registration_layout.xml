@@ -1,6 +1,5 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
@@ -8,15 +7,37 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".LoginActivity" >
-            
+    android:scrollbars="vertical"
+    tools:context=".RegistrationActivity" >
     
     <LinearLayout
           android:orientation="vertical"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:padding="10dip">
-          <!--  Email Label -->
+          <!--  First Name Label -->
+          <TextView android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#372c24"
+                android:text="First Name"/>
+          <EditText android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:layout_marginBottom="5dip"
+                android:inputType="text"
+                android:singleLine="true"/>
+          <!--  Last Name Label -->
+          <TextView android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#372c24"
+                android:text="Last Name"/>
+          <EditText android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:layout_marginBottom="5dip"
+                android:inputType="text"
+                android:singleLine="true"/>
+        <!--  Email Label -->
           <TextView android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#372c24"
@@ -24,7 +45,7 @@
           <EditText android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
-                android:layout_marginBottom="20dip"
+                android:layout_marginBottom="5dip"
                 android:inputType="textEmailAddress"
                 android:singleLine="true"/>
           <!--  Password Label -->
@@ -38,23 +59,12 @@
                 android:singleLine="true"
                 android:inputType="textPassword"/>
           <!-- Login button -->
-          <Button android:id="@+id/btnLogin"
+          <Button android:id="@+id/btnRegister"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
-                android:text="@string/login"/>
+                android:text="Register"/>
           <!-- Link to Registration Screen -->
-          <TextView android:id="@+id/link_to_register"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dip"
-                android:layout_marginBottom="40dip"
-                android:text="@string/newToTalool"
-                android:gravity="center"
-                android:textSize="18sp"
-                android:onClick="onRegistrationClicked"
-                android:clickable="true"
-                android:textColor="#0b84aa"/>
  
 </LinearLayout>
 </ScrollView>
