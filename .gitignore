@@ -1,0 +1,13 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.settings
+*.project
+bin*
+target*
+*.classpath
+.DS_Store
+.mye*
