@@ -21,7 +21,9 @@
                 android:layout_height="wrap_content"
                 android:textColor="#372c24"
                 android:text="@string/email"/>
-          <EditText android:layout_width="fill_parent"
+          <EditText 
+                android:id="@+id/email"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
                 android:layout_marginBottom="20dip"
@@ -32,7 +34,9 @@
                 android:layout_height="wrap_content"
                 android:textColor="#372c24"
                 android:text="@string/password"/>
-          <EditText android:layout_width="fill_parent"
+          <EditText 
+                android:id="@+id/password"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
                 android:singleLine="true"
@@ -42,7 +46,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
-                android:text="@string/login"/>
+                android:text="@string/login"
+                android:onClick="onLoginClick"/>
           <!-- Link to Registration Screen -->
           <TextView android:id="@+id/link_to_register"
                 android:layout_width="fill_parent"
