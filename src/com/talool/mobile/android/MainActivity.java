@@ -1,22 +1,51 @@
 package com.talool.mobile.android;
 
+import com.talool.mobile.android.util.TaloolUser;
+
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
-import android.app.ActionBar.TabListener;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.graphics.drawable.Drawable;
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 public class MainActivity extends Activity {
-	
+
+	private final LocationListener locationListener = new LocationListener() {
+	    public void onLocationChanged(Location location) {
+	        TaloolUser.getInstance().setLocation(location);
+	    }
+
+		@Override
+		public void onProviderDisabled(String arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onProviderEnabled(String arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+			// TODO Auto-generated method stub
+			
+		}
+	};
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE); 
+		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
+		
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode( ActionBar.NAVIGATION_MODE_TABS );
 		actionBar.setDisplayShowTitleEnabled(false); 

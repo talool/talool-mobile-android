@@ -1,19 +1,16 @@
 package com.talool.mobile.android;
 
 import org.apache.thrift.TException;
-import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TProtocol;
-import org.apache.thrift.transport.THttpClient;
 import org.apache.thrift.transport.TTransportException;
 
 import com.talool.api.thrift.CTokenAccess_t;
-import com.talool.api.thrift.CustomerService_t;
 import com.talool.api.thrift.Customer_t;
 import com.talool.api.thrift.ServiceException_t;
+import com.talool.mobile.android.util.TaloolUser;
+import com.talool.mobile.android.util.ThriftHelper;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,21 +20,28 @@ import android.view.View;
 import android.widget.EditText;
 
 public class RegistrationActivity extends Activity {
-	private static THttpClient tHttpClient;
-	private static TProtocol protocol;
-	private static CustomerService_t.Client client;
-	private static CTokenAccess_t tokenAccess;
-	private static EditText firstName;
-	private static EditText lastName;
-	private static EditText email;
-	private static EditText password;
+	private static ThriftHelper client;
+	private EditText firstName;
+	private EditText lastName;
+	private EditText email;
+	private EditText password;
+	private Exception exception;
 	
 	private class RegisterTask extends AsyncTask<String,Void,CTokenAccess_t>{
 
 		@Override
 		protected void onPostExecute(CTokenAccess_t result) {
-			tokenAccess = result;
-			loginAttemptComplete();
+			if(exception != null)
+			{
+				popupErrorMessage(exception.getMessage());
+			}
+			else
+			{
+				TaloolUser.getInstance().setAccessToken(result);
+				Log.i(LoginActivity.class.toString(), "Login Complete");
+				Intent myDealsIntent = new Intent(getApplicationContext(), MainActivity.class);
+				startActivity(myDealsIntent);
+			}
 		}
 
 		@Override
@@ -46,7 +50,7 @@ public class RegistrationActivity extends Activity {
 
 			try {
 				Customer_t customer = new Customer_t(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString());
-				tokenAccess = client.createAccount(customer, password.getText().toString());
+				tokenAccess = client.getClient().createAccount(customer, password.getText().toString());
 			} catch (ServiceException_t e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -70,24 +74,11 @@ public class RegistrationActivity extends Activity {
         password = (EditText) findViewById(R.id.registrationPassword);
         
 		try {
-			tHttpClient = new THttpClient("http://dev-api.talool.com/1.1");
-			protocol = new TBinaryProtocol(tHttpClient);
-			client = new CustomerService_t.Client(protocol);
+			client = new ThriftHelper();
 		} catch (TTransportException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			popupErrorMessage(e.getMessage());
 		}
 		
-    }
-
-    public void loginAttemptComplete()
-    {
-    	if(tokenAccess != null)
-    	{
-			Log.i(RegistrationActivity.class.toString(), "Login Complete");
-			Intent myDealsIntent = new Intent(getApplicationContext(), MainActivity.class);
-			startActivity(myDealsIntent);
-    	}
     }
     
     public void onRegistrationClick(View view)
