@@ -8,6 +8,8 @@
 *.project
 bin*
 target*
+gen*
+*.apk
 *.classpath
 .DS_Store
 .mye*
