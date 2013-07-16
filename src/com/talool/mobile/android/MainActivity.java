@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
 		Tab tab2 = actionBar.newTab().setText("Find Deals").setTabListener( 
 	            new MyTabListener( this, FindDealsFragment.class.getName()) );
 		Tab tab3 = actionBar.newTab().setText("My Activity").setTabListener( 
-	            new MyTabListener( this, TaloolActivityFragment.class.getName()) );
+	            new MyTabListener( this, MyActivityFragment.class.getName()) );
 		actionBar.addTab(tab);
 		actionBar.addTab(tab2);
 		actionBar.addTab(tab3);
