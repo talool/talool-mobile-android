@@ -10,5 +10,11 @@
 	<string name="login">Login</string>    
 
 	<string name="icon_gift">&#xf06b;</string>
+	<string name="icon_envelope_alt">&#xf003;</string>
+	<string name="icon_money">&#xf0d6;</string>
+	
+	<color name="color_teal">#19BCB9</color>
+	
+	<color name="color_grey">#C0C0C0</color>
 	
 </resources>

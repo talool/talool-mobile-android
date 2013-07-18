@@ -53,8 +53,8 @@ public class MyActivityFragment extends Fragment
 			{
 				client.setAccessToken(TaloolUser.getInstance().getAccessToken());
 				SearchOptions_t searchOptions = new SearchOptions_t();
-				// searchOptions.setMaxResults(1000).setPage(0).setSortProperty("activityDate").setAscending(false);
-				results = client.getClient().getActivities(null);
+				searchOptions.setMaxResults(1000).setPage(0).setSortProperty("activityDate").setAscending(false);
+				results = client.getClient().getActivities(searchOptions);
 			}
 			catch (ServiceException_t e)
 			{
