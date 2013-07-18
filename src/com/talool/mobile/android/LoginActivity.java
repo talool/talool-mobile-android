@@ -77,6 +77,7 @@ public class LoginActivity extends Activity {
 
 	public void onLoginClick(View view)
 	{
+		exception = null;
 		CustomerServiceTask task = new CustomerServiceTask();
 		task.execute(new String[]{});
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.util.TaloolUser;
+import com.talool.mobile.android.util.TaloolUtil;
 
 import android.app.Activity;
 import android.content.Context;
@@ -32,14 +33,14 @@ public class MyDealsAdapter extends ArrayAdapter<Merchant_t> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
-        MyDealsHolder holder = null;
+        MyDealsRow holder = null;
         
         if(row == null)
         {
             LayoutInflater inflater = ((Activity)context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
             
-            holder = new MyDealsHolder();
+            holder = new MyDealsRow();
             holder.myDealsMerchantIcon = (ImageView)row.findViewById(R.id.myDealsMerchantIcon);
             holder.myDealsMerchantTitle = (TextView)row.findViewById(R.id.myDealsMerchantTitle);
             holder.myDealsMerchantLocation = (TextView)row.findViewById(R.id.myDealsMerchantLocation);
@@ -50,10 +51,11 @@ public class MyDealsAdapter extends ArrayAdapter<Merchant_t> {
         }
         else
         {
-            holder = (MyDealsHolder)row.getTag();
+            holder = (MyDealsRow)row.getTag();
         }
         
         Merchant_t merchant = data.get(position);
+        holder.merchant = merchant;
         holder.myDealsMerchantIcon.setImageResource(R.drawable.icon_teal);
         holder.myDealsMerchantTitle.setText(merchant.getName());
         if(merchant.getLocations() != null && merchant.getLocations().size() >0)
@@ -68,7 +70,7 @@ public class MyDealsAdapter extends ArrayAdapter<Merchant_t> {
             	float distance = TaloolUser.getInstance().getLocation().distanceTo(merchantLocation);
             	distance = (float) (distance * 0.00062137);
             	
-            	holder.myDealsMerchantDistance.setText(String.valueOf(distance));
+            	holder.myDealsMerchantDistance.setText(String.valueOf(TaloolUtil.round(distance, 2)) + " miles");
 
         	}
         	holder.myDealsMerchantLocation.setText(merchant.getLocations().get(0).address.city);
@@ -77,16 +79,5 @@ public class MyDealsAdapter extends ArrayAdapter<Merchant_t> {
 
         
         return row;
-    }
-    
-    static class MyDealsHolder
-    {
-        ImageView myDealsMerchantIcon;
-        TextView myDealsMerchantTitle;
-        TextView myDealsMerchantLocation;
-        TextView myDealsMerchantDistance;
-        ImageView myDealsMerchantArrow;
-    }
-    
-    
+    }    
 }
