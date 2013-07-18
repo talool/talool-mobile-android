@@ -5,11 +5,27 @@
     android:gravity="left"
     android:orientation="horizontal" >
 
+     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/iconView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/icon_gift"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#19BCB9"
+            android:textSize="30sp" />
+    </LinearLayout>
+    
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:gravity="top"
-        android:orientation="vertical" >
+        android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/activityTitle"
@@ -35,7 +51,7 @@
                 android:layout_marginBottom="2dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
-                android:gravity="left"
+                android:gravity="bottom"
                 android:textColor="#000000"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -46,30 +62,13 @@
                 android:layout_height="fill_parent"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="10dp"
-                android:gravity="right"
+                android:gravity="bottom"
                 android:textColor="#000000"
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="right"
-        android:orientation="horizontal" >
-
-        <ImageView
-            android:id="@+id/myDealsMerchantArrow"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_gravity="right"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
-            android:contentDescription="ArrowIcon"
-            android:cropToPadding="false"
-            android:src="@drawable/navigation_next_item" />
-    </LinearLayout>
+   
 
 </LinearLayout>

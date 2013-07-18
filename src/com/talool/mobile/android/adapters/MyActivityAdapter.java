@@ -5,11 +5,11 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.talool.api.thrift.Activity_t;
@@ -31,7 +31,7 @@ public class MyActivityAdapter extends ArrayAdapter<Activity_t>
 		TextView activityTitle;
 		TextView activitySubtitle;
 		TextView activityDate;
-		ImageView myDealsMerchantArrow;
+		TextView icon;
 	}
 
 	public MyActivityAdapter(final Context context, final int layoutResourceId, final List<Activity_t> data)
@@ -57,7 +57,13 @@ public class MyActivityAdapter extends ArrayAdapter<Activity_t>
 			holder.activityTitle = (TextView) row.findViewById(R.id.activityTitle);
 			holder.activitySubtitle = (TextView) row.findViewById(R.id.activitySubtitle);
 			holder.activityDate = (TextView) row.findViewById(R.id.activityDate);
-			holder.myDealsMerchantArrow = (ImageView) row.findViewById(R.id.myDealsMerchantArrow);
+
+			// holder.icon.setText(R.string.icon_gift);
+
+			final TextView txt = (TextView) row.findViewById(R.id.iconView);
+
+			Typeface font = Typeface.createFromAsset(parent.getContext().getAssets(), "fontawesome-webfont.ttf");
+			txt.setTypeface(font);
 
 			row.setTag(holder);
 		}
@@ -70,7 +76,6 @@ public class MyActivityAdapter extends ArrayAdapter<Activity_t>
 		holder.activityTitle.setText(activity.getTitle());
 		holder.activitySubtitle.setText(activity.getSubtitle());
 		holder.activityDate.setText(new Date(activity.getActivityDate()).toString());
-		holder.myDealsMerchantArrow.setImageResource(R.drawable.navigation_next_item);
 
 		return row;
 	}
