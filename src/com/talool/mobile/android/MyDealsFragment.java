@@ -2,6 +2,7 @@ package com.talool.mobile.android;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
@@ -123,7 +124,11 @@ public class MyDealsFragment extends Fragment{
 			Merchant_t merchant = (Merchant_t)myDealsAdapter.getItem(position);	
 		
 	        Intent myIntent = new Intent(arg1.getContext(), DealsActivity.class);
-			startActivity(myIntent);	
+	        myIntent.putExtra("Lat", String.valueOf(merchant.getLocations().get(0).location.latitude));
+	        myIntent.putExtra("Lon", String.valueOf(merchant.getLocations().get(0).location.longitude));
+
+	        startActivity(myIntent);	
+
 		}
 	};
 

@@ -8,4 +8,7 @@
 	<string name="newToTalool">New to Talool? Please Register.</string>
 	<string name="email">Email</string>
 	<string name="login">Login</string>    
+
+	<string name="icon_gift">&#xf06b;</string>
+	
 </resources>
