@@ -32,12 +32,12 @@
         android:layout_weight="0.5"
         android:orientation="vertical" >
 
-        <TextView
+        <ListView
+            android:id="@+id/dealsAcquiredList"
             android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:text="Deals Activity" >
-        </TextView>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        </ListView>
     </LinearLayout>
 
 </LinearLayout>
