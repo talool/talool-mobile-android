@@ -81,13 +81,6 @@ public class MyActivityFragment extends Fragment
 	public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
 			Bundle savedInstanceState)
 	{
-
-		this.view = inflater.inflate(R.layout.my_activity_fragment, container, false);
-		myActivityListView = (ListView) view.findViewById(R.id.myActivityListView);
-
-		final MyActivityTask dealsTask = new MyActivityTask();
-		dealsTask.execute(new String[] {});
-
 		try
 		{
 			client = new ThriftHelper();
@@ -96,6 +89,12 @@ public class MyActivityFragment extends Fragment
 		{
 			e.printStackTrace();
 		}
+
+		this.view = inflater.inflate(R.layout.my_activity_fragment, container, false);
+		myActivityListView = (ListView) view.findViewById(R.id.myActivityListView);
+
+		final MyActivityTask dealsTask = new MyActivityTask();
+		dealsTask.execute(new String[] {});
 
 		return view;
 	}

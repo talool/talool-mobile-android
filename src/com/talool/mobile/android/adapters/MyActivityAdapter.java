@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import com.talool.api.thrift.ActivityEvent_t;
 import com.talool.api.thrift.Activity_t;
 import com.talool.mobile.android.R;
+import com.talool.mobile.android.util.TypefaceFactory;
 
 /**
  * 
@@ -49,9 +49,6 @@ public class MyActivityAdapter extends ArrayAdapter<Activity_t>
 	@Override
 	public View getView(final int position, final View convertView, final ViewGroup parent)
 	{
-		// TODO move font to global Application
-		final Typeface font = Typeface.createFromAsset(parent.getContext().getAssets(), "fontawesome-webfont.ttf");
-
 		View row = convertView;
 		ActivityHolder holder = null;
 
@@ -70,7 +67,7 @@ public class MyActivityAdapter extends ArrayAdapter<Activity_t>
 			final ImageView imageArrow = (ImageView) row.findViewById(R.id.activityLinkArrow);
 
 			final TextView txt = (TextView) row.findViewById(R.id.iconView);
-			txt.setTypeface(font);
+			txt.setTypeface(TypefaceFactory.get().getFontAwesome());
 
 			boolean hasActionLink = (activity.getActivityLink() != null);
 
