@@ -4,13 +4,14 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/dealsMerchantImage"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.25"
-        android:background="@color/gray"
-        android:orientation="vertical" >
-    </LinearLayout>
+        android:adjustViewBounds="false"
+        android:contentDescription="Deals Merchant Image"
+        android:scaleType="fitXY" />
 
     <FrameLayout
         android:id="@+id/map_frame"
@@ -22,7 +23,7 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/map"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </FrameLayout>
 
     <LinearLayout

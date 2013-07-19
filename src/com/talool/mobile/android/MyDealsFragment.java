@@ -2,7 +2,6 @@ package com.talool.mobile.android;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadPoolExecutor;
 
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
@@ -11,16 +10,17 @@ import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.adapters.MyDealsAdapter;
-import com.talool.mobile.android.adapters.MyDealsRow;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +35,7 @@ public class MyDealsFragment extends Fragment{
 	private Context context;
 	private Exception exception;
 	private List<Merchant_t> merchants;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -43,50 +43,77 @@ public class MyDealsFragment extends Fragment{
 		this.view = inflater.inflate(R.layout.my_deals_fragment, container,false);
 		myDealsListView = (ListView) view.findViewById(R.id.myDealsListView);
 		this.context = view.getContext();
-		MyDealsTask dealsTask = new MyDealsTask();
-		dealsTask.execute(new String[]{});
-
-		
+		createThriftClient();
+		reloadData();
+		return view;
+	}
+	
+	public void createThriftClient()
+	{
 		try {
 			client = new ThriftHelper();
 		} catch (TTransportException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		return view;
+	}
+	
+	private void reloadData()
+	{
+		MyDealsTask dealsTask = new MyDealsTask();
+		dealsTask.execute(new String[]{});
 	}
 	
 	private void loadListView()
 	{
-		MyDealsAdapter adapter = new MyDealsAdapter(view.getContext(), 
-                R.layout.mydeals_item_row, merchants);
-		myDealsAdapter = adapter;
-		myDealsListView.setAdapter(myDealsAdapter);
-		myDealsListView.setOnItemClickListener(onClickListener);
+		if(exception == null)
+		{
+			MyDealsAdapter adapter = new MyDealsAdapter(view.getContext(), 
+			        R.layout.mydeals_item_row, merchants);
+			myDealsAdapter = adapter;
+			myDealsListView.setAdapter(myDealsAdapter);
+			myDealsListView.setOnItemClickListener(onClickListener);
+		}
+		else
+		{
+			 popupErrorMessage(exception.getMessage());
+		}
+	}
+	
+	private void popupErrorMessage(String message)
+	{
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+		alertDialogBuilder.setTitle("Error Loading Deals");
+		alertDialogBuilder.setMessage(message);
+		alertDialogBuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener()
+		{
+			public void onClick(DialogInterface dialog, int which)
+			{
+				dialog.dismiss();
+				createThriftClient();
+				reloadData();
+			}
+		});
+		alertDialogBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener()
+		{
+			public void onClick(DialogInterface dialog, int which)
+			{
+				dialog.dismiss();
+			}
+		});
+		// create alert dialog
+		AlertDialog alertDialog = alertDialogBuilder.create();
+
+		// show it
+		alertDialog.show();
 	}
 	
 	private class MyDealsTask extends AsyncTask<String,Void,List<Merchant_t>>{
-		private ProgressDialog progressDialog;
-		public MyDealsTask()
-		{
-			this.progressDialog = new ProgressDialog(context);
-		}
 		
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();			
-			this.progressDialog.setMessage("Loading Deals");
-	        this.progressDialog.show();
-		}
-
 		@Override
 		protected void onPostExecute(List<Merchant_t> results) {
 			merchants = results;
-			if(progressDialog.isShowing())
-			{
-				progressDialog.dismiss();
-			}
+			Log.i(MyDealsFragment.class.toString(), "Number of Merchants: " + results.size());
 			loadListView();
 		}
 
@@ -95,6 +122,7 @@ public class MyDealsFragment extends Fragment{
 			List<Merchant_t> results = new ArrayList<Merchant_t>();
 
 			try {
+				exception = null;
 				client.setAccessToken(TaloolUser.getInstance().getAccessToken());
 				SearchOptions_t searchOptions = new SearchOptions_t();
 				searchOptions.setMaxResults(1000).setPage(0).setSortProperty("merchant.name").setAscending(true);
@@ -102,12 +130,17 @@ public class MyDealsFragment extends Fragment{
 			} catch (ServiceException_t e) {
 				// TODO Auto-generated catch block
 				exception = e;
+				Log.e(MyDealsFragment.class.toString(), e.getMessage());
 			} catch (TException e) {
 				// TODO Auto-generated catch block
 				exception = e;
+				Log.e(MyDealsFragment.class.toString(),e.getMessage());
+
 			} catch (Exception e)
 			{
 				exception = e;
+				Log.e(MyDealsFragment.class.toString(),e.getMessage());
+
 			}
 			
 			return results;
@@ -126,7 +159,14 @@ public class MyDealsFragment extends Fragment{
 	        Intent myIntent = new Intent(arg1.getContext(), DealsActivity.class);
 	        myIntent.putExtra("Lat", String.valueOf(merchant.getLocations().get(0).location.latitude));
 	        myIntent.putExtra("Lon", String.valueOf(merchant.getLocations().get(0).location.longitude));
-
+	        myIntent.putExtra("address1",merchant.getLocations().get(0).address.address1);
+	        myIntent.putExtra("address2",merchant.getLocations().get(0).address.address2);
+	        myIntent.putExtra("city",merchant.getLocations().get(0).address.city);
+	        myIntent.putExtra("zip", merchant.getLocations().get(0).address.zip);
+	        myIntent.putExtra("state", merchant.getLocations().get(0).address.stateProvinceCounty);
+	        myIntent.putExtra("merchantId", merchant.merchantId);
+	        myIntent.putExtra("merchantName", merchant.name);
+	        myIntent.putExtra("imageUrl", merchant.locations.get(0).merchantImageUrl);
 	        startActivity(myIntent);	
 
 		}
