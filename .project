@@ -3,6 +3,7 @@
 	<name>talool-mobile-android</name>
 	<comment></comment>
 	<projects>
+		<project>google-play-services_lib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
