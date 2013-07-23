@@ -12,6 +12,7 @@ import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.adapters.MyDealsAdapter;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
+import com.talool.mobile.android.util.TypefaceFactory;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -23,9 +24,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MyDealsFragment extends Fragment{
 	private ListView myDealsListView;
@@ -41,7 +45,10 @@ public class MyDealsFragment extends Fragment{
 			Bundle savedInstanceState) {
 		
 		this.view = inflater.inflate(R.layout.my_deals_fragment, container,false);
+		final TextView txt = (TextView) view.findViewById(R.id.myDealsFoodFilterButton);
+		txt.setTypeface(TypefaceFactory.get().getFontAwesome());
 		myDealsListView = (ListView) view.findViewById(R.id.myDealsListView);
+		
 		this.context = view.getContext();
 		createThriftClient();
 		reloadData();
@@ -56,6 +63,51 @@ public class MyDealsFragment extends Fragment{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void setButtonListeners()
+	{		
+		Button allButton = (Button) view.findViewById(R.id.myDealsAllFilterButton);
+		Button foodButton = (Button) view.findViewById(R.id.myDealsFoodFilterButton);
+		Button funButton = (Button) view.findViewById(R.id.myDealsFunFilterButton);
+		Button nightButton = (Button) view.findViewById(R.id.myDealsNightFilterButton);
+		Button shopButton = (Button) view.findViewById(R.id.myDealsShopFilterButton);
+
+		allButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+        		myDealsAdapter.getFilter().filter("");
+            }
+        });
+		
+		
+		foodButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+        		myDealsAdapter.getFilter().filter("Food");
+            }
+        });
+		
+		funButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+        		myDealsAdapter.getFilter().filter("Fun");
+            }
+        });
+		
+		nightButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+        		myDealsAdapter.getFilter().filter("Night");
+            }
+        });
+		
+		shopButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+        		myDealsAdapter.getFilter().filter("Shop");
+            }
+        });
 	}
 	
 	private void reloadData()
@@ -73,6 +125,7 @@ public class MyDealsFragment extends Fragment{
 			myDealsAdapter = adapter;
 			myDealsListView.setAdapter(myDealsAdapter);
 			myDealsListView.setOnItemClickListener(onClickListener);
+			setButtonListeners();
 		}
 		else
 		{

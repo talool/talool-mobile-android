@@ -14,6 +14,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -86,6 +88,18 @@ public class MainActivity extends Activity {
 			ret = super.onOptionsItemSelected( item );
 		}
 		return ret;
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+	        Log.d(this.getClass().getName(), "back button pressed");
+	        return false;
+	    }
+	    else
+	    {
+	    	return super.onKeyDown(keyCode, event);
+	    }
 	}
 
 	private class MyTabListener implements ActionBar.TabListener

@@ -4,11 +4,64 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <ListView 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/my_deals_background"
+        android:orientation="horizontal"
+        android:paddingTop="15dp" >
+
+        <Button
+            android:id="@+id/myDealsAllFilterButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_weight="1"
+            android:text="All" />
+
+        <Button
+            android:id="@+id/myDealsFoodFilterButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_weight="1"
+            android:text="Food" >
+        </Button>
+
+        <Button
+            android:id="@+id/myDealsFunFilterButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_weight="1"
+            android:text="Fun" >
+        </Button>
+
+        <Button
+            android:id="@+id/myDealsNightFilterButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_weight="1"
+            android:text="Night" >
+        </Button>
+
+        <Button
+            android:id="@+id/myDealsShopFilterButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_weight="1"
+            android:text="Shop" >
+
+        </Button>
+    </LinearLayout>
+
+    <ListView
         android:id="@+id/myDealsListView"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
     </ListView>
 
 </LinearLayout>

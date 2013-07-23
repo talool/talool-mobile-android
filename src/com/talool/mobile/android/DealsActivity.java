@@ -14,22 +14,19 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.talool.api.thrift.DealAcquire_t;
-import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
-import com.talool.mobile.android.adapters.DealAcquiredRow;
 import com.talool.mobile.android.adapters.DealsAcquiredAdapter;
-import com.talool.mobile.android.adapters.MyDealsAdapter;
 import com.talool.mobile.android.util.ImageDownloader;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -48,19 +45,14 @@ public class DealsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.deals_activity_layout);
-		try {
-			client = new ThriftHelper();
-		} catch (TTransportException e) {
-			e.printStackTrace();
-		}
-		
+		createThriftClient();
+
 		dealsAcquiredList = (ListView) findViewById(R.id.dealsAcquiredList);
 		imageView = (ImageView) findViewById(R.id.dealsMerchantImage);
 		mapView = (MapView) findViewById(R.id.map);
 		mapView.onCreate(savedInstanceState);
-		DealAcquiresTask dealAcquiresTask = new DealAcquiresTask();
-		dealAcquiresTask.execute(new String[]{});
-		
+		reloadData();
+
 		String lat = (String) getIntent().getSerializableExtra("Lat");
 		String lon = (String) getIntent().getSerializableExtra("Lon");
 		String address1 = (String) getIntent().getSerializableExtra("address1");
@@ -118,16 +110,62 @@ public class DealsActivity extends Activity {
 		if(exception == null)
 		{
 			DealsAcquiredAdapter adapter = new DealsAcquiredAdapter(this, 
-			        R.layout.deals_acquired_item_row, dealAcquires);
+					R.layout.deals_acquired_item_row, dealAcquires);
 			dealAcquiredAdapter = adapter;
 			dealsAcquiredList.setAdapter(dealAcquiredAdapter);
 		}
 		else
 		{
-			// popupErrorMessage(exception.getMessage());
+			popupErrorMessage(exception.getMessage());
 		}
 	}
-	
+
+	private void reloadData()
+	{
+		DealAcquiresTask dealAcquiresTask = new DealAcquiresTask();
+		dealAcquiresTask.execute(new String[]{});
+	}
+
+	private void createThriftClient()
+	{
+
+		try {
+			client = new ThriftHelper();
+		} catch (TTransportException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void popupErrorMessage(String message)
+	{
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+		alertDialogBuilder.setTitle("Error Loading Deals");
+		alertDialogBuilder.setMessage(message);
+		alertDialogBuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener()
+		{
+			public void onClick(DialogInterface dialog, int which)
+			{
+				dialog.dismiss();
+				createThriftClient();
+				reloadData();
+			}
+		});
+		alertDialogBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener()
+		{
+			public void onClick(DialogInterface dialog, int which)
+			{
+				dialog.dismiss();
+			}
+		});
+		// create alert dialog
+		AlertDialog alertDialog = alertDialogBuilder.create();
+
+		// show it
+		alertDialog.show();
+	}
+
+
 	private class DealAcquiresTask extends AsyncTask<String,Void,List<DealAcquire_t>>{
 
 		@Override
