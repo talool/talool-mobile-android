@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="100dip"
+        android:layout_height="85dp"
         android:layout_margin="0dp"
         android:background="@drawable/button_bar_3"
         android:orientation="horizontal" >
@@ -25,7 +25,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/icon_map_marker"
-                android:textColor="@color/tan" />
+                android:textColor="@color/tan"
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/openMapText"
@@ -48,7 +49,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/icon_phone"
-                android:textColor="@color/tan" />
+                android:textColor="@color/tan" 
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/callText"
@@ -73,7 +75,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/icon_info_sign"
-                android:textColor="@color/tan" />
+                android:textColor="@color/tan"
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/textView3"
