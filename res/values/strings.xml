@@ -21,6 +21,9 @@
     <string name="icon_ticket">&#xf145;</string>
     <string name="icon_glass">&#xf000;</string>
     <string name="icon_heart">&#xf004;</string>
+    <string name="icon_thumbs_up">&#xf164;</string>
+    <string name="icon_thumbs_down">&#xf165;</string>
+    
 <color name="color_teal">#19BCB9</color>
 	
 	<color name="color_grey">#C0C0C0</color>

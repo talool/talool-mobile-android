@@ -75,8 +75,8 @@ public class LoginActivity extends Activity
 		setContentView(R.layout.login_layout);
 		username = (EditText) findViewById(R.id.email);
 		password = (EditText) findViewById(R.id.password);
-		username.setText("zachmanc@colorado.edu");
-		password.setText("test123");
+		username.setText("chris@talool.com");
+		password.setText("pass123");
 		try
 		{
 			client = new ThriftHelper();

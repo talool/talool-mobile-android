@@ -24,6 +24,7 @@ import com.talool.mobile.android.R;
 import com.talool.mobile.android.adapters.MyActivityAdapter;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
+import com.talool.thrift.util.ThriftUtil;
 
 /**
  * 
@@ -52,6 +53,7 @@ public class MyActivityFragment extends Fragment
 			{
 				intent = new Intent(parent.getContext(), GiftActivity.class);
 				intent.putExtra(GiftActivity.GIFT_ID_PARAM, activity.getActivityLink().getLinkElement());
+				intent.putExtra(GiftActivity.ACTICITY_OBJ_PARAM, ThriftUtil.serialize(activity));
 			}
 			else if (activity.getActivityLink() != null)
 			{
