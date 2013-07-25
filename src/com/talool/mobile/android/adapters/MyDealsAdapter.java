@@ -1,7 +1,9 @@
 package com.talool.mobile.android.adapters;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.talool.api.thrift.Category_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.util.TaloolUser;
@@ -14,22 +16,91 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MyDealsAdapter extends ArrayAdapter<Merchant_t> {
-
-	Context context; 
-    int layoutResourceId;    
-    List<Merchant_t> data = null;
+public class MyDealsAdapter extends ArrayAdapter<Merchant_t> implements Filterable{
+	private Context context; 
+    private int layoutResourceId;    
+    private List<Merchant_t> data = null;
+    private List<Merchant_t> filteredData = null;
     
     public MyDealsAdapter(Context context, int layoutResourceId, List<Merchant_t> data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.data = data;
+        this.filteredData = data;
     }
 
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return filteredData.size();
+	}
+
+	@Override
+	public Filter getFilter() {
+		// TODO Auto-generated method stub
+		return new Filter()
+       {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence)
+            {
+                FilterResults results = new FilterResults();
+
+                //If there's nothing to filter on, return the original data for your list
+                if(charSequence == null || charSequence.length() == 0)
+                {
+                    results.values = data;
+                    results.count = data.size();
+                }
+                else
+                {
+                    List<Merchant_t> filterResultsData = new ArrayList<Merchant_t>();
+
+                    for(Merchant_t merchant : data)
+                    {
+                        //In this loop, you'll filter through originalData and compare each item to charSequence.
+                        //If you find a match, add it to your new ArrayList
+                        //I'm not sure how you're going to do comparison, so you'll need to fill out this conditional
+                    	if(merchant.category.name.equalsIgnoreCase(charSequence.toString()))
+                        {
+                            filterResultsData.add(merchant);
+                        }
+                    }            
+
+                    results.values = filterResultsData;
+                    results.count = filterResultsData.size();
+                }
+
+                return results;
+            }
+
+            @SuppressWarnings("unchecked")
+			@Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults)
+            {
+                filteredData = (List<Merchant_t>)filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+	}
+
+	@Override
+	public Merchant_t getItem(int position) {
+		// TODO Auto-generated method stub
+		return filteredData.get(0);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		// TODO Auto-generated method stub
+		return position;
+	}
+    
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
