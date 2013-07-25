@@ -1,6 +1,7 @@
 package com.talool.mobile.android;
 
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.talool.mobile.android.activity.MyActivityFragment;
 import com.talool.mobile.android.util.TaloolUser;
 
 import android.app.ActionBar;
