@@ -36,10 +36,18 @@ public final class ThriftUtil
 	 * @throws TException
 	 */
 	@SuppressWarnings("rawtypes")
-	public static byte[] serialize(final TBase obj) throws TException
+	public static byte[] serialize(final TBase obj)
 	{
-		final TSerializer serializer = new TSerializer(PROTOCOL_FACTORY);
-		final byte[] bytes = serializer.serialize(obj);
+		final TSerializer serializer = new TSerializer(new TBinaryProtocol.Factory());
+		byte[] bytes = null;
+		try {
+			bytes = serializer.serialize(obj);
+			return bytes;
+
+		} catch (TException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return bytes;
 	}
 

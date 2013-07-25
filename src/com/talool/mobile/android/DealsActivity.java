@@ -8,12 +8,15 @@ import org.apache.thrift.transport.TTransportException;
 
 import com.google.android.gms.maps.MapView;
 import com.talool.api.thrift.DealAcquire_t;
+import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.adapters.DealsAcquiredAdapter;
 import com.talool.mobile.android.util.ImageDownloader;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
+import com.talool.mobile.android.util.TypefaceFactory;
+import com.talool.thrift.util.ThriftUtil;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,6 +26,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class DealsActivity extends Activity {
 	private static ThriftHelper client;
@@ -32,7 +36,7 @@ public class DealsActivity extends Activity {
 	private DealsAcquiredAdapter dealAcquiredAdapter;
 	private Exception exception;
 	private List<DealAcquire_t> dealAcquires;
-	private String merchantId;
+	private Merchant_t merchant;
 
 
 	@Override
@@ -40,65 +44,39 @@ public class DealsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.deals_activity_layout);
 		createThriftClient();
-
+		setIcons();
 		dealsAcquiredList = (ListView) findViewById(R.id.dealsAcquiredList);
 		imageView = (ImageView) findViewById(R.id.dealsMerchantImage);
-//		mapView = (MapView) findViewById(R.id.map);
-//		mapView.onCreate(savedInstanceState);
-		reloadData();
+		
 
-		String lat = (String) getIntent().getSerializableExtra("Lat");
-		String lon = (String) getIntent().getSerializableExtra("Lon");
-		String address1 = (String) getIntent().getSerializableExtra("address1");
-		String address2 = (String) getIntent().getSerializableExtra("address2");
-		String city = (String) getIntent().getSerializableExtra("city");
-		String zip = (String) getIntent().getSerializableExtra("zip");
-		String state = (String) getIntent().getSerializableExtra("state");
-		String merchantName = (String) getIntent().getSerializableExtra("merchantName");
-		merchantId = (String) getIntent().getSerializableExtra("merchantId");
-		String imageUrl = (String) getIntent().getSerializableExtra("imageUrl");
 
-		if(imageUrl != null){
-			ImageDownloader imageTask = new ImageDownloader(this.imageView);
-			imageTask.execute(new String[]{imageUrl});			
+		try {
+			byte[] merchantBytes = (byte[]) getIntent().getSerializableExtra("merchant");
+			merchant = new Merchant_t();
+			ThriftUtil.deserialize(merchantBytes,merchant);
+			reloadData();
+
+			if(merchant.locations.get(0).merchantImageUrl != null){
+				ImageDownloader imageTask = new ImageDownloader(this.imageView);
+				imageTask.execute(new String[]{merchant.locations.get(0).merchantImageUrl});			
+			}
+		} catch (TException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-//		try {
-////			MapsInitializer.initialize(this);
-////			LatLng location = new LatLng(Double.valueOf(lat),Double.valueOf(lon));
-////			CameraUpdate update = CameraUpdateFactory.newLatLngZoom(location, 13);
-////			mapView.getMap().moveCamera(update);
-////			mapView.getMap().addMarker(new MarkerOptions()
-////			.position(location)
-////			.title(merchantName));
-//		} catch (GooglePlayServicesNotAvailableException e1) {
-//			Log.e(DealsActivity.class.toString(),"Maps was not loaded on this device. Please install");
-//		}
+
 	}
 
-	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-//		MapView mapView = (MapView) findViewById(R.id.map);
-//		mapView.onDestroy();
+	private void setIcons()
+	{
+		final TextView callIcon = (TextView) findViewById(R.id.callIcon);
+		callIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
+		final TextView visitIcon = (TextView) findViewById(R.id.visitIcon);
+		visitIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
+		final TextView mapIcon = (TextView) findViewById(R.id.mapIcon);
+		mapIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
 	}
-
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-//		MapView mapView = (MapView) findViewById(R.id.map);
-//		mapView.onPause();
-	}
-
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-//		MapView mapView = (MapView) findViewById(R.id.map);
-//		mapView.onResume();
-	}
-
+	
 	private void loadListView()
 	{
 		if(exception == null)
@@ -178,7 +156,7 @@ public class DealsActivity extends Activity {
 				client.setAccessToken(TaloolUser.getInstance().getAccessToken());
 				SearchOptions_t searchOptions = new SearchOptions_t();
 				searchOptions.setMaxResults(1000).setPage(0).setSortProperty("deal.dealId").setAscending(true);
-				results = client.getClient().getDealAcquires(merchantId, searchOptions);
+				results = client.getClient().getDealAcquires(merchant.merchantId, searchOptions);
 			} catch (ServiceException_t e) {
 				// TODO Auto-generated catch block
 				exception = e;

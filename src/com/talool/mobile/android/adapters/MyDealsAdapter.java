@@ -66,7 +66,7 @@ public class MyDealsAdapter extends ArrayAdapter<Merchant_t> implements Filterab
                         //In this loop, you'll filter through originalData and compare each item to charSequence.
                         //If you find a match, add it to your new ArrayList
                         //I'm not sure how you're going to do comparison, so you'll need to fill out this conditional
-                    	if(merchant.category.name.equalsIgnoreCase(charSequence.toString()))
+                    	if(merchant.category.categoryId == Integer.valueOf(charSequence.toString()))
                         {
                             filterResultsData.add(merchant);
                         }
@@ -92,7 +92,7 @@ public class MyDealsAdapter extends ArrayAdapter<Merchant_t> implements Filterab
 	@Override
 	public Merchant_t getItem(int position) {
 		// TODO Auto-generated method stub
-		return filteredData.get(0);
+		return filteredData.get(position);
 	}
 
 	@Override

@@ -3,13 +3,14 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/my_deals_background"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="10dp" >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="100dip"
         android:layout_margin="0dp"
-        android:background="@drawable/buttonBar3"
+        android:background="@drawable/button_bar_3"
         android:orientation="horizontal" >
 
         <LinearLayout
@@ -20,18 +21,19 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/TextView01"
+                android:id="@+id/mapIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Icon" />
+                android:text="@string/icon_map_marker"
+                android:textColor="@color/tan" />
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/openMapText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Open Map" />
-            
+                android:text="Open Map"
+                android:textColor="@color/tan" />
         </LinearLayout>
 
         <LinearLayout
@@ -42,18 +44,19 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/TextView02"
+                android:id="@+id/callIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Icon" />
+                android:text="@string/icon_phone"
+                android:textColor="@color/tan" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/callText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
-                android:text="Call" />
-
+                android:text="Call"
+                android:textColor="@color/tan" />
         </LinearLayout>
 
         <LinearLayout
@@ -65,11 +68,12 @@
             android:padding="7dp" >
 
             <TextView
-                android:id="@+id/TextView03"
+                android:id="@+id/visitIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Icon" />
+                android:text="@string/icon_info_sign"
+                android:textColor="@color/tan" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -77,7 +81,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center"
-                android:text="Visit Website" />
+                android:text="Visit Website"
+                android:textColor="@color/tan" />
 
         </LinearLayout>
     </LinearLayout>
@@ -85,13 +90,14 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:padding="10dp" >
 
         <ImageView
             android:id="@+id/dealsMerchantImage"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.25"
+            android:layout_weight="0.39"
             android:adjustViewBounds="false"
             android:contentDescription="Deals Merchant Image"
             android:scaleType="fitXY" />
@@ -101,8 +107,8 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1.00"
+            android:background="@color/tan"
             android:orientation="vertical" >
-
         </ListView>
     </LinearLayout>
 

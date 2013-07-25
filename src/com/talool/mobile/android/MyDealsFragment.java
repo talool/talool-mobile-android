@@ -237,30 +237,13 @@ public class MyDealsFragment extends Fragment
 
 			Intent myIntent = new Intent(arg1.getContext(), DealsActivity.class);
 
-			try
-			{
-				myIntent.putExtra("merchant", ThriftUtil.serialize(merchant));
 
-				// deserialize example
-				// Merchant_t merc = new Merchant_t();
-				// ThriftUtil.deserialize(whatEverBytes,merc);
+			myIntent.putExtra("merchant", ThriftUtil.serialize(merchant));
 
-			}
-			catch (TException e)
-			{
-				Log.e(this.getClass().getSimpleName(), "Cannot serialize merchant", e);
-			}
+			// deserialize example
+			// Merchant_t merc = new Merchant_t();
+			// ThriftUtil.deserialize(whatEverBytes,merc);
 
-			myIntent.putExtra("Lat", String.valueOf(merchant.getLocations().get(0).location.latitude));
-			myIntent.putExtra("Lon", String.valueOf(merchant.getLocations().get(0).location.longitude));
-			myIntent.putExtra("address1", merchant.getLocations().get(0).address.address1);
-			myIntent.putExtra("address2", merchant.getLocations().get(0).address.address2);
-			myIntent.putExtra("city", merchant.getLocations().get(0).address.city);
-			myIntent.putExtra("zip", merchant.getLocations().get(0).address.zip);
-			myIntent.putExtra("state", merchant.getLocations().get(0).address.stateProvinceCounty);
-			myIntent.putExtra("merchantId", merchant.merchantId);
-			myIntent.putExtra("merchantName", merchant.name);
-			myIntent.putExtra("imageUrl", merchant.locations.get(0).merchantImageUrl);
 			startActivity(myIntent);
 
 		}
