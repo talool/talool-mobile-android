@@ -5,6 +5,7 @@
 *.ear
 *.settings
 *.project
+project.properties
 bin*
 target*
 gen*
