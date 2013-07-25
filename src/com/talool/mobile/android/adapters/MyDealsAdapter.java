@@ -12,6 +12,7 @@ import com.talool.mobile.android.util.TaloolUtil;
 import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,7 @@ public class MyDealsAdapter extends ArrayAdapter<Merchant_t> implements Filterab
                         //In this loop, you'll filter through originalData and compare each item to charSequence.
                         //If you find a match, add it to your new ArrayList
                         //I'm not sure how you're going to do comparison, so you'll need to fill out this conditional
+                    	Log.i("TODO", merchant.name + " " + merchant.category.categoryId);
                     	if(merchant.category.categoryId == Integer.valueOf(charSequence.toString()))
                         {
                             filterResultsData.add(merchant);
@@ -125,7 +127,7 @@ public class MyDealsAdapter extends ArrayAdapter<Merchant_t> implements Filterab
             holder = (MyDealsRow)row.getTag();
         }
         
-        Merchant_t merchant = data.get(position);
+        Merchant_t merchant = filteredData.get(position);
         holder.merchant = merchant;
         holder.myDealsMerchantIcon.setImageResource(R.drawable.icon_teal);
         holder.myDealsMerchantTitle.setText(merchant.getName());

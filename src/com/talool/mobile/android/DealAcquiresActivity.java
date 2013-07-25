@@ -21,14 +21,16 @@ import com.talool.thrift.util.ThriftUtil;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class DealsActivity extends Activity {
+public class DealAcquiresActivity extends Activity {
 	private static ThriftHelper client;
 	private ImageView imageView;
 	private MapView mapView;
@@ -42,7 +44,7 @@ public class DealsActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.deals_activity_layout);
+		setContentView(R.layout.deal_acquires_activity_layout);
 		createThriftClient();
 		setIcons();
 		dealsAcquiredList = (ListView) findViewById(R.id.dealsAcquiredList);
@@ -65,6 +67,13 @@ public class DealsActivity extends Activity {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void mapClick(View view)
+	{
+		Intent myIntent = new Intent(view.getContext(), MapActivity.class);
+		myIntent.putExtra("merchant", ThriftUtil.serialize(merchant));
+		startActivity(myIntent);
 	}
 
 	private void setIcons()

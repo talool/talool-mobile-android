@@ -15,7 +15,13 @@
 	<string name="icon_phone">&#xf098;</string>
 	<string name="icon_map_marker">&#xf041;</string>
 	<string name="icon_info_sign">&#xf05a;</string>
-	<color name="color_teal">#19BCB9</color>
+	
+	<string name="icon_food">&#xf0f5;</string>
+    <string name="icon_shopping_cart">&#xf07a;</string>
+    <string name="icon_ticket">&#xf145;</string>
+    <string name="icon_glass">&#xf000;</string>
+    <string name="icon_heart">&#xf004;</string>
+<color name="color_teal">#19BCB9</color>
 	
 	<color name="color_grey">#C0C0C0</color>
 	

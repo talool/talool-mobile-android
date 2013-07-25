@@ -74,10 +74,23 @@ public class MyDealsFragment extends Fragment
 	public void setButtonListeners()
 	{
 		Button allButton = (Button) view.findViewById(R.id.myDealsAllFilterButton);
+		allButton.setTypeface(TypefaceFactory.get().getFontAwesome());
+		
+		Button favoriteButton = (Button) view.findViewById(R.id.myDealsFavoriteFilterButton);
+		favoriteButton.setTypeface(TypefaceFactory.get().getFontAwesome());
+
 		Button foodButton = (Button) view.findViewById(R.id.myDealsFoodFilterButton);
+		foodButton.setTypeface(TypefaceFactory.get().getFontAwesome());
+
 		Button funButton = (Button) view.findViewById(R.id.myDealsFunFilterButton);
+		funButton.setTypeface(TypefaceFactory.get().getFontAwesome());
+
 		Button nightButton = (Button) view.findViewById(R.id.myDealsNightFilterButton);
+		nightButton.setTypeface(TypefaceFactory.get().getFontAwesome());
+
 		Button shopButton = (Button) view.findViewById(R.id.myDealsShopFilterButton);
+		shopButton.setTypeface(TypefaceFactory.get().getFontAwesome());
+
 
 		allButton.setOnClickListener(new OnClickListener()
 		{
@@ -93,7 +106,7 @@ public class MyDealsFragment extends Fragment
 			@Override
 			public void onClick(View v)
 			{
-				myDealsAdapter.getFilter().filter("Food");
+				myDealsAdapter.getFilter().filter("1");
 			}
 		});
 
@@ -102,7 +115,7 @@ public class MyDealsFragment extends Fragment
 			@Override
 			public void onClick(View v)
 			{
-				myDealsAdapter.getFilter().filter("Fun");
+				myDealsAdapter.getFilter().filter("3");
 			}
 		});
 
@@ -111,7 +124,7 @@ public class MyDealsFragment extends Fragment
 			@Override
 			public void onClick(View v)
 			{
-				myDealsAdapter.getFilter().filter("Night");
+				myDealsAdapter.getFilter().filter("4");
 			}
 		});
 
@@ -120,7 +133,7 @@ public class MyDealsFragment extends Fragment
 			@Override
 			public void onClick(View v)
 			{
-				myDealsAdapter.getFilter().filter("Shop");
+				myDealsAdapter.getFilter().filter("2");
 			}
 		});
 	}
@@ -204,19 +217,19 @@ public class MyDealsFragment extends Fragment
 			{
 				// TODO Auto-generated catch block
 				exception = e;
-				Log.e(MyDealsFragment.class.toString(), e.getMessage());
+				//Log.e(MyDealsFragment.class.toString(), e.getMessage());
 			}
 			catch (TException e)
 			{
 				// TODO Auto-generated catch block
 				exception = e;
-				Log.e(MyDealsFragment.class.toString(), e.getMessage());
+				//Log.e(MyDealsFragment.class.toString(), e.getMessage());
 
 			}
 			catch (Exception e)
 			{
 				exception = e;
-				Log.e(MyDealsFragment.class.toString(), e.getMessage());
+				//Log.e(MyDealsFragment.class.toString(), e.getMessage());
 
 			}
 
@@ -235,7 +248,7 @@ public class MyDealsFragment extends Fragment
 			MyDealsAdapter myDealsAdapter = (MyDealsAdapter) arg0.getAdapter();
 			Merchant_t merchant = (Merchant_t) myDealsAdapter.getItem(position);
 
-			Intent myIntent = new Intent(arg1.getContext(), DealsActivity.class);
+			Intent myIntent = new Intent(arg1.getContext(), DealAcquiresActivity.class);
 
 
 			myIntent.putExtra("merchant", ThriftUtil.serialize(merchant));
