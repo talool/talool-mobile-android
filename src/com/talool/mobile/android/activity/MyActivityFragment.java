@@ -1,4 +1,4 @@
-package com.talool.mobile.android;
+package com.talool.mobile.android.activity;
 
 import java.util.List;
 
@@ -6,17 +6,21 @@ import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.talool.api.thrift.ActivityEvent_t;
 import com.talool.api.thrift.Activity_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
+import com.talool.mobile.android.BasicWebViewActivity;
+import com.talool.mobile.android.R;
 import com.talool.mobile.android.adapters.MyActivityAdapter;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
@@ -32,7 +36,35 @@ public class MyActivityFragment extends Fragment
 	private MyActivityAdapter activityAdapter;
 	private ThriftHelper client;
 	private View view;
-	private Exception exception;
+
+	protected AdapterView.OnItemClickListener activityClickListener = new AdapterView.OnItemClickListener()
+	{
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+		{
+			Intent intent = null;
+			final MyActivityAdapter activityAdapter = (MyActivityAdapter) parent.getAdapter();
+			final Activity_t activity = (Activity_t) activityAdapter.getItem(position);
+
+			if (activity.getActivityEvent().equals(ActivityEvent_t.EMAIL_RECV_GIFT) ||
+					activity.getActivityEvent().equals(ActivityEvent_t.FACEBOOK_RECV_GIFT))
+			{
+				intent = new Intent(parent.getContext(), GiftActivity.class);
+				intent.putExtra(GiftActivity.GIFT_ID_PARAM, activity.getActivityLink().getLinkElement());
+			}
+			else if (activity.getActivityLink() != null)
+			{
+				intent = new Intent(parent.getContext(), BasicWebViewActivity.class);
+				// we have an external link
+				intent.putExtra(BasicWebViewActivity.TARGET_URL_PARAM, activity.getActivityLink().getLinkElement());
+				intent.putExtra(BasicWebViewActivity.TITLE_PARAM, activity.getTitle());
+			}
+
+			startActivity(intent);
+		}
+
+	};
 
 	private class MyActivityTask extends AsyncTask<String, Void, List<Activity_t>>
 	{
@@ -43,6 +75,8 @@ public class MyActivityFragment extends Fragment
 					R.layout.my_activity_item_row, results);
 			activityAdapter = adapter;
 			myActivityListView.setAdapter(activityAdapter);
+
+			myActivityListView.setOnItemClickListener(activityClickListener);
 		}
 
 		@Override
@@ -60,17 +94,15 @@ public class MyActivityFragment extends Fragment
 			catch (ServiceException_t e)
 			{
 				e.printStackTrace();
-				exception = e;
 			}
 			catch (TException e)
 			{
 				e.printStackTrace();
-				exception = e;
+
 			}
 			catch (Exception e)
 			{
 				e.printStackTrace();
-				exception = e;
 			}
 
 			return results;

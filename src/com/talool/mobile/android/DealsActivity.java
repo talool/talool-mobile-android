@@ -6,6 +6,16 @@ import java.util.List;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
 import com.google.android.gms.maps.MapView;
 import com.talool.api.thrift.DealAcquire_t;
 import com.talool.api.thrift.Merchant_t;
@@ -18,17 +28,8 @@ import com.talool.mobile.android.util.ThriftHelper;
 import com.talool.mobile.android.util.TypefaceFactory;
 import com.talool.thrift.util.ThriftUtil;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-
-public class DealsActivity extends Activity {
+public class DealsActivity extends Activity
+{
 	private static ThriftHelper client;
 	private ImageView imageView;
 	private MapView mapView;
@@ -38,29 +39,31 @@ public class DealsActivity extends Activity {
 	private List<DealAcquire_t> dealAcquires;
 	private Merchant_t merchant;
 
-
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.deals_activity_layout);
 		createThriftClient();
 		setIcons();
 		dealsAcquiredList = (ListView) findViewById(R.id.dealsAcquiredList);
 		imageView = (ImageView) findViewById(R.id.dealsMerchantImage);
-		
 
-
-		try {
+		try
+		{
 			byte[] merchantBytes = (byte[]) getIntent().getSerializableExtra("merchant");
 			merchant = new Merchant_t();
-			ThriftUtil.deserialize(merchantBytes,merchant);
+			ThriftUtil.deserialize(merchantBytes, merchant);
 			reloadData();
 
-			if(merchant.locations.get(0).merchantImageUrl != null){
+			if (merchant.locations.get(0).merchantImageUrl != null)
+			{
 				ImageDownloader imageTask = new ImageDownloader(this.imageView);
-				imageTask.execute(new String[]{merchant.locations.get(0).merchantImageUrl});			
+				imageTask.execute(new String[] { merchant.locations.get(0).merchantImageUrl });
 			}
-		} catch (TException e) {
+		}
+		catch (TException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -76,12 +79,12 @@ public class DealsActivity extends Activity {
 		final TextView mapIcon = (TextView) findViewById(R.id.mapIcon);
 		mapIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
 	}
-	
+
 	private void loadListView()
 	{
-		if(exception == null)
+		if (exception == null)
 		{
-			DealsAcquiredAdapter adapter = new DealsAcquiredAdapter(this, 
+			DealsAcquiredAdapter adapter = new DealsAcquiredAdapter(this,
 					R.layout.deals_acquired_item_row, dealAcquires);
 			dealAcquiredAdapter = adapter;
 			dealsAcquiredList.setAdapter(dealAcquiredAdapter);
@@ -95,15 +98,18 @@ public class DealsActivity extends Activity {
 	private void reloadData()
 	{
 		DealAcquiresTask dealAcquiresTask = new DealAcquiresTask();
-		dealAcquiresTask.execute(new String[]{});
+		dealAcquiresTask.execute(new String[] {});
 	}
 
 	private void createThriftClient()
 	{
 
-		try {
+		try
+		{
 			client = new ThriftHelper();
-		} catch (TTransportException e) {
+		}
+		catch (TTransportException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -137,37 +143,45 @@ public class DealsActivity extends Activity {
 		alertDialog.show();
 	}
 
-
-	private class DealAcquiresTask extends AsyncTask<String,Void,List<DealAcquire_t>>{
+	private class DealAcquiresTask extends AsyncTask<String, Void, List<DealAcquire_t>>
+	{
 
 		@Override
-		protected void onPostExecute(List<DealAcquire_t> results) {
+		protected void onPostExecute(List<DealAcquire_t> results)
+		{
 			dealAcquires = results;
 			Log.i(MyDealsFragment.class.toString(), "Number of Deals: " + results.size());
 			loadListView();
 		}
 
 		@Override
-		protected List<DealAcquire_t> doInBackground(String... arg0) {
+		protected List<DealAcquire_t> doInBackground(String... arg0)
+		{
 			List<DealAcquire_t> results = new ArrayList<DealAcquire_t>();
 
-			try {
+			try
+			{
 				exception = null;
 				client.setAccessToken(TaloolUser.getInstance().getAccessToken());
 				SearchOptions_t searchOptions = new SearchOptions_t();
 				searchOptions.setMaxResults(1000).setPage(0).setSortProperty("deal.dealId").setAscending(true);
 				results = client.getClient().getDealAcquires(merchant.merchantId, searchOptions);
-			} catch (ServiceException_t e) {
+			}
+			catch (ServiceException_t e)
+			{
 				// TODO Auto-generated catch block
 				exception = e;
 				e.printStackTrace();
 
-			} catch (TException e) {
+			}
+			catch (TException e)
+			{
 				// TODO Auto-generated catch block
 				exception = e;
 				e.printStackTrace();
 
-			} catch (Exception e)
+			}
+			catch (Exception e)
 			{
 				exception = e;
 				e.printStackTrace();
