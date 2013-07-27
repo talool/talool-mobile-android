@@ -3,14 +3,13 @@
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-    	 android:background="@drawable/my_deals_background"
-         >
+    	 android:background="@drawable/my_deals_background" >
          
          <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="85dp"
         android:layout_margin="0dp"
-        android:background="@drawable/button_bar_3"
+        android:background="@drawable/button_bar2_brown"
         android:orientation="horizontal" >
 
         <LinearLayout
@@ -26,16 +25,16 @@
                 android:id="@+id/thumbsUpIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/icon_thumbs_up"
+                android:text="@string/icon_thumbs_up_alt"
                 android:textColor="@color/tan"
                 android:textSize="25sp" />
 
             <TextView
-                android:id="@+id/openMapText"
+                android:id="@+id/thumbsUpText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Accept Gift"
+                android:text="@string/accept_gift"
                 android:textColor="@color/tan" />
         </LinearLayout>
 
@@ -51,45 +50,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/tan"
-                android:text="@string/icon_thumbs_down"
+                android:text="@string/icon_thumbs_down_alt"
                 android:textSize="25sp" />
 
             <TextView
-                android:id="@+id/callText"
+                android:id="@+id/thumbsDownText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
-                android:text="Reject Gift"
+                android:text="@string/reject_gift"
                 android:textColor="@color/tan" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.3"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="7dp" >
-
-            <TextView
-                android:id="@+id/visitIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/icon_info_sign"
-                android:textColor="@color/tan"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:gravity="center"
-                android:text="Visit Website"
-                android:textColor="@color/tan" />
-
-        </LinearLayout>
+   
     </LinearLayout>
     
 

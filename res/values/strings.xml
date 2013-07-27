@@ -4,28 +4,29 @@
     <string name="app_name">Talool</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-	<string name="password">Password</string>
-	<string name="newToTalool">New to Talool? Please Register.</string>
-	<string name="email">Email</string>
-	<string name="login">Login</string>    
-
-	<string name="icon_gift">&#xf06b;</string>
-	<string name="icon_envelope_alt">&#xf003;</string>
-	<string name="icon_money">&#xf0d6;</string>
-	<string name="icon_phone">&#xf098;</string>
-	<string name="icon_map_marker">&#xf041;</string>
-	<string name="icon_info_sign">&#xf05a;</string>
-	
-	<string name="icon_food">&#xf0f5;</string>
+    <string name="password">Password</string>
+    <string name="newToTalool">New to Talool? Please Register.</string>
+    <string name="email">Email</string>
+    <string name="login">Login</string>
+    <string name="icon_gift">&#xf06b;</string>
+    <string name="icon_envelope_alt">&#xf003;</string>
+    <string name="icon_money">&#xf0d6;</string>
+    <string name="icon_phone">&#xf098;</string>
+    <string name="icon_map_marker">&#xf041;</string>
+    <string name="icon_info_sign">&#xf05a;</string>
+    <string name="icon_food">&#xf0f5;</string>
     <string name="icon_shopping_cart">&#xf07a;</string>
     <string name="icon_ticket">&#xf145;</string>
     <string name="icon_glass">&#xf000;</string>
     <string name="icon_heart">&#xf004;</string>
-    <string name="icon_thumbs_up">&#xf164;</string>
-    <string name="icon_thumbs_down">&#xf165;</string>
+    <string name="icon_thumbs_up_alt">&#xf087;</string>
+    <string name="icon_thumbs_down_alt">&#xf088;</string>
+
+    <color name="color_teal">#19BCB9</color>
+    <color name="color_grey">#C0C0C0</color>
     
-<color name="color_teal">#19BCB9</color>
-	
-	<color name="color_grey">#C0C0C0</color>
-	
+    <!-- activity strings -->
+    <string name="accept_gift">Accept Gift</string>
+    <string name="reject_gift">Reject Gift</string>
+
 </resources>
