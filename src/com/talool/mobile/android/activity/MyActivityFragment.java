@@ -53,7 +53,7 @@ public class MyActivityFragment extends Fragment
 			{
 				intent = new Intent(parent.getContext(), GiftActivity.class);
 				intent.putExtra(GiftActivity.GIFT_ID_PARAM, activity.getActivityLink().getLinkElement());
-				intent.putExtra(GiftActivity.ACTICITY_OBJ_PARAM, ThriftUtil.serialize(activity));
+				intent.putExtra(GiftActivity.ACTIVITY_OBJ_PARAM, ThriftUtil.serialize(activity));
 			}
 			else if (activity.getActivityLink() != null)
 			{
@@ -61,6 +61,10 @@ public class MyActivityFragment extends Fragment
 				// we have an external link
 				intent.putExtra(BasicWebViewActivity.TARGET_URL_PARAM, activity.getActivityLink().getLinkElement());
 				intent.putExtra(BasicWebViewActivity.TITLE_PARAM, activity.getTitle());
+			}
+			else
+			{
+
 			}
 
 			startActivity(intent);

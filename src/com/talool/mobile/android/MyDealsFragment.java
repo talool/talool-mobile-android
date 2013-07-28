@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.talool.api.thrift.Location_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
@@ -41,6 +42,9 @@ public class MyDealsFragment extends Fragment
 	private Context context;
 	private Exception exception;
 	private List<Merchant_t> merchants;
+
+	// TODO REMOVE FOR PRODUCTION!
+	private static final Location_t DENVER_LOCATION = new Location_t(-104.9842, 39.7392);
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,7 +79,7 @@ public class MyDealsFragment extends Fragment
 	{
 		Button allButton = (Button) view.findViewById(R.id.myDealsAllFilterButton);
 		allButton.setTypeface(TypefaceFactory.get().getFontAwesome());
-		
+
 		Button favoriteButton = (Button) view.findViewById(R.id.myDealsFavoriteFilterButton);
 		favoriteButton.setTypeface(TypefaceFactory.get().getFontAwesome());
 
@@ -90,7 +94,6 @@ public class MyDealsFragment extends Fragment
 
 		Button shopButton = (Button) view.findViewById(R.id.myDealsShopFilterButton);
 		shopButton.setTypeface(TypefaceFactory.get().getFontAwesome());
-
 
 		allButton.setOnClickListener(new OnClickListener()
 		{
@@ -210,32 +213,32 @@ public class MyDealsFragment extends Fragment
 				exception = null;
 				client.setAccessToken(TaloolUser.getInstance().getAccessToken());
 				SearchOptions_t searchOptions = new SearchOptions_t();
-				searchOptions.setMaxResults(1000).setPage(0).setSortProperty("merchant.name").setAscending(true);
-				results = client.getClient().getMerchantAcquires(searchOptions);
+				searchOptions.setMaxResults(1000).setPage(0).setSortProperty("merchant.locations.distanceInMeters").
+						setAscending(true);
+				results = client.getClient().getMerchantAcquiresWithLocation(searchOptions, DENVER_LOCATION);
 			}
 			catch (ServiceException_t e)
 			{
 				// TODO Auto-generated catch block
 				exception = e;
-				//Log.e(MyDealsFragment.class.toString(), e.getMessage());
+				// Log.e(MyDealsFragment.class.toString(), e.getMessage());
 			}
 			catch (TException e)
 			{
 				// TODO Auto-generated catch block
 				exception = e;
-				//Log.e(MyDealsFragment.class.toString(), e.getMessage());
+				// Log.e(MyDealsFragment.class.toString(), e.getMessage());
 
 			}
 			catch (Exception e)
 			{
 				exception = e;
-				//Log.e(MyDealsFragment.class.toString(), e.getMessage());
+				// Log.e(MyDealsFragment.class.toString(), e.getMessage());
 
 			}
 
 			return results;
 		}
-
 	}
 
 	protected AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener()
@@ -249,7 +252,6 @@ public class MyDealsFragment extends Fragment
 			Merchant_t merchant = (Merchant_t) myDealsAdapter.getItem(position);
 
 			Intent myIntent = new Intent(arg1.getContext(), DealAcquiresActivity.class);
-
 
 			myIntent.putExtra("merchant", ThriftUtil.serialize(merchant));
 
