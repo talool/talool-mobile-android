@@ -12,7 +12,7 @@ import com.talool.api.thrift.CustomerService_t;
 public class ThriftHelper
 {
 	// private final static String URL = "http://dev-api.talool.com/1.1";
-	private final static String URL = "https://api.talool.com/1.1";
+	private final static String URL = "http://api.talool.com/1.1";
 	public THttpClient tHttpClient;
 	public TProtocol protocol;
 	public CustomerService_t.Client client;

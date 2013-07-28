@@ -6,17 +6,15 @@ import org.apache.thrift.transport.TTransportException;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.loopj.android.image.SmartImageView;
 import com.talool.api.thrift.Activity_t;
 import com.talool.api.thrift.Gift_t;
 import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.R;
-import com.talool.mobile.android.util.ImageDownloader;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
 import com.talool.mobile.android.util.TypefaceFactory;
@@ -35,9 +33,9 @@ public class GiftActivity extends Activity
 
 	private ThriftHelper client;
 	private String giftId;
-	private ImageView dealImageView;
-	private ImageView logoImageView;
-	private ImageView dealCreatorImageView;
+	private SmartImageView dealImageView;
+	private SmartImageView logoImageView;
+	private SmartImageView dealCreatorImageView;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState)
@@ -106,9 +104,14 @@ public class GiftActivity extends Activity
 
 			details.setText(gift.getDeal().getDetails());
 
-			dealImageView = (ImageView) findViewById(R.id.dealImage);
-			logoImageView = (ImageView) findViewById(R.id.merchantLogo);
-			dealCreatorImageView = (ImageView) findViewById(R.id.dealCreatorLogo);
+			dealImageView = (SmartImageView) findViewById(R.id.dealImage);
+			dealImageView.setImageUrl(gift.getDeal().getImageUrl());
+
+			logoImageView = (SmartImageView) findViewById(R.id.merchantLogo);
+			logoImageView.setImageUrl(gift.getDeal().getMerchant().getLocations().get(0).getLogoUrl());
+
+			dealCreatorImageView = (SmartImageView) findViewById(R.id.dealCreatorLogo);
+			dealCreatorImageView.setImageUrl(gift.getDeal().getMerchant().getLocations().get(0).getLogoUrl());
 
 			final TextView address1 = (TextView) findViewById(R.id.address1);
 			final TextView address2 = (TextView) findViewById(R.id.address2);
@@ -126,31 +129,6 @@ public class GiftActivity extends Activity
 			}
 
 			cityStateZip.setText(getCityStateZip(location));
-
-			final String logoUrl = gift.getDeal().getMerchant().getLocations().get(0).getLogoUrl();
-
-			ImageDownloader imageTask = new ImageDownloader(dealImageView);
-			imageTask.execute(new String[] { gift.getDeal().getImageUrl() });
-
-			ImageDownloader logoTask = new ImageDownloader(logoImageView);
-			try
-			{
-				logoTask.execute(new String[] { logoUrl });
-			}
-			catch (IllegalStateException e)
-			{
-				Log.e(this.getClass().getSimpleName(), e.getLocalizedMessage(), e);
-			}
-
-			ImageDownloader dealCreatorLogoTask = new ImageDownloader(dealCreatorImageView);
-			try
-			{
-				dealCreatorLogoTask.execute(new String[] { logoUrl });
-			}
-			catch (IllegalStateException e)
-			{
-				Log.e(this.getClass().getSimpleName(), e.getLocalizedMessage(), e);
-			}
 
 		}
 

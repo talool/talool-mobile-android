@@ -74,7 +74,7 @@
         android:paddingRight="9sp"
         android:paddingTop="7sp" >
 
-        <ImageView
+       <com.loopj.android.image.SmartImageView
             android:id="@+id/dealImage"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
@@ -168,7 +168,7 @@
                     android:textColor="#000000" />
             </LinearLayout>
 
-            <ImageView
+          <com.loopj.android.image.SmartImageView
                 android:id="@+id/merchantLogo"
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
@@ -186,8 +186,8 @@
             android:orientation="horizontal"
             android:padding="7dp" >
 
-            <ImageView
-                android:id="@+id/dealCreatorLogo"
+            <com.loopj.android.image.SmartImageView
+    			android:id="@+id/dealCreatorLogo"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
  				android:gravity="left"
