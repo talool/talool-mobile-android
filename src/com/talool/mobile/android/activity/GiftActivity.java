@@ -11,10 +11,13 @@ import android.widget.TextView;
 
 import com.loopj.android.image.SmartImageView;
 import com.talool.api.thrift.Activity_t;
+import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.Gift_t;
 import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.R;
+import com.talool.mobile.android.cache.DealOfferCache;
+import com.talool.mobile.android.tasks.DealOfferFetchTask;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
 import com.talool.mobile.android.util.TypefaceFactory;
@@ -82,19 +85,40 @@ public class GiftActivity extends Activity
 
 	}
 
-	private static String getCityStateZip(final MerchantLocation_t location)
+	private void setDealCreatorImageView(final DealOffer_t dealOffer)
 	{
-		final StringBuilder sb = new StringBuilder();
-		sb.append(location.getAddress().getCity()).append(", ").append(location.getAddress().getStateProvinceCounty());
-		sb.append(" ").append(location.getAddress().getZip());
-
-		return sb.toString();
+		dealCreatorImageView = (SmartImageView) findViewById(R.id.dealCreatorLogo);
+		dealCreatorImageView.setImageUrl(dealOffer.getMerchant().getLocations().get(0).getLogoUrl());
 	}
+
 	private class GiftActivityTask extends AsyncTask<String, Void, Gift_t>
 	{
 		@Override
 		protected void onPostExecute(final Gift_t gift)
 		{
+			final DealOffer_t dealOffer = DealOfferCache.get().getDealOffer(gift.getDeal().getDealOfferId());
+			if (dealOffer == null)
+			{
+				final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, gift.getDeal().getDealOfferId())
+				{
+
+					@Override
+					protected void onPostExecute(final DealOffer_t dealOffer)
+					{
+						setDealCreatorImageView(dealOffer);
+						// make sure we cache the dealOffer
+						DealOfferCache.get().setDealOffer(dealOffer);
+					}
+
+				};
+
+				dealOfferFetchTask.execute(new String[] {});
+			}
+			else
+			{
+				setDealCreatorImageView(dealOffer);
+			}
+
 			final TextView summary = (TextView) findViewById(R.id.summary);
 			final TextView details = (TextView) findViewById(R.id.details);
 
@@ -109,9 +133,6 @@ public class GiftActivity extends Activity
 
 			logoImageView = (SmartImageView) findViewById(R.id.merchantLogo);
 			logoImageView.setImageUrl(gift.getDeal().getMerchant().getLocations().get(0).getLogoUrl());
-
-			dealCreatorImageView = (SmartImageView) findViewById(R.id.dealCreatorLogo);
-			dealCreatorImageView.setImageUrl(gift.getDeal().getMerchant().getLocations().get(0).getLogoUrl());
 
 			final TextView address1 = (TextView) findViewById(R.id.address1);
 			final TextView address2 = (TextView) findViewById(R.id.address2);
@@ -159,6 +180,15 @@ public class GiftActivity extends Activity
 
 			return gift;
 		}
+	}
+
+	private static String getCityStateZip(final MerchantLocation_t location)
+	{
+		final StringBuilder sb = new StringBuilder();
+		sb.append(location.getAddress().getCity()).append(", ").append(location.getAddress().getStateProvinceCounty());
+		sb.append(" ").append(location.getAddress().getZip());
+
+		return sb.toString();
 	}
 
 }
