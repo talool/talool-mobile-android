@@ -75,11 +75,19 @@ public class MyActivityAdapter extends ArrayAdapter<Activity_t>
 		final TextView txt = (TextView) row.findViewById(R.id.iconView);
 		txt.setTypeface(TypefaceFactory.get().getFontAwesome());
 
-		if (activity.getActivityLink() != null && ApiUtil.isClickableActivityLink(activity) && activity.actionTaken == false)
+		if (activity.getActivityLink() != null && ApiUtil.isClickableActivityLink(activity))
 		{
-			txt.setTextColor(row.getResources().getColor(R.color.color_teal));
-		}
+			imageArrow.setVisibility(View.VISIBLE);
+			if (activity.actionTaken)
+			{
+				txt.setTextColor(row.getResources().getColor(R.color.color_grey));
+			}
+			else
+			{
+				txt.setTextColor(row.getResources().getColor(R.color.color_teal));
+			}
 
+		}
 		else
 		{
 			imageArrow.setVisibility(View.GONE);
