@@ -5,6 +5,8 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 
 import com.talool.api.thrift.DealAcquire_t;
 import com.talool.mobile.android.R;
+import com.talool.mobile.android.util.TypefaceFactory;
 
 public class DealsAcquiredAdapter extends ArrayAdapter<DealAcquire_t> {
 	Context context; 
@@ -38,7 +41,7 @@ public class DealsAcquiredAdapter extends ArrayAdapter<DealAcquire_t> {
             row = inflater.inflate(layoutResourceId, parent, false);
             
             holder = new DealAcquiredRow();
-            holder.dealsAcquiredIcon = (ImageView)row.findViewById(R.id.dealsAcquiredIcon);
+            holder.dealsAcquiredIcon = (TextView)row.findViewById(R.id.dealsAcquiredIcon);
             holder.dealsAcquiredTitle = (TextView)row.findViewById(R.id.dealsAcquiredTitle);
             holder.dealsAcquiredExpires = (TextView)row.findViewById(R.id.dealsAcquiredExpires);
             holder.dealsAcquiredArrow = (ImageView)row.findViewById(R.id.dealsAcquiredArrow);
@@ -51,12 +54,19 @@ public class DealsAcquiredAdapter extends ArrayAdapter<DealAcquire_t> {
         }
         
         DealAcquire_t dealAcquire = data.get(position);
-        holder.dealsAcquiredIcon.setImageResource(R.drawable.icon_teal);
+
+        holder.dealsAcquiredIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
+    	holder.dealsAcquiredIcon.setTextColor(this.context.getResources().getColor(R.color.color_teal));
+
         holder.dealsAcquiredTitle.setText(dealAcquire.deal.summary);
         holder.dealsAcquiredExpires.setText("Expires on " + new Date(dealAcquire.deal.expires).toString());
-
         holder.dealsAcquiredArrow.setImageResource(R.drawable.navigation_next_item);
 
+        if(dealAcquire.redeemed != 0)
+        {
+        	holder.dealsAcquiredTitle.setPaintFlags(holder.dealsAcquiredTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        	holder.dealsAcquiredIcon.setTextColor(this.context.getResources().getColor(R.color.color_grey));
+        }
         
         return row;
     }    

@@ -11,17 +11,18 @@
         android:gravity="left"
         android:orientation="horizontal" >
 
-        <ImageView
+        <TextView
             android:id="@+id/dealsAcquiredIcon"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="3dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
-            android:contentDescription="dealsAcquiredIcon"
+            android:textSize="20sp"
+            android:contentDescription="Deals Acquired Icon"
             android:gravity="center_vertical"
-            android:src="@drawable/icon_teal" />
+            android:text="@string/icon_money" />
     </LinearLayout>
 
     <LinearLayout

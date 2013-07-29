@@ -21,7 +21,9 @@
     <string name="icon_heart">&#xf004;</string>
     <string name="icon_thumbs_up_alt">&#xf087;</string>
     <string name="icon_thumbs_down_alt">&#xf088;</string>
-
+    <string name="icon_thumbs_down_alt">&#xf088;</string>
+    
+    
     <color name="color_teal">#19BCB9</color>
     <color name="color_grey">#C0C0C0</color>
     

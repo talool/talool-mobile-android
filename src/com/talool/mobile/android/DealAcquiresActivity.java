@@ -11,6 +11,7 @@ import com.talool.api.thrift.DealAcquire_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
+import com.talool.mobile.android.activity.DealActivity;
 import com.talool.mobile.android.adapters.DealsAcquiredAdapter;
 import com.talool.mobile.android.util.ImageDownloader;
 import com.talool.mobile.android.util.TaloolUser;
@@ -26,6 +27,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,7 +35,6 @@ import android.widget.TextView;
 public class DealAcquiresActivity extends Activity {
 	private static ThriftHelper client;
 	private ImageView imageView;
-	private MapView mapView;
 	private ListView dealsAcquiredList;
 	private DealsAcquiredAdapter dealAcquiredAdapter;
 	private Exception exception;
@@ -94,6 +95,7 @@ public class DealAcquiresActivity extends Activity {
 					R.layout.deals_acquired_item_row, dealAcquires);
 			dealAcquiredAdapter = adapter;
 			dealsAcquiredList.setAdapter(dealAcquiredAdapter);
+			dealsAcquiredList.setOnItemClickListener(onClickListener);
 		}
 		else
 		{
@@ -109,7 +111,6 @@ public class DealAcquiresActivity extends Activity {
 
 	private void createThriftClient()
 	{
-
 		try {
 			client = new ThriftHelper();
 		} catch (TTransportException e) {
@@ -146,6 +147,25 @@ public class DealAcquiresActivity extends Activity {
 		alertDialog.show();
 	}
 
+	protected AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener()
+	{
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+				long arg3)
+		{
+			DealsAcquiredAdapter dealAcquiredAdapter = (DealsAcquiredAdapter) arg0.getAdapter();
+			DealAcquire_t deal = (DealAcquire_t) dealAcquiredAdapter.getItem(position);
+
+			Intent myIntent = new Intent(arg1.getContext(), DealActivity.class);
+
+			myIntent.putExtra("deal", ThriftUtil.serialize(deal));
+			myIntent.putExtra("merchant", ThriftUtil.serialize(merchant));
+
+			startActivity(myIntent);
+
+		}
+	};
 
 	private class DealAcquiresTask extends AsyncTask<String,Void,List<DealAcquire_t>>{
 
