@@ -18,7 +18,8 @@
             android:layout_weight="0.3"
             android:clickable="true"
             android:gravity="center"
-            android:orientation="vertical" >
+            android:orientation="vertical" 
+            android:onClick="acceptGiftClick" >
 
             <TextView
                 android:id="@+id/thumbsUpIcon"
@@ -42,7 +43,8 @@
             android:layout_height="fill_parent"
             android:layout_weight="0.3"
             android:gravity="center"
-            android:orientation="vertical" >
+            android:orientation="vertical" 
+            android:onClick="rejectGiftClick" >
 
             <TextView
                 android:id="@+id/thumbsDownIcon"

@@ -4,6 +4,7 @@ import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -11,13 +12,16 @@ import android.widget.TextView;
 
 import com.loopj.android.image.SmartImageView;
 import com.talool.api.thrift.Activity_t;
+import com.talool.api.thrift.DealAcquire_t;
 import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.Gift_t;
 import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.ServiceException_t;
+import com.talool.mobile.android.MainActivity;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
+import com.talool.mobile.android.tasks.GiftAcceptanceTask;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
 import com.talool.mobile.android.util.TypefaceFactory;
@@ -89,6 +93,40 @@ public class GiftActivity extends Activity
 	{
 		dealCreatorImageView = (SmartImageView) findViewById(R.id.dealCreatorLogo);
 		dealCreatorImageView.setImageUrl(dealOffer.getMerchant().getLocations().get(0).getLogoUrl());
+	}
+
+	public void acceptGiftClick(final View view)
+	{
+		// accept the gift and redirect to "My Deals"
+		final GiftAcceptanceTask task = new GiftAcceptanceTask(client, giftId, true)
+		{
+			@Override
+			protected void onPostExecute(DealAcquire_t result)
+			{
+				final Intent myIntent = new Intent(view.getContext(), MainActivity.class);
+				startActivity(myIntent);
+			}
+
+		};
+
+		task.execute(new String[] {});
+	}
+
+	public void rejectGiftClick(final View view)
+	{
+		// accept the gift and redirect to "My Deals"
+		final GiftAcceptanceTask task = new GiftAcceptanceTask(client, giftId, false)
+		{
+			@Override
+			protected void onPostExecute(DealAcquire_t result)
+			{
+				final Intent myIntent = new Intent(view.getContext(), MainActivity.class);
+				startActivity(myIntent);
+			}
+
+		};
+
+		task.execute(new String[] {});
 	}
 
 	private class GiftActivityTask extends AsyncTask<String, Void, Gift_t>
