@@ -1,0 +1,72 @@
+package com.talool.mobile.android.util;
+
+import com.talool.api.thrift.ActivityEvent_t;
+import com.talool.api.thrift.Activity_t;
+import com.talool.mobile.android.R;
+
+/**
+ * Convenience methods for the API
+ * 
+ * @author clintz
+ * 
+ */
+public final class ApiUtil
+{
+
+	public static boolean isClickableActivityLink(final Activity_t activity)
+	{
+		final ActivityEvent_t event = activity.getActivityEvent();
+
+		if (activity.activityLink == null)
+		{
+			return false;
+		}
+
+		switch (event)
+		{
+			case REDEEM:
+			case FACEBOOK_SEND_GIFT:
+			case EMAIL_SEND_GIFT:
+				return false;
+
+			case TALOOL_REACH:
+			case MERCHANT_REACH:
+			case WELCOME:
+				return true;
+
+			default:
+				return !activity.actionTaken;
+		}
+
+	}
+
+	public static int getIcon(final Activity_t activity)
+	{
+		switch (activity.activityEvent)
+		{
+			case EMAIL_RECV_GIFT:
+			case EMAIL_SEND_GIFT:
+			case FACEBOOK_RECV_GIFT:
+			case FACEBOOK_SEND_GIFT:
+			case REJECT_GIFT:
+				return R.string.icon_gift;
+
+			case FRIEND_PURCHASE_DEAL_OFFER:
+			case PURCHASE:
+			case REDEEM:
+				return R.string.icon_money;
+
+			case WELCOME:
+			case MERCHANT_REACH:
+			case TALOOL_REACH:
+				return R.string.icon_envelope_alt;
+
+			case UNKNOWN:
+			default:
+				return R.string.icon_envelope_alt;
+
+		}
+
+	}
+
+}

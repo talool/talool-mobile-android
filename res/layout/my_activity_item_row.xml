@@ -63,9 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_gravity="right"
-            android:layout_marginBottom="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
             android:contentDescription="ArrowIcon"
             android:cropToPadding="false"
             android:src="@drawable/navigation_next_item" />

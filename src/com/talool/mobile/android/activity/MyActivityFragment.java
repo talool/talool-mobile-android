@@ -22,6 +22,7 @@ import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.BasicWebViewActivity;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.adapters.MyActivityAdapter;
+import com.talool.mobile.android.util.ApiUtil;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
 import com.talool.thrift.util.ThriftUtil;
@@ -78,7 +79,17 @@ public class MyActivityFragment extends Fragment
 		protected void onPostExecute(final List<Activity_t> results)
 		{
 			final MyActivityAdapter adapter = new MyActivityAdapter(view.getContext(),
-					R.layout.my_activity_item_row, results);
+					R.layout.my_activity_item_row, results)
+			{
+
+				@Override
+				public boolean isEnabled(int position)
+				{
+					return ApiUtil.isClickableActivityLink(results.get(position));
+				}
+
+			};
+
 			activityAdapter = adapter;
 			myActivityListView.setAdapter(activityAdapter);
 
