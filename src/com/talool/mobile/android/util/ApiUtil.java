@@ -46,6 +46,8 @@ public final class ApiUtil
 		{
 			case EMAIL_RECV_GIFT:
 			case EMAIL_SEND_GIFT:
+			case FRIEND_GIFT_ACCEPT:
+			case FRIEND_GIFT_REJECT:
 			case FACEBOOK_RECV_GIFT:
 			case FACEBOOK_SEND_GIFT:
 			case REJECT_GIFT:
