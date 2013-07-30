@@ -1,41 +1,64 @@
 package com.talool.mobile.android.util;
 
-
 import android.location.Location;
 
 import com.talool.api.thrift.CTokenAccess_t;
 
-public class TaloolUser {
-	private static TaloolUser instance = null;
+/**
+ * 
+ * @author czachman,clintz
+ * 
+ *         TODO - put real location in soon
+ *         http://stackoverflow.com/questions/2227292
+ *         /how-to-get-latitude-and-longitude-of-the-mobiledevice-in-android
+ */
+public final class TaloolUser
+{
+	private static final boolean IS_DEVELOPMENT = true;
+	private static final Location DENVER_LOCATION;
+	private static TaloolUser instance = new TaloolUser();
+
 	private CTokenAccess_t accessToken;
 	private Location location;
 
-	protected TaloolUser() {
-		location = new Location("Talool");
-		location.setLatitude(39.766169);
-		location.setLongitude(-104.979033);
+	static
+	{
+		DENVER_LOCATION = new Location("Talool");
+		DENVER_LOCATION.setLatitude(39.766169);
+		DENVER_LOCATION.setLongitude(-104.979033);
 	}
-	
-	public synchronized static TaloolUser getInstance() {
-		if(instance == null) {
-			instance = new TaloolUser();
+
+	private TaloolUser()
+	{
+		if (IS_DEVELOPMENT)
+		{
+			location = DENVER_LOCATION;
 		}
+	}
+
+	public static TaloolUser getInstance()
+	{
 		return instance;
 	}
 
-	public synchronized CTokenAccess_t getAccessToken() {
+	public CTokenAccess_t getAccessToken()
+	{
 		return accessToken;
 	}
-	public synchronized void  setAccessToken(CTokenAccess_t accessToken) {
+
+	public void setAccessToken(final CTokenAccess_t accessToken)
+	{
 		this.accessToken = accessToken;
 	}
-	
-	public Location getLocation() {
+
+	public Location getLocation()
+	{
 		return location;
 	}
-	public void setLocation(Location location) {
+
+	public void setLocation(final Location location)
+	{
 		this.location = location;
 	}
-
 
 }
