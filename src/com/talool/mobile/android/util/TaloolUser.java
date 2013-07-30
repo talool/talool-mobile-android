@@ -16,7 +16,7 @@ public final class TaloolUser
 {
 	private static final boolean IS_DEVELOPMENT = true;
 	private static final Location DENVER_LOCATION;
-	private static TaloolUser instance = new TaloolUser();
+	private static final TaloolUser instance = new TaloolUser();
 
 	private CTokenAccess_t accessToken;
 	private Location location;
