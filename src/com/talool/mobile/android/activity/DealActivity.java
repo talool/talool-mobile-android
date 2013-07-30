@@ -1,5 +1,7 @@
 package com.talool.mobile.android.activity;
 
+import java.util.Date;
+
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
@@ -9,6 +11,7 @@ import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
+import com.talool.mobile.android.tasks.DealAcceptanceTask;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
 import com.talool.mobile.android.util.ImageDownloader;
 import com.talool.mobile.android.util.TaloolUtil;
@@ -17,7 +20,10 @@ import com.talool.mobile.android.util.TypefaceFactory;
 import com.talool.thrift.util.ThriftUtil;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -35,7 +41,8 @@ public class DealActivity extends Activity {
 	private TextView dealValidText;
 	private TextView dealExpirationText;
 	private LinearLayout dealActivityButtonLayout;
-	
+	private String redemptionCode;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -50,6 +57,7 @@ public class DealActivity extends Activity {
 		dealOfferCreatorImage = (SmartImageView) findViewById(R.id.dealActivityCreatorImage);
 		dealExpirationText = (TextView) findViewById(R.id.dealActivityExpires);
 		dealActivityButtonLayout = (LinearLayout) findViewById(R.id.dealActivityButtonLayout);
+		redemptionCode = null;
 
 		try {
 			byte[] dealBytes = (byte[]) getIntent().getSerializableExtra("deal");
@@ -60,43 +68,60 @@ public class DealActivity extends Activity {
 			ThriftUtil.deserialize(dealBytes,deal);
 			ThriftUtil.deserialize(merchantBytes,merchant);
 
+
 			setText();
 			loadImages();
+			checkDealRedeemed();
 			setDealCreatorImage();
-			
+
 		} catch (TException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
-	
-	private void setDealCreatorImage()
+
+	private void checkDealRedeemed()
 	{
-		final DealOffer_t dealOffer = DealOfferCache.get().getDealOffer(deal.getDeal().getDealOfferId());
-		if (dealOffer == null)
+		if(deal.redeemed == 0)
 		{
-			final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, deal.getDeal().getDealOfferId())
-			{
-
-				@Override
-				protected void onPostExecute(final DealOffer_t dealOffer)
-				{
-					setDealCreatorImageView(dealOffer);
-					// make sure we cache the dealOffer
-					DealOfferCache.get().setDealOffer(dealOffer);
-				}
-
-			};
-
-			dealOfferFetchTask.execute(new String[] {});
+			return;
 		}
 		else
 		{
-			setDealCreatorImageView(dealOffer);
+			dealActivityButtonLayout.removeAllViewsInLayout();
+			dealActivityButtonLayout.setBackground(null);
+			TextView redemptionCodeTextView = new TextView(getBaseContext());
+			redemptionCodeTextView.setText("Redeemed on " + new Date(deal.redeemed).toString());
+			redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+			redemptionCodeTextView.setTextColor(getResources().getColor(R.color.orange));
+			redemptionCodeTextView.setTypeface(TypefaceFactory.get().getFontAwesome(), Typeface.BOLD);
+			dealActivityButtonLayout.addView(redemptionCodeTextView);
+			dealActivityButtonLayout.setGravity(Gravity.CENTER);
+
 		}
+
 	}
-	
+
+	private void setDealCreatorImage()
+	{
+		final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, deal.getDeal().getDealOfferId())
+		{
+
+			@Override
+			protected void onPostExecute(final DealOffer_t dealOffer)
+			{
+				setDealCreatorImageView(dealOffer);
+				// make sure we cache the dealOffer
+				DealOfferCache.get().setDealOffer(dealOffer);
+			}
+
+		};
+
+		dealOfferFetchTask.execute(new String[] {});
+	}
+
+
 	private void setDealCreatorImageView(DealOffer_t dealOffer)
 	{
 		dealOfferCreatorImage.setImageUrl(dealOffer.getMerchant().getLocations().get(0).getLogoUrl());
@@ -123,19 +148,43 @@ public class DealActivity extends Activity {
 		dealValidText.setText(deal.deal.details);
 		dealExpirationText.setText(TaloolUtil.getExpirationText(deal.deal.expires));
 		setTitle(merchant.name);
-		
+
 		final TextView useDealIcon = (TextView) findViewById(R.id.useDealIcon);
-		useDealIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
+		if(useDealIcon != null)
+		{
+			useDealIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
+		}
+
 		final TextView giftIcon = (TextView) findViewById(R.id.giftIcon);
-		giftIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
+		if(giftIcon != null)
+		{
+			giftIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
+		}
 
 	}
-	
-	private void onUseDealNowClick(View view)
+
+	public void onUseDealNowClick(View view)
 	{
-		
+		DealAcceptanceTask dealAcceptanceTask = new DealAcceptanceTask(client, deal.dealAcquireId){
+
+			@Override
+			protected void onPostExecute(String result) {
+				redemptionCode = result;
+				dealActivityButtonLayout.removeAllViewsInLayout();
+				dealActivityButtonLayout.setBackground(null);
+				TextView redemptionCodeTextView = new TextView(getBaseContext());
+				redemptionCodeTextView.setText("Redemption code " + redemptionCode);
+				redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+				redemptionCodeTextView.setTextColor(getResources().getColor(R.color.orange));
+				redemptionCodeTextView.setTypeface(TypefaceFactory.get().getFontAwesome(), Typeface.BOLD);
+				dealActivityButtonLayout.addView(redemptionCodeTextView);
+				dealActivityButtonLayout.setGravity(Gravity.CENTER);
+			}
+
+		};
+		dealAcceptanceTask.execute(new String[] {});
 	}
-	
+
 	private void setAddressText()
 	{
 		String str = merchant.locations.get(0).address.address1;

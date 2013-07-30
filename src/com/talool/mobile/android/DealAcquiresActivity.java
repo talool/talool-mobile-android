@@ -50,7 +50,7 @@ public class DealAcquiresActivity extends Activity {
 		setIcons();
 		dealsAcquiredList = (ListView) findViewById(R.id.dealsAcquiredList);
 		imageView = (ImageView) findViewById(R.id.dealsMerchantImage);
-		
+
 
 
 		try {
@@ -69,7 +69,14 @@ public class DealAcquiresActivity extends Activity {
 		}
 
 	}
-	
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		reloadData();
+	}
+
 	public void mapClick(View view)
 	{
 		Intent myIntent = new Intent(view.getContext(), MapActivity.class);
@@ -86,7 +93,7 @@ public class DealAcquiresActivity extends Activity {
 		final TextView mapIcon = (TextView) findViewById(R.id.mapIcon);
 		mapIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
 	}
-	
+
 	private void loadListView()
 	{
 		if(exception == null)
@@ -158,12 +165,9 @@ public class DealAcquiresActivity extends Activity {
 			DealAcquire_t deal = (DealAcquire_t) dealAcquiredAdapter.getItem(position);
 
 			Intent myIntent = new Intent(arg1.getContext(), DealActivity.class);
-
 			myIntent.putExtra("deal", ThriftUtil.serialize(deal));
 			myIntent.putExtra("merchant", ThriftUtil.serialize(merchant));
-
 			startActivity(myIntent);
-
 		}
 	};
 
