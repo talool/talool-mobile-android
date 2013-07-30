@@ -36,8 +36,6 @@ public class DealActivity extends Activity {
 	private TextView dealExpirationText;
 	private LinearLayout dealActivityButtonLayout;
 	
-
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -51,6 +49,7 @@ public class DealActivity extends Activity {
 		dealSummaryText = (TextView) findViewById(R.id.dealSummaryText);
 		dealOfferCreatorImage = (SmartImageView) findViewById(R.id.dealActivityCreatorImage);
 		dealExpirationText = (TextView) findViewById(R.id.dealActivityExpires);
+		dealActivityButtonLayout = (LinearLayout) findViewById(R.id.dealActivityButtonLayout);
 
 		try {
 			byte[] dealBytes = (byte[]) getIntent().getSerializableExtra("deal");
