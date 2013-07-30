@@ -240,6 +240,13 @@ public class MyDealsFragment extends Fragment
 			return results;
 		}
 	}
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		reloadData();
+	}
 
 	protected AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener()
 	{

@@ -90,6 +90,14 @@ public class DealAcquiresActivity extends Activity
 
 	}
 
+	@Override
+	protected void onResume()
+	{
+		// TODO Auto-generated method stub
+		super.onResume();
+		reloadData();
+	}
+
 	public void mapClick(View view)
 	{
 		Intent myIntent = new Intent(view.getContext(), MapActivity.class);
@@ -181,12 +189,9 @@ public class DealAcquiresActivity extends Activity
 			DealAcquire_t deal = (DealAcquire_t) dealAcquiredAdapter.getItem(position);
 
 			Intent myIntent = new Intent(arg1.getContext(), DealActivity.class);
-
 			myIntent.putExtra("deal", ThriftUtil.serialize(deal));
 			myIntent.putExtra("merchant", ThriftUtil.serialize(merchant));
-
 			startActivity(myIntent);
-
 		}
 	};
 
