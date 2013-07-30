@@ -19,6 +19,7 @@
     <string name="icon_ticket">&#xf145;</string>
     <string name="icon_glass">&#xf000;</string>
     <string name="icon_heart">&#xf004;</string>
+    <string name="icon_heart_empty">&#xf08a;</string>
     <string name="icon_thumbs_up_alt">&#xf087;</string>
     <string name="icon_thumbs_down_alt">&#xf088;</string>
     <string name="icon_thumbs_down_alt">&#xf088;</string>
