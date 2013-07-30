@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.talool.api.thrift.DealAcquire_t;
 import com.talool.mobile.android.R;
+import com.talool.mobile.android.util.TaloolUtil;
 import com.talool.mobile.android.util.TypefaceFactory;
 
 public class DealsAcquiredAdapter extends ArrayAdapter<DealAcquire_t> {
@@ -59,7 +60,7 @@ public class DealsAcquiredAdapter extends ArrayAdapter<DealAcquire_t> {
     	holder.dealsAcquiredIcon.setTextColor(this.context.getResources().getColor(R.color.color_teal));
 
         holder.dealsAcquiredTitle.setText(dealAcquire.deal.summary);
-        holder.dealsAcquiredExpires.setText("Expires on " + new Date(dealAcquire.deal.expires).toString());
+        holder.dealsAcquiredExpires.setText(TaloolUtil.getExpirationText(dealAcquire.deal.expires));
         holder.dealsAcquiredArrow.setImageResource(R.drawable.navigation_next_item);
 
         if(dealAcquire.redeemed != 0)

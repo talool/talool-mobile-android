@@ -3,17 +3,24 @@ package com.talool.mobile.android.activity;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
+import com.loopj.android.image.SmartImageView;
 import com.talool.api.thrift.DealAcquire_t;
+import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.mobile.android.R;
+import com.talool.mobile.android.cache.DealOfferCache;
+import com.talool.mobile.android.tasks.DealOfferFetchTask;
 import com.talool.mobile.android.util.ImageDownloader;
+import com.talool.mobile.android.util.TaloolUtil;
 import com.talool.mobile.android.util.ThriftHelper;
 import com.talool.mobile.android.util.TypefaceFactory;
 import com.talool.thrift.util.ThriftUtil;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class DealActivity extends Activity {
@@ -22,10 +29,13 @@ public class DealActivity extends Activity {
 	private Merchant_t merchant;
 	private ImageView dealMerchantImage;
 	private ImageView logoImageView;
+	private SmartImageView dealOfferCreatorImage;
 	private TextView dealAddressText;
 	private TextView dealSummaryText;
 	private TextView dealValidText;
-
+	private TextView dealExpirationText;
+	private LinearLayout dealActivityButtonLayout;
+	
 
 
 	@Override
@@ -39,7 +49,8 @@ public class DealActivity extends Activity {
 		dealAddressText = (TextView) findViewById(R.id.dealAddressText);
 		dealValidText = (TextView) findViewById(R.id.dealValidText);
 		dealSummaryText = (TextView) findViewById(R.id.dealSummaryText);
-		
+		dealOfferCreatorImage = (SmartImageView) findViewById(R.id.dealActivityCreatorImage);
+		dealExpirationText = (TextView) findViewById(R.id.dealActivityExpires);
 
 		try {
 			byte[] dealBytes = (byte[]) getIntent().getSerializableExtra("deal");
@@ -52,12 +63,44 @@ public class DealActivity extends Activity {
 
 			setText();
 			loadImages();
+			setDealCreatorImage();
 			
 		} catch (TException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+	}
+	
+	private void setDealCreatorImage()
+	{
+		final DealOffer_t dealOffer = DealOfferCache.get().getDealOffer(deal.getDeal().getDealOfferId());
+		if (dealOffer == null)
+		{
+			final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, deal.getDeal().getDealOfferId())
+			{
+
+				@Override
+				protected void onPostExecute(final DealOffer_t dealOffer)
+				{
+					setDealCreatorImageView(dealOffer);
+					// make sure we cache the dealOffer
+					DealOfferCache.get().setDealOffer(dealOffer);
+				}
+
+			};
+
+			dealOfferFetchTask.execute(new String[] {});
+		}
+		else
+		{
+			setDealCreatorImageView(dealOffer);
+		}
+	}
+	
+	private void setDealCreatorImageView(DealOffer_t dealOffer)
+	{
+		dealOfferCreatorImage.setImageUrl(dealOffer.getMerchant().getLocations().get(0).getLogoUrl());
 	}
 
 	private void loadImages()
@@ -79,6 +122,7 @@ public class DealActivity extends Activity {
 		setAddressText();
 		dealSummaryText.setText(deal.deal.summary);
 		dealValidText.setText(deal.deal.details);
+		dealExpirationText.setText(TaloolUtil.getExpirationText(deal.deal.expires));
 		setTitle(merchant.name);
 		
 		final TextView useDealIcon = (TextView) findViewById(R.id.useDealIcon);
@@ -86,6 +130,11 @@ public class DealActivity extends Activity {
 		final TextView giftIcon = (TextView) findViewById(R.id.giftIcon);
 		giftIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
 
+	}
+	
+	private void onUseDealNowClick(View view)
+	{
+		
 	}
 	
 	private void setAddressText()

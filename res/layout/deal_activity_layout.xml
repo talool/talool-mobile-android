@@ -6,6 +6,7 @@
     android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/dealActivityButtonLayout"
         android:layout_width="fill_parent"
         android:layout_height="85dp"
         android:layout_margin="0dp"
@@ -93,8 +94,9 @@
                 android:orientation="horizontal" >
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:orientation="vertical" >
 
                     <TextView
@@ -112,13 +114,22 @@
                         android:text="123 Main St \nDenver, CO 80205" />
 
                 </LinearLayout>
-                <ImageView
-                    android:id="@+id/dealLogoImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:contentDescription="Deal Logo Image"
-                    android:layout_marginLeft="15dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="right"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/dealLogoImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:contentDescription="Deal Logo Image" />
+
+                </LinearLayout>
             </LinearLayout>
 
             <TextView
@@ -145,16 +156,31 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0"
                 android:gravity="bottom"
                 android:orientation="horizontal" >
 
-                <TextView
-                    android:id="@+id/textView1"
+                <com.loopj.android.image.SmartImageView
+                    android:id="@+id/dealActivityCreatorImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Deal valid at"
-                    android:textStyle="bold" />
+                 />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="bottom|right"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/dealActivityExpires"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="right"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

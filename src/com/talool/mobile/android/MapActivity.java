@@ -17,6 +17,7 @@ import com.talool.api.thrift.DealAcquire_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
+import com.talool.mobile.android.activity.DealActivity;
 import com.talool.mobile.android.adapters.DealsAcquiredAdapter;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
@@ -25,9 +26,12 @@ import com.talool.thrift.util.ThriftUtil;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 public class MapActivity extends Activity {
@@ -159,6 +163,7 @@ public class MapActivity extends Activity {
 					R.layout.deals_acquired_item_row, dealAcquires);
 			dealAcquiredAdapter = adapter;
 			dealsAcquiredList.setAdapter(dealAcquiredAdapter);
+			dealsAcquiredList.setOnItemClickListener(onClickListener);
 		}
 		else
 		{
@@ -199,4 +204,25 @@ public class MapActivity extends Activity {
 		MapAcquiresTask dealAcquiresTask = new MapAcquiresTask();
 		dealAcquiresTask.execute(new String[]{});
 	}
+	
+	protected AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener()
+	{
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+				long arg3)
+		{
+			DealsAcquiredAdapter dealAcquiredAdapter = (DealsAcquiredAdapter) arg0.getAdapter();
+			DealAcquire_t deal = (DealAcquire_t) dealAcquiredAdapter.getItem(position);
+
+			Intent myIntent = new Intent(arg1.getContext(), DealActivity.class);
+
+			myIntent.putExtra("deal", ThriftUtil.serialize(deal));
+			myIntent.putExtra("merchant", ThriftUtil.serialize(merchant));
+
+			startActivity(myIntent);
+
+		}
+	};
 }
+
