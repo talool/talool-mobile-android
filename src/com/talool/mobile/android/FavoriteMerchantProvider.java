@@ -20,12 +20,13 @@ import com.talool.mobile.android.cache.FavoriteMerchantCache;
 import com.talool.mobile.android.util.ThriftHelper;
 import com.talool.mobile.android.util.TypefaceFactory;
 
-@SuppressLint("NewApi")
-/**
+/*
+ * Optimistically sets the heart icon on the Action bar with user input onclicks.  If the service side persistence fails the UI will be undone. 
  * 
  * @author clintz
  *
  */
+@SuppressLint("NewApi")
 public class FavoriteMerchantProvider extends ActionProvider
 {
 	private ThriftHelper client;
@@ -72,6 +73,9 @@ public class FavoriteMerchantProvider extends ActionProvider
 		{
 			final boolean isCurrentFavorite = FavoriteMerchantCache.get().isFavorite(merchant.getMerchantId());
 
+			// make UI speedy! Set now optimistically assume service side succeeds!
+			setIsFavorited(!isCurrentFavorite);
+
 			final AsyncTask<String, Void, Boolean> favTask = new AsyncTask<String, Void, Boolean>()
 			{
 
@@ -79,9 +83,10 @@ public class FavoriteMerchantProvider extends ActionProvider
 				{
 					// we can update UI here because it runs on the main UI thread (unlike
 					// doBackground)
-					if (success)
+					if (!success)
 					{
-						setIsFavorited(!isCurrentFavorite);
+						// undo what we optimistically set above
+						setIsFavorited(isCurrentFavorite);
 					}
 
 				}
