@@ -21,7 +21,8 @@ public class TaloolApplication extends Application
 
 	private void init()
 	{
-	    TypefaceFactory.createInstance(getAssets());
+		// cache font-awesome typeface
+		TypefaceFactory.createInstance(getAssets());
 	}
 
 }

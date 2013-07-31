@@ -22,6 +22,12 @@ public class ThriftHelper
 		tHttpClient = new THttpClient(URL);
 		protocol = new TBinaryProtocol(tHttpClient);
 		client = new CustomerService_t.Client(protocol);
+
+		if (TaloolUser.getInstance().getAccessToken() != null)
+		{
+			tHttpClient.setCustomHeader(CustomerServiceConstants.CTOKEN_NAME,
+					TaloolUser.getInstance().getAccessToken().getToken());
+		}
 	}
 
 	public ThriftHelper(CTokenAccess_t accessToken) throws TTransportException
@@ -62,7 +68,7 @@ public class ThriftHelper
 		this.protocol = protocol;
 	}
 
-	public void setAccessToken(CTokenAccess_t tokenAccess)
+	public void setAccessToken(final CTokenAccess_t tokenAccess)
 	{
 		tHttpClient.setCustomHeader(CustomerServiceConstants.CTOKEN_NAME, tokenAccess.getToken());
 	}
