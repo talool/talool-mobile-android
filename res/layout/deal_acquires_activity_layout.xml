@@ -44,7 +44,9 @@
             android:layout_height="fill_parent"
             android:layout_weight="0.3"
             android:gravity="center"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:clickable="true"
+            android:onClick="onCallClicked" >
 
             <TextView
                 android:id="@+id/callIcon"
@@ -69,6 +71,8 @@
             android:layout_weight="0.3"
             android:gravity="center"
             android:orientation="vertical"
+            android:clickable="true"
+            android:onClick="onWebsiteClick"
             android:padding="7dp" >
 
             <TextView
