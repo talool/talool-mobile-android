@@ -84,7 +84,7 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1.00"
-            android:background="@color/tan"
+            android:background="@drawable/tan_rounded_bottom_only"
             android:orientation="vertical"
             android:padding="10dp" >
 
@@ -100,7 +100,7 @@
                     android:orientation="vertical" >
 
                     <TextView
-                        android:id="@+id/textView1"
+                        android:id="@+id/settingsUserNameText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Offer valid at"

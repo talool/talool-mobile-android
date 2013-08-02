@@ -2,5 +2,6 @@
 	<color name="red">#ffff0000</color> 
 	<color name="gray">#C0C0C0</color>
 	<color name="tan">#fff2f2e6</color>
+	<color name="dark_tan">#ffccccb3</color>
 	<color name="orange">#ffcc5926</color>
 </resources>

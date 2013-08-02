@@ -2,6 +2,7 @@ package com.talool.mobile.android;
 
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.talool.mobile.android.activity.MyActivityFragment;
+import com.talool.mobile.android.activity.SettingsActivity;
 import com.talool.mobile.android.util.TaloolUser;
 
 import android.app.ActionBar;
@@ -11,9 +12,11 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -64,9 +67,13 @@ public class MainActivity extends Activity {
 		actionBar.addTab(tab2);
 		actionBar.addTab(tab3);
 
+		if(TaloolUser.getInstance().getAccessToken() == null)
+		{
+			 Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+			 startActivity(intent);	
+		}
 
 	}
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -82,7 +89,8 @@ public class MainActivity extends Activity {
 		boolean ret;
 		if (item.getItemId() == R.id.menu_settings)
 		{
-			// Handle Settings
+			Intent intent = new Intent(getApplicationContext(),SettingsActivity.class);
+			startActivity(intent);
 			ret = true;
 		} else
 		{

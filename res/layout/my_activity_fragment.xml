@@ -4,11 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-    <ListView 
+    <ListView
         android:id="@+id/myActivityListView"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:background="@drawable/tan_rounded_bottom_only"
+        android:orientation="vertical" >
+
     </ListView>
     
 </LinearLayout>

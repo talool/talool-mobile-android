@@ -60,5 +60,10 @@ public final class TaloolUser
 	{
 		this.location = location;
 	}
+	
+	public void logoutUser()
+	{
+		this.accessToken = null;
+	}
 
 }

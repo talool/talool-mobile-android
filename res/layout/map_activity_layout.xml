@@ -22,7 +22,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:background="@color/tan"
+        android:background="@drawable/tan_rounded_bottom_only"
         android:orientation="vertical" >
     </ListView>
 
