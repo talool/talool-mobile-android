@@ -48,14 +48,18 @@ public class DealAcquiresActivity extends Activity
 	private Exception exception;
 	private List<DealAcquire_t> dealAcquires;
 	private Merchant_t merchant;
+	private Menu menu;
 
 	public boolean onCreateOptionsMenu(final Menu menu)
 	{
 		final MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.heart_action_bar, menu);
 
-		menu.getItem(0).setActionProvider(new FavoriteMerchantProvider(getApplicationContext()));
-		return super.onCreateOptionsMenu(menu);
+		menu.getItem(0).setActionProvider(new FavoriteMerchantProvider(merchant, getApplicationContext()));
+
+		this.menu = menu;
+
+		return true;
 	}
 
 	@Override
@@ -236,6 +240,12 @@ public class DealAcquiresActivity extends Activity
 				SearchOptions_t searchOptions = new SearchOptions_t();
 				searchOptions.setMaxResults(1000).setPage(0).setSortProperty("deal.dealId").setAscending(true);
 				results = client.getClient().getDealAcquires(merchant.merchantId, searchOptions);
+
+				if (results != null && results.size() > 0)
+				{
+
+				}
+
 			}
 			catch (ServiceException_t e)
 			{

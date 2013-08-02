@@ -16,6 +16,7 @@ import android.widget.EditText;
 
 import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.ServiceException_t;
+import com.talool.mobile.android.tasks.FetchFavoriteMerchantsTask;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
 
@@ -39,9 +40,20 @@ public class LoginActivity extends Activity
 			{
 				TaloolUser.getInstance().setAccessToken(result);
 				Log.i(LoginActivity.class.toString(), "Login Complete");
+
+				doPostLogin();
+
 				Intent myDealsIntent = new Intent(getApplicationContext(), MainActivity.class);
 				startActivity(myDealsIntent);
 			}
+		}
+
+		private void doPostLogin()
+		{
+			// load favorite merchants
+			final FetchFavoriteMerchantsTask favMerchantTask = new FetchFavoriteMerchantsTask();
+
+			favMerchantTask.execute(new String[] {});
 		}
 
 		@Override
