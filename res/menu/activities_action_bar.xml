@@ -1,0 +1,52 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+     <item
+        android:id="@+id/activity_filter_root"
+        android:icon="@drawable/navigation_refresh"
+        android:showAsAction="always"
+        android:titleCondensed="Refresh"/>
+        
+    <item
+        android:id="@+id/activity_filter_root"
+        android:icon="@drawable/action_search"
+        android:showAsAction="always"
+        android:titleCondensed="Options">
+        <menu>
+            <group android:checkableBehavior="single" >
+                <item
+                    android:id="@+id/activity_filter_all"
+                    android:checked="true"
+                    android:title="@string/activity_filter_all"/>
+                <item
+                    android:id="@+id/activity_filter_gift"
+                    android:enabled="true"
+                    android:icon="@drawable/fa_heart_white_2424"
+                    android:showAsAction="always"
+                    android:title="@string/activity_filter_gifts"
+                    android:visible="true"/>
+                <item
+                    android:id="@+id/activity_filter_transactions"
+                    android:icon="@drawable/fa_heart_white_2424"
+                    android:showAsAction="always"
+                    android:title="@string/activity_filter_transactions"
+                    android:visible="true"/>
+                  <item
+                    android:id="@+id/activity_filter_friends"
+                    android:enabled="true"
+                    android:icon="@drawable/fa_heart_white_2424"
+                    android:showAsAction="always"
+                    android:title="@string/activity_filter_friends"
+                    android:visible="true"/>
+                <item
+                    android:id="@+id/activity_filter_messages"
+                    android:enabled="true"
+                    android:icon="@drawable/fa_heart_white_2424"
+                    android:showAsAction="always"
+                    android:title="@string/activity_filter_messages"
+                    android:visible="true"/>
+                
+            </group>
+        </menu>
+    </item>
+
+</menu>

@@ -15,6 +15,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -47,6 +49,13 @@ public class MyDealsFragment extends Fragment
 	private static final Location_t DENVER_LOCATION = new Location_t(-104.9842, 39.7392);
 
 	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+	{
+		menu.clear();
+
+	}
+
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 	{
@@ -59,6 +68,9 @@ public class MyDealsFragment extends Fragment
 		this.context = view.getContext();
 		createThriftClient();
 		reloadData();
+
+		setHasOptionsMenu(false);
+
 		return view;
 	}
 
@@ -240,9 +252,10 @@ public class MyDealsFragment extends Fragment
 			return results;
 		}
 	}
-	
+
 	@Override
-	public void onResume() {
+	public void onResume()
+	{
 		// TODO Auto-generated method stub
 		super.onResume();
 		reloadData();

@@ -24,12 +24,18 @@
     <string name="icon_thumbs_down_alt">&#xf088;</string>
     <string name="icon_thumbs_down_alt">&#xf088;</string>
     
-    
     <color name="color_teal">#19BCB9</color>
     <color name="color_grey">#C0C0C0</color>
     
     <!-- activity strings -->
     <string name="accept_gift">Accept Gift</string>
     <string name="reject_gift">Reject Gift</string>
+    
+   <string name="activity_filter_all">Show All</string>
+   <string name="activity_filter_gifts">Gifts</string>
+   <string name="activity_filter_messages">Messages</string>
+   <string name="activity_filter_transactions">Transactions</string>
+   <string name="activity_filter_friends">Friends Activities</string>
+    
 
 </resources>
