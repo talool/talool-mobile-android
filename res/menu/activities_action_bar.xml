@@ -20,27 +20,27 @@
                 <item
                     android:id="@+id/activity_filter_gift"
                     android:enabled="true"
-                    android:icon="@drawable/fa_heart_white_2424"
+                    android:icon="@drawable/fa_gift_white_3232"
                     android:showAsAction="always"
                     android:title="@string/activity_filter_gifts"
                     android:visible="true"/>
                 <item
                     android:id="@+id/activity_filter_transactions"
-                    android:icon="@drawable/fa_heart_white_2424"
+                    android:icon="@drawable/fa_money_white_3232"
                     android:showAsAction="always"
                     android:title="@string/activity_filter_transactions"
                     android:visible="true"/>
                   <item
                     android:id="@+id/activity_filter_friends"
                     android:enabled="true"
-                    android:icon="@drawable/fa_heart_white_2424"
+                    android:icon="@drawable/fa_friends_white_3232"
                     android:showAsAction="always"
                     android:title="@string/activity_filter_friends"
                     android:visible="true"/>
                 <item
                     android:id="@+id/activity_filter_messages"
                     android:enabled="true"
-                    android:icon="@drawable/fa_heart_white_2424"
+                    android:icon="@drawable/fa_message_white_3232"
                     android:showAsAction="always"
                     android:title="@string/activity_filter_messages"
                     android:visible="true"/>
