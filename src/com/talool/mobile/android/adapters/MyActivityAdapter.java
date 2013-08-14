@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,8 +75,14 @@ public class MyActivityAdapter extends ArrayAdapter<Activity_t>
 		final TextView txt = (TextView) row.findViewById(R.id.iconView);
 		txt.setTypeface(TypefaceFactory.get().getFontAwesome());
 
+		if (activity.getTitle().startsWith("chris lint"))
+		{
+			Log.e("here", "e");
+		}
+
 		if (activity.getActivityLink() != null && ApiUtil.isClickableActivityLink(activity))
 		{
+
 			imageArrow.setVisibility(View.VISIBLE);
 			if (activity.actionTaken)
 			{
