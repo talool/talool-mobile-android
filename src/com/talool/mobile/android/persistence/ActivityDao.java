@@ -9,6 +9,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.talool.api.thrift.ActivityEvent_t;
 import com.talool.api.thrift.Activity_t;
@@ -128,16 +129,42 @@ public final class ActivityDao
 		return activities;
 	}
 
-	public void saveActivities(List<Activity_t> activities)
+	public void saveActivities(final List<Activity_t> activities)
 	{
+		final SQLiteDatabase database = this.activityDbHelper.getWritableDatabase();
+		database.beginTransaction();
+
 		long before = System.currentTimeMillis();
-		for (final Activity_t activity : activities)
+
+		try
 		{
-			saveActivity(activity);
+			final ContentValues values = new ContentValues();
+			for (final Activity_t activity : activities)
+			{
+				values.put(ActivityColumn._id.name(), activity.getActivityId());
+				values.put(ActivityColumn.activity_date.name(), activity.getActivityDate());
+				values.put(ActivityColumn.activity_type.name(), activity.getActivityEvent().ordinal());
+
+				values.put(ActivityColumn.activity_obj.name(), ThriftUtil.serialize(activity));
+
+				database.replace(ActivityDbHelper.ACTIVITY_TBL, null, values);
+				values.clear();
+			}
+
+			database.setTransactionSuccessful();
+		}
+		catch (Exception ex)
+		{
+			Log.e(this.getClass().getSimpleName(), "Problem saving activities", ex);
+		}
+		finally
+		{
+			database.endTransaction();
 		}
 
 		long total = System.currentTimeMillis() - before;
 		System.out.println(total);
+
 	}
 
 	private Activity_t cursorToActivity(final Cursor cursor)
