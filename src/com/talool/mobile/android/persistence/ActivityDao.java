@@ -20,7 +20,7 @@ import com.talool.thrift.util.ThriftUtil;
  * @author clintz
  * 
  */
-public class ActivityDao
+public final class ActivityDao
 {
 	private static ActivityDao instance;
 	private ActivityDbHelper activityDbHelper;
@@ -128,12 +128,16 @@ public class ActivityDao
 		return activities;
 	}
 
-	public void saveAllActivities(List<Activity_t> activities)
+	public void saveActivities(List<Activity_t> activities)
 	{
+		long before = System.currentTimeMillis();
 		for (final Activity_t activity : activities)
 		{
 			saveActivity(activity);
 		}
+
+		long total = System.currentTimeMillis() - before;
+		System.out.println(total);
 	}
 
 	private Activity_t cursorToActivity(final Cursor cursor)

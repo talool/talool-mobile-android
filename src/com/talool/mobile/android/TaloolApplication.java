@@ -25,8 +25,8 @@ public class TaloolApplication extends Application
 		// cache font-awesome typeface
 		TypefaceFactory.createInstance(getAssets());
 
-		// initialize Dao
+		// init Dao
 		ActivityDao.createInstance(this.getApplicationContext());
-	}
 
+	}
 }

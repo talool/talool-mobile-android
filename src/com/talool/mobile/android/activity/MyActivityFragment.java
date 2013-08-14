@@ -149,7 +149,7 @@ public class MyActivityFragment extends Fragment
 		protected void onPostExecute(final List<Activity_t> results)
 		{
 			updateActivityList(results);
-			ActivityDao.get().saveAllActivities(results);
+			ActivityDao.get().saveActivities(results);
 		}
 
 		@Override
