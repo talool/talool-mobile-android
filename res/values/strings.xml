@@ -22,7 +22,6 @@
     <string name="icon_heart_empty">&#xf08a;</string>
     <string name="icon_thumbs_up_alt">&#xf087;</string>
     <string name="icon_thumbs_down_alt">&#xf088;</string>
-    <string name="icon_thumbs_down_alt">&#xf088;</string>
     
     <color name="color_teal">#19BCB9</color>
     <color name="color_grey">#C0C0C0</color>
@@ -36,6 +35,9 @@
    <string name="activity_filter_messages">Messages</string>
    <string name="activity_filter_transactions">Transactions</string>
    <string name="activity_filter_friends">Friends Activities</string>
-    
+   <string name="get_started">login using facebook</string>
+   <string name="app_id">181930408655577</string>
+    <string name="title_facebook_login">test123</string>
+
 
 </resources>

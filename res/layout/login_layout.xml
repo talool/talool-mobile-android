@@ -48,6 +48,23 @@
                 android:layout_marginTop="10dip"
                 android:text="@string/login"
                 android:onClick="onLoginClick"/>
+        <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="174dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:lines="2"
+                android:textSize="17sp"
+                android:text="@string/get_started"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"/>
+        <com.facebook.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp" />
           <!-- Link to Registration Screen -->
           <TextView android:id="@+id/link_to_register"
                 android:layout_width="fill_parent"

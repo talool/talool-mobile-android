@@ -17,14 +17,19 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
 import com.talool.mobile.android.activity.MyActivityFragment;
 import com.talool.mobile.android.activity.SettingsActivity;
 import com.talool.mobile.android.util.TaloolUser;
 
 public class MainActivity extends Activity
 {
+    private UiLifecycleHelper lifecycleHelper;
+    private boolean isResumed = false;
 
-	private final LocationListener locationListener = new LocationListener()
+    private final LocationListener locationListener = new LocationListener()
 	{
 		public void onLocationChanged(Location location)
 		{
@@ -53,10 +58,18 @@ public class MainActivity extends Activity
 		}
 	};
 
-	@Override
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isResumed = false;
+    }
+
+    @Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+        lifecycleHelper = new UiLifecycleHelper(this, statusCallback);
+        lifecycleHelper.onCreate(savedInstanceState);
 		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
 
@@ -75,13 +88,34 @@ public class MainActivity extends Activity
 
 		if (TaloolUser.getInstance().getAccessToken() == null)
 		{
-			Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-			startActivity(intent);
+            showLogin();
 		}
 
 	}
 
-	@Override
+    @Override
+    protected void onResume() {
+        super.onResume();
+        lifecycleHelper.onResume();
+        isResumed = true;
+
+        Session session = Session.getActiveSession();
+
+        if (session != null && session.isOpened()) {
+            // user doesn't need to login
+        } else {
+            // otherwise present the splash screen
+            // and ask the person to login.
+            showLogin();
+        }
+    }
+
+    private void showLogin(){
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -176,4 +210,41 @@ public class MainActivity extends Activity
 			mFragment = null;
 		}
 	}
+
+    private Session.StatusCallback statusCallback = new Session.StatusCallback() {
+        @Override
+        public void call(Session session, SessionState state, Exception exception) {
+            onSessionStateChange(session, state, exception);
+        }
+    };
+
+    private void onSessionStateChange(Session session, SessionState state, Exception exception){
+        if (isResumed) {
+            if (state.isOpened()) {
+                Log.i("Pauk","facebook login success");
+               //user is logged in... welcome back screen?
+            } else if (state.isClosed()) {
+                //show login
+                showLogin();
+            }
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        lifecycleHelper.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        lifecycleHelper.onDestroy();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        lifecycleHelper.onActivityResult(requestCode, resultCode, data);
+    }
 }
