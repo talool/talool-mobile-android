@@ -129,34 +129,18 @@ public class MyActivityFragment extends Fragment
 	@Override
 	public boolean onOptionsItemSelected(final MenuItem item)
 	{
-		if (item.getItemId() == R.id.activity_filter_root ||
-				item.getItemId() == R.id.activity_filter_all)
+		if (item.getItemId() == R.id.activity_filter_root)
 		{
-			return false;
+			return true;
 		}
 
 		selectedEventFilter = item.getItemId();
-
 		item.setChecked(item.isChecked() ? false : true);
 
 		reloadData();
 
 		return true;
 
-		// // Handle item selection
-		// switch (item.getItemId())
-		// {
-		// case R.id.activity_all:
-		// item.setChecked(item.isChecked() ? false : true);
-		// return true;
-		//
-		// case R.id.activity_messages:
-		// item.setChecked(item.isChecked() ? false : true);
-		// return true;
-		//
-		// default:
-		// return super.onOptionsItemSelected(item);
-		// }
 	}
 
 	private class MyActivityTask extends AsyncTask<String, Void, List<Activity_t>>
