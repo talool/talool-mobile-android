@@ -4,4 +4,8 @@
 	<color name="tan">#fff2f2e6</color>
 	<color name="dark_tan">#ffccccb3</color>
 	<color name="orange">#ffcc5926</color>
+	<color name="white">#FFFFFFFF</color>
+	<color name="pressed_talool">#CCDAD7C5</color>
+	<color name="actionbar_text">#FFFFFFFF</color>
+	<color name="actionbartab_text">#CCDAD7C5</color>
 </resources>

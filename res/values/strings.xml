@@ -10,6 +10,7 @@
     <string name="login">Login</string>
     <string name="icon_gift">&#xf06b;</string>
     <string name="icon_envelope_alt">&#xf003;</string>
+    <string name="icon_envelope">&#xf0e0;</string>
     <string name="icon_money">&#xf0d6;</string>
     <string name="icon_phone">&#xf098;</string>
     <string name="icon_map_marker">&#xf041;</string>
