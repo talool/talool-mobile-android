@@ -35,8 +35,6 @@ public class MyActivityAdapter extends ArrayAdapter<Activity_t>
 		TextView activityTitle;
 		TextView activitySubtitle;
 		TextView activityDate;
-		TextView icon;
-		ImageView activityLinkArrow;
 	}
 
 	public MyActivityAdapter(final Context context, final int layoutResourceId, final List<Activity_t> data)

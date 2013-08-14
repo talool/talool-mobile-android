@@ -5,8 +5,10 @@ import org.apache.thrift.TException;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.talool.api.thrift.Activity_t;
 import com.talool.api.thrift.DealAcquire_t;
 import com.talool.api.thrift.ServiceException_t;
+import com.talool.mobile.android.persistence.ActivityDao;
 import com.talool.mobile.android.util.ThriftHelper;
 
 /**
@@ -17,14 +19,19 @@ import com.talool.mobile.android.util.ThriftHelper;
 public class GiftAcceptanceTask extends AsyncTask<String, Void, DealAcquire_t>
 {
 	private ThriftHelper client;
-	private String giftId;
+	private Activity_t activity;
 	private boolean accept = false;
 
-	public GiftAcceptanceTask(final ThriftHelper client, final String giftId, boolean accept)
+	public GiftAcceptanceTask(final ThriftHelper client, final Activity_t activity, boolean accept)
 	{
 		this.client = client;
-		this.giftId = giftId;
 		this.accept = accept;
+		this.activity = activity;
+	}
+
+	public String getGiftId()
+	{
+		return activity.getActivityLink().getLinkElement();
 	}
 
 	@Override
@@ -40,16 +47,18 @@ public class GiftAcceptanceTask extends AsyncTask<String, Void, DealAcquire_t>
 
 		try
 		{
-			// TODO add the returned dealAcquire to cache, and then set the Intent
 			if (accept)
 			{
-				dealAcquire = client.client.acceptGift(giftId);
-
+				dealAcquire = client.client.acceptGift(getGiftId());
 			}
 			else
 			{
-				client.client.rejectGift(giftId);
+				client.client.rejectGift(getGiftId());
 			}
+
+			// make sure we update our cache
+			activity.setActionTaken(true);
+			ActivityDao.get().saveActivity(activity);
 
 		}
 		catch (ServiceException_t e)

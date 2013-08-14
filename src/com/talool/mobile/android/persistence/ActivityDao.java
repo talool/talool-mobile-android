@@ -50,7 +50,7 @@ public class ActivityDao
 		activityDbHelper.close();
 	}
 
-	public void createActivity(final Activity_t activity)
+	public void saveActivity(final Activity_t activity)
 	{
 		final SQLiteDatabase database = this.activityDbHelper.getWritableDatabase();
 
@@ -132,7 +132,7 @@ public class ActivityDao
 	{
 		for (final Activity_t activity : activities)
 		{
-			createActivity(activity);
+			saveActivity(activity);
 		}
 	}
 
