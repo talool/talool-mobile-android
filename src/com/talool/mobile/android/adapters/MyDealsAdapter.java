@@ -6,8 +6,10 @@ import java.util.List;
 import com.talool.api.thrift.Category_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.mobile.android.R;
+import com.talool.mobile.android.util.ApiUtil;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.TaloolUtil;
+import com.talool.mobile.android.util.TypefaceFactory;
 
 import android.app.Activity;
 import android.content.Context;
@@ -114,7 +116,7 @@ public class MyDealsAdapter extends ArrayAdapter<Merchant_t> implements Filterab
             row = inflater.inflate(layoutResourceId, parent, false);
             
             holder = new MyDealsRow();
-            holder.myDealsMerchantIcon = (ImageView)row.findViewById(R.id.myDealsMerchantIcon);
+            holder.myDealsMerchantIcon = (TextView) row.findViewById(R.id.iconView);
             holder.myDealsMerchantTitle = (TextView)row.findViewById(R.id.myDealsMerchantTitle);
             holder.myDealsMerchantLocation = (TextView)row.findViewById(R.id.myDealsMerchantLocation);
             holder.myDealsMerchantDistance = (TextView)row.findViewById(R.id.myDealsMerchantDistance);
@@ -129,7 +131,11 @@ public class MyDealsAdapter extends ArrayAdapter<Merchant_t> implements Filterab
         
         Merchant_t merchant = filteredData.get(position);
         holder.merchant = merchant;
-        holder.myDealsMerchantIcon.setImageResource(R.drawable.icon_teal);
+        
+        holder.myDealsMerchantIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
+        holder.myDealsMerchantIcon.setText(ApiUtil.getIcon(merchant.category));
+        holder.myDealsMerchantIcon.setTextColor(row.getResources().getColor(ApiUtil.getIconColor(merchant.category)));
+        
         holder.myDealsMerchantTitle.setText(merchant.getName());
         if(merchant.getLocations() != null && merchant.getLocations().size() >0)
         {

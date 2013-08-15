@@ -9,11 +9,11 @@
         android:id="@+id/iconView"
         android:layout_width="40sp"
         android:layout_height="40sp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:text="@string/icon_gift"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#19BCB9"
+        android:textColor="@color/teal"
         android:textSize="35sp" />
 
     <LinearLayout
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="TextView"
-            android:textColor="#B6B6B4"
+            android:textColor="@color/gray_4"
             android:textSize="12sp"
             android:ellipsize="end"
             android:singleLine="true"
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="TextView"
-            android:textColor="#B6B6B4"
+            android:textColor="@color/gray_4"
             android:textSize="12sp" />
     </LinearLayout>
 

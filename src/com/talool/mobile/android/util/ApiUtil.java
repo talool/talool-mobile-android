@@ -2,6 +2,7 @@ package com.talool.mobile.android.util;
 
 import com.talool.api.thrift.ActivityEvent_t;
 import com.talool.api.thrift.Activity_t;
+import com.talool.api.thrift.Category_t;
 import com.talool.mobile.android.R;
 
 /**
@@ -68,6 +69,46 @@ public final class ApiUtil
 			case UNKNOWN:
 			default:
 				return R.string.icon_envelope_alt;
+
+		}
+
+	}
+	
+	public static int getIcon(final Category_t category)
+	{
+		switch (category.categoryId)
+		{
+			case Constants.FOOD_CATEGORY_ID:
+				return R.string.icon_food;
+
+			case Constants.SHOPPING_CATEGORY_ID:
+				return R.string.icon_shopping_cart;
+
+			case Constants.FUN_CATEGORY_ID:
+				return R.string.icon_ticket;
+
+			default:
+				return R.string.icon_food;
+
+		}
+
+	}
+	
+	public static int getIconColor(final Category_t category)
+	{
+		switch (category.categoryId)
+		{
+			case Constants.FOOD_CATEGORY_ID:
+				return R.color.teal;
+
+			case Constants.SHOPPING_CATEGORY_ID:
+				return R.color.orange;
+
+			case Constants.FUN_CATEGORY_ID:
+				return R.color.green;
+
+			default:
+				return R.color.gray_icon;
 
 		}
 

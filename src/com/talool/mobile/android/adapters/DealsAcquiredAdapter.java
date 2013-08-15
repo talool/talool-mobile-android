@@ -57,7 +57,7 @@ public class DealsAcquiredAdapter extends ArrayAdapter<DealAcquire_t> {
         DealAcquire_t dealAcquire = data.get(position);
 
         holder.dealsAcquiredIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
-    	holder.dealsAcquiredIcon.setTextColor(this.context.getResources().getColor(R.color.color_teal));
+    	holder.dealsAcquiredIcon.setTextColor(this.context.getResources().getColor(R.color.teal));
 
         holder.dealsAcquiredTitle.setText(dealAcquire.deal.summary);
         holder.dealsAcquiredExpires.setText(TaloolUtil.getExpirationText(dealAcquire.deal.expires));
@@ -66,7 +66,7 @@ public class DealsAcquiredAdapter extends ArrayAdapter<DealAcquire_t> {
         if(dealAcquire.redeemed != 0)
         {
         	holder.dealsAcquiredTitle.setPaintFlags(holder.dealsAcquiredTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        	holder.dealsAcquiredIcon.setTextColor(this.context.getResources().getColor(R.color.color_grey));
+        	holder.dealsAcquiredIcon.setTextColor(this.context.getResources().getColor(R.color.gray_icon));
         }
         
         return row;

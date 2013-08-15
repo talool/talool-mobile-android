@@ -1,5 +1,6 @@
 <resources>
-	<color name="red">#ffff0000</color> 
+	<color name="red">#ed1c24</color> 
+	<color name="green">#50b948</color>
 	<color name="gray">#C0C0C0</color>
 	<color name="tan">#fff2f2e6</color>
 	<color name="dark_tan">#ffccccb3</color>
@@ -10,4 +11,10 @@
 	<color name="actionbartab_text">#CCDAD7C5</color>
 	<color name="locationBackground">#ffbfb399</color>
 	<color name="brown">#ff4D4040</color>
+	<color name="teal">#19BCB9</color>
+	<color name="gray_1">#dad7c5</color>
+	<color name="gray_2">#b9ac97</color>
+	<color name="gray_3">#998675</color>
+	<color name="gray_4">#837165</color>
+	<color name="gray_icon">#b9ac97</color>
 </resources>

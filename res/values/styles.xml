@@ -31,6 +31,7 @@
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Talool</item>
         <item name="android:actionBarTabTextStyle">@style/TabTextStyle.Talool</item>
         <item name="android:itemTextAppearance">@style/MenuTextStyle.Talool</item>
+        <item name="android:actionButtonStyle">@style/MenuTextStyle.Talool</item>
     </style>
 
     <style name="ActionBar.Solid.Talool" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">

@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 public class MyDealsRow {
 	public Merchant_t merchant;
-    public ImageView myDealsMerchantIcon;
+    public TextView myDealsMerchantIcon;
     public TextView myDealsMerchantTitle;
     public TextView myDealsMerchantLocation;
     public TextView myDealsMerchantDistance;

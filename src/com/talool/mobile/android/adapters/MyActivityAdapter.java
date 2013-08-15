@@ -80,18 +80,18 @@ public class MyActivityAdapter extends ArrayAdapter<Activity_t>
 			imageArrow.setVisibility(View.VISIBLE);
 			if (activity.actionTaken)
 			{
-				txt.setTextColor(row.getResources().getColor(R.color.color_grey));
+				txt.setTextColor(row.getResources().getColor(R.color.gray_icon));
 			}
 			else
 			{
-				txt.setTextColor(row.getResources().getColor(R.color.color_teal));
+				txt.setTextColor(row.getResources().getColor(R.color.teal));
 			}
 
 		}
 		else
 		{
 			imageArrow.setVisibility(View.GONE);
-			txt.setTextColor(row.getResources().getColor(R.color.color_grey));
+			txt.setTextColor(row.getResources().getColor(R.color.gray_icon));
 		}
 
 		txt.setText(ApiUtil.getIcon(activity));
