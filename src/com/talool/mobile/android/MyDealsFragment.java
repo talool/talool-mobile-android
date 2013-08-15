@@ -46,8 +46,10 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	private Context context;
 	private Exception exception;
 	private List<Merchant_t> merchants;
-    private PullToRefreshAttacher mPullToRefreshAttacher;
-
+	private Menu menu;
+	
+	private PullToRefreshAttacher mPullToRefreshAttacher;
+	
 	// TODO REMOVE FOR PRODUCTION!
 	private static final Location_t DENVER_LOCATION = new Location_t(-104.9842, 39.7392);
 
@@ -56,26 +58,34 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	{
 		menu.clear();
 
+		this.menu = menu;
+
+		inflater.inflate(R.menu.my_deals_action_bar, menu);
+
+		// final MenuItem menuItem = menu.findItem(selectedEventFilter);
+		// menuItem.setChecked(true);
+
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 	{
-		this.view = inflater.inflate(R.layout.my_deals_fragment, container, false);
-		mPullToRefreshAttacher = ((MainActivity) getActivity())
-                .getPullToRefreshAttacher();
 
+		this.view = inflater.inflate(R.layout.my_deals_fragment, container, false);
 		final TextView txt = (TextView) view.findViewById(R.id.myDealsFoodFilterButton);
 		txt.setTypeface(TypefaceFactory.get().getFontAwesome());
 		myDealsListView = (ListView) view.findViewById(R.id.myDealsListView);
-        mPullToRefreshAttacher.addRefreshableView(myDealsListView, this);
 
+		mPullToRefreshAttacher = ((MainActivity) getActivity())
+                .getPullToRefreshAttacher();
+        mPullToRefreshAttacher.addRefreshableView(myDealsListView, this);
+		
 		this.context = view.getContext();
 		createThriftClient();
 		reloadData();
 
-		setHasOptionsMenu(false);
+		setHasOptionsMenu(true);
 
 		return view;
 	}
@@ -219,7 +229,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 			merchants = results;
 			Log.i(MyDealsFragment.class.toString(), "Number of Merchants: " + results.size());
 			loadListView();
-			mPullToRefreshAttacher.setRefreshComplete();
+            mPullToRefreshAttacher.setRefreshComplete();
 		}
 
 		@Override
@@ -277,17 +287,9 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		{
 			MyDealsAdapter myDealsAdapter = (MyDealsAdapter) arg0.getAdapter();
 			Merchant_t merchant = (Merchant_t) myDealsAdapter.getItem(position);
-
 			Intent myIntent = new Intent(arg1.getContext(), DealAcquiresActivity.class);
-
 			myIntent.putExtra("merchant", ThriftUtil.serialize(merchant));
-
-			// deserialize example
-			// Merchant_t merc = new Merchant_t();
-			// ThriftUtil.deserialize(whatEverBytes,merc);
-
 			startActivity(myIntent);
-
 		}
 	};
 

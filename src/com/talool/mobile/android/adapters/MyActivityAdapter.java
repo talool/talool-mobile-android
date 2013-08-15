@@ -1,6 +1,5 @@
 package com.talool.mobile.android.adapters;
 
-import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
@@ -15,6 +14,8 @@ import android.widget.TextView;
 import com.talool.api.thrift.Activity_t;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.util.ApiUtil;
+import com.talool.mobile.android.util.Constants;
+import com.talool.mobile.android.util.SafeSimpleDateFormat;
 import com.talool.mobile.android.util.TypefaceFactory;
 
 /**
@@ -34,8 +35,6 @@ public class MyActivityAdapter extends ArrayAdapter<Activity_t>
 		TextView activityTitle;
 		TextView activitySubtitle;
 		TextView activityDate;
-		TextView icon;
-		ImageView activityLinkArrow;
 	}
 
 	public MyActivityAdapter(final Context context, final int layoutResourceId, final List<Activity_t> data)
@@ -77,6 +76,7 @@ public class MyActivityAdapter extends ArrayAdapter<Activity_t>
 
 		if (activity.getActivityLink() != null && ApiUtil.isClickableActivityLink(activity))
 		{
+
 			imageArrow.setVisibility(View.VISIBLE);
 			if (activity.actionTaken)
 			{
@@ -100,7 +100,7 @@ public class MyActivityAdapter extends ArrayAdapter<Activity_t>
 
 		holder.activityTitle.setText(activity.getTitle());
 		holder.activitySubtitle.setText(activity.getSubtitle());
-		holder.activityDate.setText(new Date(activity.getActivityDate()).toString());
+		holder.activityDate.setText(new SafeSimpleDateFormat(Constants.GENERAL_DATE_TIME_FORMAT).format(activity.getActivityDate()));
 
 		return row;
 	}

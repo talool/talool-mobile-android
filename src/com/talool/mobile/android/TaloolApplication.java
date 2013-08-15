@@ -2,6 +2,7 @@ package com.talool.mobile.android;
 
 import android.app.Application;
 
+import com.talool.mobile.android.persistence.ActivityDao;
 import com.talool.mobile.android.util.TypefaceFactory;
 
 /**
@@ -23,6 +24,9 @@ public class TaloolApplication extends Application
 	{
 		// cache font-awesome typeface
 		TypefaceFactory.createInstance(getAssets());
-	}
 
+		// init Dao
+		ActivityDao.createInstance(this.getApplicationContext());
+
+	}
 }

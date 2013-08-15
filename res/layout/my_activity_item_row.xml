@@ -43,8 +43,8 @@
 
         <TextView
             android:id="@+id/activityDate"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="TextView"
             android:textColor="#B6B6B4"

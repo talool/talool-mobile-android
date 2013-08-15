@@ -75,7 +75,7 @@
         android:id="@+id/myDealsListView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/tan_rounded"
+        android:background="@drawable/tan_rounded_bottom_only"
         android:orientation="vertical" >
     </ListView>
 
