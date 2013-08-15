@@ -1,10 +1,9 @@
 package com.talool.mobile.android.activity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
@@ -29,6 +28,7 @@ import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.BasicWebViewActivity;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.adapters.MyActivityAdapter;
+import com.talool.mobile.android.persistence.ActivityDao;
 import com.talool.mobile.android.util.ApiUtil;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
@@ -49,21 +49,38 @@ public class MyActivityFragment extends Fragment
 
 	int selectedEventFilter = R.id.activity_filter_all;
 
-	private static final Map<Integer, Set<ActivityEvent_t>> eventMap = new HashMap<Integer, Set<ActivityEvent_t>>();
+	private static final Map<Integer, List<ActivityEvent_t>> eventMap = new HashMap<Integer, List<ActivityEvent_t>>();
 
 	static
 	{
-		Set<ActivityEvent_t> ss = new HashSet<ActivityEvent_t>();
-		ss.add(ActivityEvent_t.EMAIL_RECV_GIFT);
-		ss.add(ActivityEvent_t.EMAIL_SEND_GIFT);
-		ss.add(ActivityEvent_t.FACEBOOK_RECV_GIFT);
-		ss.add(ActivityEvent_t.FACEBOOK_SEND_GIFT);
-		ss.add(ActivityEvent_t.FRIEND_GIFT_ACCEPT);
-		ss.add(ActivityEvent_t.FRIEND_GIFT_REDEEM);
-		ss.add(ActivityEvent_t.FRIEND_GIFT_REJECT);
-
+		final List<ActivityEvent_t> gifts = new ArrayList<ActivityEvent_t>();
 		eventMap.put(R.id.activity_filter_all, null);
-		eventMap.put(R.id.activity_filter_gift, ss);
+
+		gifts.add(ActivityEvent_t.EMAIL_RECV_GIFT);
+		gifts.add(ActivityEvent_t.EMAIL_SEND_GIFT);
+		gifts.add(ActivityEvent_t.FACEBOOK_RECV_GIFT);
+		gifts.add(ActivityEvent_t.FACEBOOK_SEND_GIFT);
+		eventMap.put(R.id.activity_filter_gift, gifts);
+
+		final List<ActivityEvent_t> transactions = new ArrayList<ActivityEvent_t>();
+		transactions.add(ActivityEvent_t.PURCHASE);
+		transactions.add(ActivityEvent_t.REDEEM);
+		eventMap.put(R.id.activity_filter_transactions, transactions);
+
+		final List<ActivityEvent_t> friends = new ArrayList<ActivityEvent_t>();
+		friends.add(ActivityEvent_t.FRIEND_PURCHASE_DEAL_OFFER);
+		friends.add(ActivityEvent_t.FRIEND_GIFT_REDEEM);
+		friends.add(ActivityEvent_t.FRIEND_GIFT_ACCEPT);
+		friends.add(ActivityEvent_t.FRIEND_GIFT_REDEEM);
+		friends.add(ActivityEvent_t.FRIEND_GIFT_REJECT);
+		eventMap.put(R.id.activity_filter_friends, friends);
+
+		final List<ActivityEvent_t> messages = new ArrayList<ActivityEvent_t>();
+		messages.add(ActivityEvent_t.TALOOL_REACH);
+		messages.add(ActivityEvent_t.AD);
+		messages.add(ActivityEvent_t.WELCOME);
+		messages.add(ActivityEvent_t.UNKNOWN);
+		eventMap.put(R.id.activity_filter_messages, messages);
 
 	}
 
@@ -112,56 +129,27 @@ public class MyActivityFragment extends Fragment
 	@Override
 	public boolean onOptionsItemSelected(final MenuItem item)
 	{
-		if (item.getItemId() == R.id.activity_filter_root ||
-				item.getItemId() == R.id.activity_filter_all)
+		if (item.getItemId() == R.id.activity_filter_root)
 		{
-			return false;
+			return true;
 		}
 
 		selectedEventFilter = item.getItemId();
-
 		item.setChecked(item.isChecked() ? false : true);
 
 		reloadData();
 
 		return true;
 
-		// // Handle item selection
-		// switch (item.getItemId())
-		// {
-		// case R.id.activity_all:
-		// item.setChecked(item.isChecked() ? false : true);
-		// return true;
-		//
-		// case R.id.activity_messages:
-		// item.setChecked(item.isChecked() ? false : true);
-		// return true;
-		//
-		// default:
-		// return super.onOptionsItemSelected(item);
-		// }
 	}
+
 	private class MyActivityTask extends AsyncTask<String, Void, List<Activity_t>>
 	{
 		@Override
 		protected void onPostExecute(final List<Activity_t> results)
 		{
-			final MyActivityAdapter adapter = new MyActivityAdapter(view.getContext(),
-					R.layout.my_activity_item_row, results)
-			{
-
-				@Override
-				public boolean isEnabled(int position)
-				{
-					return ApiUtil.isClickableActivityLink(results.get(position));
-				}
-
-			};
-
-			activityAdapter = adapter;
-			myActivityListView.setAdapter(activityAdapter);
-
-			myActivityListView.setOnItemClickListener(activityClickListener);
+			updateActivityList(results);
+			ActivityDao.get().saveActivities(results);
 		}
 
 		@Override
@@ -195,10 +183,47 @@ public class MyActivityFragment extends Fragment
 		}
 	}
 
+	private void updateActivityList(final List<Activity_t> results)
+	{
+		final MyActivityAdapter adapter = newMyActivityAdapter(results);
+
+		activityAdapter = adapter;
+		myActivityListView.setAdapter(activityAdapter);
+		myActivityListView.setOnItemClickListener(activityClickListener);
+	}
+
+	private MyActivityAdapter newMyActivityAdapter(final List<Activity_t> results)
+	{
+		final MyActivityAdapter adapter = new MyActivityAdapter(view.getContext(),
+				R.layout.my_activity_item_row, results)
+		{
+
+			@Override
+			public boolean isEnabled(int position)
+			{
+				return ApiUtil.isClickableActivityLink(results.get(position));
+			}
+
+		};
+
+		return adapter;
+
+	};
+
 	private void reloadData()
 	{
-		final MyActivityTask dealsTask = new MyActivityTask();
-		dealsTask.execute(new String[] {});
+		final List<Activity_t> acts = ActivityDao.get().getAllActivities(MyActivityFragment.eventMap.get(selectedEventFilter));
+
+		if (acts.size() > 0)
+		{
+			updateActivityList(acts);
+		}
+		else
+		{
+			final MyActivityTask dealsTask = new MyActivityTask();
+			dealsTask.execute(new String[] {});
+		}
+
 	}
 
 	@Override

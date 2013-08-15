@@ -10,6 +10,7 @@
     <string name="login">Login</string>
     <string name="icon_gift">&#xf06b;</string>
     <string name="icon_envelope_alt">&#xf003;</string>
+    <string name="icon_envelope">&#xf0e0;</string>
     <string name="icon_money">&#xf0d6;</string>
     <string name="icon_phone">&#xf098;</string>
     <string name="icon_map_marker">&#xf041;</string>
@@ -37,5 +38,10 @@
    <string name="activity_filter_transactions">Transactions</string>
    <string name="activity_filter_friends">Friends Activities</string>
     
+   <string name="my_deals_filter_all">Show All</string>
+   <string name="my_deals_filter_favorites">Favorites</string>
+   <string name="my_deals_filter_food">Food</string>
+   <string name="my_deals_filter_shopping">Shopping</string>
+   <string name="my_deals_filter_fun">Fun</string>
 
 </resources>

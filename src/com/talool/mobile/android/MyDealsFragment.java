@@ -44,6 +44,7 @@ public class MyDealsFragment extends Fragment
 	private Context context;
 	private Exception exception;
 	private List<Merchant_t> merchants;
+	private Menu menu;
 
 	// TODO REMOVE FOR PRODUCTION!
 	private static final Location_t DENVER_LOCATION = new Location_t(-104.9842, 39.7392);
@@ -52,6 +53,13 @@ public class MyDealsFragment extends Fragment
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
 	{
 		menu.clear();
+
+		this.menu = menu;
+
+		inflater.inflate(R.menu.my_deals_action_bar, menu);
+
+		// final MenuItem menuItem = menu.findItem(selectedEventFilter);
+		// menuItem.setChecked(true);
 
 	}
 
@@ -69,7 +77,7 @@ public class MyDealsFragment extends Fragment
 		createThriftClient();
 		reloadData();
 
-		setHasOptionsMenu(false);
+		setHasOptionsMenu(true);
 
 		return view;
 	}

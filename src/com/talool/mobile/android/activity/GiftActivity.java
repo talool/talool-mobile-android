@@ -40,6 +40,7 @@ public class GiftActivity extends Activity
 
 	private ThriftHelper client;
 	private String giftId;
+	private Activity_t activity;
 	private SmartImageView dealImageView;
 	private SmartImageView logoImageView;
 	private SmartImageView dealCreatorImageView;
@@ -59,13 +60,8 @@ public class GiftActivity extends Activity
 			e.printStackTrace();
 		}
 
-		giftId = (String) getIntent().getSerializableExtra(GIFT_ID_PARAM);
-
-		final GiftActivityTask dealsTask = new GiftActivityTask();
-		dealsTask.execute(new String[] {});
-
 		byte[] activityObjBytes = (byte[]) getIntent().getSerializableExtra(ACTIVITY_OBJ_PARAM);
-		final Activity_t activity = new Activity_t();
+		activity = new Activity_t();
 		try
 		{
 			ThriftUtil.deserialize(activityObjBytes, activity);
@@ -75,17 +71,16 @@ public class GiftActivity extends Activity
 			e.printStackTrace();
 		}
 
+		giftId = activity.getActivityLink().getLinkElement();
+
+		final GiftActivityTask dealsTask = new GiftActivityTask();
+		dealsTask.execute(new String[] {});
+
 		final TextView thumbsDownIcon = (TextView) findViewById(R.id.thumbsUpIcon);
 		thumbsDownIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
 
 		final TextView thumbsUpIcon = (TextView) findViewById(R.id.thumbsDownIcon);
 		thumbsUpIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
-
-		/**
-		 * if (activity.getSubtitle() != null) { final TextView activitySubTitle =
-		 * (TextView) findViewById(R.id.activitySubtitle);
-		 * activitySubTitle.setText(activity.getSubtitle()); }
-		 **/
 
 	}
 
@@ -98,7 +93,7 @@ public class GiftActivity extends Activity
 	public void acceptGiftClick(final View view)
 	{
 		// accept the gift and redirect to "My Deals"
-		final GiftAcceptanceTask task = new GiftAcceptanceTask(client, giftId, true)
+		final GiftAcceptanceTask task = new GiftAcceptanceTask(client, activity, true)
 		{
 			@Override
 			protected void onPostExecute(DealAcquire_t result)
@@ -115,7 +110,7 @@ public class GiftActivity extends Activity
 	public void rejectGiftClick(final View view)
 	{
 		// accept the gift and redirect to "My Deals"
-		final GiftAcceptanceTask task = new GiftAcceptanceTask(client, giftId, false)
+		final GiftAcceptanceTask task = new GiftAcceptanceTask(client, activity, false)
 		{
 			@Override
 			protected void onPostExecute(DealAcquire_t result)
@@ -131,6 +126,7 @@ public class GiftActivity extends Activity
 
 	private class GiftActivityTask extends AsyncTask<String, Void, Gift_t>
 	{
+
 		@Override
 		protected void onPostExecute(final Gift_t gift)
 		{

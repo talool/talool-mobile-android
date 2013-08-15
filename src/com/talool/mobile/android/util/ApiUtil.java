@@ -26,6 +26,8 @@ public final class ApiUtil
 		{
 			case REDEEM:
 			case FACEBOOK_SEND_GIFT:
+			case FRIEND_GIFT_REDEEM:
+			case FRIEND_GIFT_REJECT:
 			case EMAIL_SEND_GIFT:
 				return false;
 

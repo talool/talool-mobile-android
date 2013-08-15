@@ -16,6 +16,7 @@ import android.widget.EditText;
 
 import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.ServiceException_t;
+import com.talool.mobile.android.tasks.ActivitySupervisor;
 import com.talool.mobile.android.tasks.FetchFavoriteMerchantsTask;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
@@ -54,6 +55,17 @@ public class LoginActivity extends Activity
 			final FetchFavoriteMerchantsTask favMerchantTask = new FetchFavoriteMerchantsTask();
 
 			favMerchantTask.execute(new String[] {});
+
+			// init activtiy supervisor
+			ActivitySupervisor.createInstance(new ActivitySupervisor.NotificationCallback()
+			{
+
+				@Override
+				public void handleNotificationCount(int totalNotifications)
+				{
+					Log.i(this.getClass().getSimpleName(), "handling noticiation count: " + totalNotifications);
+				}
+			});
 		}
 
 		@Override
