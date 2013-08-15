@@ -22,7 +22,9 @@
     <string name="icon_heart_empty">&#xf08a;</string>
     <string name="icon_thumbs_up_alt">&#xf087;</string>
     <string name="icon_thumbs_down_alt">&#xf088;</string>
-    <string name="icon_thumbs_down_alt">&#xf088;</string>
+    <string name="dealsString">If you purchased a paper copy of the PayBack Book, there is an access code inside for free access to these digital deals.</string>
+    <string name="paybackText">While some offers from our paper coupon book are not currently available for you to purchase on your mobile device, we will be adding Bonus Deals throughout the year that will be delivered to you automatically when you purchase the deals listed below.</string>
+    <string name="locationSelect">Can you please tell us which Payback Book you are interested in?</string>
     
     <color name="color_teal">#19BCB9</color>
     <color name="color_grey">#C0C0C0</color>

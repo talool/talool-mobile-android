@@ -4,4 +4,6 @@
 	<color name="tan">#fff2f2e6</color>
 	<color name="dark_tan">#ffccccb3</color>
 	<color name="orange">#ffcc5926</color>
+	<color name="locationBackground">#ffbfb399</color>
+	<color name="brown">#ff4D4040</color>
 </resources>

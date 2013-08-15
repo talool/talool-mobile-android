@@ -35,8 +35,15 @@ public class DealAcceptanceTask extends AsyncTask<String, Void, String> {
 		try
 		{
 			Location loc = TaloolUser.getInstance().getLocation();
-			Location_t location = new Location_t(loc.getLongitude(), loc.getLatitude());
-			code = client.client.redeem(dealAcquireId,location);
+			if(loc == null)
+			{
+				code = client.client.redeem(dealAcquireId,null);
+			}
+			else
+			{
+				Location_t location = new Location_t(loc.getLongitude(), loc.getLatitude());
+				code = client.client.redeem(dealAcquireId,location);
+			}
 		}
 		catch (ServiceException_t e)
 		{

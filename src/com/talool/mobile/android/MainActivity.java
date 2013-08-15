@@ -20,9 +20,12 @@ import android.view.MenuItem;
 import com.talool.mobile.android.activity.MyActivityFragment;
 import com.talool.mobile.android.activity.SettingsActivity;
 import com.talool.mobile.android.util.TaloolUser;
+import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
+
 
 public class MainActivity extends Activity
 {
+    private PullToRefreshAttacher mPullToRefreshAttacher;
 
 	private final LocationListener locationListener = new LocationListener()
 	{
@@ -78,6 +81,8 @@ public class MainActivity extends Activity
 			Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
 			startActivity(intent);
 		}
+		
+		mPullToRefreshAttacher = PullToRefreshAttacher.get(this);
 
 	}
 
@@ -176,4 +181,8 @@ public class MainActivity extends Activity
 			mFragment = null;
 		}
 	}
+	
+    public PullToRefreshAttacher getPullToRefreshAttacher() {
+        return mPullToRefreshAttacher;
+    }
 }

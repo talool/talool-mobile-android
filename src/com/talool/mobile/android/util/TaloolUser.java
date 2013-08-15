@@ -14,26 +14,24 @@ import com.talool.api.thrift.CTokenAccess_t;
  */
 public final class TaloolUser
 {
-	private static final boolean IS_DEVELOPMENT = true;
-	private static final Location DENVER_LOCATION;
+	public final Location BOULDER_LOCATION;
+	public final Location VANCOUVER_LOCATION;
 	private static final TaloolUser instance = new TaloolUser();
 
 	private CTokenAccess_t accessToken;
 	private Location location;
 
-	static
-	{
-		DENVER_LOCATION = new Location("Talool");
-		DENVER_LOCATION.setLatitude(39.766169);
-		DENVER_LOCATION.setLongitude(-104.979033);
-	}
+
 
 	private TaloolUser()
 	{
-		if (IS_DEVELOPMENT)
-		{
-			location = DENVER_LOCATION;
-		}
+		BOULDER_LOCATION = new Location("Boulder");
+		BOULDER_LOCATION.setLatitude(40.0176);
+		BOULDER_LOCATION.setLongitude(-105.2797);
+		 
+		VANCOUVER_LOCATION = new Location("Vancouver");
+		VANCOUVER_LOCATION.setLatitude(45.6389);
+		VANCOUVER_LOCATION.setLongitude(-122.6028);
 	}
 
 	public static TaloolUser getInstance()

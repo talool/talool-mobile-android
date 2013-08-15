@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
+import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
+
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -35,7 +37,7 @@ import com.talool.mobile.android.util.ThriftHelper;
 import com.talool.mobile.android.util.TypefaceFactory;
 import com.talool.thrift.util.ThriftUtil;
 
-public class MyDealsFragment extends Fragment
+public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.OnRefreshListener
 {
 	private ListView myDealsListView;
 	private MyDealsAdapter myDealsAdapter;
@@ -44,6 +46,7 @@ public class MyDealsFragment extends Fragment
 	private Context context;
 	private Exception exception;
 	private List<Merchant_t> merchants;
+    private PullToRefreshAttacher mPullToRefreshAttacher;
 
 	// TODO REMOVE FOR PRODUCTION!
 	private static final Location_t DENVER_LOCATION = new Location_t(-104.9842, 39.7392);
@@ -59,11 +62,14 @@ public class MyDealsFragment extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 	{
-
 		this.view = inflater.inflate(R.layout.my_deals_fragment, container, false);
+		mPullToRefreshAttacher = ((MainActivity) getActivity())
+                .getPullToRefreshAttacher();
+
 		final TextView txt = (TextView) view.findViewById(R.id.myDealsFoodFilterButton);
 		txt.setTypeface(TypefaceFactory.get().getFontAwesome());
 		myDealsListView = (ListView) view.findViewById(R.id.myDealsListView);
+        mPullToRefreshAttacher.addRefreshableView(myDealsListView, this);
 
 		this.context = view.getContext();
 		createThriftClient();
@@ -213,6 +219,7 @@ public class MyDealsFragment extends Fragment
 			merchants = results;
 			Log.i(MyDealsFragment.class.toString(), "Number of Merchants: " + results.size());
 			loadListView();
+			mPullToRefreshAttacher.setRefreshComplete();
 		}
 
 		@Override
@@ -283,5 +290,10 @@ public class MyDealsFragment extends Fragment
 
 		}
 	};
+
+	@Override
+	public void onRefreshStarted(View view) {
+		reloadData();
+	}
 
 }
