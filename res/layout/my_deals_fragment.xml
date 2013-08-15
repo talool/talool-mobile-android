@@ -2,75 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/tan"
-    android:orientation="vertical" >
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="80dp"
-        android:background="@drawable/my_deals_background"
-        android:gravity="center"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/myDealsAllFilterButton"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:layout_weight="1"
-            android:text="All"
-            android:textColor="@color/tan" />
-
-        <Button
-            android:id="@+id/myDealsFavoriteFilterButton"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:layout_weight="1"
-            android:text="@string/icon_heart"
-            android:textColor="@color/tan" />
-
-        <Button
-            android:id="@+id/myDealsFoodFilterButton"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:layout_weight="1"
-            android:text="@string/icon_food"
-            android:textColor="@color/tan" >
-        </Button>
-
-        <Button
-            android:id="@+id/myDealsShopFilterButton"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:layout_weight="1"
-            android:text="@string/icon_shopping_cart"
-            android:textColor="@color/tan" >
-        </Button>
-
-        <Button
-            android:id="@+id/myDealsFunFilterButton"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:layout_weight="1"
-            android:text="@string/icon_ticket"
-            android:textColor="@color/tan" >
-        </Button>
-
-        <Button
-            android:id="@+id/myDealsNightFilterButton"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
-            android:layout_weight="1"
-            android:text="@string/icon_glass"
-            android:textColor="@color/tan" >
-        </Button>
-    </LinearLayout>
-
+    android:background="@drawable/my_deals_background"
+    android:orientation="vertical"
+    android:paddingBottom="7sp"
+    android:paddingLeft="9sp"
+    android:paddingRight="9sp"
+    android:paddingTop="7sp" >
+   
     <ListView
         android:id="@+id/myDealsListView"
         android:layout_width="fill_parent"

@@ -7,7 +7,6 @@ import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
-
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -20,12 +19,9 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.talool.api.thrift.Location_t;
 import com.talool.api.thrift.Merchant_t;
@@ -34,7 +30,6 @@ import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.adapters.MyDealsAdapter;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
-import com.talool.mobile.android.util.TypefaceFactory;
 import com.talool.thrift.util.ThriftUtil;
 
 public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.OnRefreshListener
@@ -47,9 +42,9 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	private Exception exception;
 	private List<Merchant_t> merchants;
 	private Menu menu;
-	
+
 	private PullToRefreshAttacher mPullToRefreshAttacher;
-	
+
 	// TODO REMOVE FOR PRODUCTION!
 	private static final Location_t DENVER_LOCATION = new Location_t(-104.9842, 39.7392);
 
@@ -73,14 +68,15 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	{
 
 		this.view = inflater.inflate(R.layout.my_deals_fragment, container, false);
-		final TextView txt = (TextView) view.findViewById(R.id.myDealsFoodFilterButton);
-		txt.setTypeface(TypefaceFactory.get().getFontAwesome());
+		// final TextView txt = (TextView)
+		// view.findViewById(R.id.myDealsFoodFilterButton);
+		// txt.setTypeface(TypefaceFactory.get().getFontAwesome());
 		myDealsListView = (ListView) view.findViewById(R.id.myDealsListView);
 
 		mPullToRefreshAttacher = ((MainActivity) getActivity())
-                .getPullToRefreshAttacher();
-        mPullToRefreshAttacher.addRefreshableView(myDealsListView, this);
-		
+				.getPullToRefreshAttacher();
+		mPullToRefreshAttacher.addRefreshableView(myDealsListView, this);
+
 		this.context = view.getContext();
 		createThriftClient();
 		reloadData();
@@ -103,71 +99,75 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		}
 	}
 
-	public void setButtonListeners()
-	{
-		Button allButton = (Button) view.findViewById(R.id.myDealsAllFilterButton);
-		allButton.setTypeface(TypefaceFactory.get().getFontAwesome());
-
-		Button favoriteButton = (Button) view.findViewById(R.id.myDealsFavoriteFilterButton);
-		favoriteButton.setTypeface(TypefaceFactory.get().getFontAwesome());
-
-		Button foodButton = (Button) view.findViewById(R.id.myDealsFoodFilterButton);
-		foodButton.setTypeface(TypefaceFactory.get().getFontAwesome());
-
-		Button funButton = (Button) view.findViewById(R.id.myDealsFunFilterButton);
-		funButton.setTypeface(TypefaceFactory.get().getFontAwesome());
-
-		Button nightButton = (Button) view.findViewById(R.id.myDealsNightFilterButton);
-		nightButton.setTypeface(TypefaceFactory.get().getFontAwesome());
-
-		Button shopButton = (Button) view.findViewById(R.id.myDealsShopFilterButton);
-		shopButton.setTypeface(TypefaceFactory.get().getFontAwesome());
-
-		allButton.setOnClickListener(new OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				myDealsAdapter.getFilter().filter("");
-			}
-		});
-
-		foodButton.setOnClickListener(new OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				myDealsAdapter.getFilter().filter("1");
-			}
-		});
-
-		funButton.setOnClickListener(new OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				myDealsAdapter.getFilter().filter("3");
-			}
-		});
-
-		nightButton.setOnClickListener(new OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				myDealsAdapter.getFilter().filter("4");
-			}
-		});
-
-		shopButton.setOnClickListener(new OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				myDealsAdapter.getFilter().filter("2");
-			}
-		});
-	}
+	// public void setButtonListeners()
+	// {
+	// Button allButton = (Button) view.findViewById(R.id.myDealsAllFilterButton);
+	// allButton.setTypeface(TypefaceFactory.get().getFontAwesome());
+	//
+	// Button favoriteButton = (Button)
+	// view.findViewById(R.id.myDealsFavoriteFilterButton);
+	// favoriteButton.setTypeface(TypefaceFactory.get().getFontAwesome());
+	//
+	// Button foodButton = (Button)
+	// view.findViewById(R.id.myDealsFoodFilterButton);
+	// foodButton.setTypeface(TypefaceFactory.get().getFontAwesome());
+	//
+	// Button funButton = (Button) view.findViewById(R.id.myDealsFunFilterButton);
+	// funButton.setTypeface(TypefaceFactory.get().getFontAwesome());
+	//
+	// Button nightButton = (Button)
+	// view.findViewById(R.id.myDealsNightFilterButton);
+	// nightButton.setTypeface(TypefaceFactory.get().getFontAwesome());
+	//
+	// Button shopButton = (Button)
+	// view.findViewById(R.id.myDealsShopFilterButton);
+	// shopButton.setTypeface(TypefaceFactory.get().getFontAwesome());
+	//
+	// allButton.setOnClickListener(new OnClickListener()
+	// {
+	// @Override
+	// public void onClick(View v)
+	// {
+	// myDealsAdapter.getFilter().filter("");
+	// }
+	// });
+	//
+	// foodButton.setOnClickListener(new OnClickListener()
+	// {
+	// @Override
+	// public void onClick(View v)
+	// {
+	// myDealsAdapter.getFilter().filter("1");
+	// }
+	// });
+	//
+	// funButton.setOnClickListener(new OnClickListener()
+	// {
+	// @Override
+	// public void onClick(View v)
+	// {
+	// myDealsAdapter.getFilter().filter("3");
+	// }
+	// });
+	//
+	// nightButton.setOnClickListener(new OnClickListener()
+	// {
+	// @Override
+	// public void onClick(View v)
+	// {
+	// myDealsAdapter.getFilter().filter("4");
+	// }
+	// });
+	//
+	// shopButton.setOnClickListener(new OnClickListener()
+	// {
+	// @Override
+	// public void onClick(View v)
+	// {
+	// myDealsAdapter.getFilter().filter("2");
+	// }
+	// });
+	// }
 
 	private void reloadData()
 	{
@@ -184,7 +184,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 			myDealsAdapter = adapter;
 			myDealsListView.setAdapter(myDealsAdapter);
 			myDealsListView.setOnItemClickListener(onClickListener);
-			setButtonListeners();
+			// setButtonListeners();
 		}
 		else
 		{
@@ -229,7 +229,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 			merchants = results;
 			Log.i(MyDealsFragment.class.toString(), "Number of Merchants: " + results.size());
 			loadListView();
-            mPullToRefreshAttacher.setRefreshComplete();
+			mPullToRefreshAttacher.setRefreshComplete();
 		}
 
 		@Override
@@ -294,7 +294,8 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	};
 
 	@Override
-	public void onRefreshStarted(View view) {
+	public void onRefreshStarted(View view)
+	{
 		reloadData();
 	}
 

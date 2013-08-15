@@ -2,19 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/tan"
+    android:background="@drawable/my_deals_background"
     android:orientation="vertical"
-    android:paddingBottom="0dp"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp" >
-    
+    android:paddingBottom="7sp"
+    android:paddingLeft="9sp"
+    android:paddingRight="9sp"
+    android:paddingTop="7sp" >
+
     <ListView
         android:id="@+id/myActivityListView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/tan_rounded_bottom_only"
         android:orientation="vertical" >
-
     </ListView>
-    
+
 </LinearLayout>

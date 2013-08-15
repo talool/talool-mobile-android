@@ -17,10 +17,12 @@
         android:textSize="35sp" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="78dp"
         android:layout_marginTop="5dp"
         android:layout_weight=".9"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:gravity="left"
         android:orientation="vertical" >
 
@@ -29,6 +31,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
+            android:ellipsize="end"
+			android:singleLine="false"
+			android:lines="2"
+			android:maxLines="2"
             android:layout_marginLeft="5dp"
             android:text="TextView" />
 
@@ -39,7 +45,11 @@
             android:layout_marginLeft="5dp"
             android:text="TextView"
             android:textColor="#B6B6B4"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:ellipsize="end"
+            android:singleLine="true"
+			android:lines="1"
+			android:maxLines="1" />
 
         <TextView
             android:id="@+id/activityDate"
