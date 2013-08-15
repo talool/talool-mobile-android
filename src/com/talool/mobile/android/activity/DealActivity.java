@@ -8,6 +8,7 @@ import org.apache.thrift.transport.TTransportException;
 import com.loopj.android.image.SmartImageView;
 import com.talool.api.thrift.DealAcquire_t;
 import com.talool.api.thrift.DealOffer_t;
+import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
@@ -187,19 +188,20 @@ public class DealActivity extends Activity {
 
 	private void setAddressText()
 	{
-		String str = merchant.locations.get(0).address.address1;
-		if(merchant.locations.get(0).address.address2 != null )
+		MerchantLocation_t location = merchant.locations.get(0);
+		StringBuilder sb = new StringBuilder(location.address.address1);
+		if(location.address.address2 != null )
 		{
-			str = str + "\n" + merchant.locations.get(0).address.address2 ;
+			sb.append("\n").append(location.address.address2);
 		}
-		else
-		{
-			str = str + "\n" + merchant.locations.get(0).address.city +  " "
-					+ merchant.locations.get(0).address.stateProvinceCounty + " " 
-					+ merchant.locations.get(0).address.zip;
-		}
+		sb.append("\n")
+			.append(location.address.city)
+			.append(", ")
+			.append(location.address.stateProvinceCounty) 
+			.append(" ")
+			.append(location.address.zip);
 
-		dealAddressText.setText(str);
+		dealAddressText.setText(sb.toString());
 	}
 
 	private void createThriftClient()

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.loopj.android.image.SmartImageView;
@@ -169,21 +170,22 @@ public class GiftActivity extends Activity
 			logoImageView.setImageUrl(gift.getDeal().getMerchant().getLocations().get(0).getLogoUrl());
 
 			final TextView address1 = (TextView) findViewById(R.id.address1);
-			final TextView address2 = (TextView) findViewById(R.id.address2);
-			final TextView cityStateZip = (TextView) findViewById(R.id.cityStateZip);
-
+			
 			final MerchantLocation_t location = gift.getDeal().getMerchant().getLocations().get(0);
-			address1.setText(location.getAddress().getAddress1());
-			if (location.getAddress().getAddress2() == null)
+			
+			StringBuilder sb = new StringBuilder(location.address.address1);
+			if(location.address.address2 != null )
 			{
-				address2.setVisibility(View.GONE);
+				sb.append("\n").append(location.address.address2);
 			}
-			else
-			{
-				address2.setText(location.getAddress().getAddress2());
-			}
-
-			cityStateZip.setText(getCityStateZip(location));
+			sb.append("\n")
+				.append(location.address.city)
+				.append(", ")
+				.append(location.address.stateProvinceCounty) 
+				.append(" ")
+				.append(location.address.zip);
+			
+			address1.setText(sb.toString());
 
 		}
 
