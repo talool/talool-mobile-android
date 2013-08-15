@@ -105,23 +105,23 @@ public class DealAcquiresActivity extends Activity
 
 	public void onCallClicked(View view)
 	{
-		
-		 String uri = "tel:" + merchant.locations.get(0).phone.trim() ;
-		 Intent intent = new Intent(Intent.ACTION_DIAL);
-		 intent.setData(Uri.parse(uri));
-		 startActivity(intent);	
+
+		String uri = "tel:" + merchant.locations.get(0).phone.trim();
+		Intent intent = new Intent(Intent.ACTION_DIAL);
+		intent.setData(Uri.parse(uri));
+		startActivity(intent);
 	}
-	
+
 	public void mapClick(View view)
 	{
 		Intent myIntent = new Intent(view.getContext(), MapActivity.class);
 		myIntent.putExtra("merchant", ThriftUtil.serialize(merchant));
 		startActivity(myIntent);
 	}
-	
+
 	public void onWebsiteClick(View view)
 	{
-		Intent myIntent = new Intent(view.getContext(),BasicWebViewActivity.class);
+		Intent myIntent = new Intent(this.getApplicationContext(), BasicWebViewActivity.class);
 		myIntent.putExtra(BasicWebViewActivity.TARGET_URL_PARAM, merchant.locations.get(0).websiteUrl);
 		myIntent.putExtra(BasicWebViewActivity.TITLE_PARAM, merchant.name);
 		startActivity(myIntent);

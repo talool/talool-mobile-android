@@ -6,6 +6,7 @@ import java.util.Map;
 import com.talool.api.thrift.Merchant_t;
 
 /**
+ * Favorite Merchant cache
  * 
  * @author clintz
  * 

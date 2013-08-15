@@ -7,6 +7,8 @@ import com.talool.api.thrift.DealOffer_t;
 
 /**
  * 
+ * Deal Offer Cache
+ * 
  * @author clintz
  * 
  */
