@@ -96,7 +96,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
 	{
-		//menu.clear();
+		// menu.clear();
 
 		this.menu = menu;
 
@@ -146,9 +146,9 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		reloadData();
 
 		setHasOptionsMenu(true);
-		
+
 		StringBuilder sb = new StringBuilder();
-		Customer_t c = TaloolUser.getInstance().getAccessToken().customer;
+		Customer_t c = TaloolUser.get().getAccessToken().customer;
 		sb.append(c.firstName).append(" ").append(c.lastName);
 		getActivity().setTitle(sb.toString());
 
