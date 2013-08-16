@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
       <item
-        android:id="@+id/activity_filter_root"
+        android:id="@+id/my_deals_filter_root"
         android:icon="@drawable/action_search"
         android:showAsAction="always"
         android:titleCondensed="Options">

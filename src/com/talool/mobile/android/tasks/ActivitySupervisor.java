@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.thrift.transport.TTransportException;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.talool.api.thrift.Activity_t;
@@ -34,6 +35,8 @@ public final class ActivitySupervisor
 
 	private NotificationCallback notificationCallback;
 
+	private ActivityDao activityDao;
+
 	private SearchOptions_t searchOptions;
 
 	public static interface NotificationCallback
@@ -63,7 +66,7 @@ public final class ActivitySupervisor
 							// only update dao of we know something has changed
 							// blindy update everything , optimize in the next release
 							lastActivityTime = mostCurrentActivity.getActivityDate();
-							ActivityDao.get().saveActivities(acts);
+							activityDao.saveActivities(acts);
 						}
 
 						if (notificationCallback != null)
@@ -101,11 +104,12 @@ public final class ActivitySupervisor
 
 	}
 
-	public static synchronized ActivitySupervisor createInstance(final NotificationCallback notificationCallback)
+	public static synchronized ActivitySupervisor createInstance(final Context context, final NotificationCallback notificationCallback)
 	{
 		if (instance == null)
 		{
-			instance = new ActivitySupervisor(notificationCallback);
+			instance = new ActivitySupervisor(context, notificationCallback);
+
 		}
 
 		return instance;
@@ -116,10 +120,13 @@ public final class ActivitySupervisor
 		return instance;
 	}
 
-	private ActivitySupervisor(final NotificationCallback notificationCallback)
+	private ActivitySupervisor(final Context context, final NotificationCallback notificationCallback)
 	{
 		try
 		{
+			activityDao = new ActivityDao(context);
+			activityDao.open();
+
 			searchOptions = new SearchOptions_t();
 			searchOptions.setSortProperty("activityDate");
 			searchOptions.setAscending(true);
@@ -130,6 +137,7 @@ public final class ActivitySupervisor
 			activityPoller = new ActivityPoller();
 			activityPoller.setDaemon(true);
 			activityPoller.start();
+
 		}
 		catch (TTransportException e)
 		{

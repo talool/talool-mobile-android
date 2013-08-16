@@ -1,9 +1,7 @@
 package com.talool.mobile.android.activity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
@@ -12,6 +10,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,6 +26,7 @@ import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.BasicWebViewActivity;
 import com.talool.mobile.android.R;
+import com.talool.mobile.android.TaloolApplication;
 import com.talool.mobile.android.adapters.MyActivityAdapter;
 import com.talool.mobile.android.persistence.ActivityDao;
 import com.talool.mobile.android.util.ApiUtil;
@@ -46,10 +46,11 @@ public class MyActivityFragment extends Fragment
 	private ThriftHelper client;
 	private View view;
 	private Menu menu;
+	private ActivityDao activityDao;
 
 	int selectedEventFilter = R.id.activity_filter_all;
 
-	private static final Map<Integer, List<ActivityEvent_t>> eventMap = new HashMap<Integer, List<ActivityEvent_t>>();
+	private static final SparseArray<List<ActivityEvent_t>> eventMap = new SparseArray<List<ActivityEvent_t>>();
 
 	static
 	{
@@ -149,7 +150,7 @@ public class MyActivityFragment extends Fragment
 		protected void onPostExecute(final List<Activity_t> results)
 		{
 			updateActivityList(results);
-			ActivityDao.get().saveActivities(results);
+			activityDao.saveActivities(results);
 		}
 
 		@Override
@@ -212,7 +213,7 @@ public class MyActivityFragment extends Fragment
 
 	private void reloadData()
 	{
-		final List<Activity_t> acts = ActivityDao.get().getAllActivities(MyActivityFragment.eventMap.get(selectedEventFilter));
+		final List<Activity_t> acts = activityDao.getAllActivities(MyActivityFragment.eventMap.get(selectedEventFilter));
 
 		if (acts.size() > 0)
 		{
@@ -235,6 +236,10 @@ public class MyActivityFragment extends Fragment
 
 		setRetainInstance(false);
 
+		activityDao = new ActivityDao(TaloolApplication.getAppContext());
+
+		activityDao.open();
+
 		try
 		{
 			client = new ThriftHelper();
@@ -249,6 +254,16 @@ public class MyActivityFragment extends Fragment
 		reloadData();
 
 		return view;
+	}
+
+	@Override
+	public void onDestroy()
+	{
+		super.onDestroy();
+		if (activityDao != null)
+		{
+			activityDao.close();
+		}
 	}
 
 }

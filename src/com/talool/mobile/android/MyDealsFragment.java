@@ -15,9 +15,11 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -28,10 +30,17 @@ import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.adapters.MyDealsAdapter;
+import com.talool.mobile.android.cache.FavoriteMerchantCache;
+import com.talool.mobile.android.persistence.MerchantDao;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
 import com.talool.thrift.util.ThriftUtil;
 
+/**
+ * 
+ * @author clintz,czachman
+ * 
+ */
 public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.OnRefreshListener
 {
 	private ListView myDealsListView;
@@ -42,6 +51,41 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	private Exception exception;
 	private List<Merchant_t> merchants;
 	private Menu menu;
+
+	private MerchantDao merchantDao;
+
+	private FilterBy selectedFilter = FilterBy.All;
+
+	private enum FilterBy
+	{
+		All(null, R.id.my_deals_filter_all), Food(1, R.id.my_deals_filter_food),
+		Shopping(2, R.id.my_deals_filter_shopping), Fun(3, R.id.my_deals_filter_fun),
+		Favorites(null, R.id.my_deals_filter_favorites);
+
+		private Integer categoryId;
+		private Integer androidId;
+
+		private static SparseArray<FilterBy> filterByMap = new SparseArray<FilterBy>();
+
+		static
+		{
+			for (FilterBy fb : FilterBy.values())
+			{
+				filterByMap.put(fb.androidId, fb);
+			}
+		}
+
+		FilterBy(Integer categoryId, Integer androidId)
+		{
+			this.categoryId = categoryId;
+			this.androidId = androidId;
+		}
+
+		public Integer getCategoryId()
+		{
+			return categoryId;
+		}
+	};
 
 	private PullToRefreshAttacher mPullToRefreshAttacher;
 
@@ -57,15 +101,34 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 
 		inflater.inflate(R.menu.my_deals_action_bar, menu);
 
-		// final MenuItem menuItem = menu.findItem(selectedEventFilter);
-		// menuItem.setChecked(true);
+		final MenuItem menuItem = menu.findItem(R.id.my_deals_filter_all);
+		menuItem.setChecked(true);
 
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(final MenuItem item)
+	{
+		if (item.getItemId() == R.id.my_deals_filter_root)
+		{
+			return true;
+		}
+
+		selectedFilter = FilterBy.filterByMap.get(item.getItemId());
+
+		item.setChecked(item.isChecked() ? false : true);
+
+		reloadData();
+
+		return true;
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 	{
+		merchantDao = new MerchantDao(TaloolApplication.getAppContext());
+		merchantDao.open();
 
 		this.view = inflater.inflate(R.layout.my_deals_fragment, container, false);
 		// final TextView txt = (TextView)
@@ -91,6 +154,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		try
 		{
 			client = new ThriftHelper();
+			client.setAccessToken(TaloolUser.getInstance().getAccessToken());
 		}
 		catch (TTransportException e)
 		{
@@ -99,80 +163,62 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		}
 	}
 
-	// public void setButtonListeners()
-	// {
-	// Button allButton = (Button) view.findViewById(R.id.myDealsAllFilterButton);
-	// allButton.setTypeface(TypefaceFactory.get().getFontAwesome());
-	//
-	// Button favoriteButton = (Button)
-	// view.findViewById(R.id.myDealsFavoriteFilterButton);
-	// favoriteButton.setTypeface(TypefaceFactory.get().getFontAwesome());
-	//
-	// Button foodButton = (Button)
-	// view.findViewById(R.id.myDealsFoodFilterButton);
-	// foodButton.setTypeface(TypefaceFactory.get().getFontAwesome());
-	//
-	// Button funButton = (Button) view.findViewById(R.id.myDealsFunFilterButton);
-	// funButton.setTypeface(TypefaceFactory.get().getFontAwesome());
-	//
-	// Button nightButton = (Button)
-	// view.findViewById(R.id.myDealsNightFilterButton);
-	// nightButton.setTypeface(TypefaceFactory.get().getFontAwesome());
-	//
-	// Button shopButton = (Button)
-	// view.findViewById(R.id.myDealsShopFilterButton);
-	// shopButton.setTypeface(TypefaceFactory.get().getFontAwesome());
-	//
-	// allButton.setOnClickListener(new OnClickListener()
-	// {
-	// @Override
-	// public void onClick(View v)
-	// {
-	// myDealsAdapter.getFilter().filter("");
-	// }
-	// });
-	//
-	// foodButton.setOnClickListener(new OnClickListener()
-	// {
-	// @Override
-	// public void onClick(View v)
-	// {
-	// myDealsAdapter.getFilter().filter("1");
-	// }
-	// });
-	//
-	// funButton.setOnClickListener(new OnClickListener()
-	// {
-	// @Override
-	// public void onClick(View v)
-	// {
-	// myDealsAdapter.getFilter().filter("3");
-	// }
-	// });
-	//
-	// nightButton.setOnClickListener(new OnClickListener()
-	// {
-	// @Override
-	// public void onClick(View v)
-	// {
-	// myDealsAdapter.getFilter().filter("4");
-	// }
-	// });
-	//
-	// shopButton.setOnClickListener(new OnClickListener()
-	// {
-	// @Override
-	// public void onClick(View v)
-	// {
-	// myDealsAdapter.getFilter().filter("2");
-	// }
-	// });
-	// }
-
 	private void reloadData()
 	{
-		MyDealsTask dealsTask = new MyDealsTask();
+		switch (selectedFilter)
+		{
+			case All:
+				merchants = merchantDao.getMerchants(null);
+				break;
+			case Favorites:
+				merchants = new ArrayList<Merchant_t>(FavoriteMerchantCache.get().getMerchants());
+				break;
+			default:
+				merchants = merchantDao.getMerchants(selectedFilter.getCategoryId());
+				break;
+
+		}
+		if (merchants == null)
+		{
+			merchants = new ArrayList<Merchant_t>();
+		}
+
+		if (merchants.size() > 0)
+		{
+			updateMerchantsList(merchants);
+		}
+		else
+		{
+			refreshViaService();
+		}
+
+	}
+
+	private void refreshViaService()
+	{
+		final MyDealsTask dealsTask = new MyDealsTask();
 		dealsTask.execute(new String[] {});
+	}
+
+	private void updateMerchantsList(final List<Merchant_t> results)
+	{
+
+		try
+		{
+			MyDealsAdapter adapter = new MyDealsAdapter(view.getContext(),
+					R.layout.mydeals_item_row, merchants);
+			myDealsAdapter = adapter;
+			myDealsListView.setAdapter(myDealsAdapter);
+			myDealsListView.setOnItemClickListener(onClickListener);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+
+			Log.e("dealsFrag", e.getLocalizedMessage(), e);
+		}
+
+		myDealsListView.setOnItemClickListener(onClickListener);
 	}
 
 	private void loadListView()
@@ -184,7 +230,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 			myDealsAdapter = adapter;
 			myDealsListView.setAdapter(myDealsAdapter);
 			myDealsListView.setOnItemClickListener(onClickListener);
-			// setButtonListeners();
+
 		}
 		else
 		{
@@ -192,9 +238,9 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		}
 	}
 
-	private void popupErrorMessage(String message)
+	private void popupErrorMessage(final String message)
 	{
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+		final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 		alertDialogBuilder.setTitle("Error Loading Deals");
 		alertDialogBuilder.setMessage(message);
 		alertDialogBuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener()
@@ -224,26 +270,25 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	{
 
 		@Override
-		protected void onPostExecute(List<Merchant_t> results)
+		protected void onPostExecute(final List<Merchant_t> results)
 		{
 			merchants = results;
 			Log.i(MyDealsFragment.class.toString(), "Number of Merchants: " + results.size());
 			loadListView();
 			mPullToRefreshAttacher.setRefreshComplete();
+			merchantDao.saveMerchants(results);
 		}
 
 		@Override
 		protected List<Merchant_t> doInBackground(String... arg0)
 		{
-			List<Merchant_t> results = new ArrayList<Merchant_t>();
+			List<Merchant_t> results = null;
 
 			try
 			{
 				exception = null;
-				client.setAccessToken(TaloolUser.getInstance().getAccessToken());
-				SearchOptions_t searchOptions = new SearchOptions_t();
-				searchOptions.setMaxResults(1000).setPage(0).setSortProperty("merchant.locations.distanceInMeters").
-						setAscending(true);
+				final SearchOptions_t searchOptions = new SearchOptions_t();
+				searchOptions.setMaxResults(1000).setPage(0).setSortProperty("merchant.name").setAscending(true);
 				results = client.getClient().getMerchantAcquiresWithLocation(searchOptions, DENVER_LOCATION);
 			}
 			catch (ServiceException_t e)
@@ -275,7 +320,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	{
 		// TODO Auto-generated method stub
 		super.onResume();
-		reloadData();
+		// reloadData();
 	}
 
 	protected AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener()
@@ -294,9 +339,19 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	};
 
 	@Override
-	public void onRefreshStarted(View view)
+	public void onRefreshStarted(final View view)
 	{
-		reloadData();
+		refreshViaService();
+	}
+
+	@Override
+	public void onDestroy()
+	{
+		super.onDestroy();
+		if (merchantDao != null)
+		{
+			merchantDao.close();
+		}
 	}
 
 }

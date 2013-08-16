@@ -8,12 +8,11 @@ import org.apache.thrift.TException;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.talool.api.thrift.ActivityEvent_t;
 import com.talool.api.thrift.Activity_t;
-import com.talool.mobile.android.persistence.ActivityDbHelper.ActivityColumn;
+import com.talool.mobile.android.persistence.TaloolDbHelper.ActivityColumn;
 import com.talool.thrift.util.ThriftUtil;
 
 /**
@@ -21,40 +20,15 @@ import com.talool.thrift.util.ThriftUtil;
  * @author clintz
  * 
  */
-public final class ActivityDao
+public final class ActivityDao extends AbstractDbAdapter
 {
-	private static ActivityDao instance;
-	private ActivityDbHelper activityDbHelper;
-
-	public static synchronized ActivityDao createInstance(final Context context)
+	public ActivityDao(Context ctx)
 	{
-		if (instance == null)
-		{
-			instance = new ActivityDao(context);
-		}
-
-		return instance;
-	}
-
-	public static ActivityDao get()
-	{
-		return instance;
-	}
-
-	private ActivityDao(final Context context)
-	{
-		activityDbHelper = new ActivityDbHelper(context);
-	}
-
-	public void close()
-	{
-		activityDbHelper.close();
+		super(ctx);
 	}
 
 	public void saveActivity(final Activity_t activity)
 	{
-		final SQLiteDatabase database = this.activityDbHelper.getWritableDatabase();
-
 		ContentValues values = new ContentValues();
 		values.put(ActivityColumn._id.name(), activity.getActivityId());
 		values.put(ActivityColumn.activity_date.name(), activity.getActivityDate());
@@ -62,41 +36,19 @@ public final class ActivityDao
 
 		values.put(ActivityColumn.activity_obj.name(), ThriftUtil.serialize(activity));
 
-		long insertId = database.replace(ActivityDbHelper.ACTIVITY_TBL, null,
+		mDb.replace(TaloolDbHelper.ACTIVITY_TBL, null,
 				values);
 
-	}
-
-	public List<Activity_t> getActivities(final ActivityEvent_t activityEvent)
-	{
-		final SQLiteDatabase database = this.activityDbHelper.getReadableDatabase();
-		final List<Activity_t> activities = new ArrayList<Activity_t>();
-
-		final Cursor cursor = database.query(ActivityDbHelper.ACTIVITY_TBL,
-				ActivityColumn.getColumnArray(), ActivityColumn.activity_type + "=" + activityEvent.ordinal(), null, null, null, ActivityColumn.activity_date
-						+ " DESC");
-
-		cursor.moveToFirst();
-		while (!cursor.isAfterLast())
-		{
-			Activity_t activity = cursorToActivity(cursor);
-			activities.add(activity);
-			cursor.moveToNext();
-		}
-		// Make sure to close the cursor
-		cursor.close();
-		return activities;
 	}
 
 	public List<Activity_t> getAllActivities(final List<ActivityEvent_t> filterEvents)
 	{
 		Cursor cursor = null;
-		final SQLiteDatabase database = this.activityDbHelper.getReadableDatabase();
 		final List<Activity_t> activities = new ArrayList<Activity_t>();
 
 		if (filterEvents == null || filterEvents.size() == 0)
 		{
-			cursor = database.query(ActivityDbHelper.ACTIVITY_TBL,
+			cursor = mDb.query(TaloolDbHelper.ACTIVITY_TBL,
 					ActivityColumn.getColumnArray(), null, null, null, null, ActivityColumn.activity_date + " DESC");
 		}
 		else
@@ -112,7 +64,7 @@ public final class ActivityDao
 				sb.append(ActivityColumn.activity_type).append("=").append(evt.ordinal());
 			}
 
-			cursor = database.query(ActivityDbHelper.ACTIVITY_TBL,
+			cursor = mDb.query(TaloolDbHelper.ACTIVITY_TBL,
 					ActivityColumn.getColumnArray(), sb.toString(), null, null, null, ActivityColumn.activity_date + " DESC");
 
 		}
@@ -131,10 +83,7 @@ public final class ActivityDao
 
 	public void saveActivities(final List<Activity_t> activities)
 	{
-		final SQLiteDatabase database = this.activityDbHelper.getWritableDatabase();
-		database.beginTransaction();
-
-		long before = System.currentTimeMillis();
+		mDb.beginTransaction();
 
 		try
 		{
@@ -147,11 +96,11 @@ public final class ActivityDao
 
 				values.put(ActivityColumn.activity_obj.name(), ThriftUtil.serialize(activity));
 
-				database.replace(ActivityDbHelper.ACTIVITY_TBL, null, values);
+				mDb.replace(TaloolDbHelper.ACTIVITY_TBL, null, values);
 				values.clear();
 			}
 
-			database.setTransactionSuccessful();
+			mDb.setTransactionSuccessful();
 		}
 		catch (Exception ex)
 		{
@@ -159,12 +108,8 @@ public final class ActivityDao
 		}
 		finally
 		{
-			database.endTransaction();
+			mDb.endTransaction();
 		}
-
-		long total = System.currentTimeMillis() - before;
-		System.out.println(total);
-
 	}
 
 	private Activity_t cursorToActivity(final Cursor cursor)
