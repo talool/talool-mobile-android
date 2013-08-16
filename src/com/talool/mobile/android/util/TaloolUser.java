@@ -3,6 +3,8 @@ package com.talool.mobile.android.util;
 import android.location.Location;
 
 import com.talool.api.thrift.CTokenAccess_t;
+import com.talool.mobile.android.TaloolApplication;
+import com.talool.mobile.android.cache.FavoriteMerchantCache;
 
 /**
  * 
@@ -21,20 +23,18 @@ public final class TaloolUser
 	private CTokenAccess_t accessToken;
 	private Location location;
 
-
-
 	private TaloolUser()
 	{
 		BOULDER_LOCATION = new Location("Boulder");
 		BOULDER_LOCATION.setLatitude(40.0176);
 		BOULDER_LOCATION.setLongitude(-105.2797);
-		 
+
 		VANCOUVER_LOCATION = new Location("Vancouver");
 		VANCOUVER_LOCATION.setLatitude(45.6389);
 		VANCOUVER_LOCATION.setLongitude(-122.6028);
 	}
 
-	public static TaloolUser getInstance()
+	public static TaloolUser get()
 	{
 		return instance;
 	}
@@ -58,10 +58,12 @@ public final class TaloolUser
 	{
 		this.location = location;
 	}
-	
+
 	public void logoutUser()
 	{
 		this.accessToken = null;
+		TaloolApplication.getAppContext().deleteDatabase(Constants.DATABASE_NAME);
+		FavoriteMerchantCache.get().clear();
 	}
 
 }

@@ -13,4 +13,7 @@ public final class Constants
 	public static final int SHOPPING_CATEGORY_ID = 2;
 	public static final int FUN_CATEGORY_ID = 3;
 
+	public static final String DATABASE_NAME = "talool";
+	public static final int DATABASE_VERSION = 1;
+
 }

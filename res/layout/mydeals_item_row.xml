@@ -61,7 +61,7 @@
         
     </LinearLayout>
 
-    <ImageView
+    <com.loopj.android.image.SmartImageView
         android:id="@+id/myDealsMerchantArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

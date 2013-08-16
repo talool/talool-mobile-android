@@ -38,7 +38,7 @@ public class FindDealsFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onResume();
 		
-		if(TaloolUser.getInstance().getLocation() == null)
+		if(TaloolUser.get().getLocation() == null)
 		{
 			Intent intent = new Intent(this.view.getContext(), LocationSelectActivity.class);
 			startActivity(intent);

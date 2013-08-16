@@ -154,7 +154,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		try
 		{
 			client = new ThriftHelper();
-			client.setAccessToken(TaloolUser.getInstance().getAccessToken());
+			client.setAccessToken(TaloolUser.get().getAccessToken());
 		}
 		catch (TTransportException e)
 		{

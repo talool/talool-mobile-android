@@ -129,7 +129,7 @@ public class MapActivity extends Activity {
 
 			try {
 				exception = null;
-				client.setAccessToken(TaloolUser.getInstance().getAccessToken());
+				client.setAccessToken(TaloolUser.get().getAccessToken());
 				SearchOptions_t searchOptions = new SearchOptions_t();
 				searchOptions.setMaxResults(1000).setPage(0).setSortProperty("deal.dealId").setAscending(true);
 				results = client.getClient().getDealAcquires(merchant.merchantId, searchOptions);

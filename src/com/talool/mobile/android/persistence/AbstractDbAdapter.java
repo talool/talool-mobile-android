@@ -8,14 +8,12 @@ import android.util.Log;
 
 import com.talool.mobile.android.persistence.TaloolDbHelper.ActivityColumn;
 import com.talool.mobile.android.persistence.TaloolDbHelper.MerchantColumn;
+import com.talool.mobile.android.util.Constants;
 
 public abstract class AbstractDbAdapter
 {
 	protected DatabaseHelper mDbHelper;
 	protected static SQLiteDatabase mDb;
-
-	protected static final String DATABASE_NAME = "talool";
-	protected static final int DATABASE_VERSION = 2;
 
 	protected final Context mCtx;
 
@@ -24,7 +22,7 @@ public abstract class AbstractDbAdapter
 
 		DatabaseHelper(Context context)
 		{
-			super(context, DATABASE_NAME, null, DATABASE_VERSION);
+			super(context, Constants.DATABASE_NAME, null, Constants.DATABASE_VERSION);
 		}
 
 		@Override
@@ -74,8 +72,15 @@ public abstract class AbstractDbAdapter
 		{
 			Log.w("TaloolDbAdapter", "Upgrading database from version " + oldVersion + " to "
 					+ newVersion + ", which will destroy all old data");
-			db.execSQL("DROP TABLE IF EXISTS routes");
+
+			dropTables();
 			onCreate(db);
+		}
+
+		public void dropTables()
+		{
+			mDb.execSQL("DROP TABLE IF EXISTS merchant");
+			mDb.execSQL("DROP TABLE IF EXISTS merchant");
 		}
 	}
 

@@ -23,10 +23,10 @@ public class ThriftHelper
 		protocol = new TBinaryProtocol(tHttpClient);
 		client = new CustomerService_t.Client(protocol);
 
-		if (TaloolUser.getInstance().getAccessToken() != null)
+		if (TaloolUser.get().getAccessToken() != null)
 		{
 			tHttpClient.setCustomHeader(CustomerServiceConstants.CTOKEN_NAME,
-					TaloolUser.getInstance().getAccessToken().getToken());
+					TaloolUser.get().getAccessToken().getToken());
 		}
 	}
 

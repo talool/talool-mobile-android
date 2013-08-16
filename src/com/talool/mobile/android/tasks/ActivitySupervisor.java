@@ -133,7 +133,7 @@ public final class ActivitySupervisor
 
 			client = new ThriftHelper();
 			this.notificationCallback = notificationCallback;
-			client.setAccessToken(TaloolUser.getInstance().getAccessToken());
+			client.setAccessToken(TaloolUser.get().getAccessToken());
 			activityPoller = new ActivityPoller();
 			activityPoller.setDaemon(true);
 			activityPoller.start();

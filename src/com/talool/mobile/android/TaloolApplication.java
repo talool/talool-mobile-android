@@ -20,6 +20,7 @@ public class TaloolApplication extends Application
 		super.onCreate();
 		TaloolApplication.context = getApplicationContext();
 		init();
+
 	}
 
 	private void init()
@@ -33,4 +34,5 @@ public class TaloolApplication extends Application
 	{
 		return TaloolApplication.context;
 	}
+
 }

@@ -200,7 +200,7 @@ public class GiftActivity extends Activity
 
 			try
 			{
-				client.setAccessToken(TaloolUser.getInstance().getAccessToken());
+				client.setAccessToken(TaloolUser.get().getAccessToken());
 				gift = client.getClient().getGift(giftId);
 
 			}

@@ -55,6 +55,11 @@ public final class FavoriteMerchantCache
 		return merchants.containsKey(merchantId);
 	}
 
+	public void clear()
+	{
+		merchants.clear();
+	}
+
 	public Merchant_t getMerchant(final String merchantId)
 	{
 		return merchants.get(merchantId);

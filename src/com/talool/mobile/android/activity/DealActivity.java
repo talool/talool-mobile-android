@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,7 +23,6 @@ import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.tasks.DealAcceptanceTask;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
-import com.talool.mobile.android.util.ImageDownloader;
 import com.talool.mobile.android.util.TaloolUtil;
 import com.talool.mobile.android.util.ThriftHelper;
 import com.talool.mobile.android.util.TypefaceFactory;
@@ -35,8 +33,8 @@ public class DealActivity extends Activity
 	private static ThriftHelper client;
 	private DealAcquire_t deal;
 	private Merchant_t merchant;
-	private ImageView dealMerchantImage;
-	private ImageView logoImageView;
+	private SmartImageView dealMerchantImage;
+	private SmartImageView logoImageView;
 	private SmartImageView dealOfferCreatorImage;
 	private TextView dealAddressText;
 	private TextView dealSummaryText;
@@ -52,8 +50,8 @@ public class DealActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.deal_activity_layout);
 		createThriftClient();
-		logoImageView = (ImageView) findViewById(R.id.dealLogoImage);
-		dealMerchantImage = (ImageView) findViewById(R.id.dealMerchantImage);
+		logoImageView = (SmartImageView) findViewById(R.id.dealLogoImage);
+		dealMerchantImage = (SmartImageView) findViewById(R.id.dealMerchantImage);
 		dealAddressText = (TextView) findViewById(R.id.dealAddressText);
 		dealValidText = (TextView) findViewById(R.id.dealValidText);
 		dealSummaryText = (TextView) findViewById(R.id.dealSummaryText);
@@ -136,14 +134,12 @@ public class DealActivity extends Activity
 	{
 		if (deal.deal.imageUrl != null)
 		{
-			ImageDownloader imageTask = new ImageDownloader(this.dealMerchantImage);
-			imageTask.execute(new String[] { deal.deal.imageUrl });
+			dealMerchantImage.setImageUrl(deal.deal.imageUrl);
 		}
 
 		if (merchant.locations.get(0).logoUrl != null)
 		{
-			ImageDownloader imageTask = new ImageDownloader(this.logoImageView);
-			imageTask.execute(new String[] { merchant.locations.get(0).logoUrl });
+			logoImageView.setImageUrl(merchant.locations.get(0).logoUrl);
 		}
 
 	}

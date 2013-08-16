@@ -160,7 +160,7 @@ public class MyActivityFragment extends Fragment
 
 			try
 			{
-				client.setAccessToken(TaloolUser.getInstance().getAccessToken());
+				client.setAccessToken(TaloolUser.get().getAccessToken());
 				SearchOptions_t searchOptions = new SearchOptions_t();
 				searchOptions.setMaxResults(1000).setPage(0).setSortProperty("activityDate").setAscending(false);
 				results = client.getClient().getActivities(searchOptions);
