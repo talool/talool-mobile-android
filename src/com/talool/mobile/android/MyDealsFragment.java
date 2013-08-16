@@ -95,7 +95,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
 	{
-		menu.clear();
+		//menu.clear();
 
 		this.menu = menu;
 

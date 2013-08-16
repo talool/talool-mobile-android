@@ -125,7 +125,7 @@ public class DealActivity extends Activity {
 
 	private void setDealCreatorImageView(DealOffer_t dealOffer)
 	{
-		dealOfferCreatorImage.setImageUrl(dealOffer.getMerchant().getLocations().get(0).getLogoUrl());
+		dealOfferCreatorImage.setImageUrl(dealOffer.getImageUrl());
 	}
 
 	private void loadImages()

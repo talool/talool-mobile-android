@@ -88,7 +88,7 @@ public class GiftActivity extends Activity
 	private void setDealCreatorImageView(final DealOffer_t dealOffer)
 	{
 		dealCreatorImageView = (SmartImageView) findViewById(R.id.dealCreatorLogo);
-		dealCreatorImageView.setImageUrl(dealOffer.getMerchant().getLocations().get(0).getLogoUrl());
+		dealCreatorImageView.setImageUrl(dealOffer.getImageUrl());
 	}
 
 	public void acceptGiftClick(final View view)
