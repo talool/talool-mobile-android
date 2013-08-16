@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.talool.api.thrift.Customer_t;
 import com.talool.api.thrift.Location_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.SearchOptions_t;
@@ -145,6 +146,11 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		reloadData();
 
 		setHasOptionsMenu(true);
+		
+		StringBuilder sb = new StringBuilder();
+		Customer_t c = TaloolUser.getInstance().getAccessToken().customer;
+		sb.append(c.firstName).append(" ").append(c.lastName);
+		getActivity().setTitle(sb.toString());
 
 		return view;
 	}

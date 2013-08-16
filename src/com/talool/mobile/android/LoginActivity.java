@@ -116,6 +116,8 @@ public class LoginActivity extends Activity
 		{
 			popupErrorMessage(e.getMessage());
 		}
+		
+		setTitle(R.string.welcome);
 
 	}
 
