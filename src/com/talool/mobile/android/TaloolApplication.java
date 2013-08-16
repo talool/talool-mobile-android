@@ -1,8 +1,8 @@
 package com.talool.mobile.android;
 
 import android.app.Application;
+import android.content.Context;
 
-import com.talool.mobile.android.persistence.ActivityDao;
 import com.talool.mobile.android.util.TypefaceFactory;
 
 /**
@@ -12,11 +12,13 @@ import com.talool.mobile.android.util.TypefaceFactory;
  */
 public class TaloolApplication extends Application
 {
+	private static Context context;
 
 	@Override
 	public void onCreate()
 	{
 		super.onCreate();
+		TaloolApplication.context = getApplicationContext();
 		init();
 	}
 
@@ -25,8 +27,10 @@ public class TaloolApplication extends Application
 		// cache font-awesome typeface
 		TypefaceFactory.createInstance(getAssets());
 
-		// init Dao
-		ActivityDao.createInstance(this.getApplicationContext());
+	}
 
+	public static Context getAppContext()
+	{
+		return TaloolApplication.context;
 	}
 }

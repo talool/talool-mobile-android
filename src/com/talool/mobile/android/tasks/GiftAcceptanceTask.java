@@ -8,6 +8,7 @@ import android.util.Log;
 import com.talool.api.thrift.Activity_t;
 import com.talool.api.thrift.DealAcquire_t;
 import com.talool.api.thrift.ServiceException_t;
+import com.talool.mobile.android.TaloolApplication;
 import com.talool.mobile.android.persistence.ActivityDao;
 import com.talool.mobile.android.util.ThriftHelper;
 
@@ -58,7 +59,9 @@ public class GiftAcceptanceTask extends AsyncTask<String, Void, DealAcquire_t>
 
 			// make sure we update our cache
 			activity.setActionTaken(true);
-			ActivityDao.get().saveActivity(activity);
+			ActivityDao dao = new ActivityDao(TaloolApplication.getAppContext());
+			dao.open();
+			dao.saveActivity(activity);
 
 		}
 		catch (ServiceException_t e)

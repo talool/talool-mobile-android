@@ -57,7 +57,7 @@ public class LoginActivity extends Activity
 			favMerchantTask.execute(new String[] {});
 
 			// init activtiy supervisor
-			ActivitySupervisor.createInstance(new ActivitySupervisor.NotificationCallback()
+			ActivitySupervisor.createInstance(getBaseContext(), new ActivitySupervisor.NotificationCallback()
 			{
 
 				@Override
