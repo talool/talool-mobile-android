@@ -17,4 +17,6 @@
 	<color name="gray_3">#998675</color>
 	<color name="gray_4">#837165</color>
 	<color name="gray_icon">#b9ac97</color>
+	<color name="teal_highlight">#0af7f3</color>
+	<color name="teal_lowlight">#028d8a</color>
 </resources>

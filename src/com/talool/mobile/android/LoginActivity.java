@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ClipDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -101,6 +102,12 @@ public class LoginActivity extends Activity
 		password = (EditText) findViewById(R.id.password);
 		username.setText("chris@talool.com");
 		password.setText("pass123");
+		
+		ClipDrawable username_bg = (ClipDrawable) username.getBackground();
+		username_bg.setLevel(1500);
+		ClipDrawable password_bg = (ClipDrawable) password.getBackground();
+		password_bg.setLevel(1500);
+		
 		try
 		{
 			client = new ThriftHelper();
