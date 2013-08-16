@@ -38,7 +38,7 @@
             android:orientation="vertical" >
 
             <Button
-                android:id="@+id/boulderButton"
+                android:id="@+id/logoutButton"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

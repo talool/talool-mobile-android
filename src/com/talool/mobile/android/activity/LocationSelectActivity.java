@@ -18,13 +18,13 @@ public class LocationSelectActivity extends Activity {
 	
 	public void onBoulderClicked(View view)
 	{
-		TaloolUser.getInstance().setLocation(TaloolUser.getInstance().BOULDER_LOCATION);
+		TaloolUser.get().setLocation(TaloolUser.get().BOULDER_LOCATION);
 		onBackPressed();
 	}
 	
 	public void onVancouverClicked(View view)
 	{
-		TaloolUser.getInstance().setLocation(TaloolUser.getInstance().VANCOUVER_LOCATION);
+		TaloolUser.get().setLocation(TaloolUser.get().VANCOUVER_LOCATION);
 		onBackPressed();
 	}
 

@@ -38,7 +38,7 @@ public class DealOfferFetchTask extends AsyncTask<String, Void, DealOffer_t>
 
 		try
 		{
-			thriftHelper.setAccessToken(TaloolUser.getInstance().getAccessToken());
+			thriftHelper.setAccessToken(TaloolUser.get().getAccessToken());
 			dealOffer = thriftHelper.getClient().getDealOffer(dealOfferId);
 		}
 		catch (ServiceException_t e)

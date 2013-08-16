@@ -31,7 +31,7 @@ public class MainActivity extends Activity
 	{
 		public void onLocationChanged(Location location)
 		{
-			TaloolUser.getInstance().setLocation(location);
+			TaloolUser.get().setLocation(location);
 		}
 
 		@Override
@@ -76,7 +76,7 @@ public class MainActivity extends Activity
 		actionBar.addTab(tab2);
 		actionBar.addTab(tab3);
 
-		if (TaloolUser.getInstance().getAccessToken() == null)
+		if (TaloolUser.get().getAccessToken() == null)
 		{
 			Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
 			startActivity(intent);

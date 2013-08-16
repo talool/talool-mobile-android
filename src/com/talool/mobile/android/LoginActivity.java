@@ -40,7 +40,7 @@ public class LoginActivity extends Activity
 			}
 			else
 			{
-				TaloolUser.getInstance().setAccessToken(result);
+				TaloolUser.get().setAccessToken(result);
 				Log.i(LoginActivity.class.toString(), "Login Complete");
 
 				doPostLogin();

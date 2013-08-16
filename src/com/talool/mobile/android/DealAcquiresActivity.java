@@ -18,17 +18,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.loopj.android.image.SmartImageView;
 import com.talool.api.thrift.DealAcquire_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.activity.DealActivity;
 import com.talool.mobile.android.adapters.DealsAcquiredAdapter;
-import com.talool.mobile.android.util.ImageDownloader;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
 import com.talool.mobile.android.util.TypefaceFactory;
@@ -42,7 +41,7 @@ import com.talool.thrift.util.ThriftUtil;
 public class DealAcquiresActivity extends Activity
 {
 	private static ThriftHelper client;
-	private ImageView imageView;
+	private SmartImageView imageView;
 	private ListView dealsAcquiredList;
 	private DealsAcquiredAdapter dealAcquiredAdapter;
 	private Exception exception;
@@ -70,7 +69,7 @@ public class DealAcquiresActivity extends Activity
 		createThriftClient();
 		setIcons();
 		dealsAcquiredList = (ListView) findViewById(R.id.dealsAcquiredList);
-		imageView = (ImageView) findViewById(R.id.dealsMerchantImage);
+		imageView = (SmartImageView) findViewById(R.id.dealsMerchantImage);
 
 		try
 		{
@@ -83,8 +82,7 @@ public class DealAcquiresActivity extends Activity
 
 			if (merchant.locations.get(0).merchantImageUrl != null)
 			{
-				ImageDownloader imageTask = new ImageDownloader(this.imageView);
-				imageTask.execute(new String[] { merchant.locations.get(0).merchantImageUrl });
+				imageView.setImageUrl(merchant.locations.get(0).merchantImageUrl);
 			}
 		}
 		catch (TException e)
@@ -236,7 +234,7 @@ public class DealAcquiresActivity extends Activity
 			try
 			{
 				exception = null;
-				client.setAccessToken(TaloolUser.getInstance().getAccessToken());
+				client.setAccessToken(TaloolUser.get().getAccessToken());
 				SearchOptions_t searchOptions = new SearchOptions_t();
 				searchOptions.setMaxResults(1000).setPage(0).setSortProperty("deal.dealId").setAscending(true);
 				results = client.getClient().getDealAcquires(merchant.merchantId, searchOptions);
