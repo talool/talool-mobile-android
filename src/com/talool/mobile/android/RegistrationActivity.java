@@ -3,21 +3,22 @@ package com.talool.mobile.android;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
-import com.talool.api.thrift.CTokenAccess_t;
-import com.talool.api.thrift.Customer_t;
-import com.talool.api.thrift.ServiceException_t;
-import com.talool.mobile.android.util.TaloolUser;
-import com.talool.mobile.android.util.ThriftHelper;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.drawable.ClipDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+
+import com.talool.api.thrift.CTokenAccess_t;
+import com.talool.api.thrift.Customer_t;
+import com.talool.api.thrift.ServiceException_t;
+import com.talool.mobile.android.util.TaloolUser;
+import com.talool.mobile.android.util.ThriftHelper;
 
 public class RegistrationActivity extends Activity {
 	private static ThriftHelper client;
@@ -72,6 +73,15 @@ public class RegistrationActivity extends Activity {
         lastName = (EditText) findViewById(R.id.lastName);
         email = (EditText) findViewById(R.id.registrationEmail);
         password = (EditText) findViewById(R.id.registrationPassword);
+        
+        ClipDrawable firstName_bg = (ClipDrawable) firstName.getBackground();
+        firstName_bg.setLevel(1500);
+		ClipDrawable lastName_bg = (ClipDrawable) lastName.getBackground();
+		lastName_bg.setLevel(1500);
+        ClipDrawable username_bg = (ClipDrawable) email.getBackground();
+		username_bg.setLevel(1500);
+		ClipDrawable password_bg = (ClipDrawable) password.getBackground();
+		password_bg.setLevel(1500);
         
 		try {
 			client = new ThriftHelper();
