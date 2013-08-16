@@ -48,6 +48,7 @@
    <string name="my_deals_filter_food">Food</string>
    <string name="my_deals_filter_shopping">Shopping</string>
    <string name="my_deals_filter_fun">Fun</string>
+    <string name="new_deal_received"/>
 
 
 </resources>

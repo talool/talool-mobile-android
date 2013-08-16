@@ -1,5 +1,10 @@
 package com.talool.mobile.android;
 
+import com.facebook.*;
+import com.facebook.model.GraphUser;
+import com.facebook.widget.LoginButton;
+import com.talool.api.thrift.Customer_t;
+import com.talool.mobile.android.util.FacebookHelper;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
@@ -21,16 +26,23 @@ import com.talool.mobile.android.tasks.FetchFavoriteMerchantsTask;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
 
+import java.util.Arrays;
+
 public class LoginActivity extends Activity
 {
+
+
 	private static ThriftHelper client;
+    private Customer_t facebookCostomer;
 	private EditText username;
 	private EditText password;
 	private Exception exception;
+    private UiLifecycleHelper lifecycleHelper;
+    private boolean isResumed = false;
 
 	private class CustomerServiceTask extends AsyncTask<String, Void, CTokenAccess_t>
 	{
-		@Override
+        @Override
 		protected void onPostExecute(CTokenAccess_t result)
 		{
 			if (exception != null)
@@ -56,17 +68,10 @@ public class LoginActivity extends Activity
 
 			favMerchantTask.execute(new String[] {});
 
-			// init activtiy supervisor
-			ActivitySupervisor.createInstance(new ActivitySupervisor.NotificationCallback()
-			{
 
-				@Override
-				public void handleNotificationCount(int totalNotifications)
-				{
-					Log.i(this.getClass().getSimpleName(), "handling noticiation count: " + totalNotifications);
-				}
-			});
 		}
+
+
 
 		@Override
 		protected CTokenAccess_t doInBackground(String... arg0)
@@ -89,14 +94,20 @@ public class LoginActivity extends Activity
 			}
 			return tokenAccess;
 		}
-
 	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.login_layout);
+        lifecycleHelper = new UiLifecycleHelper(this, statusCallback);
+        lifecycleHelper.onCreate(savedInstanceState);
+
+        setContentView(R.layout.login_layout);
+
+        LoginButton authButton = (LoginButton) this.findViewById(R.id.login_button);
+        authButton.setReadPermissions(Arrays.asList("email", "user_birthday"));
+
 		username = (EditText) findViewById(R.id.email);
 		password = (EditText) findViewById(R.id.password);
 		username.setText("chris@talool.com");
@@ -109,7 +120,6 @@ public class LoginActivity extends Activity
 		{
 			popupErrorMessage(e.getMessage());
 		}
-
 	}
 
 	public void onLoginClick(View view)
@@ -158,5 +168,116 @@ public class LoginActivity extends Activity
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        lifecycleHelper.onPause();
+        isResumed = false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        lifecycleHelper.onResume();
+        isResumed = true;
+
+        Session session = Session.getActiveSession();
+
+        if (session != null && session.isOpened()) {
+            // user doesn't need to login
+        } else {
+            // otherwise present the splash screen
+            // and ask the person to login.
+            //showLogin();
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        lifecycleHelper.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        lifecycleHelper.onDestroy();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        lifecycleHelper.onActivityResult(requestCode, resultCode, data);
+    }
+    private Session.StatusCallback statusCallback = new Session.StatusCallback() {
+        @Override
+        public void call(Session session, SessionState state, Exception exception) {
+            onSessionStateChange(session, state, exception);
+        }
+    };
+
+
+    private void onSessionStateChange(Session session, SessionState state, Exception exception){
+        if (isResumed) {
+            if (state.isOpened() && TaloolUser.getInstance().getAccessToken() == null ) {
+                Request request = Request.newMeRequest(Session.getActiveSession(), new Request.GraphUserCallback() {
+                    @Override
+                    public void onCompleted(GraphUser user, Response response) {
+                        facebookCostomer = FacebookHelper.createCostomerFromFacebook(user);
+
+                        //CustomerServiceTask task = new CustomerServiceTask();
+                        FacebookServiceTask task = new FacebookServiceTask();
+                        task.execute(new String[] {});
+                    }
+                });
+                request.executeAsync();
+            } else if (state.isClosed()) {
+                //show login
+                //showLogin();
+            }
+        }
+    }
+
+    private class FacebookServiceTask extends AsyncTask<String,Void,CTokenAccess_t>{
+
+        @Override
+        protected void onPostExecute(CTokenAccess_t result) {
+            if(exception != null)
+            {
+                popupErrorMessage(exception.getMessage());
+            }
+            else
+            {
+                TaloolUser.getInstance().setAccessToken(result);
+                Log.i(LoginActivity.class.toString(), "Login Complete");
+                Intent myDealsIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(myDealsIntent);
+            }
+        }
+
+        @Override
+        protected CTokenAccess_t doInBackground(String... arg0) {
+            CTokenAccess_t tokenAccess = null;
+
+            try {
+                if (client.getClient().customerEmailExists(facebookCostomer.getEmail())){
+                    //todo better password for facebook accounts
+                    tokenAccess = client.getClient().authenticate(facebookCostomer.getEmail(), facebookCostomer.getEmail());
+                }
+                else {
+                    tokenAccess = client.getClient().createAccount(facebookCostomer, facebookCostomer.getEmail());
+                }
+            } catch (ServiceException_t e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (TException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            return tokenAccess;
+        }
+    }
 
 }

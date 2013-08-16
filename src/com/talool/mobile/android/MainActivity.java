@@ -1,28 +1,33 @@
 package com.talool.mobile.android;
 
-import android.app.ActionBar;
+import android.app.*;
 import android.app.ActionBar.Tab;
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.facebook.Session;
-import com.facebook.SessionState;
-import com.facebook.UiLifecycleHelper;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import com.facebook.*;
 import com.talool.mobile.android.activity.MyActivityFragment;
 import com.talool.mobile.android.activity.SettingsActivity;
+import com.talool.mobile.android.tasks.ActivitySupervisor;
 import com.talool.mobile.android.util.TaloolUser;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends Activity
 {
@@ -68,6 +73,24 @@ public class MainActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+        // Add code to print out the key hash
+        try {
+            //todo remove, this will print your keyhash
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "com.talool.mobile.android",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.d("bug","bug");
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
+
         lifecycleHelper = new UiLifecycleHelper(this, statusCallback);
         lifecycleHelper.onCreate(savedInstanceState);
 		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -80,9 +103,10 @@ public class MainActivity extends Activity
 				new MyTabListener(this, MyDealsFragment.class.getName()));
 		Tab tab2 = actionBar.newTab().setText("Find Deals").setTabListener(
 				new MyTabListener(this, FindDealsFragment.class.getName()));
-		Tab tab3 = actionBar.newTab().setText("My Activity").setTabListener(
-				new MyTabListener(this, MyActivityFragment.class.getName()));
-		actionBar.addTab(tab);
+		Tab tab3 = actionBar.newTab().setCustomView(R.layout.activity_tab_layout).setTabListener(
+                new MyTabListener( this, MyActivityFragment.class.getName()) );
+
+        actionBar.addTab(tab);
 		actionBar.addTab(tab2);
 		actionBar.addTab(tab3);
 
@@ -90,8 +114,8 @@ public class MainActivity extends Activity
 		{
             showLogin();
 		}
-
 	}
+
 
     @Override
     protected void onResume() {
@@ -99,16 +123,24 @@ public class MainActivity extends Activity
         lifecycleHelper.onResume();
         isResumed = true;
 
-        Session session = Session.getActiveSession();
-
-        if (session != null && session.isOpened()) {
-            // user doesn't need to login
-        } else {
-            // otherwise present the splash screen
-            // and ask the person to login.
-            showLogin();
-        }
+        /*if (TaloolUser.getInstance().getAccessToken() != null){
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ActivitySupervisor.createInstance(notificationCallback);
+                }
+            });
+        } */
     }
+
+    ActivitySupervisor.NotificationCallback notificationCallback = new ActivitySupervisor.NotificationCallback() {
+        @Override
+        public void handleNotificationCount(int totalNotifications) {
+            if (totalNotifications > 0){
+                newNotification(NOTIFICATION_ID, NOTIFICATION_TITLE, NOTIFICATION_MESSAGE, totalNotifications, null);
+            }
+        }
+    };
 
     private void showLogin(){
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -247,4 +279,50 @@ public class MainActivity extends Activity
         super.onActivityResult(requestCode, resultCode, data);
         lifecycleHelper.onActivityResult(requestCode, resultCode, data);
     }
+
+    //todo add dynamic messages
+    public static final String NOTIFICATION_MESSAGE = "Received gift \"2 for 1 lunch\" at The Kitchen";
+    private final static String NOTIFICATION_TITLE = "Update Test Message";
+    private final static int NOTIFICATION_ID = 001;
+
+    public void updateNotificationTab(final int count){
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //todo clean clean clean
+                Tab notificationTab = getActionBar().getTabAt(2);
+
+                if (count > 0){
+                    ((TextView)notificationTab.getCustomView().findViewById(R.id.actionbar_notifcation_textview)).setText(Integer.toString(count));
+                    notificationTab.getCustomView().findViewById(R.id.activity_text_count).setVisibility(RelativeLayout.VISIBLE);
+                }
+                else {
+                    notificationTab.getCustomView().findViewById(R.id.activity_text_count).setVisibility(RelativeLayout.GONE);
+                }
+
+            }
+        });
+    }
+
+    private void newNotification(int notificationId, String notificationTitle, String notificationMessage, int totalNotifications, Object o) {
+        updateNotificationTab(totalNotifications);
+
+        //todo add intent
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext())
+                .setSmallIcon(R.drawable.icon_teal)
+                .setContentTitle(NOTIFICATION_TITLE)
+                .setContentText(NOTIFICATION_MESSAGE)
+                .setNumber(totalNotifications)
+                .setContentIntent(null);
+
+        NotificationManager mNotifyMgr = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        // Builds the notification and issues it.
+        mNotifyMgr.notify(NOTIFICATION_ID, builder.build());
+    }
+
+
+
+
+
+
 }
