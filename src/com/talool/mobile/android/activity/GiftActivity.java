@@ -160,8 +160,9 @@ public class GiftActivity extends Activity
 			setTitle("A Gift to " + gift.getDeal().getMerchant().getName());
 
 			summary.setText(gift.getDeal().getSummary());
-
+			summary.setTypeface(TypefaceFactory.get().getMarkerFeltWide());
 			details.setText(gift.getDeal().getDetails());
+			details.setTypeface(TypefaceFactory.get().getMarkerFelt());
 
 			dealImageView = (SmartImageView) findViewById(R.id.dealImage);
 			dealImageView.setImageUrl(gift.getDeal().getImageUrl());

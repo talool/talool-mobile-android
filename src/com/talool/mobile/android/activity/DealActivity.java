@@ -146,7 +146,9 @@ public class DealActivity extends Activity {
 	{
 		setAddressText();
 		dealSummaryText.setText(deal.deal.summary);
+		dealSummaryText.setTypeface(TypefaceFactory.get().getMarkerFeltWide());
 		dealValidText.setText(deal.deal.details);
+		dealValidText.setTypeface(TypefaceFactory.get().getMarkerFelt());
 		dealExpirationText.setText(TaloolUtil.getExpirationText(deal.deal.expires));
 		setTitle(merchant.name);
 
