@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.loopj.android.image.SmartImageView;
@@ -24,6 +23,7 @@ import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
 import com.talool.mobile.android.tasks.GiftAcceptanceTask;
 import com.talool.mobile.android.util.TaloolUser;
+import com.talool.mobile.android.util.TaloolUtil;
 import com.talool.mobile.android.util.ThriftHelper;
 import com.talool.mobile.android.util.TypefaceFactory;
 import com.talool.thrift.util.ThriftUtil;
@@ -171,21 +171,24 @@ public class GiftActivity extends Activity
 			logoImageView.setImageUrl(gift.getDeal().getMerchant().getLocations().get(0).getLogoUrl());
 
 			final TextView address1 = (TextView) findViewById(R.id.address1);
-			
+
 			final MerchantLocation_t location = gift.getDeal().getMerchant().getLocations().get(0);
-			
+
+			final TextView expires = (TextView) findViewById(R.id.expires);
+			expires.setText(TaloolUtil.getExpirationText(gift.getDeal().getExpires()));
+
 			StringBuilder sb = new StringBuilder(location.address.address1);
-			if(location.address.address2 != null )
+			if (location.address.address2 != null)
 			{
 				sb.append("\n").append(location.address.address2);
 			}
 			sb.append("\n")
-				.append(location.address.city)
-				.append(", ")
-				.append(location.address.stateProvinceCounty) 
-				.append(" ")
-				.append(location.address.zip);
-			
+					.append(location.address.city)
+					.append(", ")
+					.append(location.address.stateProvinceCounty)
+					.append(" ")
+					.append(location.address.zip);
+
 			address1.setText(sb.toString());
 
 		}
