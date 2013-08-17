@@ -30,6 +30,8 @@ public final class ApiUtil
 			case FRIEND_GIFT_REDEEM:
 			case FRIEND_GIFT_REJECT:
 			case EMAIL_SEND_GIFT:
+			case UNKNOWN:
+			case PURCHASE:
 				return false;
 
 			case TALOOL_REACH:
@@ -73,7 +75,7 @@ public final class ApiUtil
 		}
 
 	}
-	
+
 	public static int getIcon(final Category_t category)
 	{
 		switch (category.categoryId)
@@ -93,7 +95,7 @@ public final class ApiUtil
 		}
 
 	}
-	
+
 	public static int getIconColor(final Category_t category)
 	{
 		switch (category.categoryId)
