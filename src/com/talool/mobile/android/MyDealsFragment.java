@@ -25,6 +25,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.Fields;
+import com.google.analytics.tracking.android.MapBuilder;
 import com.talool.api.thrift.Customer_t;
 import com.talool.api.thrift.Location_t;
 import com.talool.api.thrift.Merchant_t;
@@ -358,6 +361,22 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		{
 			merchantDao.close();
 		}
+	}
+	
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		EasyTracker easyTracker = EasyTracker.getInstance(getActivity());
+		easyTracker.set(Fields.SCREEN_NAME, "My Deals");
+
+		easyTracker.send(MapBuilder.createAppView().build());
+	}
+
+	@Override
+	public void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
 	}
 
 }

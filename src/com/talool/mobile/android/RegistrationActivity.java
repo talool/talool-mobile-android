@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.analytics.tracking.android.EasyTracker;
 import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.Customer_t;
 import com.talool.api.thrift.ServiceException_t;
@@ -93,8 +94,16 @@ public class RegistrationActivity extends Activity {
     
     public void onRegistrationClick(View view)
     {
-    	RegisterTask registerTask = new RegisterTask();
-    	registerTask.execute(new String[]{});
+    	
+    	if(firstName.getText().toString() != null && lastName.getText().toString() != null && email.getText().toString() != null && password.getText().toString() != null)
+    	{
+    		popupErrorMessage("All fields in the registration page are required");
+    	}
+    	else
+    	{
+    		RegisterTask registerTask = new RegisterTask();
+    		registerTask.execute(new String[]{});
+    	}
     	
     }
 
@@ -116,4 +125,16 @@ public class RegistrationActivity extends Activity {
 		// show it
 		alertDialog.show();
 	}
+	
+	  @Override
+	  public void onStart() {
+	    super.onStart();
+	    EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+	  }
+
+	  @Override
+	  public void onStop() {
+	    super.onStop();
+	    EasyTracker.getInstance(this).activityStop(this);  // Add this method.
+	  }
 }

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.analytics.tracking.android.EasyTracker;
 import com.loopj.android.image.SmartImageView;
 import com.talool.api.thrift.Activity_t;
 import com.talool.api.thrift.DealAcquire_t;
@@ -231,4 +232,15 @@ public class GiftActivity extends Activity
 		return sb.toString();
 	}
 
+	  @Override
+	  public void onStart() {
+	    super.onStart();
+	    EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+	  }
+
+	  @Override
+	  public void onStop() {
+	    super.onStop();
+	    EasyTracker.getInstance(this).activityStop(this);  // Add this method.
+	  }
 }

@@ -20,6 +20,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.Fields;
+import com.google.analytics.tracking.android.MapBuilder;
 import com.talool.api.thrift.ActivityEvent_t;
 import com.talool.api.thrift.Activity_t;
 import com.talool.api.thrift.SearchOptions_t;
@@ -264,6 +267,22 @@ public class MyActivityFragment extends Fragment
 		{
 			activityDao.close();
 		}
+	}
+	
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		EasyTracker easyTracker = EasyTracker.getInstance(getActivity());
+		easyTracker.set(Fields.SCREEN_NAME, "My Activity");
+
+		easyTracker.send(MapBuilder.createAppView().build());
+	}
+
+	@Override
+	public void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
 	}
 
 }
