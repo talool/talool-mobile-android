@@ -23,6 +23,7 @@ import android.widget.ListView;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.Fields;
 import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.talool.api.thrift.ActivityEvent_t;
 import com.talool.api.thrift.Activity_t;
 import com.talool.api.thrift.SearchOptions_t;
@@ -172,15 +173,33 @@ public class MyActivityFragment extends Fragment
 			catch (ServiceException_t e)
 			{
 				e.printStackTrace();
+				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+
+				easyTracker.send(MapBuilder
+						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+						.build()
+						);
 			}
 			catch (TException e)
 			{
 				e.printStackTrace();
+				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+
+				easyTracker.send(MapBuilder
+						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+						.build()
+						);
 
 			}
 			catch (Exception e)
 			{
 				e.printStackTrace();
+				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+
+				easyTracker.send(MapBuilder
+						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+						.build()
+						);
 			}
 
 			return results;
@@ -250,6 +269,12 @@ public class MyActivityFragment extends Fragment
 		catch (TTransportException e)
 		{
 			e.printStackTrace();
+			EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+
+			easyTracker.send(MapBuilder
+					.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+					.build()
+					);
 		}
 
 		setHasOptionsMenu(true);
@@ -268,7 +293,7 @@ public class MyActivityFragment extends Fragment
 			activityDao.close();
 		}
 	}
-	
+
 	@Override
 	public void onStart() {
 		// TODO Auto-generated method stub

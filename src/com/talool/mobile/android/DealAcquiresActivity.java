@@ -22,6 +22,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.loopj.android.image.SmartImageView;
 import com.talool.api.thrift.DealAcquire_t;
 import com.talool.api.thrift.Merchant_t;
@@ -88,8 +90,13 @@ public class DealAcquiresActivity extends Activity
 		}
 		catch (TException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			EasyTracker easyTracker = EasyTracker.getInstance(this);
+
+			easyTracker.send(MapBuilder
+					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),exception),true)                                              
+					.build()
+					);
 		}
 
 	}
@@ -97,7 +104,6 @@ public class DealAcquiresActivity extends Activity
 	@Override
 	protected void onResume()
 	{
-		// TODO Auto-generated method stub
 		super.onResume();
 		reloadData();
 	}
@@ -149,6 +155,12 @@ public class DealAcquiresActivity extends Activity
 		else
 		{
 			popupErrorMessage(exception.getMessage());
+			EasyTracker easyTracker = EasyTracker.getInstance(this);
+
+			easyTracker.send(MapBuilder
+					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),exception),true)                                              
+					.build()
+					);
 		}
 	}
 
@@ -166,8 +178,12 @@ public class DealAcquiresActivity extends Activity
 		}
 		catch (TTransportException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			EasyTracker easyTracker = EasyTracker.getInstance(this);
+
+			easyTracker.send(MapBuilder
+					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),exception),true)                                              
+					.build()
+					);
 		}
 	}
 
@@ -264,7 +280,6 @@ public class DealAcquiresActivity extends Activity
 			{
 				exception = e;
 				e.printStackTrace();
-
 			}
 
 			return results;
@@ -275,7 +290,16 @@ public class DealAcquiresActivity extends Activity
 	  @Override
 	  public void onStart() {
 	    super.onStart();
-	    EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+	    EasyTracker easyTracker = EasyTracker.getInstance(this);
+
+	    easyTracker.activityStart(this);  // Add this method.
+
+	    // MapBuilder.createEvent().build() returns a Map of event fields and values
+	    // that are set and sent with the hit.
+	    easyTracker.send(MapBuilder
+	        .createEvent("deal_acquire_action","selected",merchant.merchantId,null)           
+	        .build()
+	    );
 	  }
 
 	  @Override

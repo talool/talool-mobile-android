@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.tasks.ActivitySupervisor;
@@ -37,7 +39,7 @@ public class LoginActivity extends Activity
 		{
 			if (exception != null)
 			{
-				popupErrorMessage(exception.getMessage());
+				popupErrorMessage(exception);
 			}
 			else
 			{
@@ -83,6 +85,7 @@ public class LoginActivity extends Activity
 			{
 				Log.i(LoginActivity.class.toString(), e.getMessage());
 				exception = e;
+				
 			}
 			catch (TException e)
 			{
@@ -115,7 +118,13 @@ public class LoginActivity extends Activity
 		}
 		catch (TTransportException e)
 		{
-			popupErrorMessage(e.getMessage());
+			popupErrorMessage(e);
+			EasyTracker easyTracker = EasyTracker.getInstance(this);
+
+			easyTracker.send(MapBuilder
+					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),e),true)                                              
+					.build()
+					);
 		}
 		
 		setTitle(R.string.welcome);
@@ -129,11 +138,17 @@ public class LoginActivity extends Activity
 		task.execute(new String[] {});
 	}
 
-	public void popupErrorMessage(String message)
+	public void popupErrorMessage(Exception exception)
 	{
+		EasyTracker easyTracker = EasyTracker.getInstance(this);
+
+		easyTracker.send(MapBuilder
+				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),exception),true)                                              
+				.build()
+				);	
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 		alertDialogBuilder.setTitle("Error Logging In");
-		alertDialogBuilder.setMessage(message);
+		alertDialogBuilder.setMessage(exception.getMessage());
 		alertDialogBuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int which)
