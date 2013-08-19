@@ -14,6 +14,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.cache.FavoriteMerchantCache;
@@ -35,22 +38,29 @@ public class FavoriteMerchantProvider extends ActionProvider
 	TextView heartTextView;
 
 	private final Context mContext;
-
+	private View view;
 	private final FavoriteOnClickListener favoriteOnClickListener = new FavoriteOnClickListener();
 
 	@Override
 	public View onCreateActionView(final MenuItem forItem)
 	{
+		View view = super.onCreateActionView(forItem);
+		this.view = view;
 		try
 		{
 			client = new ThriftHelper();
 		}
 		catch (TTransportException e)
 		{
-			e.printStackTrace();
+			EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+
+			easyTracker.send(MapBuilder
+					.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+					.build()
+					);
 		}
 
-		return super.onCreateActionView(forItem);
+		return view;
 	}
 
 	protected void setIsFavorited(final boolean isFavorited)
@@ -113,14 +123,32 @@ public class FavoriteMerchantProvider extends ActionProvider
 					catch (TApplicationException e)
 					{
 						Log.e(this.getClass().getSimpleName(), e.getLocalizedMessage());
+						EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+
+						easyTracker.send(MapBuilder
+								.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+								.build()
+								);
 					}
 					catch (ServiceException_t e)
 					{
 						Log.e(this.getClass().getSimpleName(), e.getLocalizedMessage());
+						EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+
+						easyTracker.send(MapBuilder
+								.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+								.build()
+								);
 					}
 					catch (Exception e)
 					{
 						Log.e(this.getClass().getSimpleName(), e.getLocalizedMessage());
+						EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+
+						easyTracker.send(MapBuilder
+								.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+								.build()
+								);
 					}
 
 					return false;

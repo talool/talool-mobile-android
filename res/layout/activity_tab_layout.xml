@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_tab"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal">
+    
+	<TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="fill_parent"
+	    android:text="ACTIVITY"
+	    android:textStyle="bold"
+	    android:textAlignment="center"
+	    android:gravity="center_vertical|left"
+	    android:id="@+id/activity_text"/>
+	    		
+	<RelativeLayout android:layout_width="24dp"
+	    android:layout_height="24dp"
+	    android:layout_marginLeft="4dp"
+	    android:layout_gravity="center_vertical|left"
+	    android:layout_toRightOf= "@id/activity_text"
+	    android:layout_centerVertical ="true"
+	    android:id="@+id/activity_text_count"
+	    android:visibility="gone">
+	    <!-- Menu Item Image -->
+	    <ImageView
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:clickable="true"
+	        android:src="@drawable/notification_shape" />
+	
+	    <!-- Badge Count -->    
+	    <TextView
+	        android:id="@+id/actionbar_notifcation_textview"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerInParent="true"
+	        android:padding="2dp"
+	        android:text="21"
+	        android:textColor="@color/color_teal" />
+	
+	</RelativeLayout>
+</RelativeLayout>

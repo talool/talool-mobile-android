@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.analytics.tracking.android.EasyTracker;
 import com.talool.mobile.android.BasicWebViewActivity;
 import com.talool.mobile.android.LoginActivity;
 import com.talool.mobile.android.R;
@@ -52,8 +53,23 @@ public class SettingsActivity extends Activity
 	{
 		final Intent intent = new Intent(view.getContext(), BasicWebViewActivity.class);
 
-		intent.putExtra(BasicWebViewActivity.TARGET_URL_PARAM, "http://www.talool.com/privacy"));
+		intent.putExtra(BasicWebViewActivity.TARGET_URL_PARAM, "http://www.talool.com/privacy");
 		intent.putExtra(BasicWebViewActivity.TITLE_PARAM, "Talool");
 		startActivity(intent);
 	}
+
+	@Override
+	public void onStart()
+	{
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this); // Add this method.
+	}
+
+	@Override
+	public void onStop()
+	{
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+	}
+
 }

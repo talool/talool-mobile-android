@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<resources>
+  <!--Replace placeholder ID with your tracking ID-->
+  <string name="ga_trackingId">UA-43245216-1</string>
+
+  <!--Enable automatic activity tracking-->
+  <bool name="ga_autoActivityTracking">true</bool>
+
+  <!--Enable automatic exception tracking-->
+  <bool name="ga_reportUncaughtExceptions">true</bool>
+  
+  <integer name="ga_dispatchPeriod">3</integer>
+  
+	<string name="com.talool.mobile.android.LoginActivity">Login</string>
+	<string name="com.talool.mobile.android.MainActivity">Main</string>
+	<string name="com.talool.mobile.android.MapActivity">Map</string>
+	<string name="com.talool.mobile.android.RegistrationActivity">Registration</string>
+	<string name="com.talool.mobile.android.DealAcquiresActivity">Deal Acquires</string>
+	
+	<string name="com.talool.mobile.android.DealActivity">Deal</string>
+	<string name="com.talool.mobile.android.DealAcquiresActivity">Gift</string>
+	<string name="com.talool.mobile.android.DealAcquiresActivity">Location Select</string>
+	<string name="com.talool.mobile.android.DealAcquiresActivity">Settings</string>
+			
+</resources>

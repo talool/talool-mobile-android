@@ -4,12 +4,17 @@ import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.loopj.android.image.SmartImageView;
 import com.talool.api.thrift.Activity_t;
 import com.talool.api.thrift.DealAcquire_t;
@@ -45,7 +50,13 @@ public class GiftActivity extends Activity
 	private SmartImageView dealImageView;
 	private SmartImageView logoImageView;
 	private SmartImageView dealCreatorImageView;
-
+	private View view;
+	
+	@Override
+	public View onCreateView(String name, Context context, AttributeSet attrs) {
+		this.view = super.onCreateView(name, context, attrs);
+		return view;
+	}
 	@Override
 	protected void onCreate(final Bundle savedInstanceState)
 	{
@@ -59,6 +70,12 @@ public class GiftActivity extends Activity
 		catch (TTransportException e)
 		{
 			e.printStackTrace();
+			EasyTracker easyTracker = EasyTracker.getInstance(this);
+
+			easyTracker.send(MapBuilder
+					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),e),true)                                              
+					.build()
+					);
 		}
 
 		byte[] activityObjBytes = (byte[]) getIntent().getSerializableExtra(ACTIVITY_OBJ_PARAM);
@@ -70,6 +87,12 @@ public class GiftActivity extends Activity
 		catch (TException e)
 		{
 			e.printStackTrace();
+			EasyTracker easyTracker = EasyTracker.getInstance(this);
+
+			easyTracker.send(MapBuilder
+					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),e),true)                                              
+					.build()
+					);
 		}
 
 		giftId = activity.getActivityLink().getLinkElement();
@@ -207,15 +230,33 @@ public class GiftActivity extends Activity
 			catch (ServiceException_t e)
 			{
 				e.printStackTrace();
+				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+
+				easyTracker.send(MapBuilder
+						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+						.build()
+						);
 			}
 			catch (TException e)
 			{
 				e.printStackTrace();
+				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+
+				easyTracker.send(MapBuilder
+						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+						.build()
+						);
 
 			}
 			catch (Exception e)
 			{
 				e.printStackTrace();
+				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+
+				easyTracker.send(MapBuilder
+						.createException(new StandardExceptionParser(view.getContext(),null).getDescription(Thread.currentThread().getName(),e),true)                                              
+						.build()
+						);
 			}
 
 			return gift;
@@ -231,4 +272,15 @@ public class GiftActivity extends Activity
 		return sb.toString();
 	}
 
+	  @Override
+	  public void onStart() {
+	    super.onStart();
+	    EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+	  }
+
+	  @Override
+	  public void onStop() {
+	    super.onStop();
+	    EasyTracker.getInstance(this).activityStop(this);  // Add this method.
+	  }
 }

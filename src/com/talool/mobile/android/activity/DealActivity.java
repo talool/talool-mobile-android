@@ -14,6 +14,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.loopj.android.image.SmartImageView;
 import com.talool.api.thrift.DealAcquire_t;
 import com.talool.api.thrift.DealOffer_t;
@@ -79,8 +82,13 @@ public class DealActivity extends Activity
 		}
 		catch (TException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			EasyTracker easyTracker = EasyTracker.getInstance(this);
+
+			easyTracker.send(MapBuilder
+					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),e),true)                                              
+					.build()
+					);
 		}
 
 	}
@@ -201,11 +209,11 @@ public class DealActivity extends Activity
 			sb.append("\n").append(location.address.address2);
 		}
 		sb.append("\n")
-				.append(location.address.city)
-				.append(", ")
-				.append(location.address.stateProvinceCounty)
-				.append(" ")
-				.append(location.address.zip);
+		.append(location.address.city)
+		.append(", ")
+		.append(location.address.stateProvinceCounty)
+		.append(" ")
+		.append(location.address.zip);
 
 		dealAddressText.setText(sb.toString());
 	}
@@ -218,8 +226,33 @@ public class DealActivity extends Activity
 		}
 		catch (TTransportException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			EasyTracker easyTracker = EasyTracker.getInstance(this);
+
+			easyTracker.send(MapBuilder
+					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),e),true)                                              
+					.build()
+					);
 		}
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		EasyTracker easyTracker = EasyTracker.getInstance(this);
+
+		easyTracker.activityStart(this);  // Add this method.
+
+		// MapBuilder.createEvent().build() returns a Map of event fields and values
+		// that are set and sent with the hit.
+		easyTracker.send(MapBuilder
+				.createEvent("deal_activity","selected",deal.deal.dealId,null)           
+				.build()
+				);
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this);  // Add this method.
 	}
 }

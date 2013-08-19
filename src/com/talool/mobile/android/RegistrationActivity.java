@@ -14,6 +14,9 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.Customer_t;
 import com.talool.api.thrift.ServiceException_t;
@@ -34,7 +37,7 @@ public class RegistrationActivity extends Activity {
 		protected void onPostExecute(CTokenAccess_t result) {
 			if(exception != null)
 			{
-				popupErrorMessage(exception.getMessage());
+				popupErrorMessage(exception);
 			}
 			else
 			{
@@ -55,9 +58,11 @@ public class RegistrationActivity extends Activity {
 			} catch (ServiceException_t e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				exception = e;
 			} catch (TException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				exception = e;
 			}
 			return tokenAccess;
 		}
@@ -86,15 +91,23 @@ public class RegistrationActivity extends Activity {
 		try {
 			client = new ThriftHelper();
 		} catch (TTransportException e) {
-			popupErrorMessage(e.getMessage());
+			popupErrorMessage(e);
 		}
 		
     }
     
     public void onRegistrationClick(View view)
     {
-    	RegisterTask registerTask = new RegisterTask();
-    	registerTask.execute(new String[]{});
+    	
+    	if(firstName.getText().toString() != null && lastName.getText().toString() != null && email.getText().toString() != null && password.getText().toString() != null)
+    	{
+    		popupErrorMessage("All fields in the registration page are required");
+    	}
+    	else
+    	{
+    		RegisterTask registerTask = new RegisterTask();
+    		registerTask.execute(new String[]{});
+    	}
     	
     }
 
@@ -105,6 +118,24 @@ public class RegistrationActivity extends Activity {
         return true;
     }
     
+	public void popupErrorMessage(Exception exception)
+	{
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+		alertDialogBuilder.setTitle("Error Registering");
+		alertDialogBuilder.setMessage(exception.getMessage());
+		// create alert dialog
+		AlertDialog alertDialog = alertDialogBuilder.create();
+
+		EasyTracker easyTracker = EasyTracker.getInstance(this);
+
+		easyTracker.send(MapBuilder
+				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),exception),true)                                              
+				.build()
+				);
+		// show it
+		alertDialog.show();
+	}
+	
 	public void popupErrorMessage(String message)
 	{
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -113,7 +144,25 @@ public class RegistrationActivity extends Activity {
 		// create alert dialog
 		AlertDialog alertDialog = alertDialogBuilder.create();
 
+		EasyTracker easyTracker = EasyTracker.getInstance(this);
+
+		easyTracker.send(MapBuilder
+				.createException(message,true)                                              
+				.build()
+				);
 		// show it
 		alertDialog.show();
 	}
+	
+	  @Override
+	  public void onStart() {
+	    super.onStart();
+	    EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+	  }
+
+	  @Override
+	  public void onStop() {
+	    super.onStop();
+	    EasyTracker.getInstance(this).activityStop(this);  // Add this method.
+	  }
 }
