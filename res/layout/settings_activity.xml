@@ -4,31 +4,33 @@
     android:layout_height="match_parent"
     android:background="@drawable/my_deals_background"
     android:orientation="vertical"
-    android:padding="10dp" >
+    android:padding="10dp"
+    android:textSize="30sp" >
 
     <TextView
-        android:id="@+id/settingsUserNameText"
+        android:id="@+id/settings_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="Account"
+        android:text="@string/settings_account"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/tan_rounded"
         android:orientation="horizontal"
         android:padding="10dp" >
 
         <TextView
-            android:id="@+id/settingsUserNameText"
+            android:id="@+id/settings_username_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
-            android:text="User Name " />
+            android:text="@string/settings_username_label" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -38,14 +40,157 @@
             android:orientation="vertical" >
 
             <Button
-                android:id="@+id/logoutButton"
+                android:id="@+id/settings_logout_button"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Logout" />
-
+                android:text="@string/settings_logout_label" />
         </LinearLayout>
-
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/settings_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="@string/settings_about"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffff"/>
+
+    <LinearLayout
+        android:id="@id/settings_privacy_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/tan_rounded"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:clickable="true"
+        android:onClick="openUrl">
+
+        <TextView
+            android:id="@+id/settings_privacy_policy"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="left"
+            android:layout_margin="5dp"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:layout_weight="0.95"
+            android:text="@string/settings_privacy_policy" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right"
+            android:contentDescription="@string/arrow_content_desc"
+            android:cropToPadding="false"
+            android:layout_weight="0.05"
+            android:src="@drawable/navigation_next_item" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@id/settings_terms_of_use_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/tan_rounded"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:clickable="true"
+        android:onClick="openUrl">
+
+        <TextView
+            android:id="@+id/settings_terms_of_use"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="left"
+            android:layout_margin="5dp"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:layout_weight="0.95"
+            android:text="@string/settings_terms_of_use" />
+        
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right"
+            android:contentDescription="@string/arrow_content_desc"
+            android:cropToPadding="false"
+            android:layout_weight="0.05"
+            android:src="@drawable/navigation_next_item" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@id/settings_merchant_services_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/tan_rounded"
+        android:orientation="horizontal"
+        android:padding="10dp" 
+        android:clickable="true"
+        android:onClick="openUrl">
+
+       <TextView
+            android:id="@+id/settings_merchant_services"
+            android:layout_width="wrap_content"
+            android:layout_weight="0.95"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:layout_margin="5dp"  
+            android:text="@string/settings_merchant_services" />
+             
+          <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right"
+            android:contentDescription="@string/arrow_content_desc"
+            android:cropToPadding="false"
+            android:layout_weight="0.05"
+            android:src="@drawable/navigation_next_item" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@id/settings_publisher_services_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/tan_rounded"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:clickable="true"
+        android:onClick="openUrl">
+
+        <TextView
+            android:id="@+id/settings_publisher_services"
+            android:layout_width="wrap_content"
+            android:layout_weight="0.95"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:layout_margin="5dp"  
+            android:text="@string/settings_publisher_services" />
+        
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right"
+            android:contentDescription="@string/arrow_content_desc"
+            android:cropToPadding="false"
+            android:layout_weight="0.05"
+            android:src="@drawable/navigation_next_item" />
+    </LinearLayout>
+    
+    
+   <TextView
+            android:id="@+id/settings_copyright"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="bottom|center_horizontal"
+            android:textColor="@color/tan"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:text="@string/settings_copyright"/>
 </LinearLayout>

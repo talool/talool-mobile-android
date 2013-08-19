@@ -33,6 +33,7 @@
     <string name="paybackText">While some offers from our paper coupon book are not currently available for you to purchase on your mobile device, we will be adding Bonus Deals throughout the year that will be delivered to you automatically when you purchase the deals listed below.</string>
     <string name="locationSelect">Can you please tell us which Payback Book you are interested in?</string>
     
+    <string name="arrow_content_desc">click link</string>
     <!-- activity strings -->
     <string name="accept_gift">Accept Gift</string>
     <string name="reject_gift">Reject Gift</string>
@@ -48,5 +49,18 @@
    <string name="my_deals_filter_food">Food</string>
    <string name="my_deals_filter_shopping">Shopping</string>
    <string name="my_deals_filter_fun">Fun</string>
+   
+   <!--  settings strings -->
+   
+   <string name="settings_copyright">Copyright \u00A9 2013 Talool, Inc</string>
+   <string name="settings_publisher_services">Publisher Services</string>
+   <string name="settings_merchant_services">Merchant Services</string>
+   <string name="settings_terms_of_use">Terms of Use</string>
+   <string name="settings_privacy_policy">Privacy Policy</string>
+   <string name="settings_about">About Talool</string>
+   <string name="settings_account">Account</string>
+   <string name="settings_username_label">Username</string>
+   <string name="settings_logout_label">Sign Out</string>
+
 
 </resources>
