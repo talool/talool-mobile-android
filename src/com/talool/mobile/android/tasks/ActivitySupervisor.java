@@ -30,7 +30,9 @@ public final class ActivitySupervisor
 	private static ActivitySupervisor instance;
 	private static final long POLLER_SLEEP_TIME = 30000; // 30 seconds
 
-	private ThriftHelper client = null;
+
+
+    private ThriftHelper client = null;
 	private ActivityPoller activityPoller = null;
 
 	private NotificationCallback notificationCallback;
@@ -81,7 +83,6 @@ public final class ActivitySupervisor
 							}
 
 							notificationCallback.handleNotificationCount(actionsPending);
-
 						}
 
 					}
