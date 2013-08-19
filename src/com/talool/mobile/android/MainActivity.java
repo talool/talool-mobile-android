@@ -24,6 +24,7 @@ import com.facebook.*;
 import com.talool.mobile.android.activity.MyActivityFragment;
 import com.talool.mobile.android.activity.SettingsActivity;
 import com.talool.mobile.android.tasks.ActivitySupervisor;
+import com.talool.mobile.android.util.NotificationHelper;
 import com.talool.mobile.android.util.TaloolUser;
 
 import java.security.MessageDigest;
@@ -31,8 +32,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends Activity
 {
-    private UiLifecycleHelper lifecycleHelper;
-    private boolean isResumed = false;
+    NotificationHelper notificationHelper;
 
     private final LocationListener locationListener = new LocationListener()
 	{
@@ -66,7 +66,6 @@ public class MainActivity extends Activity
     @Override
     protected void onPause() {
         super.onPause();
-        isResumed = false;
     }
 
     @Override
@@ -91,8 +90,6 @@ public class MainActivity extends Activity
 
         }
 
-        lifecycleHelper = new UiLifecycleHelper(this, statusCallback);
-        lifecycleHelper.onCreate(savedInstanceState);
 		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
 
@@ -120,27 +117,13 @@ public class MainActivity extends Activity
     @Override
     protected void onResume() {
         super.onResume();
-        lifecycleHelper.onResume();
-        isResumed = true;
 
-        /*if (TaloolUser.getInstance().getAccessToken() != null){
-            this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    ActivitySupervisor.createInstance(notificationCallback);
-                }
-            });
-        } */
+        if (TaloolUser.getInstance().getAccessToken() != null && notificationHelper == null){
+            notificationHelper = new NotificationHelper(getActionBar().getTabAt(2), getApplicationContext());
+        }
     }
 
-    ActivitySupervisor.NotificationCallback notificationCallback = new ActivitySupervisor.NotificationCallback() {
-        @Override
-        public void handleNotificationCount(int totalNotifications) {
-            if (totalNotifications > 0){
-                newNotification(NOTIFICATION_ID, NOTIFICATION_TITLE, NOTIFICATION_MESSAGE, totalNotifications, null);
-            }
-        }
-    };
+
 
     private void showLogin(){
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -242,87 +225,4 @@ public class MainActivity extends Activity
 			mFragment = null;
 		}
 	}
-
-    private Session.StatusCallback statusCallback = new Session.StatusCallback() {
-        @Override
-        public void call(Session session, SessionState state, Exception exception) {
-            onSessionStateChange(session, state, exception);
-        }
-    };
-
-    private void onSessionStateChange(Session session, SessionState state, Exception exception){
-        if (isResumed) {
-            if (state.isOpened()) {
-                Log.i("Pauk","facebook login success");
-               //user is logged in... welcome back screen?
-            } else if (state.isClosed()) {
-                //show login
-                showLogin();
-            }
-        }
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        lifecycleHelper.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        lifecycleHelper.onDestroy();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        lifecycleHelper.onActivityResult(requestCode, resultCode, data);
-    }
-
-    //todo add dynamic messages
-    public static final String NOTIFICATION_MESSAGE = "Received gift \"2 for 1 lunch\" at The Kitchen";
-    private final static String NOTIFICATION_TITLE = "Update Test Message";
-    private final static int NOTIFICATION_ID = 001;
-
-    public void updateNotificationTab(final int count){
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                //todo clean clean clean
-                Tab notificationTab = getActionBar().getTabAt(2);
-
-                if (count > 0){
-                    ((TextView)notificationTab.getCustomView().findViewById(R.id.actionbar_notifcation_textview)).setText(Integer.toString(count));
-                    notificationTab.getCustomView().findViewById(R.id.activity_text_count).setVisibility(RelativeLayout.VISIBLE);
-                }
-                else {
-                    notificationTab.getCustomView().findViewById(R.id.activity_text_count).setVisibility(RelativeLayout.GONE);
-                }
-
-            }
-        });
-    }
-
-    private void newNotification(int notificationId, String notificationTitle, String notificationMessage, int totalNotifications, Object o) {
-        updateNotificationTab(totalNotifications);
-
-        //todo add intent
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext())
-                .setSmallIcon(R.drawable.icon_teal)
-                .setContentTitle(NOTIFICATION_TITLE)
-                .setContentText(NOTIFICATION_MESSAGE)
-                .setNumber(totalNotifications)
-                .setContentIntent(null);
-
-        NotificationManager mNotifyMgr = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-        // Builds the notification and issues it.
-        mNotifyMgr.notify(NOTIFICATION_ID, builder.build());
-    }
-
-
-
-
-
-
 }

@@ -21,7 +21,6 @@ import android.widget.EditText;
 
 import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.ServiceException_t;
-import com.talool.mobile.android.tasks.ActivitySupervisor;
 import com.talool.mobile.android.tasks.FetchFavoriteMerchantsTask;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
@@ -30,9 +29,8 @@ import java.util.Arrays;
 
 public class LoginActivity extends Activity
 {
-
-
-	private static ThriftHelper client;
+    public static final String TALOOL_FB_PASSCODE = "";
+    private static ThriftHelper client;
     private Customer_t facebookCostomer;
 	private EditText username;
 	private EditText password;
@@ -263,11 +261,11 @@ public class LoginActivity extends Activity
 
             try {
                 if (client.getClient().customerEmailExists(facebookCostomer.getEmail())){
-                    //todo better password for facebook accounts
-                    tokenAccess = client.getClient().authenticate(facebookCostomer.getEmail(), facebookCostomer.getEmail());
+                    //todo better password for facebook accounts.
+                    tokenAccess = client.getClient().authenticate(facebookCostomer.getEmail(), TALOOL_FB_PASSCODE + facebookCostomer.getEmail());
                 }
                 else {
-                    tokenAccess = client.getClient().createAccount(facebookCostomer, facebookCostomer.getEmail());
+                    tokenAccess = client.getClient().createAccount(facebookCostomer, TALOOL_FB_PASSCODE + facebookCostomer.getEmail());
                 }
             } catch (ServiceException_t e) {
                 // TODO Auto-generated catch block
