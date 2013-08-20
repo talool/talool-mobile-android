@@ -2,6 +2,7 @@ package com.talool.mobile.android.util;
 
 import android.location.Location;
 
+import com.facebook.Session;
 import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.mobile.android.TaloolApplication;
 import com.talool.mobile.android.cache.FavoriteMerchantCache;
@@ -64,6 +65,12 @@ public final class TaloolUser
 		this.accessToken = null;
 		TaloolApplication.getAppContext().deleteDatabase(Constants.DATABASE_NAME);
 		FavoriteMerchantCache.get().clear();
+
+		if (Session.getActiveSession().isOpened())
+		{
+			Session.getActiveSession().closeAndClearTokenInformation();
+		}
+
 	}
 
 }
