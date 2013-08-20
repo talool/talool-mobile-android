@@ -34,7 +34,7 @@ import java.util.Arrays;
 
 public class LoginActivity extends Activity
 {
-    public static final String TALOOL_FB_PASSCODE = "";
+    public static final String TALOOL_FB_PASSCODE = "talool4";
     private static ThriftHelper client;
     private Customer_t facebookCostomer;
 	private EditText username;
