@@ -3,6 +3,8 @@
 	<name>talool-mobile-android</name>
 	<comment></comment>
 	<projects>
+		<project>actionbar-pulltorefresh</project>
+		<project>FacebookSDK</project>
 		<project>google-play-services_lib</project>
 	</projects>
 	<buildSpec>
