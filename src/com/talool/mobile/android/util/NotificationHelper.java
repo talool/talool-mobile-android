@@ -101,11 +101,9 @@ public class NotificationHelper {
     ActivitySupervisor.NotificationCallback notificationCallback = new ActivitySupervisor.NotificationCallback() {
         @Override
         public void handleNotificationCount(int totalNotifications) {
-            if (totalNotifications > 0 && notificationManager != null){
+            if (notificationManager != null && totalNotifications != previousCount){
                     newNotification(currentNotificationId, NOTIFICATION_TITLE, NOTIFICATION_MESSAGE, totalNotifications, null);
             }
         }
     };
-
-
 }
