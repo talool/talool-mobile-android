@@ -106,7 +106,7 @@ public class DealActivity extends Activity
 			TextView redemptionCodeTextView = new TextView(getBaseContext());
 			redemptionCodeTextView.setText("Redeemed on " + new Date(deal.redeemed).toString());
 			redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-			redemptionCodeTextView.setTextColor(getResources().getColor(R.color.orange));
+			redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
 			redemptionCodeTextView.setTypeface(TypefaceFactory.get().getFontAwesome(), Typeface.BOLD);
 			dealActivityButtonLayout.addView(redemptionCodeTextView);
 			dealActivityButtonLayout.setGravity(Gravity.CENTER);
@@ -190,7 +190,7 @@ public class DealActivity extends Activity
 				TextView redemptionCodeTextView = new TextView(getBaseContext());
 				redemptionCodeTextView.setText("Redemption code " + redemptionCode);
 				redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-				redemptionCodeTextView.setTextColor(getResources().getColor(R.color.orange));
+				redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
 				redemptionCodeTextView.setTypeface(TypefaceFactory.get().getFontAwesome(), Typeface.BOLD);
 				dealActivityButtonLayout.addView(redemptionCodeTextView);
 				dealActivityButtonLayout.setGravity(Gravity.CENTER);

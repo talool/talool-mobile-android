@@ -13,7 +13,7 @@
 	    android:text="ACTIVITY"
 	    android:textAlignment="center"
 	    android:gravity="center_vertical|left"
-        android:textColor="@color/white"
+        android:textAppearance="@style/TabTextStyle.Talool"
 	    android:id="@+id/activity_text"/>
 	    		
 	<RelativeLayout android:layout_width="24dp"
@@ -31,7 +31,7 @@
 	        android:clickable="true"
 	        android:src="@drawable/notification_shape" />
 	
-	    <!-- Badge Count -->    
+	    <!-- Badge Count android:textAppearance="@style/TabTextStyle.Talool" -->    
 	    <TextView
 	        android:id="@+id/actionbar_notifcation_textview"
 	        android:layout_width="wrap_content"
@@ -39,7 +39,8 @@
 	        android:layout_centerInParent="true"
 	        android:padding="2dp"
 	        android:text="21"
-	        android:textColor="@color/color_teal" />
+	        android:textSize="11sp"
+	        android:textColor="@color/white" />
 	
 	</RelativeLayout>
 </RelativeLayout>
