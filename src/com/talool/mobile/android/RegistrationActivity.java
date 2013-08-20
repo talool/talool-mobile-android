@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.drawable.ClipDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -23,19 +24,22 @@ import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
 
-public class RegistrationActivity extends Activity {
+public class RegistrationActivity extends Activity
+{
 	private static ThriftHelper client;
 	private EditText firstName;
 	private EditText lastName;
 	private EditText email;
 	private EditText password;
 	private Exception exception;
-	
-	private class RegisterTask extends AsyncTask<String,Void,CTokenAccess_t>{
+
+	private class RegisterTask extends AsyncTask<String, Void, CTokenAccess_t>
+	{
 
 		@Override
-		protected void onPostExecute(CTokenAccess_t result) {
-			if(exception != null)
+		protected void onPostExecute(CTokenAccess_t result)
+		{
+			if (exception != null)
 			{
 				popupErrorMessage(exception);
 			}
@@ -49,17 +53,23 @@ public class RegistrationActivity extends Activity {
 		}
 
 		@Override
-		protected CTokenAccess_t doInBackground(String... arg0) {
+		protected CTokenAccess_t doInBackground(String... arg0)
+		{
 			CTokenAccess_t tokenAccess = null;
 
-			try {
+			try
+			{
 				Customer_t customer = new Customer_t(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString());
 				tokenAccess = client.getClient().createAccount(customer, password.getText().toString());
-			} catch (ServiceException_t e) {
+			}
+			catch (ServiceException_t e)
+			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				exception = e;
-			} catch (TException e) {
+			}
+			catch (TException e)
+			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				exception = e;
@@ -68,56 +78,63 @@ public class RegistrationActivity extends Activity {
 		}
 
 	}
-	
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.registration_layout);
-        
-        firstName = (EditText) findViewById(R.id.firstName);
-        lastName = (EditText) findViewById(R.id.lastName);
-        email = (EditText) findViewById(R.id.registrationEmail);
-        password = (EditText) findViewById(R.id.registrationPassword);
-        
-        ClipDrawable firstName_bg = (ClipDrawable) firstName.getBackground();
-        firstName_bg.setLevel(1500);
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.registration_layout);
+
+		firstName = (EditText) findViewById(R.id.firstName);
+		lastName = (EditText) findViewById(R.id.lastName);
+		email = (EditText) findViewById(R.id.registrationEmail);
+		password = (EditText) findViewById(R.id.registrationPassword);
+
+		ClipDrawable firstName_bg = (ClipDrawable) firstName.getBackground();
+		firstName_bg.setLevel(1500);
 		ClipDrawable lastName_bg = (ClipDrawable) lastName.getBackground();
 		lastName_bg.setLevel(1500);
-        ClipDrawable username_bg = (ClipDrawable) email.getBackground();
+		ClipDrawable username_bg = (ClipDrawable) email.getBackground();
 		username_bg.setLevel(1500);
 		ClipDrawable password_bg = (ClipDrawable) password.getBackground();
 		password_bg.setLevel(1500);
-        
-		try {
+
+		try
+		{
 			client = new ThriftHelper();
-		} catch (TTransportException e) {
+		}
+		catch (TTransportException e)
+		{
 			popupErrorMessage(e);
 		}
-		
-    }
-    
-    public void onRegistrationClick(View view)
-    {
-    	
-    	if(firstName.getText().toString() != null && lastName.getText().toString() != null && email.getText().toString() != null && password.getText().toString() != null)
-    	{
-    		popupErrorMessage("All fields in the registration page are required");
-    	}
-    	else
-    	{
-    		RegisterTask registerTask = new RegisterTask();
-    		registerTask.execute(new String[]{});
-    	}
-    	
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-    
+	}
+
+	public void onRegistrationClick(View view)
+	{
+		if (TextUtils.isEmpty(firstName.getText().toString()) ||
+				TextUtils.isEmpty(lastName.getText().toString()) ||
+				TextUtils.isEmpty(email.getText().toString()) ||
+				TextUtils.isEmpty(password.getText().toString()))
+		{
+			popupErrorMessage("All fields in the registration page are required");
+		}
+		else
+		{
+			RegisterTask registerTask = new RegisterTask();
+			registerTask.execute(new String[] {});
+		}
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
 	public void popupErrorMessage(Exception exception)
 	{
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -129,13 +146,13 @@ public class RegistrationActivity extends Activity {
 		EasyTracker easyTracker = EasyTracker.getInstance(this);
 
 		easyTracker.send(MapBuilder
-				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),exception),true)                                              
+				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
 				.build()
 				);
 		// show it
 		alertDialog.show();
 	}
-	
+
 	public void popupErrorMessage(String message)
 	{
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -147,22 +164,24 @@ public class RegistrationActivity extends Activity {
 		EasyTracker easyTracker = EasyTracker.getInstance(this);
 
 		easyTracker.send(MapBuilder
-				.createException(message,true)                                              
+				.createException(message, true)
 				.build()
 				);
 		// show it
 		alertDialog.show();
 	}
-	
-	  @Override
-	  public void onStart() {
-	    super.onStart();
-	    EasyTracker.getInstance(this).activityStart(this);  // Add this method.
-	  }
 
-	  @Override
-	  public void onStop() {
-	    super.onStop();
-	    EasyTracker.getInstance(this).activityStop(this);  // Add this method.
-	  }
+	@Override
+	public void onStart()
+	{
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this); // Add this method.
+	}
+
+	@Override
+	public void onStop()
+	{
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+	}
 }
