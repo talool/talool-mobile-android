@@ -51,10 +51,37 @@ public class SettingsActivity extends Activity
 
 	public void openUrl(final View view)
 	{
+		String url = null;
+		String title = null;
+
 		final Intent intent = new Intent(view.getContext(), BasicWebViewActivity.class);
 
-		intent.putExtra(BasicWebViewActivity.TARGET_URL_PARAM, "http://www.talool.com/privacy");
-		intent.putExtra(BasicWebViewActivity.TITLE_PARAM, "Talool");
+		switch (view.getId())
+		{
+			case R.id.settings_privacy_layout:
+				url = getResources().getString(R.string.settings_privacy_policy_url);
+				title = getResources().getString(R.string.settings_privacy_policy);
+				break;
+
+			case R.id.settings_terms_of_use_layout:
+				url = getResources().getString(R.string.settings_terms_of_service_url);
+				title = getResources().getString(R.string.settings_terms_of_service);
+				break;
+
+			case R.id.settings_merchant_services_layout:
+				url = getResources().getString(R.string.settings_merchant_services_url);
+				title = getResources().getString(R.string.settings_merchant_services);
+				break;
+
+			case R.id.settings_publisher_services_layout:
+				url = getResources().getString(R.string.settings_publisher_services_url);
+				title = getResources().getString(R.string.settings_publisher_services);
+				break;
+
+		}
+
+		intent.putExtra(BasicWebViewActivity.TARGET_URL_PARAM, url);
+		intent.putExtra(BasicWebViewActivity.TITLE_PARAM, title);
 		startActivity(intent);
 	}
 

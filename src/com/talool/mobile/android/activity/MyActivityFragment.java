@@ -33,6 +33,7 @@ import com.talool.mobile.android.R;
 import com.talool.mobile.android.TaloolApplication;
 import com.talool.mobile.android.adapters.MyActivityAdapter;
 import com.talool.mobile.android.persistence.ActivityDao;
+import com.talool.mobile.android.tasks.ActivityActionTakenTask;
 import com.talool.mobile.android.util.ApiUtil;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
@@ -112,6 +113,13 @@ public class MyActivityFragment extends Fragment
 				// we have an external link
 				intent.putExtra(BasicWebViewActivity.TARGET_URL_PARAM, activity.getActivityLink().getLinkElement());
 				intent.putExtra(BasicWebViewActivity.TITLE_PARAM, activity.getTitle());
+
+				if (activity.getActivityEvent().equals(ActivityEvent_t.TALOOL_REACH) ||
+						activity.getActivityEvent().equals(ActivityEvent_t.WELCOME))
+				{
+					final ActivityActionTakenTask task = new ActivityActionTakenTask(client, activity.getActivityId());
+					task.execute();
+				}
 			}
 
 			startActivity(intent);
@@ -176,7 +184,7 @@ public class MyActivityFragment extends Fragment
 				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 				easyTracker.send(MapBuilder
-						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(), e), true)
 						.build()
 						);
 			}
@@ -186,7 +194,7 @@ public class MyActivityFragment extends Fragment
 				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 				easyTracker.send(MapBuilder
-						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(), e), true)
 						.build()
 						);
 
@@ -197,7 +205,7 @@ public class MyActivityFragment extends Fragment
 				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 				easyTracker.send(MapBuilder
-						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(), e), true)
 						.build()
 						);
 			}
@@ -272,7 +280,7 @@ public class MyActivityFragment extends Fragment
 			EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+					.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(), e), true)
 					.build()
 					);
 		}
@@ -295,7 +303,8 @@ public class MyActivityFragment extends Fragment
 	}
 
 	@Override
-	public void onStart() {
+	public void onStart()
+	{
 		// TODO Auto-generated method stub
 		super.onStart();
 		EasyTracker easyTracker = EasyTracker.getInstance(getActivity());
@@ -305,7 +314,8 @@ public class MyActivityFragment extends Fragment
 	}
 
 	@Override
-	public void onStop() {
+	public void onStop()
+	{
 		// TODO Auto-generated method stub
 		super.onStop();
 	}
