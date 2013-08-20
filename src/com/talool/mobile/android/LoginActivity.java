@@ -84,13 +84,13 @@ public class LoginActivity extends Activity
 			}
 			catch (ServiceException_t e)
 			{
-				Log.i(LoginActivity.class.toString(), e.getMessage());
+				Log.i(LoginActivity.class.toString(), String.valueOf(e.getMessage()));
 				exception = e;
 				
 			}
 			catch (TException e)
 			{
-				Log.i(LoginActivity.class.toString(), e.getMessage());
+				Log.i(LoginActivity.class.toString(), String.valueOf(e.getMessage()));
 				exception = e;
 			}
 			return tokenAccess;
