@@ -28,20 +28,14 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:paddingLeft="10dp"
         android:paddingRight="10dp" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:dividerPadding="5dp"
-            android:orientation="vertical"
-            android:paddingBottom="0dp"
-            android:paddingLeft="0dp"
-            android:paddingRight="0dp"
-            android:paddingTop="0dp" >
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+                
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,8 +80,8 @@
                 android:orientation="vertical"
                 android:padding="10dp" >
 
-                <ImageView
-                    android:id="@+id/imageView1"
+                <com.loopj.android.image.SmartImageView
+                    android:id="@+id/bookImageView"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
@@ -98,14 +92,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/paybackText" />
-
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/listViewLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/tan_rounded"
+                android:background="@drawable/tan_rounded_top_only"
                 android:orientation="vertical"
                 android:padding="10dp" >
 
@@ -113,25 +107,33 @@
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="XX Deals from XX Merchants" />
+                    android:layout_gravity="center" />
 
-                <ImageView
-                    android:id="@+id/ImageView01"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="5dp" />
+                <FrameLayout
+                    android:id="@+id/find_deals_map_frame"
+                    android:layout_width="fill_parent"
+                    android:layout_height="100dp"
+                    android:layout_weight="0.25" >
 
-                <ListView
-                    android:id="@+id/listView1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
-                </ListView>
+                    <com.google.android.gms.maps.MapView
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/find_deals_map"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" >
+                    </com.google.android.gms.maps.MapView>
+                </FrameLayout>
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/dealOffersListView"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/dark_tan" >
+            </ListView>
+
 
             </LinearLayout>
 
-        </LinearLayout>
     </ScrollView>
 
 </LinearLayout>
