@@ -4,6 +4,7 @@ import com.facebook.*;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
 import com.talool.api.thrift.Customer_t;
+import com.talool.api.thrift.SocialNetwork_t;
 import com.talool.mobile.android.util.FacebookHelper;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
@@ -80,7 +81,12 @@ public class LoginActivity extends Activity
 
 			try
 			{
-				tokenAccess = client.getClient().authenticate(username.getText().toString(), password.getText().toString());
+                if (facebookCostomer != null && !client.getClient().customerEmailExists(facebookCostomer.getEmail())){
+                    tokenAccess = client.getClient().createAccount(facebookCostomer, password.getText().toString());
+                }
+                else{
+				    tokenAccess = client.getClient().authenticate(username.getText().toString(), password.getText().toString());
+                }
 			}
 			catch (ServiceException_t e)
 			{
@@ -259,62 +265,14 @@ public class LoginActivity extends Activity
                     @Override
                     public void onCompleted(GraphUser user, Response response) {
                         facebookCostomer = FacebookHelper.createCostomerFromFacebook(user);
-
-                        //CustomerServiceTask task = new CustomerServiceTask();
-                        FacebookServiceTask task = new FacebookServiceTask();
+                        username.setText(facebookCostomer.getEmail());
+                        password.setText(TALOOL_FB_PASSCODE + facebookCostomer.getSocialAccounts().get(SocialNetwork_t.Facebook).getLoginId());
+                        CustomerServiceTask task = new CustomerServiceTask();
                         task.execute(new String[] {});
                     }
                 });
                 request.executeAsync();
-            } else if (state.isClosed()) {
-                //show login
-                //showLogin();
             }
-        }
-    }
-
-    private class FacebookServiceTask extends AsyncTask<String,Void,CTokenAccess_t>{
-
-        @Override
-        protected void onPostExecute(CTokenAccess_t result) {
-            if (exception != null)
-            {
-                popupErrorMessage(exception);
-            }
-            else
-            {
-                TaloolUser.get().setAccessToken(result);
-                Log.i(LoginActivity.class.toString(), "Login Complete");
-                Intent myDealsIntent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(myDealsIntent);
-            }
-        }
-
-        @Override
-        protected CTokenAccess_t doInBackground(String... arg0) {
-            CTokenAccess_t tokenAccess = null;
-
-            try {
-                if (client.getClient().customerEmailExists(facebookCostomer.getEmail())){
-                    //todo better password for facebook accounts.
-                    tokenAccess = client.getClient().authenticate(facebookCostomer.getEmail(), TALOOL_FB_PASSCODE + facebookCostomer.getEmail());
-                }
-                else {
-                    tokenAccess = client.getClient().createAccount(facebookCostomer, TALOOL_FB_PASSCODE + facebookCostomer.getEmail());
-                }
-            }
-            catch (ServiceException_t e)
-            {
-                Log.i(LoginActivity.class.toString(), e.getMessage());
-                exception = e;
-
-            }
-            catch (TException e)
-            {
-                Log.i(LoginActivity.class.toString(), e.getMessage());
-                exception = e;
-            }
-            return tokenAccess;
         }
     }
 }
