@@ -38,23 +38,16 @@ public class DealsAcquiredAdapter extends ArrayAdapter<DealAcquire_t>
 		View row = convertView;
 		DealAcquiredRow holder = null;
 
-		if (row == null)
-		{
-			LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-			row = inflater.inflate(layoutResourceId, parent, false);
+		LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+		row = inflater.inflate(layoutResourceId, parent, false);
 
-			holder = new DealAcquiredRow();
-			holder.dealsAcquiredIcon = (TextView) row.findViewById(R.id.dealsAcquiredIcon);
-			holder.dealsAcquiredTitle = (TextView) row.findViewById(R.id.dealsAcquiredTitle);
-			holder.dealsAcquiredExpires = (TextView) row.findViewById(R.id.dealsAcquiredExpires);
-			holder.dealsAcquiredArrow = (ImageView) row.findViewById(R.id.dealsAcquiredArrow);
+		holder = new DealAcquiredRow();
+		holder.dealsAcquiredIcon = (TextView) row.findViewById(R.id.dealsAcquiredIcon);
+		holder.dealsAcquiredTitle = (TextView) row.findViewById(R.id.dealsAcquiredTitle);
+		holder.dealsAcquiredExpires = (TextView) row.findViewById(R.id.dealsAcquiredExpires);
+		holder.dealsAcquiredArrow = (ImageView) row.findViewById(R.id.dealsAcquiredArrow);
 
-			row.setTag(holder);
-		}
-		else
-		{
-			holder = (DealAcquiredRow) row.getTag();
-		}
+		row.setTag(holder);
 
 		DealAcquire_t dealAcquire = data.get(position);
 
@@ -70,7 +63,7 @@ public class DealsAcquiredAdapter extends ArrayAdapter<DealAcquire_t>
 			holder.dealsAcquiredTitle.setPaintFlags(holder.dealsAcquiredTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 			holder.dealsAcquiredIcon.setTextColor(this.context.getResources().getColor(R.color.gray_icon));
 		}
-		
+
 		if(dealAcquire.getStatus() == AcquireStatus_t.PENDING_ACCEPT_CUSTOMER_SHARE)
 		{
 			holder.dealsAcquiredTitle.setPaintFlags(holder.dealsAcquiredTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
