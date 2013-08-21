@@ -116,6 +116,19 @@ public final class ActivitySupervisor
 
 	}
 
+	/**
+	 * Creates an instance, or if one already exists, it simply re-assigns the
+	 * notificationCallback and forces a refresh of the activityPoller (from local
+	 * persistence).
+	 * 
+	 * It is written this way because we can't use a singleInstance activity and
+	 * guarantee a singleton instance of the Notification callback, but lets
+	 * guarantee a singleton still of our Activity supervisor
+	 * 
+	 * @param context
+	 * @param notificationCallback
+	 * @return
+	 */
 	public static synchronized ActivitySupervisor createInstance(final Context context, final NotificationCallback notificationCallback)
 	{
 		if (instance == null)
