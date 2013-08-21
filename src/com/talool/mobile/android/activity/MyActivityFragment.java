@@ -323,27 +323,28 @@ public class MyActivityFragment extends Fragment
 
 		if (ActivitySupervisor.get().getActionsPending() > 0)
 		{
+			boolean firstPass = false;
 			final Activity_t act = ActivitySupervisor.get().getMostCurrentActivity();
 
 			if (mostCurrentActivity == null)
 			{
+				firstPass = true;
 				mostCurrentActivity = act;
 			}
-			else
-			{
-				if (!mostCurrentActivity.equals(mostCurrentActivity))
-				{
-					mostCurrentActivity = act;
 
-					getActivity().runOnUiThread(new Runnable()
+			if (firstPass || !mostCurrentActivity.equals(act))
+			{
+				mostCurrentActivity = act;
+
+				getActivity().runOnUiThread(new Runnable()
+				{
+					@Override
+					public void run()
 					{
-						@Override
-						public void run()
-						{
-							reloadData();
-						}
-					});
-				}
+						reloadData();
+					}
+				});
+
 			}
 
 		}

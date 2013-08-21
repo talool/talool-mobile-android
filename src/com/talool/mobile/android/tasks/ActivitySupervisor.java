@@ -60,34 +60,7 @@ public final class ActivitySupervisor
 				try
 				{
 					final List<Activity_t> acts = client.getClient().getActivities(searchOptions);
-					final Activity_t mostCurrentActivity = acts.get(acts.size() - 1);
-
-					if (acts != null)
-					{
-						if (mostCurrentActivity.getActivityDate() != lastActivityTime)
-						{
-							// only update dao of we know something has changed
-							// blindy update everything , optimize in the next release
-							lastActivityTime = mostCurrentActivity.getActivityDate();
-							activityDao.saveActivities(acts);
-						}
-
-						if (notificationCallback != null)
-						{
-							int actionsPending = 0;
-							for (final Activity_t act : acts)
-							{
-								if (ApiUtil.isClickableActivityLink(act) && act.actionTaken == false)
-								{
-									actionsPending++;
-								}
-							}
-
-							notificationCallback.handleNotificationCount(actionsPending);
-						}
-
-					}
-
+					handleActionsPending(acts);
 				}
 				catch (Exception e)
 				{
