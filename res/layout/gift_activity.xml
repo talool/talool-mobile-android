@@ -74,150 +74,155 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="10dp" >
-
-       <com.loopj.android.image.SmartImageView
-            android:id="@+id/dealImage"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.39"
-            android:adjustViewBounds="false"
-            android:contentDescription="Deals Merchant Image"
-            android:scaleType="fitXY" />
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.0"
-            android:background="@drawable/tan_rounded_bottom_only"
-            android:orientation="vertical" >
-			
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal" >
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".6"
-                    android:orientation="vertical" >
-
-                    <TextView
-                        android:id="@+id/offerValid"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Offer valid at"
-                        android:textSize="10sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/address1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxLines="3"
-                        android:textSize="10sp"
-                        android:text="123 Main St \nDenver, CO 80205" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_weight=".4"
-                    android:gravity="right"
-                    android:orientation="vertical" >
-
-                    <com.loopj.android.image.SmartImageView
-                        android:id="@+id/merchantLogo"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="right"
-                        android:layout_marginLeft="15dp"
-                        android:layout_weight="1"
-                        android:contentDescription="Deal Logo Image"
-                        android:scaleType="fitEnd" />
-
-                </LinearLayout>
-            </LinearLayout>
-            
-             <TextView
-                 android:id="@+id/fromFriend"
-                 android:layout_width="fill_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_gravity="center"
-                 android:background="@drawable/ribbonbadge"
-                 android:gravity="center"
-                 android:minHeight="90dp"
-                 android:text="Doug"
-                 android:textColor="@color/white"
-                 android:textSize="12sp" />
-             
-            <TextView
-                android:id="@+id/summary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="Deal Summary"
-                android:textSize="24sp" />
-
-            <TextView
-                android:id="@+id/details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                android:text="Deal Details"
-                android:textSize="14sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="bottom"
-                android:orientation="horizontal" >
-
-                <com.loopj.android.image.SmartImageView
-                    android:id="@+id/dealCreatorLogo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                 />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="bottom|right"
-                    android:orientation="vertical" >
-
-                    <TextView
-                        android:id="@+id/expires"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:gravity="right"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-            
-        </LinearLayout>
-
-	</LinearLayout>
+        android:layout_height="wrap_content"
+        android:fillViewport="false">
+        
+	    <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="match_parent"
+	        android:orientation="vertical"
+	        android:padding="10dp" >
 	
+	       <com.talool.mobile.android.util.TaloolSmartImageView
+	            android:id="@+id/dealImage"
+	            android:layout_width="fill_parent"
+	            android:layout_height="100dp"
+	            android:layout_weight="0.33"
+	            android:adjustViewBounds="false"
+	            android:contentDescription="Deals Merchant Image"
+	            android:scaleType="fitXY" />
+	
+	        <LinearLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="0dp"
+	            android:layout_weight=".66"
+	            android:background="@drawable/tan_rounded_bottom_only"
+	            android:orientation="vertical" >
+				
+	            <LinearLayout
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:layout_marginLeft="10dp"
+	                android:layout_marginRight="10dp"
+	                android:layout_marginTop="10dp"
+	                android:orientation="horizontal"
+	                android:baselineAligned="false" >
+	
+	                <LinearLayout
+	                    android:layout_width="0dp"
+	                    android:layout_height="wrap_content"
+	                    android:layout_weight=".6"
+	                    android:orientation="vertical" >
+	
+	                    <TextView
+	                        android:id="@+id/offerValid"
+	                        android:layout_width="wrap_content"
+	                        android:layout_height="wrap_content"
+	                        android:text="Offer valid at"
+	                        android:textSize="12sp"
+	                        android:textStyle="bold" />
+	
+	                    <TextView
+	                        android:id="@+id/address1"
+	                        android:layout_width="wrap_content"
+	                        android:layout_height="wrap_content"
+	                        android:maxLines="3"
+	                        android:textSize="12sp"
+	                        android:text="123 Main St \nDenver, CO 80205" />
+	
+	                </LinearLayout>
+	
+	                <LinearLayout
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="40dp"
+	                    android:layout_weight=".4"
+	                    android:gravity="right"
+	                    android:orientation="vertical" >
+	
+	                    <com.loopj.android.image.SmartImageView
+	                        android:id="@+id/merchantLogo"
+	                        android:layout_width="match_parent"
+	                        android:layout_height="match_parent"
+	                        android:layout_gravity="right"
+	                        android:layout_marginLeft="15dp"
+	                        android:scaleType="fitEnd" />
+	
+	                </LinearLayout>
+	            </LinearLayout>
+	            
+	             <TextView
+	                 android:id="@+id/fromFriend"
+	                 android:layout_width="fill_parent"
+	                 android:layout_height="wrap_content"
+	                 android:layout_gravity="center"
+	                 android:background="@drawable/ribbonbadge"
+	                 android:gravity="center"
+	                 android:minHeight="90dp"
+	                 android:text="Doug"
+	                 android:textColor="@color/white"
+	                 android:textSize="12sp" />
+	             
+	            <TextView
+	                android:id="@+id/summary"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_gravity="center"
+	                android:layout_marginRight="10dp"
+	                android:layout_marginLeft="10dp"
+	                android:layout_marginBottom="30dp"
+	                android:layout_marginTop="30dp"
+	                android:gravity="center"
+	                android:text="Deal Summary"
+	                android:textSize="24sp" />
+	
+	            <TextView
+	                android:id="@+id/details"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_gravity="center"
+	                android:layout_margin="10dp"
+	                android:gravity="center"
+	                android:text="Deal Details"
+	                android:textSize="14sp" />
+	
+	            <LinearLayout
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:layout_marginBottom="5dp"
+	                android:layout_marginTop="30dp"
+	                android:layout_marginLeft="10dp"
+	                android:layout_marginRight="10dp"
+	                android:gravity="bottom"
+	                android:orientation="horizontal" >
+	
+	                <com.loopj.android.image.SmartImageView
+	                    android:id="@+id/dealCreatorLogo"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                 />
+	
+	                <LinearLayout
+	                    android:layout_width="match_parent"
+	                    android:layout_height="wrap_content"
+	                    android:gravity="bottom|right"
+	                    android:orientation="vertical" >
+	
+	                    <TextView
+	                        android:id="@+id/expires"
+	                        android:layout_width="wrap_content"
+	                        android:layout_height="wrap_content"
+	                        android:layout_marginLeft="10dp"
+	                        android:gravity="right"
+	                        android:textStyle="bold" />
+	
+	                </LinearLayout>
+	
+	            </LinearLayout>
+	            
+	        </LinearLayout>
+	
+		</LinearLayout>
+	</ScrollView>
 </LinearLayout>

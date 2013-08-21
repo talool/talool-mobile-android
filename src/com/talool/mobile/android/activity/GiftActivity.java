@@ -27,6 +27,7 @@ import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
 import com.talool.mobile.android.tasks.GiftAcceptanceTask;
+import com.talool.mobile.android.util.TaloolSmartImageView;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.TaloolUtil;
 import com.talool.mobile.android.util.ThriftHelper;
@@ -47,7 +48,7 @@ public class GiftActivity extends Activity
 	private ThriftHelper client;
 	private String giftId;
 	private Activity_t activity;
-	private SmartImageView dealImageView;
+	private TaloolSmartImageView dealImageView;
 	private SmartImageView logoImageView;
 	private SmartImageView dealCreatorImageView;
 	private View view;
@@ -187,7 +188,7 @@ public class GiftActivity extends Activity
 			details.setText(gift.getDeal().getDetails());
 			details.setTypeface(TypefaceFactory.get().getMarkerFelt());
 
-			dealImageView = (SmartImageView) findViewById(R.id.dealImage);
+			dealImageView = (TaloolSmartImageView) findViewById(R.id.dealImage);
 			dealImageView.setImageUrl(gift.getDeal().getImageUrl());
 
 			logoImageView = (SmartImageView) findViewById(R.id.merchantLogo);

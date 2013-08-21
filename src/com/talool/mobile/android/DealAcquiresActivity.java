@@ -24,13 +24,13 @@ import android.widget.TextView;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
-import com.loopj.android.image.SmartImageView;
 import com.talool.api.thrift.DealAcquire_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.activity.DealActivity;
 import com.talool.mobile.android.adapters.DealsAcquiredAdapter;
+import com.talool.mobile.android.util.TaloolSmartImageView;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
 import com.talool.mobile.android.util.TypefaceFactory;
@@ -44,7 +44,7 @@ import com.talool.thrift.util.ThriftUtil;
 public class DealAcquiresActivity extends Activity
 {
 	private static ThriftHelper client;
-	private SmartImageView imageView;
+	private TaloolSmartImageView imageView;
 	private ListView dealsAcquiredList;
 	private DealsAcquiredAdapter dealAcquiredAdapter;
 	private Exception exception;
@@ -72,7 +72,7 @@ public class DealAcquiresActivity extends Activity
 		createThriftClient();
 		setIcons();
 		dealsAcquiredList = (ListView) findViewById(R.id.dealsAcquiredList);
-		imageView = (SmartImageView) findViewById(R.id.dealsMerchantImage);
+		imageView = (TaloolSmartImageView) findViewById(R.id.dealsMerchantImage);
 
 		try
 		{

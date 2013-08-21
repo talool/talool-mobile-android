@@ -26,6 +26,7 @@ import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.tasks.DealAcceptanceTask;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
+import com.talool.mobile.android.util.TaloolSmartImageView;
 import com.talool.mobile.android.util.TaloolUtil;
 import com.talool.mobile.android.util.ThriftHelper;
 import com.talool.mobile.android.util.TypefaceFactory;
@@ -36,7 +37,7 @@ public class DealActivity extends Activity
 	private static ThriftHelper client;
 	private DealAcquire_t deal;
 	private Merchant_t merchant;
-	private SmartImageView dealMerchantImage;
+	private TaloolSmartImageView dealMerchantImage;
 	private SmartImageView logoImageView;
 	private SmartImageView dealOfferCreatorImage;
 	private TextView dealAddressText;
@@ -54,7 +55,7 @@ public class DealActivity extends Activity
 		setContentView(R.layout.deal_activity_layout);
 		createThriftClient();
 		logoImageView = (SmartImageView) findViewById(R.id.dealLogoImage);
-		dealMerchantImage = (SmartImageView) findViewById(R.id.dealMerchantImage);
+		dealMerchantImage = (TaloolSmartImageView) findViewById(R.id.dealMerchantImage);
 		dealAddressText = (TextView) findViewById(R.id.dealAddressText);
 		dealValidText = (TextView) findViewById(R.id.dealValidText);
 		dealSummaryText = (TextView) findViewById(R.id.dealSummaryText);
@@ -107,7 +108,8 @@ public class DealActivity extends Activity
 			redemptionCodeTextView.setText("Redeemed on " + new Date(deal.redeemed).toString());
 			redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 			redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
-			redemptionCodeTextView.setTypeface(TypefaceFactory.get().getFontAwesome(), Typeface.BOLD);
+			redemptionCodeTextView.setTypeface(TypefaceFactory.get().getMarkerFelt(), Typeface.NORMAL);
+			redemptionCodeTextView.setPadding(30, 0, 30, 0);
 			dealActivityButtonLayout.addView(redemptionCodeTextView);
 			dealActivityButtonLayout.setGravity(Gravity.CENTER);
 
@@ -191,7 +193,8 @@ public class DealActivity extends Activity
 				redemptionCodeTextView.setText("Redemption code " + redemptionCode);
 				redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 				redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
-				redemptionCodeTextView.setTypeface(TypefaceFactory.get().getFontAwesome(), Typeface.BOLD);
+				redemptionCodeTextView.setTypeface(TypefaceFactory.get().getMarkerFelt(), Typeface.NORMAL);
+				redemptionCodeTextView.setPadding(30, 0, 30, 0);
 				dealActivityButtonLayout.addView(redemptionCodeTextView);
 				dealActivityButtonLayout.setGravity(Gravity.CENTER);
 			}

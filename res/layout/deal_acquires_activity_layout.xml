@@ -118,7 +118,7 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -126,11 +126,11 @@
         android:orientation="vertical"
         android:padding="0dp" >
 
-        <com.loopj.android.image.SmartImageView
+        <com.talool.mobile.android.util.TaloolSmartImageView
             android:id="@+id/dealsMerchantImage"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight=".39"
+            android:layout_weight=".33"
             android:adjustViewBounds="false"
             android:contentDescription="Deals Merchant Image"
             android:scaleType="fitXY" />
@@ -138,8 +138,8 @@
         <ListView
             android:id="@+id/dealsAcquiredList"
             android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.00"
+            android:layout_height="fill_parent"
+            android:layout_weight=".66"
             android:background="@drawable/tan_rounded_bottom_only"
             android:orientation="vertical" >
         </ListView>
