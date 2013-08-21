@@ -29,10 +29,7 @@ public final class ActivitySupervisor
 {
 	private static ActivitySupervisor instance;
 	private static final long POLLER_SLEEP_TIME = 30000; // 30 seconds
-
-
-
-    private ThriftHelper client = null;
+	private ThriftHelper client = null;
 	private ActivityPoller activityPoller = null;
 
 	private NotificationCallback notificationCallback;
@@ -48,8 +45,8 @@ public final class ActivitySupervisor
 
 	private class ActivityPoller extends Thread
 	{
-
-		private long lastActivityTime;
+		long lastActivityTime;
+		boolean forceRefresh = false;
 
 		@Override
 		public void run()
@@ -59,33 +56,8 @@ public final class ActivitySupervisor
 				try
 				{
 					final List<Activity_t> acts = client.getClient().getActivities(searchOptions);
-					final Activity_t mostCurrentActivity = acts.get(acts.size() - 1);
 
-					if (acts != null)
-					{
-						if (mostCurrentActivity.getActivityDate() != lastActivityTime)
-						{
-							// only update dao of we know something has changed
-							// blindy update everything , optimize in the next release
-							lastActivityTime = mostCurrentActivity.getActivityDate();
-							activityDao.saveActivities(acts);
-						}
-
-						if (notificationCallback != null)
-						{
-							int actionsPending = 0;
-							for (final Activity_t act : acts)
-							{
-								if (ApiUtil.isClickableActivityLink(act) && act.actionTaken == false)
-								{
-									actionsPending++;
-								}
-							}
-
-							notificationCallback.handleNotificationCount(actionsPending);
-						}
-
-					}
+					handleActionsPending(acts);
 
 				}
 				catch (Exception e)
@@ -98,7 +70,46 @@ public final class ActivitySupervisor
 					sleep(POLLER_SLEEP_TIME);
 				}
 				catch (InterruptedException ignoreException)
-				{}
+				{
+					//
+					if (forceRefresh)
+					{
+						handleActionsPending(activityDao.getAllActivities(null));
+						forceRefresh = false;
+					}
+				}
+			}
+
+		}
+
+		public void handleActionsPending(final List<Activity_t> acts)
+		{
+			final Activity_t mostCurrentActivity = acts.get(acts.size() - 1);
+
+			if (acts != null)
+			{
+				if (mostCurrentActivity.getActivityDate() != lastActivityTime)
+				{
+					// only update dao of we know something has changed
+					// blindy update everything , optimize in the next release
+					lastActivityTime = mostCurrentActivity.getActivityDate();
+					activityDao.saveActivities(acts);
+				}
+
+				if (notificationCallback != null)
+				{
+					int actionsPending = 0;
+					for (final Activity_t act : acts)
+					{
+						if (ApiUtil.isClickableActivityLink(act) && act.actionTaken == false)
+						{
+							actionsPending++;
+						}
+					}
+
+					notificationCallback.handleNotificationCount(actionsPending);
+				}
+
 			}
 
 		}
@@ -110,7 +121,12 @@ public final class ActivitySupervisor
 		if (instance == null)
 		{
 			instance = new ActivitySupervisor(context, notificationCallback);
-
+		}
+		else
+		{
+			instance.notificationCallback = notificationCallback;
+			instance.activityPoller.forceRefresh = true;
+			instance.activityPoller.interrupt();
 		}
 
 		return instance;

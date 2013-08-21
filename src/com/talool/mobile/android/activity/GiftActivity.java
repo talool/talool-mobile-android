@@ -52,12 +52,14 @@ public class GiftActivity extends Activity
 	private SmartImageView logoImageView;
 	private SmartImageView dealCreatorImageView;
 	private View view;
-	
+
 	@Override
-	public View onCreateView(String name, Context context, AttributeSet attrs) {
+	public View onCreateView(String name, Context context, AttributeSet attrs)
+	{
 		this.view = super.onCreateView(name, context, attrs);
 		return view;
 	}
+
 	@Override
 	protected void onCreate(final Bundle savedInstanceState)
 	{
@@ -74,7 +76,7 @@ public class GiftActivity extends Activity
 			EasyTracker easyTracker = EasyTracker.getInstance(this);
 
 			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),e),true)                                              
+					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), e), true)
 					.build()
 					);
 		}
@@ -91,7 +93,7 @@ public class GiftActivity extends Activity
 			EasyTracker easyTracker = EasyTracker.getInstance(this);
 
 			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),e),true)                                              
+					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), e), true)
 					.build()
 					);
 		}
@@ -234,7 +236,7 @@ public class GiftActivity extends Activity
 				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 				easyTracker.send(MapBuilder
-						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(), e), true)
 						.build()
 						);
 			}
@@ -244,7 +246,7 @@ public class GiftActivity extends Activity
 				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 				easyTracker.send(MapBuilder
-						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(), e), true)
 						.build()
 						);
 
@@ -255,7 +257,7 @@ public class GiftActivity extends Activity
 				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 				easyTracker.send(MapBuilder
-						.createException(new StandardExceptionParser(view.getContext(),null).getDescription(Thread.currentThread().getName(),e),true)                                              
+						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(), e), true)
 						.build()
 						);
 			}
@@ -273,15 +275,17 @@ public class GiftActivity extends Activity
 		return sb.toString();
 	}
 
-	  @Override
-	  public void onStart() {
-	    super.onStart();
-	    EasyTracker.getInstance(this).activityStart(this);  // Add this method.
-	  }
+	@Override
+	public void onStart()
+	{
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this); // Add this method.
+	}
 
-	  @Override
-	  public void onStop() {
-	    super.onStop();
-	    EasyTracker.getInstance(this).activityStop(this);  // Add this method.
-	  }
+	@Override
+	public void onStop()
+	{
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+	}
 }

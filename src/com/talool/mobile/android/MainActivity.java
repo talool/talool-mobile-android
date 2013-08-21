@@ -1,7 +1,15 @@
 package com.talool.mobile.android;
 
-import android.app.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
+import android.app.ActionBar;
 import android.app.ActionBar.Tab;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -17,26 +25,21 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
 import com.google.analytics.tracking.android.EasyTracker;
 import com.talool.mobile.android.activity.MyActivityFragment;
 import com.talool.mobile.android.activity.SettingsActivity;
 import com.talool.mobile.android.util.NotificationHelper;
 import com.talool.mobile.android.util.TaloolUser;
-import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
-
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends Activity
 {
 
-    private PullToRefreshAttacher mPullToRefreshAttacher;
-    NotificationHelper notificationHelper;
+	private PullToRefreshAttacher mPullToRefreshAttacher;
+	NotificationHelper notificationHelper;
 
+	// public enum TabMeta { "My Deals",
 
-    private final LocationListener locationListener = new LocationListener()
+	private final LocationListener locationListener = new LocationListener()
 	{
 		public void onLocationChanged(Location location)
 		{
@@ -65,32 +68,39 @@ public class MainActivity extends Activity
 		}
 	};
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
+	@Override
+	protected void onPause()
+	{
+		super.onPause();
+	}
 
-    @Override
+	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-        // Add code to print out the key hash
-        try {
-            //todo remove, this will print your keyhash
-            PackageInfo info = getPackageManager().getPackageInfo(
-                    "com.talool.mobile.android",
-                    PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.d("bug","bug");
+		// Add code to print out the key hash
+		try
+		{
+			// todo remove, this will print your keyhash
+			PackageInfo info = getPackageManager().getPackageInfo(
+					"com.talool.mobile.android",
+					PackageManager.GET_SIGNATURES);
+			for (Signature signature : info.signatures)
+			{
+				MessageDigest md = MessageDigest.getInstance("SHA");
+				md.update(signature.toByteArray());
+				Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+			}
+		}
+		catch (PackageManager.NameNotFoundException e)
+		{
+			Log.d("bug", "bug");
 
-        } catch (NoSuchAlgorithmException e) {
+		}
+		catch (NoSuchAlgorithmException e)
+		{
 
-        }
+		}
 
 		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
@@ -103,38 +113,38 @@ public class MainActivity extends Activity
 		Tab tab2 = actionBar.newTab().setText("Find Deals").setTabListener(
 				new MyTabListener(this, FindDealsFragment.class.getName()));
 		Tab tab3 = actionBar.newTab().setCustomView(R.layout.activity_tab_layout).setTabListener(
-                new MyTabListener( this, MyActivityFragment.class.getName()) );
+				new MyTabListener(this, MyActivityFragment.class.getName()));
 
-        actionBar.addTab(tab);
+		actionBar.addTab(tab);
 		actionBar.addTab(tab2);
 		actionBar.addTab(tab3);
 
 		if (TaloolUser.get().getAccessToken() == null)
 		{
-            showLogin();
+			showLogin();
 		}
 
 		mPullToRefreshAttacher = PullToRefreshAttacher.get(this);
 	}
 
+	@Override
+	protected void onResume()
+	{
+		super.onResume();
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+		if (TaloolUser.get().getAccessToken() != null && notificationHelper == null)
+		{
+			notificationHelper = new NotificationHelper(getActionBar().getTabAt(2), getApplicationContext());
+		}
+	}
 
-        if (TaloolUser.get().getAccessToken() != null && notificationHelper == null){
-            notificationHelper = new NotificationHelper(getActionBar().getTabAt(2), getApplicationContext());
-        }
-    }
+	private void showLogin()
+	{
+		Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+		startActivity(intent);
+	}
 
-
-
-    private void showLogin(){
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -229,20 +239,23 @@ public class MainActivity extends Activity
 			mFragment = null;
 		}
 	}
-	
-    public PullToRefreshAttacher getPullToRefreshAttacher() {
-        return mPullToRefreshAttacher;
-    }
-    
-	  @Override
-	  public void onStart() {
-	    super.onStart();
-	    EasyTracker.getInstance(this).activityStart(this);  // Add this method.
-	  }
 
-	  @Override
-	  public void onStop() {
-	    super.onStop();
-	    EasyTracker.getInstance(this).activityStop(this);  // Add this method.
-	  }
+	public PullToRefreshAttacher getPullToRefreshAttacher()
+	{
+		return mPullToRefreshAttacher;
+	}
+
+	@Override
+	public void onStart()
+	{
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this); // Add this method.
+	}
+
+	@Override
+	public void onStop()
+	{
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+	}
 }
