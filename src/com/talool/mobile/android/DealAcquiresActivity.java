@@ -3,6 +3,8 @@ package com.talool.mobile.android;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.view.MenuItem;
+import com.talool.mobile.android.activity.SettingsActivity;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
@@ -56,6 +58,7 @@ public class DealAcquiresActivity extends Activity
 	{
 		final MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.heart_action_bar, menu);
+        inflater.inflate(R.menu.main, menu);
 
 		menu.getItem(0).setActionProvider(new FavoriteMerchantProvider(merchant, getApplicationContext()));
 
@@ -63,6 +66,23 @@ public class DealAcquiresActivity extends Activity
 
 		return true;
 	}
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        boolean ret;
+        if (item.getItemId() == R.id.menu_settings)
+        {
+            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(intent);
+            ret = true;
+        }
+        else
+        {
+            ret = super.onOptionsItemSelected(item);
+        }
+        return ret;
+    }
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)

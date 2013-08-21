@@ -1,10 +1,12 @@
 package com.talool.mobile.android;
 
+import android.view.MenuItem;
 import com.facebook.*;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
 import com.talool.api.thrift.Customer_t;
 import com.talool.api.thrift.SocialNetwork_t;
+import com.talool.mobile.android.activity.SettingsActivity;
 import com.talool.mobile.android.util.FacebookHelper;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
@@ -195,6 +197,23 @@ public class LoginActivity extends Activity
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        boolean ret;
+        if (item.getItemId() == R.id.menu_settings)
+        {
+            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(intent);
+            ret = true;
+        }
+        else
+        {
+            ret = super.onOptionsItemSelected(item);
+        }
+        return ret;
+    }
 
     @Override
     public void onStart() {

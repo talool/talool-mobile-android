@@ -34,6 +34,7 @@ import com.talool.mobile.android.TaloolApplication;
 import com.talool.mobile.android.adapters.MyActivityAdapter;
 import com.talool.mobile.android.persistence.ActivityDao;
 import com.talool.mobile.android.tasks.ActivityActionTakenTask;
+import com.talool.mobile.android.tasks.ActivitySupervisor;
 import com.talool.mobile.android.util.ApiUtil;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
@@ -52,6 +53,7 @@ public class MyActivityFragment extends Fragment
 	private View view;
 	private Menu menu;
 	private ActivityDao activityDao;
+	private Activity_t mostCurrentActivity;
 
 	int selectedEventFilter = R.id.activity_filter_all;
 
@@ -311,12 +313,46 @@ public class MyActivityFragment extends Fragment
 		easyTracker.set(Fields.SCREEN_NAME, "My Activity");
 
 		easyTracker.send(MapBuilder.createAppView().build());
+
+	}
+
+	@Override
+	public void onPause()
+	{
+		super.onPause();
+
+		if (ActivitySupervisor.get().getActionsPending() > 0)
+		{
+			boolean firstPass = false;
+			final Activity_t act = ActivitySupervisor.get().getMostCurrentActivity();
+
+			if (mostCurrentActivity == null)
+			{
+				firstPass = true;
+				mostCurrentActivity = act;
+			}
+
+			if (firstPass || !mostCurrentActivity.equals(act))
+			{
+				mostCurrentActivity = act;
+
+				getActivity().runOnUiThread(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						reloadData();
+					}
+				});
+
+			}
+
+		}
 	}
 
 	@Override
 	public void onStop()
 	{
-		// TODO Auto-generated method stub
 		super.onStop();
 	}
 

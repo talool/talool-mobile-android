@@ -1,46 +1,30 @@
 package com.talool.mobile.android.activity;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
+import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuItem;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Typeface;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Contacts;
-import android.provider.ContactsContract;
-import android.provider.ContactsContract.CommonDataKinds;
-import android.provider.ContactsContract.CommonDataKinds.Email;
-import android.provider.ContactsContract.PhoneLookup;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.loopj.android.image.SmartImageView;
-import com.talool.api.thrift.AcquireStatus_t;
 import com.talool.api.thrift.DealAcquire_t;
 import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.Merchant_t;
-import com.talool.api.thrift.SearchOptions_t;
-import com.talool.api.thrift.ServiceException_t;
-import com.talool.mobile.android.MyDealsFragment;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.tasks.DealAcceptanceTask;
@@ -65,9 +49,6 @@ public class DealActivity extends Activity
 	private TextView dealExpirationText;
 	private LinearLayout dealActivityButtonLayout;
 	private String redemptionCode;
-	private String email;
-	private Exception exception;
-	private String name;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -118,22 +99,7 @@ public class DealActivity extends Activity
 
 	private void checkDealRedeemed()
 	{
-
-		if(deal.status == AcquireStatus_t.PENDING_ACCEPT_CUSTOMER_SHARE)
-		{
-			dealActivityButtonLayout.removeAllViewsInLayout();
-			dealActivityButtonLayout.setBackground(null);
-			TextView redemptionCodeTextView = new TextView(getBaseContext());
-			redemptionCodeTextView.setText("Gifted on " + new Date(deal.getUpdated()).toString());
-			redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-			redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
-			redemptionCodeTextView.setTypeface(TypefaceFactory.get().getMarkerFelt(), Typeface.NORMAL);
-			redemptionCodeTextView.setPadding(30, 0, 30, 0);
-			dealActivityButtonLayout.addView(redemptionCodeTextView);
-			dealActivityButtonLayout.setGravity(Gravity.CENTER);
-			return;
-		}
-		else if(deal.redeemed == 0)
+		if (deal.redeemed == 0)
 		{
 			return;
 		}
@@ -149,13 +115,10 @@ public class DealActivity extends Activity
 			redemptionCodeTextView.setPadding(30, 0, 30, 0);
 			dealActivityButtonLayout.addView(redemptionCodeTextView);
 			dealActivityButtonLayout.setGravity(Gravity.CENTER);
-			return;
+
 		}
 
-
 	}
-
-
 
 	private void setDealCreatorImage()
 	{
@@ -278,60 +241,6 @@ public class DealActivity extends Activity
 		}
 	}
 
-	public void onGiftViaEmail(View view)
-	{
-		Intent contactPickerIntent = new Intent(Intent.ACTION_PICK,  ContactsContract.CommonDataKinds.Email.CONTENT_URI);  
-		startActivityForResult(contactPickerIntent, 100);  
-	}
-
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
-		if (resultCode == RESULT_OK) {  
-			switch (requestCode) {  
-			case 100:  
-				Cursor emailCur = null;
-				String email = "";  
-				try {  
-					Uri result = data.getData();  
-					// get the contact id from the Uri  
-					String id = result.getLastPathSegment();  
-					// query for everything email  
-					emailCur = getContentResolver().query( 
-							ContactsContract.CommonDataKinds.Email.CONTENT_URI, 
-							null,
-							ContactsContract.CommonDataKinds.Email._ID + " = ?", 
-									new String[]{id}, null); 
-					while (emailCur.moveToNext()) { 
-						email = emailCur.getString(emailCur.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
-						name = emailCur.getString(emailCur.getColumnIndex(ContactsContract.CommonDataKinds.Email.DISPLAY_NAME_PRIMARY));
-
-					}
-				} catch (Exception e) {  
-				} finally {  
-					if (emailCur != null) {  
-						emailCur.close();  
-					}  
-					this.email = email;
-				}  
-				break;  
-			}  
-		} else {  
-		}
-		sendGift();
-	}
-
-	private void sendGift()
-	{
-		if(this.email ==  null || this.email.isEmpty())
-		{
-			Toast.makeText(getApplicationContext(), "Please select a contact with an email address", Toast.LENGTH_LONG).show();
-		}
-		else		
-		{
-			GiftTask giftTask = new GiftTask();
-			giftTask.execute(new String[]{});
-		}
-	}
-
 	@Override
 	public void onStart() {
 		super.onStart();
@@ -353,58 +262,28 @@ public class DealActivity extends Activity
 		EasyTracker.getInstance(this).activityStop(this);  // Add this method.
 	}
 
-	private class GiftTask extends AsyncTask<String, Void, String>
-	{
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
-		@Override
-		protected void onPostExecute(final String results)
-		{
-			if(exception == null)
-			{
-				dealActivityButtonLayout.removeAllViewsInLayout();
-				dealActivityButtonLayout.setBackground(null);
-				TextView redemptionCodeTextView = new TextView(getBaseContext());
-				redemptionCodeTextView.setText("Gifted on " + new Date(deal.getUpdated()).toString());
-				redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-				redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
-				redemptionCodeTextView.setTypeface(TypefaceFactory.get().getMarkerFelt(), Typeface.NORMAL);
-				redemptionCodeTextView.setPadding(30, 0, 30, 0);
-				dealActivityButtonLayout.addView(redemptionCodeTextView);
-				dealActivityButtonLayout.setGravity(Gravity.CENTER);
-			}
-		}
-
-		@Override
-		protected String doInBackground(String... arg0)
-		{
-			String results = null;
-
-			try
-			{
-				exception = null;
-				results = client.getClient().giftToEmail(deal.dealAcquireId, email, name);
-			}
-			catch (ServiceException_t e)
-			{
-				// TODO Auto-generated catch block
-				exception = e;
-				// Log.e(MyDealsFragment.class.toString(), e.getMessage());
-			}
-			catch (TException e)
-			{
-				// TODO Auto-generated catch block
-				exception = e;
-				// Log.e(MyDealsFragment.class.toString(), e.getMessage());
-
-			}
-			catch (Exception e)
-			{
-				exception = e;
-				// Log.e(MyDealsFragment.class.toString(), e.getMessage());
-
-			}
-
-			return results;
-		}
-	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        boolean ret;
+        if (item.getItemId() == R.id.menu_settings)
+        {
+            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(intent);
+            ret = true;
+        }
+        else
+        {
+            ret = super.onOptionsItemSelected(item);
+        }
+        return ret;
+    }
 }
