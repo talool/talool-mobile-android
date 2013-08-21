@@ -1,5 +1,7 @@
 package com.talool.mobile.android.activity;
 
+import android.view.Menu;
+import android.view.MenuItem;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
@@ -294,4 +296,29 @@ public class GiftActivity extends Activity
 	    super.onStop();
 	    EasyTracker.getInstance(this).activityStop(this);  // Add this method.
 	  }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        boolean ret;
+        if (item.getItemId() == R.id.menu_settings)
+        {
+            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(intent);
+            ret = true;
+        }
+        else
+        {
+            ret = super.onOptionsItemSelected(item);
+        }
+        return ret;
+    }
 }

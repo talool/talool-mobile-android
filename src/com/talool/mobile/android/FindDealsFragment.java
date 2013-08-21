@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
@@ -16,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.location.Location;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -60,6 +63,8 @@ public class FindDealsFragment extends Fragment {
 	private DealOffer_t closestBook;
 	private MapView mapView;
 	private LinearLayout listViewLinearLayout;
+	private String accessCode;
+	private Button loadDealsButton;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,14 +73,15 @@ public class FindDealsFragment extends Fragment {
 		this.view = inflater.inflate(R.layout.find_deals_fragment, container,false);
 		bookImage = (SmartImageView) view.findViewById(R.id.bookImageView);
 		dealOffersListView = (ListView) view.findViewById(R.id.dealOffersListView);
+		loadDealsButton = (Button) view.findViewById(R.id.loadDealsButton);
+		loadDealsButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				RedeemBook redeemBookTask = new RedeemBook();
+				redeemBookTask.execute(new Void[]{});
+			}
+		});		
 		listViewLinearLayout = (LinearLayout) view.findViewById(R.id.listViewLinearLayout);
-		try {
-			MapsInitializer.initialize(view.getContext());
-			mapView = (MapView) view.findViewById(R.id.find_deals_map);
-			mapView.onCreate(savedInstanceState);
-		} catch (GooglePlayServicesNotAvailableException e1) {
-			Log.e(DealAcquiresActivity.class.toString(),"Maps was not loaded on this device. Please install");
-		} 
+		listViewLinearLayout.setVisibility(View.INVISIBLE);
 		createThriftClient();
 		return view;
 	}
@@ -109,7 +115,6 @@ public class FindDealsFragment extends Fragment {
 
 	@Override
 	public void onStop() {
-		// TODO Auto-generated method stub
 		super.onStop();
 	}
 
@@ -233,15 +238,9 @@ public class FindDealsFragment extends Fragment {
 			loadBookDeals();
 		}
 	}
-	
+
 	private void loadBookDeals()
 	{		
-//		LatLng location = new LatLng(Double.valueOf(merchant.locations.get(0).location.latitude),Double.valueOf(merchant.locations.get(0).location.longitude));
-//		CameraUpdate update = CameraUpdateFactory.newLatLngZoom(location, 13);	
-//		mapView.getMap().moveCamera(update);
-//		mapView.getMap().addMarker(new MarkerOptions()
-//		.position(location)
-//		.title(merchant.name));
 		FindDealsTask dealsTask = new FindDealsTask();
 		dealsTask.execute(new String[]{});
 	}
@@ -294,8 +293,9 @@ public class FindDealsFragment extends Fragment {
 		dealOffersAdapter = adapter;
 		dealOffersListView.setAdapter(dealOffersAdapter);
 		setListViewHeightBasedOnChildren(dealOffersListView);
+		listViewLinearLayout.setVisibility(View.VISIBLE);
 	}
-	
+
 	private class FindDealsTask extends AsyncTask<String, Void, List<Deal_t>>
 	{
 
@@ -345,26 +345,99 @@ public class FindDealsFragment extends Fragment {
 			return results;
 		}
 	}
-	
-	   public void setListViewHeightBasedOnChildren(ListView listView) {
-	        ListAdapter listAdapter = listView.getAdapter(); 
-	        if (listAdapter == null) {
-	            // pre-condition
-	            return;
-	        }
 
-	        int totalHeight = 0;
-	        for (int i = 0; i < listAdapter.getCount(); i++) {
-	            View listItem = listAdapter.getView(i, null, listView);
-	            listItem.measure(0, 0);
-	            totalHeight += listItem.getMeasuredHeight();
-	        }
+	private void redirectToMyDeals()
+	{
+		ActionBar bar = getActivity().getActionBar();
+		bar.setSelectedNavigationItem(0);
+	}
 
-	        ViewGroup.LayoutParams params = listView.getLayoutParams();
-	        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-	        listView.setLayoutParams(params);
-	        listView.setBackgroundColor(view.getResources().getColor(R.color.dark_tan));
+	private class RedeemBook extends AsyncTask<Void, Void, Void>
+	{
+		private boolean emptyCode = false;
 
-	    }
+		@Override
+		protected void onPostExecute(Void result) {
+			if(exception != null)
+			{
+				popupErrorMessage(exception.getMessage());
+			}
+			else if (emptyCode)
+			{
+				popupErrorMessage("Access Code cannot be empty");
+			}else
+			{
+				AlertDialog dialog = new AlertDialog.Builder(view.getContext()).setTitle("You've Got Deals!")
+						.setMessage("Would you like to see your new deals?")
+						.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) { 
+								redirectToMyDeals();
+							}
+						})
+						.setNegativeButton("No", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) { 
+							}
+						})
+						.show();			
+			}
+		}
+
+		@Override
+		protected Void doInBackground(Void... arg0)
+		{
+			try
+			{
+				exception = null;
+				EditText editText = (EditText) view.findViewById(R.id.accessCode);
+				accessCode = editText.getText().toString();
+				if(accessCode == null || accessCode == "" || accessCode.isEmpty())
+				{
+					emptyCode = true;
+					return null;
+				}
+				else
+				{
+					client.getClient().activateCode(closestBook.dealOfferId, accessCode);
+				}
+			}
+			catch (ServiceException_t e)
+			{
+				// TODO Auto-generated catch block
+				exception = e;
+				e.printStackTrace();
+			}
+			catch (TException e)
+			{
+				// TODO Auto-generated catch block
+				exception = e;
+			}
+			catch (Exception e)
+			{
+				exception = e;
+			}
+			return null;
+		}
+	}
+
+	public void setListViewHeightBasedOnChildren(ListView listView) {
+		ListAdapter listAdapter = listView.getAdapter(); 
+		if (listAdapter == null) {
+			// pre-condition
+			return;
+		}
+
+		int totalHeight = 0;
+		for (int i = 0; i < listAdapter.getCount(); i++) {
+			View listItem = listAdapter.getView(i, null, listView);
+			listItem.measure(0, 0);
+			totalHeight += listItem.getMeasuredHeight();
+		}
+
+		ViewGroup.LayoutParams params = listView.getLayoutParams();
+		params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+		listView.setLayoutParams(params);
+		listView.setBackgroundColor(view.getResources().getColor(R.color.dark_tan));
+
+	}
 
 }
