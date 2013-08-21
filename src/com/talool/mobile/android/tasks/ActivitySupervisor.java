@@ -31,7 +31,6 @@ public final class ActivitySupervisor
 	private static final long POLLER_SLEEP_TIME = 30000; // 30 seconds
 	private ThriftHelper client = null;
 	private ActivityPoller activityPoller = null;
-	private boolean forceRefresh = false;
 
 	private volatile int actionsPending = 0;
 
@@ -50,7 +49,7 @@ public final class ActivitySupervisor
 
 	private class ActivityPoller extends Thread
 	{
-
+		private boolean forceRefresh = false;
 		private long lastActivityTime;
 
 		@Override
@@ -146,12 +145,33 @@ public final class ActivitySupervisor
 		}
 	}
 
+	/**
+	 * Creates an instance, or if one already exists, it simply re-assigns the
+	 * notificationCallback and forces a refresh of the activityPoller (from local
+	 * persistence).
+	 * 
+	 * It is written this way because we can't use a singleInstance activity and
+	 * guarantee a singleton instance of the Notification callback, but lets
+	 * guarantee a singleton still of our Activity supervisor
+	 * 
+	 * @param context
+	 * @param notificationCallback
+	 * @return
+	 */
+
 	public static synchronized ActivitySupervisor createInstance(final Context context, final NotificationCallback notificationCallback)
 	{
 		if (instance == null)
 		{
 			instance = new ActivitySupervisor(context, notificationCallback);
 
+		}
+
+		else
+		{
+			instance.notificationCallback = notificationCallback;
+			instance.activityPoller.forceRefresh = true;
+			instance.activityPoller.interrupt();
 		}
 
 		return instance;
