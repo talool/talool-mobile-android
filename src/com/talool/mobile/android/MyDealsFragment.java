@@ -336,7 +336,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	{
 		// TODO Auto-generated method stub
 		super.onResume();
-		// reloadData();
+		//reloadData();
 	}
 
 	protected AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener()

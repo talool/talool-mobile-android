@@ -31,11 +31,12 @@
         android:layout_height="fill_parent"
         android:paddingLeft="10dp"
         android:paddingRight="10dp" >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-                
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,7 +56,7 @@
                     android:layout_marginTop="5dp" >
 
                     <EditText
-                        android:id="@+id/editText1"
+                        android:id="@+id/accessCode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -63,7 +64,7 @@
                         android:hint="access code" />
 
                     <Button
-                        android:id="@+id/boulderButton"
+                        android:id="@+id/loadDealsButton"
                         style="?android:attr/buttonStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -108,20 +109,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center" />
-
-                <FrameLayout
-                    android:id="@+id/find_deals_map_frame"
-                    android:layout_width="fill_parent"
-                    android:layout_height="100dp"
-                    android:layout_weight="0.25" >
-
-                    <com.google.android.gms.maps.MapView
-                        xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:id="@+id/find_deals_map"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content" >
-                    </com.google.android.gms.maps.MapView>
-                </FrameLayout>
             </LinearLayout>
 
             <ListView
@@ -130,10 +117,7 @@
                 android:layout_height="fill_parent"
                 android:background="@color/dark_tan" >
             </ListView>
-
-
-            </LinearLayout>
-
+        </LinearLayout>
     </ScrollView>
 
 </LinearLayout>

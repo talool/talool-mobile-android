@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.talool.api.thrift.AcquireStatus_t;
 import com.talool.api.thrift.DealAcquire_t;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.util.TaloolUtil;
@@ -65,6 +66,12 @@ public class DealsAcquiredAdapter extends ArrayAdapter<DealAcquire_t>
 		holder.dealsAcquiredArrow.setImageResource(R.drawable.navigation_next_item);
 
 		if (dealAcquire.redeemed != 0)
+		{
+			holder.dealsAcquiredTitle.setPaintFlags(holder.dealsAcquiredTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+			holder.dealsAcquiredIcon.setTextColor(this.context.getResources().getColor(R.color.gray_icon));
+		}
+		
+		if(dealAcquire.getStatus() == AcquireStatus_t.PENDING_ACCEPT_CUSTOMER_SHARE)
 		{
 			holder.dealsAcquiredTitle.setPaintFlags(holder.dealsAcquiredTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 			holder.dealsAcquiredIcon.setTextColor(this.context.getResources().getColor(R.color.gray_icon));
