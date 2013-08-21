@@ -1,11 +1,15 @@
 package com.talool.mobile.android;
 
+import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuItem;
 import com.google.analytics.tracking.android.EasyTracker;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
+import com.talool.mobile.android.activity.SettingsActivity;
 
 /**
  * An activity that simply presents a WebView
@@ -50,5 +54,30 @@ public class BasicWebViewActivity extends Activity
 	    super.onStop();
 	    EasyTracker.getInstance(this).activityStop(this);  // Add this method.
 	  }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        boolean ret;
+        if (item.getItemId() == R.id.menu_settings)
+        {
+            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(intent);
+            ret = true;
+        }
+        else
+        {
+            ret = super.onOptionsItemSelected(item);
+        }
+        return ret;
+    }
 
 }
