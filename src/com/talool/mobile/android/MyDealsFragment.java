@@ -12,9 +12,9 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,7 +23,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.Fields;
@@ -39,6 +41,7 @@ import com.talool.mobile.android.cache.FavoriteMerchantCache;
 import com.talool.mobile.android.persistence.MerchantDao;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
+import com.talool.mobile.android.util.TypefaceFactory;
 import com.talool.thrift.util.ThriftUtil;
 
 /**
@@ -200,6 +203,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		}
 		else
 		{
+			showHelp();
 			refreshViaService();
 		}
 
@@ -234,12 +238,18 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	{
 		if (exception == null)
 		{
-			MyDealsAdapter adapter = new MyDealsAdapter(view.getContext(),
-					R.layout.mydeals_item_row, merchants);
-			myDealsAdapter = adapter;
-			myDealsListView.setAdapter(myDealsAdapter);
-			myDealsListView.setOnItemClickListener(onClickListener);
-
+			if (merchants.isEmpty())
+			{
+				showHelp();
+			}
+			else
+			{
+				MyDealsAdapter adapter = new MyDealsAdapter(view.getContext(),
+						R.layout.mydeals_item_row, merchants);
+				myDealsAdapter = adapter;
+				myDealsListView.setAdapter(myDealsAdapter);
+				myDealsListView.setOnItemClickListener(onClickListener);
+			}
 		}
 		else
 		{
@@ -378,6 +388,18 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	public void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
+	}
+	
+	private void showHelp()
+	{
+		TextView help = (TextView) view.findViewById(R.id.myDealsHelp);
+		help.setTypeface(TypefaceFactory.get().getMarkerFelt());
+		help.setText(R.string.helpLoadingDeals);
+		Drawable arrowImage = getResources().getDrawable( R.drawable.help_arrow );
+		ImageView arrow2 = (ImageView) view.findViewById(R.id.arrow2);
+		arrow2.setImageDrawable(arrowImage);
+		ImageView arrow3 = (ImageView) view.findViewById(R.id.arrow3);
+		arrow3.setImageDrawable(arrowImage);
 	}
 
 }

@@ -99,7 +99,8 @@
                 android:id="@+id/dealOffersListView"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
-                android:background="@color/dark_tan" >
+                android:background="@color/dark_tan"
+                android:listSelector="@android:color/transparent" >
             </ListView>
         </LinearLayout>
     </ScrollView>

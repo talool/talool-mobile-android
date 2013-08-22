@@ -117,8 +117,8 @@ public class LoginActivity extends Activity
 
 		username = (EditText) findViewById(R.id.email);
 		password = (EditText) findViewById(R.id.password);
-		username.setText("chris@talool.com");
-		password.setText("pass123");
+		username.setText("dm13@talool.com");
+		password.setText("abc123");
 		
 		ClipDrawable username_bg = (ClipDrawable) username.getBackground();
 		username_bg.setLevel(1500);

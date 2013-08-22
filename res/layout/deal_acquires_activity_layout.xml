@@ -130,7 +130,6 @@
             android:id="@+id/dealsMerchantImage"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight=".33"
             android:adjustViewBounds="false"
             android:contentDescription="Deals Merchant Image"
             android:scaleType="fitXY" />
@@ -138,8 +137,8 @@
         <ListView
             android:id="@+id/dealsAcquiredList"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight=".66"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@drawable/tan_rounded_bottom_only"
             android:orientation="vertical" >
         </ListView>

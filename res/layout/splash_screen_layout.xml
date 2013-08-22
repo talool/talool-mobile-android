@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:src="@drawable/talool_logo_and_icon"
-        android:contentDescription="@string/app_name" />
+        android:contentDescription="@string/app_name"
+        android:paddingBottom="60dp" />
  
  
 </RelativeLayout>

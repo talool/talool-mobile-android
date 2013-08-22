@@ -15,7 +15,7 @@ import com.loopj.android.image.SmartImageView;
 public class TaloolSmartImageView extends SmartImageView {
 	
 	private OnPreDrawListener pdl;
-	private static final boolean DEBUG = true;
+	private static final boolean DEBUG = false;
 
 	public TaloolSmartImageView(Context arg0) {
 		super(arg0);

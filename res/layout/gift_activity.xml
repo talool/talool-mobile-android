@@ -89,7 +89,6 @@
 	            android:id="@+id/dealImage"
 	            android:layout_width="fill_parent"
 	            android:layout_height="100dp"
-	            android:layout_weight="0.33"
 	            android:adjustViewBounds="false"
 	            android:contentDescription="Deals Merchant Image"
 	            android:scaleType="fitXY" />
@@ -97,7 +96,7 @@
 	        <LinearLayout
 	            android:layout_width="fill_parent"
 	            android:layout_height="0dp"
-	            android:layout_weight=".66"
+	            android:layout_weight="1"
 	            android:background="@drawable/tan_rounded_bottom_only"
 	            android:orientation="vertical" >
 				
