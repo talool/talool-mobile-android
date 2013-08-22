@@ -69,7 +69,7 @@ public class LoginActivity extends Activity
 		private void doPostLogin()
 		{
 			// load favorite merchants
-			final FetchFavoriteMerchantsTask favMerchantTask = new FetchFavoriteMerchantsTask();
+			final FetchFavoriteMerchantsTask favMerchantTask = new FetchFavoriteMerchantsTask(getApplicationContext());
 
 			favMerchantTask.execute(new String[] {});
 		}

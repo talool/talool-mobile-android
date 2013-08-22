@@ -54,13 +54,7 @@ public class GiftActivity extends Activity
 	private SmartImageView logoImageView;
 	private SmartImageView dealCreatorImageView;
 	private TextView fromFriend;
-	private View view;
 	
-	@Override
-	public View onCreateView(String name, Context context, AttributeSet attrs) {
-		this.view = super.onCreateView(name, context, attrs);
-		return view;
-	}
 	@Override
 	protected void onCreate(final Bundle savedInstanceState)
 	{
@@ -123,7 +117,7 @@ public class GiftActivity extends Activity
 	public void acceptGiftClick(final View view)
 	{
 		// accept the gift and redirect to "My Deals"
-		final GiftAcceptanceTask task = new GiftAcceptanceTask(client, activity, true)
+		final GiftAcceptanceTask task = new GiftAcceptanceTask(client, activity, true,view.getContext())
 		{
 			@Override
 			protected void onPostExecute(DealAcquire_t result)
@@ -140,7 +134,7 @@ public class GiftActivity extends Activity
 	public void rejectGiftClick(final View view)
 	{
 		// accept the gift and redirect to "My Deals"
-		final GiftAcceptanceTask task = new GiftAcceptanceTask(client, activity, false)
+		final GiftAcceptanceTask task = new GiftAcceptanceTask(client, activity, false,view.getContext())
 		{
 			@Override
 			protected void onPostExecute(DealAcquire_t result)
@@ -163,7 +157,7 @@ public class GiftActivity extends Activity
 			final DealOffer_t dealOffer = DealOfferCache.get().getDealOffer(gift.getDeal().getDealOfferId());
 			if (dealOffer == null)
 			{
-				final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, gift.getDeal().getDealOfferId())
+				final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, gift.getDeal().getDealOfferId(),getApplicationContext())
 				{
 
 					@Override
@@ -243,20 +237,20 @@ public class GiftActivity extends Activity
 			catch (ServiceException_t e)
 			{
 				e.printStackTrace();
-				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+				EasyTracker easyTracker = EasyTracker.getInstance(getApplicationContext());
 
 				easyTracker.send(MapBuilder
-						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+						.createException(new StandardExceptionParser(getApplicationContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
 						.build()
 						);
 			}
 			catch (TException e)
 			{
 				e.printStackTrace();
-				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+				EasyTracker easyTracker = EasyTracker.getInstance(getApplicationContext());
 
 				easyTracker.send(MapBuilder
-						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+						.createException(new StandardExceptionParser(getApplicationContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
 						.build()
 						);
 
@@ -264,10 +258,10 @@ public class GiftActivity extends Activity
 			catch (Exception e)
 			{
 				e.printStackTrace();
-				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+				EasyTracker easyTracker = EasyTracker.getInstance(getApplicationContext());
 
 				easyTracker.send(MapBuilder
-						.createException(new StandardExceptionParser(view.getContext(),null).getDescription(Thread.currentThread().getName(),e),true)                                              
+						.createException(new StandardExceptionParser(getApplicationContext(),null).getDescription(Thread.currentThread().getName(),e),true)                                              
 						.build()
 						);
 			}

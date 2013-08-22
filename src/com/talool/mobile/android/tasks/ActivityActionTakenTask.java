@@ -2,10 +2,15 @@ package com.talool.mobile.android.tasks;
 
 import org.apache.thrift.TException;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.talool.api.thrift.ServiceException_t;
+import com.talool.mobile.android.util.TaloolUtil;
 import com.talool.mobile.android.util.ThriftHelper;
 
 /**
@@ -17,11 +22,13 @@ public class ActivityActionTakenTask extends AsyncTask<Void, Void, Void>
 {
 	private ThriftHelper client;
 	private String activityId;
+	private Context context;
 
-	public ActivityActionTakenTask(final ThriftHelper client, final String activityId)
+	public ActivityActionTakenTask(final ThriftHelper client, final String activityId, Context context)
 	{
 		this.client = client;
 		this.activityId = activityId;
+		this.context = context;
 	}
 
 	@Override
@@ -33,18 +40,17 @@ public class ActivityActionTakenTask extends AsyncTask<Void, Void, Void>
 		}
 		catch (ServiceException_t e)
 		{
-			Log.e(this.getClass().getSimpleName(), "Service API problem activity action", e);
+			TaloolUtil.sendException(e,context);
 		}
 		catch (TException e)
 		{
-			Log.e(this.getClass().getSimpleName(), "Thrift protocol problem activity action", e);
+			TaloolUtil.sendException(e,context);
 		}
 		catch (Exception e)
 		{
-			Log.e(this.getClass().getSimpleName(), "Problem activity action", e);
+			TaloolUtil.sendException(e,context);
 		}
 
 		return null;
-
 	}
 }

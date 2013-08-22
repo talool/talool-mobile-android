@@ -2,6 +2,7 @@ package com.talool.mobile.android.tasks;
 
 import org.apache.thrift.TException;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -10,6 +11,7 @@ import com.talool.api.thrift.DealAcquire_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.TaloolApplication;
 import com.talool.mobile.android.persistence.ActivityDao;
+import com.talool.mobile.android.util.TaloolUtil;
 import com.talool.mobile.android.util.ThriftHelper;
 
 /**
@@ -22,12 +24,14 @@ public class GiftAcceptanceTask extends AsyncTask<String, Void, DealAcquire_t>
 	private ThriftHelper client;
 	private Activity_t activity;
 	private boolean accept = false;
+	private Context context;
 
-	public GiftAcceptanceTask(final ThriftHelper client, final Activity_t activity, boolean accept)
+	public GiftAcceptanceTask(final ThriftHelper client, final Activity_t activity, boolean accept, final Context context)
 	{
 		this.client = client;
 		this.accept = accept;
 		this.activity = activity;
+		this.context = context;
 	}
 
 	public String getGiftId()
@@ -66,15 +70,15 @@ public class GiftAcceptanceTask extends AsyncTask<String, Void, DealAcquire_t>
 		}
 		catch (ServiceException_t e)
 		{
-			Log.e(this.getClass().getSimpleName(), "Service API problem accepting gift", e);
+			TaloolUtil.sendException(e,context);
 		}
 		catch (TException e)
 		{
-			Log.e(this.getClass().getSimpleName(), "Thrift protocol problem accepting gift", e);
+			TaloolUtil.sendException(e,context);
 		}
 		catch (Exception e)
 		{
-			Log.e(this.getClass().getSimpleName(), "Problem accepting gift", e);
+			TaloolUtil.sendException(e,context);
 		}
 
 		return dealAcquire;

@@ -5,8 +5,10 @@ import org.apache.thrift.TException;
 import com.talool.api.thrift.Location_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.util.TaloolUser;
+import com.talool.mobile.android.util.TaloolUtil;
 import com.talool.mobile.android.util.ThriftHelper;
 
+import android.content.Context;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -14,11 +16,12 @@ import android.util.Log;
 public class DealAcceptanceTask extends AsyncTask<String, Void, String> {
 	private ThriftHelper client;
 	private String dealAcquireId;
-
-	public DealAcceptanceTask(final ThriftHelper client, final String dealAcquireId)
+	private Context context;
+	public DealAcceptanceTask(final ThriftHelper client, final String dealAcquireId, final Context context)
 	{
 		this.client = client;
 		this.dealAcquireId = dealAcquireId;
+		this.context = context;
 	}
 
 	@Override
@@ -47,16 +50,15 @@ public class DealAcceptanceTask extends AsyncTask<String, Void, String> {
 		}
 		catch (ServiceException_t e)
 		{
-			Log.e(this.getClass().getSimpleName(), "Service API problem accepting gift", e);
-			
+			TaloolUtil.sendException(e,context);			
 		}
 		catch (TException e)
 		{
-			Log.e(this.getClass().getSimpleName(), "Thrift protocol problem accepting gift", e);
+			TaloolUtil.sendException(e,context);
 		}
 		catch (Exception e)
 		{
-			Log.e(this.getClass().getSimpleName(), "Problem accepting gift", e);
+			TaloolUtil.sendException(e,context);
 		}
 
 		return code;

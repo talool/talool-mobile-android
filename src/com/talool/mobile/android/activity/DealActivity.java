@@ -6,6 +6,7 @@ import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
@@ -13,6 +14,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -74,7 +76,6 @@ public class DealActivity extends Activity
 		dealSummaryText = (TextView) findViewById(R.id.dealSummaryText);
 		dealOfferCreatorImage = (SmartImageView) findViewById(R.id.dealActivityCreatorImage);
 		dealExpirationText = (TextView) findViewById(R.id.dealActivityExpires);
-
 		dealActivityButtonLayout = (LinearLayout) findViewById(R.id.dealActivityButtonLayout);
 		redemptionCode = null;
 
@@ -150,7 +151,7 @@ public class DealActivity extends Activity
 
 	private void setDealCreatorImage()
 	{
-		final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, deal.getDeal().getDealOfferId())
+		final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, deal.getDeal().getDealOfferId(),getApplicationContext())
 		{
 
 			@Override
@@ -209,9 +210,9 @@ public class DealActivity extends Activity
 
 	}
 
-	public void onUseDealNowClick(View view)
+	public void onUseDealNowClick(final View view)
 	{
-		DealAcceptanceTask dealAcceptanceTask = new DealAcceptanceTask(client, deal.dealAcquireId)
+		DealAcceptanceTask dealAcceptanceTask = new DealAcceptanceTask(client, deal.dealAcquireId, view.getContext())
 		{
 
 			@Override
@@ -228,6 +229,11 @@ public class DealActivity extends Activity
 				redemptionCodeTextView.setPadding(30, 0, 30, 0);
 				dealActivityButtonLayout.addView(redemptionCodeTextView);
 				dealActivityButtonLayout.setGravity(Gravity.CENTER);
+				
+				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+			    easyTracker.send(MapBuilder
+				        .createEvent("redeem","selected",deal.dealAcquireId,null)           
+				        .build());
 			}
 
 		};
@@ -388,6 +394,11 @@ public class DealActivity extends Activity
 				redemptionCodeTextView.setPadding(30, 0, 30, 0);
 				dealActivityButtonLayout.addView(redemptionCodeTextView);
 				dealActivityButtonLayout.setGravity(Gravity.CENTER);
+								
+				EasyTracker easyTracker = EasyTracker.getInstance(getApplicationContext());
+			    easyTracker.send(MapBuilder
+				        .createEvent("gift","selected",deal.dealAcquireId,null)           
+				        .build());
 			}
 		}
 

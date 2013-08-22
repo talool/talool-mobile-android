@@ -9,6 +9,9 @@ import org.apache.thrift.transport.TTransportException;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.talool.api.thrift.Activity_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.mobile.android.persistence.ActivityDao;
@@ -233,4 +236,6 @@ public final class ActivitySupervisor
 			Log.e(this.getClass().getSimpleName(), "Problem creating thrift util", e);
 		}
 	}
+	
+
 }

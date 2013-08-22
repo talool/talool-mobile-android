@@ -169,7 +169,7 @@ public class MyActivityFragment extends Fragment
 				if (activity.getActivityEvent().equals(ActivityEvent_t.TALOOL_REACH) ||
 						activity.getActivityEvent().equals(ActivityEvent_t.WELCOME))
 				{
-					final ActivityActionTakenTask task = new ActivityActionTakenTask(client, activity.getActivityId());
+					final ActivityActionTakenTask task = new ActivityActionTakenTask(client, activity.getActivityId(),view.getContext());
 					task.execute();
 				}
 			}

@@ -62,12 +62,16 @@ public class DealsAcquiredAdapter extends ArrayAdapter<DealAcquire_t>
 		{
 			holder.dealsAcquiredTitle.setPaintFlags(holder.dealsAcquiredTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 			holder.dealsAcquiredIcon.setTextColor(this.context.getResources().getColor(R.color.gray_icon));
+			holder.dealsAcquiredExpires.setText(TaloolUtil.getRedeemedText(dealAcquire.redeemed));
+
 		}
 
 		if(dealAcquire.getStatus() == AcquireStatus_t.PENDING_ACCEPT_CUSTOMER_SHARE)
 		{
 			holder.dealsAcquiredTitle.setPaintFlags(holder.dealsAcquiredTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 			holder.dealsAcquiredIcon.setTextColor(this.context.getResources().getColor(R.color.gray_icon));
+			holder.dealsAcquiredExpires.setText(TaloolUtil.getSharedText(dealAcquire.deal.updated));
+
 		}
 
 		return row;

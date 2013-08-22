@@ -108,11 +108,9 @@ public class FindDealsFragment extends Fragment {
 
 	@Override
 	public void onStart() {
-		// TODO Auto-generated method stub
 		super.onStart();
 		EasyTracker easyTracker = EasyTracker.getInstance(getActivity());
 		easyTracker.set(Fields.SCREEN_NAME, "Find Deals");
-
 		easyTracker.send(MapBuilder.createAppView().build());
 	}
 
@@ -151,7 +149,7 @@ public class FindDealsFragment extends Fragment {
 		final DealOffer_t dealOffer = DealOfferCache.get().getDealOffer(DEAL_OFFER_ID_PAYBACK_BOULDER);
 		if (dealOffer == null)
 		{
-			final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, DEAL_OFFER_ID_PAYBACK_BOULDER)
+			final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, DEAL_OFFER_ID_PAYBACK_BOULDER, view.getContext())
 			{
 				@Override
 				protected void onPostExecute(final DealOffer_t dealOffer)
@@ -173,7 +171,7 @@ public class FindDealsFragment extends Fragment {
 		final DealOffer_t dealOffer = DealOfferCache.get().getDealOffer(DEAL_OFFER_ID_PAYBACK_VANCOUVER);
 		if (dealOffer == null)
 		{
-			final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, DEAL_OFFER_ID_PAYBACK_VANCOUVER)
+			final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, DEAL_OFFER_ID_PAYBACK_VANCOUVER,view.getContext())
 			{
 				@Override
 				protected void onPostExecute(final DealOffer_t dealOffer)
@@ -394,7 +392,12 @@ public class FindDealsFragment extends Fragment {
 			{
 				popupErrorMessage("Access Code cannot be empty");
 			}else
-			{
+			{			
+				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+				easyTracker.send(MapBuilder
+						.createEvent("redeem_book","selected",closestBook.dealOfferId,null)           
+						.build()
+						);
 				AlertDialog dialog = new AlertDialog.Builder(view.getContext()).setTitle("You've Got Deals!")
 						.setMessage("Would you like to see your new deals?")
 						.setPositiveButton("Yes", new DialogInterface.OnClickListener() {

@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.apache.thrift.TException;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.cache.FavoriteMerchantCache;
+import com.talool.mobile.android.util.TaloolUtil;
 import com.talool.mobile.android.util.ThriftHelper;
 
 /**
@@ -19,8 +21,11 @@ import com.talool.mobile.android.util.ThriftHelper;
  */
 public class FetchFavoriteMerchantsTask extends AsyncTask<String, Void, List<Merchant_t>>
 {
-	public FetchFavoriteMerchantsTask()
-	{}
+	private Context context;
+	public FetchFavoriteMerchantsTask(final Context context)
+	{
+		this.context = context;
+	}
 
 	@Override
 	protected void onPostExecute(final List<Merchant_t> merchants)
@@ -49,15 +54,15 @@ public class FetchFavoriteMerchantsTask extends AsyncTask<String, Void, List<Mer
 		}
 		catch (ServiceException_t e)
 		{
-			Log.e(this.getClass().getSimpleName(), "Service API problem accepting gift", e);
+			TaloolUtil.sendException(e,context);
 		}
 		catch (TException e)
 		{
-			Log.e(this.getClass().getSimpleName(), "Thrift protocol problem accepting gift", e);
+			TaloolUtil.sendException(e,context);
 		}
 		catch (Exception e)
 		{
-			Log.e(this.getClass().getSimpleName(), "Problem accepting gift", e);
+			TaloolUtil.sendException(e,context);
 		}
 
 		return merchants;

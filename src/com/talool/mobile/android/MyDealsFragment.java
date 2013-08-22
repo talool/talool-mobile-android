@@ -286,7 +286,6 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		protected void onPostExecute(final List<Merchant_t> results)
 		{
 			merchants = results;
-			Log.i(MyDealsFragment.class.toString(), "Number of Merchants: " + results.size());
 			loadListView();
 			mPullToRefreshAttacher.setRefreshComplete();
 			merchantDao.saveMerchants(results);

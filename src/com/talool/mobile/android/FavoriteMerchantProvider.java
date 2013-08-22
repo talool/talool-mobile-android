@@ -97,6 +97,11 @@ public class FavoriteMerchantProvider extends ActionProvider
 					{
 						// undo what we optimistically set above
 						setIsFavorited(isCurrentFavorite);
+						EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+						easyTracker.send(MapBuilder
+								.createEvent("favorited","selected",merchant.merchantId,null)           
+								.build()
+								);
 					}
 
 				}
