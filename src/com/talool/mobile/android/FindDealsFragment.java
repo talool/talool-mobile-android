@@ -1,6 +1,8 @@
 package com.talool.mobile.android;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
@@ -22,6 +24,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.Fields;
@@ -234,6 +237,7 @@ public class FindDealsFragment extends Fragment {
 			{
 				closestBook = vancouverBook;
 			}
+			getActivity().setTitle(closestBook.title);
 			loadBookImages();
 			loadBookDeals();
 		}
@@ -294,6 +298,18 @@ public class FindDealsFragment extends Fragment {
 		dealOffersListView.setAdapter(dealOffersAdapter);
 		setListViewHeightBasedOnChildren(dealOffersListView);
 		listViewLinearLayout.setVisibility(View.VISIBLE);
+		
+		Map<String,String> map = new HashMap<String,String>();
+		for(Deal_t deal : dealOffers)
+		{
+			if(map.get(deal.merchant.merchantId) == null)
+			{
+				map.put(deal.merchant.merchantId, deal.dealOfferId);
+			}
+		}
+
+		TextView textView = (TextView) view.findViewById(R.id.summaryText);
+		textView.setText(dealOffers.size() + " Deal from " + map.size() +" Merchants");
 	}
 
 	private class FindDealsTask extends AsyncTask<String, Void, List<Deal_t>>
