@@ -1,16 +1,14 @@
 package com.talool.mobile.android.activity;
 
-import android.view.Menu;
-import android.view.MenuItem;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.AttributeSet;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -190,7 +188,8 @@ public class GiftActivity extends Activity
 			{
 				fn = (new StringBuilder(fn.substring(0, 7)).append("...")).toString();
 			}
-			fromFriend.setText(fn);
+			StringBuilder fromFriendLabel = new StringBuilder("From\n");
+			fromFriend.setText(fromFriendLabel.append(fn).toString());
 
 			summary.setText(gift.getDeal().getSummary());
 			summary.setTypeface(TypefaceFactory.get().getMarkerFeltWide());

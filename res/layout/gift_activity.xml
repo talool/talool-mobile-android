@@ -159,10 +159,11 @@
 	                 android:layout_gravity="center"
 	                 android:background="@drawable/ribbonbadge"
 	                 android:gravity="center"
-	                 android:minHeight="90dp"
+	                 android:minHeight="105dp"
 	                 android:textColor="@color/white"
 	                 android:textSize="12sp"
-	                 android:ellipsize="end" />
+	                 android:ellipsize="end"
+	                 android:paddingBottom="5dp" />
 	             
 	            <TextView
 	                android:id="@+id/summary"

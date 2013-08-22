@@ -12,13 +12,13 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.location.Location;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -30,24 +30,16 @@ import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.Fields;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.loopj.android.image.SmartImageView;
 import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.Deal_t;
-import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.activity.LocationSelectActivity;
 import com.talool.mobile.android.adapters.FindDealsAdapter;
-import com.talool.mobile.android.adapters.MyDealsAdapter;
 import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
+import com.talool.mobile.android.util.TaloolSmartImageView;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
 
@@ -62,7 +54,7 @@ public class FindDealsFragment extends Fragment {
 	private static final String DEAL_OFFER_ID_PAYBACK_VANCOUVER = "a067de54-d63d-4613-8d60-9d995765cd52";
 	private DealOffer_t boulderBook;
 	private DealOffer_t vancouverBook;
-	private SmartImageView bookImage;
+	private TaloolSmartImageView bookImage;
 	private DealOffer_t closestBook;
 	private MapView mapView;
 	private LinearLayout listViewLinearLayout;
@@ -74,7 +66,7 @@ public class FindDealsFragment extends Fragment {
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		this.view = inflater.inflate(R.layout.find_deals_fragment, container,false);
-		bookImage = (SmartImageView) view.findViewById(R.id.bookImageView);
+		bookImage = (TaloolSmartImageView) view.findViewById(R.id.bookImageView);
 		dealOffersListView = (ListView) view.findViewById(R.id.dealOffersListView);
 		loadDealsButton = (Button) view.findViewById(R.id.loadDealsButton);
 		loadDealsButton.setOnClickListener(new View.OnClickListener() {

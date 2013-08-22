@@ -5,32 +5,12 @@
     android:background="@drawable/my_deals_background"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/button_bar1"
-        android:gravity="center|center_vertical"
-        android:orientation="vertical"
-        android:padding="10dp" >
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center|center_vertical"
-            android:gravity="center"
-            android:text="Buy Now For $9.99"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#ffffff"
-            android:textSize="26sp" />
-    </LinearLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp" >
+        android:paddingRight="10dp"
+        android:paddingTop="10dp" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -81,18 +61,22 @@
                 android:orientation="vertical"
                 android:padding="10dp" >
 
-                <com.loopj.android.image.SmartImageView
+                <com.talool.mobile.android.util.TaloolSmartImageView
                     android:id="@+id/bookImageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_width="150dp"
+                    android:layout_height="62dp"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="5dp" />
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:scaleType="fitXY"
+                    android:layout_weight=".3" />
 
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/paybackText" />
+                    android:text="@string/paybackText"
+                    android:layout_weight=".6" />
             </LinearLayout>
 
             <LinearLayout
