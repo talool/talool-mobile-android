@@ -163,9 +163,12 @@ public class GiftActivity extends Activity
 					@Override
 					protected void onPostExecute(final DealOffer_t dealOffer)
 					{
-						setDealCreatorImageView(dealOffer);
-						// make sure we cache the dealOffer
-						DealOfferCache.get().setDealOffer(dealOffer);
+						if(dealOffer != null)
+						{
+							setDealCreatorImageView(dealOffer);
+							// make sure we cache the dealOffer
+							DealOfferCache.get().setDealOffer(dealOffer);
+						}
 					}
 
 				};
