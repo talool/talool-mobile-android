@@ -160,9 +160,9 @@
 	                 android:background="@drawable/ribbonbadge"
 	                 android:gravity="center"
 	                 android:minHeight="90dp"
-	                 android:text="Doug"
 	                 android:textColor="@color/white"
-	                 android:textSize="12sp" />
+	                 android:textSize="12sp"
+	                 android:ellipsize="end" />
 	             
 	            <TextView
 	                android:id="@+id/summary"

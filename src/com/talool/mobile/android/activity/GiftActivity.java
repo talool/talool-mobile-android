@@ -53,6 +53,7 @@ public class GiftActivity extends Activity
 	private TaloolSmartImageView dealImageView;
 	private SmartImageView logoImageView;
 	private SmartImageView dealCreatorImageView;
+	private TextView fromFriend;
 	private View view;
 	
 	@Override
@@ -108,6 +109,8 @@ public class GiftActivity extends Activity
 
 		final TextView thumbsUpIcon = (TextView) findViewById(R.id.thumbsDownIcon);
 		thumbsUpIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
+		
+		fromFriend = (TextView) findViewById(R.id.fromFriend);
 
 	}
 
@@ -184,6 +187,13 @@ public class GiftActivity extends Activity
 			final TextView details = (TextView) findViewById(R.id.details);
 
 			setTitle("A Gift to " + gift.getDeal().getMerchant().getName());
+			
+			String fn = gift.getFromCustomer().firstName;
+			if (fn.length()>10)
+			{
+				fn = (new StringBuilder(fn.substring(0, 7)).append("...")).toString();
+			}
+			fromFriend.setText(fn);
 
 			summary.setText(gift.getDeal().getSummary());
 			summary.setTypeface(TypefaceFactory.get().getMarkerFeltWide());
@@ -291,7 +301,7 @@ public class GiftActivity extends Activity
     public boolean onCreateOptionsMenu(Menu menu)
     {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        //getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
