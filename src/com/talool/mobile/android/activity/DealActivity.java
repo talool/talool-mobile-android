@@ -414,22 +414,16 @@ public class DealActivity extends Activity
 			}
 			catch (ServiceException_t e)
 			{
-				// TODO Auto-generated catch block
 				exception = e;
-				// Log.e(MyDealsFragment.class.toString(), e.getMessage());
 			}
 			catch (TException e)
 			{
-				// TODO Auto-generated catch block
 				exception = e;
-				// Log.e(MyDealsFragment.class.toString(), e.getMessage());
 
 			}
 			catch (Exception e)
 			{
 				exception = e;
-				// Log.e(MyDealsFragment.class.toString(), e.getMessage());
-
 			}
 
 			return results;

@@ -267,7 +267,6 @@ public final class ActivitySupervisor
 		}
 		catch (TTransportException e)
 		{
-			Log.e(this.getClass().getSimpleName(), "Problem creating thrift util", e);
 		}
 	}
 
