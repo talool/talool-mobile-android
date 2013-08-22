@@ -28,8 +28,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
                 android:layout_marginBottom="20dip"
-                android:inputType="text"
                 android:singleLine="true"
+                android:inputType="textCapWords"
                 android:background="@drawable/clipped_edittext"
                 android:textColor="@color/white"/>
           <!--  Last Name Label -->
@@ -44,7 +44,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
                 android:layout_marginBottom="20dip"
-                android:inputType="text"
+                android:inputType="textCapWords"
+                android:capitalize="words"
                 android:singleLine="true"
                 android:background="@drawable/clipped_edittext"
                 android:textColor="@color/white"/>

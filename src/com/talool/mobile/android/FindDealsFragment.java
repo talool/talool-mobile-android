@@ -10,6 +10,7 @@ import org.apache.thrift.transport.TTransportException;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -73,6 +75,9 @@ public class FindDealsFragment extends Fragment {
 			public void onClick(View v) {
 				RedeemBook redeemBookTask = new RedeemBook();
 				redeemBookTask.execute(new Void[]{});
+				InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+				EditText editText = (EditText) view.findViewById(R.id.accessCode);
+				imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
 			}
 		});		
 		listViewLinearLayout = (LinearLayout) view.findViewById(R.id.listViewLinearLayout);
