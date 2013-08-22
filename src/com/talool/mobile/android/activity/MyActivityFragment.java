@@ -9,7 +9,6 @@ import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
-
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -172,7 +171,7 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 				if (activity.getActivityEvent().equals(ActivityEvent_t.TALOOL_REACH) ||
 						activity.getActivityEvent().equals(ActivityEvent_t.WELCOME))
 				{
-					final ActivityActionTakenTask task = new ActivityActionTakenTask(client, activity.getActivityId(),view.getContext());
+					final ActivityActionTakenTask task = new ActivityActionTakenTask(client, activity.getActivityId(), view.getContext());
 					task.execute();
 				}
 			}
@@ -309,7 +308,7 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 			refreshViaService();
 		}
 	}
-	
+
 	private void refreshViaService()
 	{
 		final MyActivityTask dealsTask = new MyActivityTask();
@@ -323,6 +322,8 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 		this.view = inflater.inflate(R.layout.my_activity_fragment, container, false);
 		myActivityListView = (ListView) view.findViewById(R.id.myActivityListView);
 
+		getActivity().setTitle("Activity");
+
 		setRetainInstance(false);
 
 		activityDao = new ActivityDao(TaloolApplication.getAppContext());
@@ -331,7 +332,7 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 		mPullToRefreshAttacher = ((MainActivity) getActivity())
 				.getPullToRefreshAttacher();
 		mPullToRefreshAttacher.addRefreshableView(myActivityListView, this);
-		
+
 		try
 		{
 			client = new ThriftHelper();
@@ -394,10 +395,9 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 	}
 
 	@Override
-	public void onRefreshStarted(View view) {
+	public void onRefreshStarted(View view)
+	{
 		refreshViaService();
 	}
-	
-	
 
 }
