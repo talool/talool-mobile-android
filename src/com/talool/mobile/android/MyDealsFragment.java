@@ -56,7 +56,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	private Exception exception;
 	private List<Merchant_t> merchants;
 	private Menu menu;
-
+	private PullToRefreshAttacher mPullToRefreshAttacher;
 	private MerchantDao merchantDao;
 
 	private FilterBy selectedFilter = FilterBy.All;
@@ -91,9 +91,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 			return categoryId;
 		}
 	};
-
-	private PullToRefreshAttacher mPullToRefreshAttacher;
-
+	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
 	{

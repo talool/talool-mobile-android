@@ -53,17 +53,9 @@ public class MyActivityAdapter extends ArrayAdapter<Activity_t>
 
 		final Activity_t activity = data.get(position);
 
-		if (row == null)
-		{
-			final LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-			row = inflater.inflate(layoutResourceId, parent, false);
-			holder = new ActivityHolder();
-		}
-
-		else
-		{
-			holder = (ActivityHolder) row.getTag();
-		}
+		final LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+		row = inflater.inflate(layoutResourceId, parent, false);
+		holder = new ActivityHolder();
 
 		holder.activityTitle = (TextView) row.findViewById(R.id.activityTitle);
 		holder.activitySubtitle = (TextView) row.findViewById(R.id.activitySubtitle);

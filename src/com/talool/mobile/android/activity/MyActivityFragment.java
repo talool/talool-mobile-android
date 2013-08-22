@@ -8,6 +8,8 @@ import java.util.Observer;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
+import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
+
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -31,6 +33,7 @@ import com.talool.api.thrift.Activity_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.BasicWebViewActivity;
+import com.talool.mobile.android.MainActivity;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.TaloolApplication;
 import com.talool.mobile.android.adapters.MyActivityAdapter;
@@ -49,7 +52,7 @@ import com.talool.thrift.util.ThriftUtil;
  * @author clintz
  * @TODO Wire up proper exception handling/logging
  */
-public class MyActivityFragment extends Fragment
+public class MyActivityFragment extends Fragment implements PullToRefreshAttacher.OnRefreshListener
 {
 	private static final SparseArray<List<ActivityEvent_t>> eventMap = new SparseArray<List<ActivityEvent_t>>();
 
@@ -59,9 +62,9 @@ public class MyActivityFragment extends Fragment
 	private View view;
 	private Menu menu;
 	private ActivityDao activityDao;
-
 	private Activity_t mostCurrentActivity;
 	private ActivityObserver activityObserver;
+	private PullToRefreshAttacher mPullToRefreshAttacher;
 
 	int selectedEventFilter = R.id.activity_filter_all;
 
@@ -213,8 +216,8 @@ public class MyActivityFragment extends Fragment
 		@Override
 		protected void onPostExecute(final List<Activity_t> results)
 		{
-			updateActivityList(results);
 			activityDao.saveActivities(results);
+			updateActivityList(activityDao.getAllActivities(MyActivityFragment.eventMap.get(selectedEventFilter)));
 		}
 
 		@Override
@@ -226,7 +229,7 @@ public class MyActivityFragment extends Fragment
 			{
 				client.setAccessToken(TaloolUser.get().getAccessToken());
 				SearchOptions_t searchOptions = new SearchOptions_t();
-				searchOptions.setMaxResults(1000).setPage(0).setSortProperty("activityDate").setAscending(false);
+				searchOptions.setSortProperty("activityDate").setAscending(false);
 				results = client.getClient().getActivities(searchOptions);
 
 			}
@@ -268,8 +271,8 @@ public class MyActivityFragment extends Fragment
 
 	private void updateActivityList(final List<Activity_t> results)
 	{
+		mPullToRefreshAttacher.setRefreshComplete();
 		final MyActivityAdapter adapter = newMyActivityAdapter(results);
-
 		activityAdapter = adapter;
 		myActivityListView.setAdapter(activityAdapter);
 		myActivityListView.setOnItemClickListener(activityClickListener);
@@ -303,10 +306,14 @@ public class MyActivityFragment extends Fragment
 		}
 		else
 		{
-			final MyActivityTask dealsTask = new MyActivityTask();
-			dealsTask.execute(new String[] {});
+			refreshViaService();
 		}
-
+	}
+	
+	private void refreshViaService()
+	{
+		final MyActivityTask dealsTask = new MyActivityTask();
+		dealsTask.execute(new String[] {});
 	}
 
 	@Override
@@ -319,9 +326,12 @@ public class MyActivityFragment extends Fragment
 		setRetainInstance(false);
 
 		activityDao = new ActivityDao(TaloolApplication.getAppContext());
-
 		activityDao.open();
 
+		mPullToRefreshAttacher = ((MainActivity) getActivity())
+				.getPullToRefreshAttacher();
+		mPullToRefreshAttacher.addRefreshableView(myActivityListView, this);
+		
 		try
 		{
 			client = new ThriftHelper();
@@ -382,5 +392,12 @@ public class MyActivityFragment extends Fragment
 			activityObserver = null;
 		}
 	}
+
+	@Override
+	public void onRefreshStarted(View view) {
+		refreshViaService();
+	}
+	
+	
 
 }
