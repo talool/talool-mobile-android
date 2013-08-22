@@ -20,14 +20,12 @@ public class TaloolApplication extends Application
 		super.onCreate();
 		TaloolApplication.context = getApplicationContext();
 		init();
-
 	}
 
 	private void init()
 	{
 		// cache font-awesome typeface
 		TypefaceFactory.createInstance(getAssets());
-
 	}
 
 	public static Context getAppContext()

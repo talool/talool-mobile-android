@@ -9,9 +9,6 @@ import org.apache.thrift.transport.TTransportException;
 import android.content.Context;
 import android.util.Log;
 
-import com.google.analytics.tracking.android.EasyTracker;
-import com.google.analytics.tracking.android.MapBuilder;
-import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.talool.api.thrift.Activity_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.mobile.android.persistence.ActivityDao;
@@ -44,6 +41,8 @@ public final class ActivitySupervisor
 	private Activity_t mostCurrentActivity;
 
 	private SearchOptions_t searchOptions;
+
+	private boolean isPaused = false;
 
 	private static final ActivityObservable activityObservable = new ActivityObservable();
 
@@ -99,6 +98,21 @@ public final class ActivitySupervisor
 	{
 		private boolean forceRefresh = false;
 		private long lastActivityTime;
+		private Object monitor = new Object();
+
+		public void onPause()
+		{
+			isPaused = false;
+			synchronized (monitor)
+			{
+				monitor.notifyAll();
+			}
+		}
+
+		public void pause()
+		{
+			isPaused = true;
+		}
 
 		@Override
 		public void run()
@@ -107,8 +121,17 @@ public final class ActivitySupervisor
 			{
 				try
 				{
+					if (isPaused)
+					{
+						synchronized (monitor)
+						{
+							monitor.wait();
+						}
+					}
+
 					final List<Activity_t> acts = client.getClient().getActivities(searchOptions);
 					handleActionsPending(acts);
+
 				}
 				catch (Exception e)
 				{
@@ -122,12 +145,13 @@ public final class ActivitySupervisor
 				catch (InterruptedException ignoreException)
 				{
 					//
-					if (forceRefresh)
+					if (forceRefresh && !isPaused)
 					{
 						handleActionsPending(activityDao.getAllActivities(null));
 						forceRefresh = false;
 					}
 				}
+
 			}
 
 		}
@@ -202,6 +226,16 @@ public final class ActivitySupervisor
 		return instance;
 	}
 
+	public void pause()
+	{
+		instance.activityPoller.pause();
+	}
+
+	public void resume()
+	{
+		instance.activityPoller.onPause();
+	}
+
 	public void addActivityObserver(final Observer observer)
 	{
 		activityObservable.addObserver(observer);
@@ -235,6 +269,5 @@ public final class ActivitySupervisor
 		{
 		}
 	}
-	
 
 }
