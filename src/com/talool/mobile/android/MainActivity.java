@@ -28,6 +28,7 @@ import android.view.MenuItem;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.talool.mobile.android.activity.MyActivityFragment;
 import com.talool.mobile.android.activity.SettingsActivity;
+import com.talool.mobile.android.tasks.ActivitySupervisor;
 import com.talool.mobile.android.util.NotificationHelper;
 import com.talool.mobile.android.util.TaloolUser;
 
@@ -70,6 +71,11 @@ public class MainActivity extends Activity
 	protected void onPause()
 	{
 		super.onPause();
+
+		if (ActivitySupervisor.get() != null)
+		{
+			ActivitySupervisor.get().pause();
+		}
 	}
 
 	@Override
@@ -134,6 +140,12 @@ public class MainActivity extends Activity
 		{
 			notificationHelper = new NotificationHelper(getActionBar().getTabAt(2), getApplicationContext());
 		}
+
+		if (ActivitySupervisor.get() != null)
+		{
+			ActivitySupervisor.get().resume();
+		}
+
 	}
 
 	private void showLogin()
