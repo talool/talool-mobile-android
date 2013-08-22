@@ -76,7 +76,6 @@ public final class ActivitySupervisor
 			activityUpdateSummary.currentActivity = activity;
 			activityUpdateSummary.actionsPending = actionsPending;
 
-			int cnt = this.countObservers();
 			setChanged();
 			notifyObservers();
 		}
