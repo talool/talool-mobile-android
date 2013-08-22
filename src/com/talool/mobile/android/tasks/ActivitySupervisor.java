@@ -1,6 +1,8 @@
 package com.talool.mobile.android.tasks;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import org.apache.thrift.transport.TTransportException;
 
@@ -32,8 +34,6 @@ public final class ActivitySupervisor
 	private ThriftHelper client = null;
 	private ActivityPoller activityPoller = null;
 
-	private volatile int actionsPending = 0;
-
 	private NotificationCallback notificationCallback;
 
 	private ActivityDao activityDao;
@@ -41,6 +41,52 @@ public final class ActivitySupervisor
 	private Activity_t mostCurrentActivity;
 
 	private SearchOptions_t searchOptions;
+
+	private static final ActivityObservable activityObservable = new ActivityObservable();
+
+	public static class ActivityUpdateSummary
+	{
+		private Activity_t currentActivity;
+		private int actionsPending;
+
+		public ActivityUpdateSummary(final Activity_t currentActivity, final int actionsPending)
+		{
+			this.currentActivity = currentActivity;
+			this.actionsPending = actionsPending;
+		}
+
+		public Activity_t getCurrentActivity()
+		{
+			return currentActivity;
+		}
+
+		public int getActionsPending()
+		{
+			return actionsPending;
+		}
+
+	}
+
+	public static class ActivityObservable extends Observable
+	{
+		private final ActivityUpdateSummary activityUpdateSummary = new ActivityUpdateSummary(null, 0);
+
+		public void updateActivitySummary(final Activity_t activity, int actionsPending)
+		{
+			activityUpdateSummary.currentActivity = activity;
+			activityUpdateSummary.actionsPending = actionsPending;
+
+			int cnt = this.countObservers();
+			setChanged();
+			notifyObservers();
+		}
+
+		public ActivityUpdateSummary getActivityUpdateSummary()
+		{
+			return activityUpdateSummary;
+		}
+
+	}
 
 	public static interface NotificationCallback
 	{
@@ -111,7 +157,7 @@ public final class ActivitySupervisor
 
 					notificationCallback.handleNotificationCount(actionsPending);
 
-					instance.actionsPending = actionsPending;
+					activityObservable.updateActivitySummary(mostCurrentActivity, actionsPending);
 				}
 			}
 
@@ -137,7 +183,6 @@ public final class ActivitySupervisor
 		if (instance == null)
 		{
 			instance = new ActivitySupervisor(context, notificationCallback);
-
 		}
 
 		else
@@ -150,19 +195,19 @@ public final class ActivitySupervisor
 		return instance;
 	}
 
-	public int getActionsPending()
-	{
-		return actionsPending;
-	}
-
-	public Activity_t getMostCurrentActivity()
-	{
-		return mostCurrentActivity;
-	}
-
 	public static ActivitySupervisor get()
 	{
 		return instance;
+	}
+
+	public void addActivityObserver(final Observer observer)
+	{
+		activityObservable.addObserver(observer);
+	}
+
+	public void removeActivityObserver(final Observer observer)
+	{
+		activityObservable.deleteObserver(observer);
 	}
 
 	private ActivitySupervisor(final Context context, final NotificationCallback notificationCallback)
