@@ -158,7 +158,7 @@ public final class ActivitySupervisor
 
 		public void handleActionsPending(final List<Activity_t> acts)
 		{
-			if (acts != null)
+			if (acts != null && acts.size() > 0)
 			{
 				mostCurrentActivity = acts.get(acts.size() - 1);
 
@@ -266,8 +266,7 @@ public final class ActivitySupervisor
 
 		}
 		catch (TTransportException e)
-		{
-		}
+		{}
 	}
 
 }
