@@ -227,8 +227,6 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		catch (Exception e)
 		{
 			e.printStackTrace();
-
-			Log.e("dealsFrag", e.getLocalizedMessage(), e);
 		}
 
 		myDealsListView.setOnItemClickListener(onClickListener);
@@ -315,22 +313,15 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 			}
 			catch (ServiceException_t e)
 			{
-				// TODO Auto-generated catch block
 				exception = e;
-				// Log.e(MyDealsFragment.class.toString(), e.getMessage());
 			}
 			catch (TException e)
 			{
-				// TODO Auto-generated catch block
 				exception = e;
-				// Log.e(MyDealsFragment.class.toString(), e.getMessage());
-
 			}
 			catch (Exception e)
 			{
 				exception = e;
-				// Log.e(MyDealsFragment.class.toString(), e.getMessage());
-
 			}
 
 			return results;
@@ -340,9 +331,8 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	@Override
 	public void onResume()
 	{
-		// TODO Auto-generated method stub
 		super.onResume();
-		//reloadData();
+		refreshViaService();
 	}
 
 	protected AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener()

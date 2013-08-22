@@ -127,7 +127,6 @@ public class FavoriteMerchantProvider extends ActionProvider
 					}
 					catch (TApplicationException e)
 					{
-						Log.e(this.getClass().getSimpleName(), e.getLocalizedMessage());
 						EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 						easyTracker.send(MapBuilder
@@ -137,7 +136,6 @@ public class FavoriteMerchantProvider extends ActionProvider
 					}
 					catch (ServiceException_t e)
 					{
-						Log.e(this.getClass().getSimpleName(), e.getLocalizedMessage());
 						EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 						easyTracker.send(MapBuilder
@@ -147,7 +145,6 @@ public class FavoriteMerchantProvider extends ActionProvider
 					}
 					catch (Exception e)
 					{
-						Log.e(this.getClass().getSimpleName(), e.getLocalizedMessage());
 						EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 						easyTracker.send(MapBuilder
