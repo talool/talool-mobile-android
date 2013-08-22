@@ -259,6 +259,12 @@ public class FindDealsFragment extends Fragment {
 		else
 		{
 			popupErrorMessage(exception.getMessage());
+			EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+
+			easyTracker.send(MapBuilder
+					.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),exception),true)                                              
+					.build()
+					);
 		}
 	}
 
@@ -376,6 +382,12 @@ public class FindDealsFragment extends Fragment {
 		protected void onPostExecute(Void result) {
 			if(exception != null)
 			{
+				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+
+				easyTracker.send(MapBuilder
+						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),exception),true)                                              
+						.build()
+						);
 				popupErrorMessage(exception.getMessage());
 			}
 			else if (emptyCode)
@@ -430,6 +442,7 @@ public class FindDealsFragment extends Fragment {
 			catch (Exception e)
 			{
 				exception = e;
+				
 			}
 			return null;
 		}

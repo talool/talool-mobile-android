@@ -36,8 +36,7 @@
             android:gravity="top"
             android:textColor="#000000"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:text="Merchant Name" />
+            android:textStyle="bold" />
 
 		 <TextView
 		     android:id="@+id/myDealsMerchantLocation"
@@ -46,18 +45,16 @@
 		     android:layout_marginBottom="5dp"
 		     android:gravity="left"
 		     android:textColor="@color/gray_4"
-		     android:textSize="12sp"
-		     android:text="location" />
+		     android:textSize="12sp" />
 		 
 		<TextView
-		     android:id="@+id/myDealsMerchantDistance"
-		     android:layout_width="wrap_content"
-		     android:layout_height="wrap_content"
-		     android:layout_marginBottom="5dp"
-		     android:gravity="left"
-		     android:textColor="@color/gray_4"
-		     android:textSize="12sp"
-		     android:text="distance" />
+		    android:id="@+id/myDealsMerchantDistance"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginBottom="5dp"
+		    android:gravity="left"
+		    android:textColor="@color/gray_4"
+		    android:textSize="12sp" />
         
     </LinearLayout>
 

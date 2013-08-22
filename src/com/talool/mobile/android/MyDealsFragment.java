@@ -94,9 +94,6 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 
 	private PullToRefreshAttacher mPullToRefreshAttacher;
 
-	// TODO REMOVE FOR PRODUCTION!
-	private static final Location_t DENVER_LOCATION = new Location_t(-104.9842, 39.7392);
-
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
 	{
@@ -305,7 +302,17 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 				exception = null;
 				final SearchOptions_t searchOptions = new SearchOptions_t();
 				searchOptions.setMaxResults(1000).setPage(0).setSortProperty("merchant.name").setAscending(true);
-				results = client.getClient().getMerchantAcquiresWithLocation(searchOptions, DENVER_LOCATION);
+				if(TaloolUser.get().getLocation() != null)
+				{
+					Location_t location = new Location_t();
+					location.latitude = TaloolUser.get().getLocation().getLatitude();
+					location.longitude = TaloolUser.get().getLocation().getLongitude();
+					results = client.getClient().getMerchantAcquiresWithLocation(searchOptions, location);
+				}
+				else
+				{
+					results = client.getClient().getMerchantAcquiresWithLocation(searchOptions, null);
+				}
 			}
 			catch (ServiceException_t e)
 			{
