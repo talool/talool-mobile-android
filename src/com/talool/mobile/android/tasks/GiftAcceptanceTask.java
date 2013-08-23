@@ -4,7 +4,6 @@ import org.apache.thrift.TException;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.talool.api.thrift.Activity_t;
 import com.talool.api.thrift.DealAcquire_t;
@@ -70,15 +69,15 @@ public class GiftAcceptanceTask extends AsyncTask<String, Void, DealAcquire_t>
 		}
 		catch (ServiceException_t e)
 		{
-			TaloolUtil.sendException(e,context);
+			TaloolUtil.sendException(e, context);
 		}
 		catch (TException e)
 		{
-			TaloolUtil.sendException(e,context);
+			TaloolUtil.sendException(e, context);
 		}
 		catch (Exception e)
 		{
-			TaloolUtil.sendException(e,context);
+			TaloolUtil.sendException(e, context);
 		}
 
 		return dealAcquire;

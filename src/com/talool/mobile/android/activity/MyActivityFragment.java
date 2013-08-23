@@ -365,8 +365,6 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 
 		setHasOptionsMenu(true);
 
-		reloadData();
-
 		return view;
 	}
 
@@ -394,6 +392,8 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 			activityObserver = new ActivityObserver();
 			ActivitySupervisor.get().addActivityObserver(activityObserver);
 		}
+
+		reloadData();
 
 	}
 
