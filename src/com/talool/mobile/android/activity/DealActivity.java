@@ -112,7 +112,7 @@ public class DealActivity extends Activity
 		if (deal.status == AcquireStatus_t.PENDING_ACCEPT_CUSTOMER_SHARE)
 		{
 			dealActivityButtonLayout.removeAllViewsInLayout();
-			dealActivityButtonLayout.setBackground(null);
+			dealActivityButtonLayout.setBackgroundDrawable(null);
 			TextView redemptionCodeTextView = new TextView(getBaseContext());
 			redemptionCodeTextView.setText("Gifted on " + new Date(deal.getUpdated()).toString());
 			redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
@@ -130,7 +130,7 @@ public class DealActivity extends Activity
 		else
 		{
 			dealActivityButtonLayout.removeAllViewsInLayout();
-			dealActivityButtonLayout.setBackground(null);
+			dealActivityButtonLayout.setBackgroundDrawable(null);
 			TextView redemptionCodeTextView = new TextView(getBaseContext());
 			redemptionCodeTextView.setText("Redeemed on " + new Date(deal.redeemed).toString());
 			redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
@@ -215,7 +215,7 @@ public class DealActivity extends Activity
 			{
 				redemptionCode = result;
 				dealActivityButtonLayout.removeAllViewsInLayout();
-				dealActivityButtonLayout.setBackground(null);
+				dealActivityButtonLayout.setBackgroundDrawable(null);
 				TextView redemptionCodeTextView = new TextView(getBaseContext());
 				redemptionCodeTextView.setText("Redemption code " + redemptionCode);
 				redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
@@ -391,7 +391,7 @@ public class DealActivity extends Activity
 			if (exception == null)
 			{
 				dealActivityButtonLayout.removeAllViewsInLayout();
-				dealActivityButtonLayout.setBackground(null);
+				dealActivityButtonLayout.setBackgroundDrawable(null);
 				TextView redemptionCodeTextView = new TextView(getBaseContext());
 				redemptionCodeTextView.setText("Gifted on " + new Date(deal.getUpdated()).toString());
 				redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);

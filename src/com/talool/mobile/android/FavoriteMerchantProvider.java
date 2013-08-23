@@ -41,28 +41,6 @@ public class FavoriteMerchantProvider extends ActionProvider
 	private View view;
 	private final FavoriteOnClickListener favoriteOnClickListener = new FavoriteOnClickListener();
 
-	@Override
-	public View onCreateActionView(final MenuItem forItem)
-	{
-		View view = super.onCreateActionView(forItem);
-		this.view = view;
-		try
-		{
-			client = new ThriftHelper();
-		}
-		catch (TTransportException e)
-		{
-			EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
-
-			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
-					.build()
-					);
-		}
-
-		return view;
-	}
-
 	protected void setIsFavorited(final boolean isFavorited)
 	{
 		if (isFavorited)
@@ -186,6 +164,20 @@ public class FavoriteMerchantProvider extends ActionProvider
 		heartTextView.setTypeface(TypefaceFactory.get().getFontAwesome());
 
 		setIsFavorited(FavoriteMerchantCache.get().isFavorite(merchant.getMerchantId()));
+		this.view = view;
+		try
+		{
+			client = new ThriftHelper();
+		}
+		catch (TTransportException e)
+		{
+			EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+
+			easyTracker.send(MapBuilder
+					.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+					.build()
+					);
+		}
 
 		return view;
 	}

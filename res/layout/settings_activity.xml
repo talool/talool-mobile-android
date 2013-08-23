@@ -190,7 +190,6 @@
             android:layout_height="fill_parent"
             android:gravity="bottom|center_horizontal"
             android:textColor="@color/tan"
-            android:textAlignment="center"
             android:textSize="12sp"
             android:text="@string/settings_copyright"/>
 </LinearLayout>
