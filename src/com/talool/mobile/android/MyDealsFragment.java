@@ -94,7 +94,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 			return categoryId;
 		}
 	};
-	
+
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
 	{
@@ -145,7 +145,6 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 
 		this.context = view.getContext();
 		createThriftClient();
-		reloadData();
 
 		setHasOptionsMenu(true);
 
@@ -171,7 +170,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 			EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+					.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(), e), true)
 					.build()
 					);
 		}
@@ -203,7 +202,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		}
 		else
 		{
-			showHelp();
+			// showHelp();
 			refreshViaService();
 		}
 
@@ -307,7 +306,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 				exception = null;
 				final SearchOptions_t searchOptions = new SearchOptions_t();
 				searchOptions.setMaxResults(1000).setPage(0).setSortProperty("merchant.name").setAscending(true);
-				if(TaloolUser.get().getLocation() != null)
+				if (TaloolUser.get().getLocation() != null)
 				{
 					Location_t location = new Location_t();
 					location.latitude = TaloolUser.get().getLocation().getLatitude();
@@ -340,7 +339,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	public void onResume()
 	{
 		super.onResume();
-		refreshViaService();
+		reloadData();
 	}
 
 	protected AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener()
@@ -373,9 +372,10 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 			merchantDao.close();
 		}
 	}
-	
+
 	@Override
-	public void onStart() {
+	public void onStart()
+	{
 		// TODO Auto-generated method stub
 		super.onStart();
 		EasyTracker easyTracker = EasyTracker.getInstance(getActivity());
@@ -385,17 +385,18 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	}
 
 	@Override
-	public void onStop() {
+	public void onStop()
+	{
 		// TODO Auto-generated method stub
 		super.onStop();
 	}
-	
+
 	private void showHelp()
 	{
 		TextView help = (TextView) view.findViewById(R.id.myDealsHelp);
 		help.setTypeface(TypefaceFactory.get().getMarkerFelt());
 		help.setText(R.string.helpLoadingDeals);
-		Drawable arrowImage = getResources().getDrawable( R.drawable.help_arrow );
+		Drawable arrowImage = getResources().getDrawable(R.drawable.help_arrow);
 		ImageView arrow2 = (ImageView) view.findViewById(R.id.arrow2);
 		arrow2.setImageDrawable(arrowImage);
 		ImageView arrow3 = (ImageView) view.findViewById(R.id.arrow3);
