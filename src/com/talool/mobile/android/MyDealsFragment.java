@@ -9,6 +9,7 @@ import org.apache.thrift.transport.TTransportException;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -202,7 +203,6 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		}
 		else
 		{
-			// showHelp();
 			refreshViaService();
 		}
 
@@ -286,10 +286,30 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 
 	private class MyDealsTask extends AsyncTask<String, Void, List<Merchant_t>>
 	{
+		
+		private ProgressDialog pd;
+
+		@Override
+		protected void onPreExecute() {
+			if (merchants.isEmpty())
+			{
+				pd = new ProgressDialog(context);
+	            pd.setTitle("Fetching Deals...");
+	            pd.setMessage("One moment, please.");
+	            pd.setCancelable(false);
+	            pd.setIndeterminate(true);
+	            pd.show();
+			}
+		}
 
 		@Override
 		protected void onPostExecute(final List<Merchant_t> results)
 		{
+			if (pd != null && pd.isShowing())
+			{
+				pd.dismiss();
+			}
+			
 			merchants = results;
 			loadListView();
 			mPullToRefreshAttacher.setRefreshComplete();
@@ -341,7 +361,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		super.onResume();
 		reloadData();
 	}
-
+	
 	protected AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener()
 	{
 
