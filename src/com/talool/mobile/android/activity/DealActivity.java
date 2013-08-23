@@ -36,6 +36,8 @@ import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.tasks.DealRedemptionTask;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
+import com.talool.mobile.android.util.AlertMessage;
+import com.talool.mobile.android.util.AndroidUtils;
 import com.talool.mobile.android.util.TaloolSmartImageView;
 import com.talool.mobile.android.util.TaloolUtil;
 import com.talool.mobile.android.util.ThriftHelper;
@@ -244,11 +246,11 @@ public class DealActivity extends Activity
 			sb.append("\n").append(location.address.address2);
 		}
 		sb.append("\n")
-				.append(location.address.city)
-				.append(", ")
-				.append(location.address.stateProvinceCounty)
-				.append(" ")
-				.append(location.address.zip);
+		.append(location.address.city)
+		.append(", ")
+		.append(location.address.stateProvinceCounty)
+		.append(" ")
+		.append(location.address.zip);
 
 		dealAddressText.setText(sb.toString());
 	}
@@ -272,16 +274,24 @@ public class DealActivity extends Activity
 
 	public void onGiftViaEmail(View view)
 	{
-		Intent contactPickerIntent = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Email.CONTENT_URI);
-		startActivityForResult(contactPickerIntent, 100);
+		try{
+			Intent contactPickerIntent = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Email.CONTENT_URI);
+			startActivityForResult(contactPickerIntent, 100);
+		}
+		catch (Exception e)
+		{
+			AlertMessage alertMessage = new AlertMessage("Gift Via Email Picker","Error on Picker ",e);
+			AndroidUtils.popupMessageWithOk(alertMessage, getApplicationContext());
+		}
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		if (resultCode == RESULT_OK)
-		{
-			switch (requestCode)
+		try{
+			if (resultCode == RESULT_OK)
 			{
+				switch (requestCode)
+				{
 				case 100:
 					Cursor emailCur = null;
 					String email = "";
@@ -314,15 +324,22 @@ public class DealActivity extends Activity
 						this.email = email;
 					}
 					break;
+				}
 			}
+			else
+			{}
+			sendGift();
 		}
-		else
-		{}
-		sendGift();
+		catch (Exception e)
+		{
+			AlertMessage alertMessage = new AlertMessage("Gift Via Email Picker Results","Error on Picker Results ",e);
+			AndroidUtils.popupMessageWithOk(alertMessage, getApplicationContext());
+		}
 	}
 
 	private void sendGift()
 	{
+
 		if (this.email == null || this.email.isEmpty())
 		{
 			Toast.makeText(getApplicationContext(), "Please select a contact with an email address", Toast.LENGTH_LONG).show();
@@ -388,23 +405,30 @@ public class DealActivity extends Activity
 		@Override
 		protected void onPostExecute(final String results)
 		{
-			if (exception == null)
-			{
-				dealActivityButtonLayout.removeAllViewsInLayout();
-				dealActivityButtonLayout.setBackgroundDrawable(null);
-				TextView redemptionCodeTextView = new TextView(getBaseContext());
-				redemptionCodeTextView.setText("Gifted on " + new Date(deal.getUpdated()).toString());
-				redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-				redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
-				redemptionCodeTextView.setTypeface(TypefaceFactory.get().getMarkerFelt(), Typeface.NORMAL);
-				redemptionCodeTextView.setPadding(30, 0, 30, 0);
-				dealActivityButtonLayout.addView(redemptionCodeTextView);
-				dealActivityButtonLayout.setGravity(Gravity.CENTER);
+			try{
+				if (exception == null)
+				{
+					dealActivityButtonLayout.removeAllViewsInLayout();
+					dealActivityButtonLayout.setBackgroundDrawable(null);
+					TextView redemptionCodeTextView = new TextView(getBaseContext());
+					redemptionCodeTextView.setText("Gifted on " + new Date());
+					redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+					redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
+					redemptionCodeTextView.setTypeface(TypefaceFactory.get().getMarkerFelt(), Typeface.NORMAL);
+					redemptionCodeTextView.setPadding(30, 0, 30, 0);
+					dealActivityButtonLayout.addView(redemptionCodeTextView);
+					dealActivityButtonLayout.setGravity(Gravity.CENTER);
 
-				EasyTracker easyTracker = EasyTracker.getInstance(getApplicationContext());
-				easyTracker.send(MapBuilder
-						.createEvent("gift", "selected", deal.dealAcquireId, null)
-						.build());
+					EasyTracker easyTracker = EasyTracker.getInstance(getApplicationContext());
+					easyTracker.send(MapBuilder
+							.createEvent("gift", "selected", deal.dealAcquireId, null)
+							.build());
+				}
+			}
+			catch (Exception e)
+			{
+				AlertMessage alertMessage = new AlertMessage("Gift Task Results","Error on Results ",e);
+				AndroidUtils.popupMessageWithOk(alertMessage, getApplicationContext());
 			}
 		}
 
