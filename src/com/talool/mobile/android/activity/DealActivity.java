@@ -34,8 +34,8 @@ import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
-import com.talool.mobile.android.tasks.DealRedemptionTask;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
+import com.talool.mobile.android.tasks.DealRedemptionTask;
 import com.talool.mobile.android.util.AlertMessage;
 import com.talool.mobile.android.util.AndroidUtils;
 import com.talool.mobile.android.util.TaloolSmartImageView;
@@ -246,11 +246,11 @@ public class DealActivity extends Activity
 			sb.append("\n").append(location.address.address2);
 		}
 		sb.append("\n")
-		.append(location.address.city)
-		.append(", ")
-		.append(location.address.stateProvinceCounty)
-		.append(" ")
-		.append(location.address.zip);
+				.append(location.address.city)
+				.append(", ")
+				.append(location.address.stateProvinceCounty)
+				.append(" ")
+				.append(location.address.zip);
 
 		dealAddressText.setText(sb.toString());
 	}
@@ -274,56 +274,58 @@ public class DealActivity extends Activity
 
 	public void onGiftViaEmail(View view)
 	{
-		try{
+		try
+		{
 			Intent contactPickerIntent = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Email.CONTENT_URI);
 			startActivityForResult(contactPickerIntent, 100);
 		}
 		catch (Exception e)
 		{
-			AlertMessage alertMessage = new AlertMessage("Gift Via Email Picker","Error on Picker ",e);
-			AndroidUtils.popupMessageWithOk(alertMessage, getApplicationContext());
+			AlertMessage alertMessage = new AlertMessage("Gift Via Email Picker", "Error on Picker ", e);
+			AndroidUtils.popupMessageWithOk(alertMessage, view.getContext());
 		}
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		try{
+		try
+		{
 			if (resultCode == RESULT_OK)
 			{
 				switch (requestCode)
 				{
-				case 100:
-					Cursor emailCur = null;
-					String email = "";
-					try
-					{
-						Uri result = data.getData();
-						// get the contact id from the Uri
-						String id = result.getLastPathSegment();
-						// query for everything email
-						emailCur = getContentResolver().query(
-								ContactsContract.CommonDataKinds.Email.CONTENT_URI,
-								null,
-								ContactsContract.CommonDataKinds.Email._ID + " = ?",
-								new String[] { id }, null);
-						while (emailCur.moveToNext())
+					case 100:
+						Cursor emailCur = null;
+						String email = "";
+						try
 						{
-							email = emailCur.getString(emailCur.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
-							name = emailCur.getString(emailCur.getColumnIndex(ContactsContract.CommonDataKinds.Email.DISPLAY_NAME_PRIMARY));
+							Uri result = data.getData();
+							// get the contact id from the Uri
+							String id = result.getLastPathSegment();
+							// query for everything email
+							emailCur = getContentResolver().query(
+									ContactsContract.CommonDataKinds.Email.CONTENT_URI,
+									null,
+									ContactsContract.CommonDataKinds.Email._ID + " = ?",
+									new String[] { id }, null);
+							while (emailCur.moveToNext())
+							{
+								email = emailCur.getString(emailCur.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
+								name = emailCur.getString(emailCur.getColumnIndex(ContactsContract.CommonDataKinds.Email.DISPLAY_NAME_PRIMARY));
 
+							}
 						}
-					}
-					catch (Exception e)
-					{}
-					finally
-					{
-						if (emailCur != null)
+						catch (Exception e)
+						{}
+						finally
 						{
-							emailCur.close();
+							if (emailCur != null)
+							{
+								emailCur.close();
+							}
+							this.email = email;
 						}
-						this.email = email;
-					}
-					break;
+						break;
 				}
 			}
 			else
@@ -332,7 +334,7 @@ public class DealActivity extends Activity
 		}
 		catch (Exception e)
 		{
-			AlertMessage alertMessage = new AlertMessage("Gift Via Email Picker Results","Error on Picker Results ",e);
+			AlertMessage alertMessage = new AlertMessage("Gift Via Email Picker Results", "Error on Picker Results ", e);
 			AndroidUtils.popupMessageWithOk(alertMessage, getApplicationContext());
 		}
 	}
@@ -405,7 +407,8 @@ public class DealActivity extends Activity
 		@Override
 		protected void onPostExecute(final String results)
 		{
-			try{
+			try
+			{
 				if (exception == null)
 				{
 					dealActivityButtonLayout.removeAllViewsInLayout();
@@ -427,7 +430,7 @@ public class DealActivity extends Activity
 			}
 			catch (Exception e)
 			{
-				AlertMessage alertMessage = new AlertMessage("Gift Task Results","Error on Results ",e);
+				AlertMessage alertMessage = new AlertMessage("Gift Task Results", "Error on Results ", e);
 				AndroidUtils.popupMessageWithOk(alertMessage, getApplicationContext());
 			}
 		}

@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.Fields;
@@ -60,6 +61,7 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 	private ThriftHelper client;
 	private View view;
 	private Menu menu;
+	private TextView noResultsMessage;
 	private ActivityDao activityDao;
 	private Activity_t mostCurrentActivity;
 	private ActivityObserver activityObserver;
@@ -201,6 +203,10 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 			return true;
 		}
 
+		myActivityListView = (ListView) view.findViewById(R.id.myActivityListView);
+
+		noResultsMessage.setVisibility(View.GONE);
+
 		selectedEventFilter = item.getItemId();
 		item.setChecked(item.isChecked() ? false : true);
 
@@ -305,7 +311,13 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 		}
 		else
 		{
-			refreshViaService();
+			final StringBuilder sb = new StringBuilder();
+
+			noResultsMessage.setVisibility(View.VISIBLE);
+			sb.append(getResources().getString(R.string.activity_no_results_prefix)).append(" '").
+					append(((MenuItem) menu.findItem(selectedEventFilter)).getTitle()).append("'");
+
+			noResultsMessage.setText(sb.toString());
 		}
 	}
 
@@ -323,6 +335,9 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 		myActivityListView = (ListView) view.findViewById(R.id.myActivityListView);
 
 		getActivity().setTitle("Activity");
+
+		noResultsMessage = (TextView) view.findViewById(R.id.activity_no_results_msg);
+		noResultsMessage.setVisibility(View.GONE);
 
 		setRetainInstance(false);
 
