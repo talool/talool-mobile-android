@@ -6,7 +6,6 @@ import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
@@ -14,7 +13,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -36,7 +34,7 @@ import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
-import com.talool.mobile.android.tasks.DealAcceptanceTask;
+import com.talool.mobile.android.tasks.DealRedemptionTask;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
 import com.talool.mobile.android.util.TaloolSmartImageView;
 import com.talool.mobile.android.util.TaloolUtil;
@@ -101,7 +99,7 @@ public class DealActivity extends Activity
 			EasyTracker easyTracker = EasyTracker.getInstance(this);
 
 			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),e),true)                                              
+					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), e), true)
 					.build()
 					);
 		}
@@ -111,7 +109,7 @@ public class DealActivity extends Activity
 	private void checkDealRedeemed()
 	{
 
-		if(deal.status == AcquireStatus_t.PENDING_ACCEPT_CUSTOMER_SHARE)
+		if (deal.status == AcquireStatus_t.PENDING_ACCEPT_CUSTOMER_SHARE)
 		{
 			dealActivityButtonLayout.removeAllViewsInLayout();
 			dealActivityButtonLayout.setBackground(null);
@@ -125,7 +123,7 @@ public class DealActivity extends Activity
 			dealActivityButtonLayout.setGravity(Gravity.CENTER);
 			return;
 		}
-		else if(deal.redeemed == 0)
+		else if (deal.redeemed == 0)
 		{
 			return;
 		}
@@ -144,14 +142,11 @@ public class DealActivity extends Activity
 			return;
 		}
 
-
 	}
-
-
 
 	private void setDealCreatorImage()
 	{
-		final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, deal.getDeal().getDealOfferId(),getApplicationContext())
+		final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, deal.getDeal().getDealOfferId(), getApplicationContext())
 		{
 
 			@Override
@@ -212,7 +207,7 @@ public class DealActivity extends Activity
 
 	public void onUseDealNowClick(final View view)
 	{
-		DealAcceptanceTask dealAcceptanceTask = new DealAcceptanceTask(client, deal.dealAcquireId, view.getContext())
+		DealRedemptionTask dealAcceptanceTask = new DealRedemptionTask(client, deal.dealAcquireId, view.getContext())
 		{
 
 			@Override
@@ -229,11 +224,11 @@ public class DealActivity extends Activity
 				redemptionCodeTextView.setPadding(30, 0, 30, 0);
 				dealActivityButtonLayout.addView(redemptionCodeTextView);
 				dealActivityButtonLayout.setGravity(Gravity.CENTER);
-				
+
 				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
-			    easyTracker.send(MapBuilder
-				        .createEvent("redeem","selected",deal.dealAcquireId,null)           
-				        .build());
+				easyTracker.send(MapBuilder
+						.createEvent("redeem", "selected", deal.dealAcquireId, null)
+						.build());
 			}
 
 		};
@@ -249,11 +244,11 @@ public class DealActivity extends Activity
 			sb.append("\n").append(location.address.address2);
 		}
 		sb.append("\n")
-		.append(location.address.city)
-		.append(", ")
-		.append(location.address.stateProvinceCounty)
-		.append(" ")
-		.append(location.address.zip);
+				.append(location.address.city)
+				.append(", ")
+				.append(location.address.stateProvinceCounty)
+				.append(" ")
+				.append(location.address.zip);
 
 		dealAddressText.setText(sb.toString());
 	}
@@ -269,7 +264,7 @@ public class DealActivity extends Activity
 			EasyTracker easyTracker = EasyTracker.getInstance(this);
 
 			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),e),true)                                              
+					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), e), true)
 					.build()
 					);
 		}
@@ -277,112 +272,123 @@ public class DealActivity extends Activity
 
 	public void onGiftViaEmail(View view)
 	{
-		Intent contactPickerIntent = new Intent(Intent.ACTION_PICK,  ContactsContract.CommonDataKinds.Email.CONTENT_URI);  
-		startActivityForResult(contactPickerIntent, 100);  
+		Intent contactPickerIntent = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Email.CONTENT_URI);
+		startActivityForResult(contactPickerIntent, 100);
 	}
 
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
-		if (resultCode == RESULT_OK) {  
-			switch (requestCode) {  
-			case 100:  
-				Cursor emailCur = null;
-				String email = "";  
-				try {  
-					Uri result = data.getData();  
-					// get the contact id from the Uri  
-					String id = result.getLastPathSegment();  
-					// query for everything email  
-					emailCur = getContentResolver().query( 
-							ContactsContract.CommonDataKinds.Email.CONTENT_URI, 
-							null,
-							ContactsContract.CommonDataKinds.Email._ID + " = ?", 
-									new String[]{id}, null); 
-					while (emailCur.moveToNext()) { 
-						email = emailCur.getString(emailCur.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
-						name = emailCur.getString(emailCur.getColumnIndex(ContactsContract.CommonDataKinds.Email.DISPLAY_NAME_PRIMARY));
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		if (resultCode == RESULT_OK)
+		{
+			switch (requestCode)
+			{
+				case 100:
+					Cursor emailCur = null;
+					String email = "";
+					try
+					{
+						Uri result = data.getData();
+						// get the contact id from the Uri
+						String id = result.getLastPathSegment();
+						// query for everything email
+						emailCur = getContentResolver().query(
+								ContactsContract.CommonDataKinds.Email.CONTENT_URI,
+								null,
+								ContactsContract.CommonDataKinds.Email._ID + " = ?",
+								new String[] { id }, null);
+						while (emailCur.moveToNext())
+						{
+							email = emailCur.getString(emailCur.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
+							name = emailCur.getString(emailCur.getColumnIndex(ContactsContract.CommonDataKinds.Email.DISPLAY_NAME_PRIMARY));
 
+						}
 					}
-				} catch (Exception e) {  
-				} finally {  
-					if (emailCur != null) {  
-						emailCur.close();  
-					}  
-					this.email = email;
-				}  
-				break;  
-			}  
-		} else {  
+					catch (Exception e)
+					{}
+					finally
+					{
+						if (emailCur != null)
+						{
+							emailCur.close();
+						}
+						this.email = email;
+					}
+					break;
+			}
 		}
+		else
+		{}
 		sendGift();
 	}
 
 	private void sendGift()
 	{
-		if(this.email ==  null || this.email.isEmpty())
+		if (this.email == null || this.email.isEmpty())
 		{
 			Toast.makeText(getApplicationContext(), "Please select a contact with an email address", Toast.LENGTH_LONG).show();
 		}
-		else		
+		else
 		{
 			GiftTask giftTask = new GiftTask();
-			giftTask.execute(new String[]{});
+			giftTask.execute(new String[] {});
 		}
 	}
 
 	@Override
-	public void onStart() {
+	public void onStart()
+	{
 		super.onStart();
 		EasyTracker easyTracker = EasyTracker.getInstance(this);
 
-		easyTracker.activityStart(this);  // Add this method.
+		easyTracker.activityStart(this); // Add this method.
 
 		// MapBuilder.createEvent().build() returns a Map of event fields and values
 		// that are set and sent with the hit.
 		easyTracker.send(MapBuilder
-				.createEvent("deal_activity","selected",deal.deal.dealId,null)           
+				.createEvent("deal_activity", "selected", deal.deal.dealId, null)
 				.build()
 				);
 	}
 
 	@Override
-	public void onStop() {
+	public void onStop()
+	{
 		super.onStop();
-		EasyTracker.getInstance(this).activityStop(this);  // Add this method.
+		EasyTracker.getInstance(this).activityStop(this); // Add this method.
 	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        boolean ret;
-        if (item.getItemId() == R.id.menu_settings)
-        {
-            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-            startActivity(intent);
-            ret = true;
-        }
-        else
-        {
-            ret = super.onOptionsItemSelected(item);
-        }
-        return ret;
-    }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		boolean ret;
+		if (item.getItemId() == R.id.menu_settings)
+		{
+			Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+			startActivity(intent);
+			ret = true;
+		}
+		else
+		{
+			ret = super.onOptionsItemSelected(item);
+		}
+		return ret;
+	}
 
-    
 	private class GiftTask extends AsyncTask<String, Void, String>
 	{
 
 		@Override
 		protected void onPostExecute(final String results)
 		{
-			if(exception == null)
+			if (exception == null)
 			{
 				dealActivityButtonLayout.removeAllViewsInLayout();
 				dealActivityButtonLayout.setBackground(null);
@@ -394,11 +400,11 @@ public class DealActivity extends Activity
 				redemptionCodeTextView.setPadding(30, 0, 30, 0);
 				dealActivityButtonLayout.addView(redemptionCodeTextView);
 				dealActivityButtonLayout.setGravity(Gravity.CENTER);
-								
+
 				EasyTracker easyTracker = EasyTracker.getInstance(getApplicationContext());
-			    easyTracker.send(MapBuilder
-				        .createEvent("gift","selected",deal.dealAcquireId,null)           
-				        .build());
+				easyTracker.send(MapBuilder
+						.createEvent("gift", "selected", deal.dealAcquireId, null)
+						.build());
 			}
 		}
 
