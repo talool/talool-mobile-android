@@ -6,6 +6,7 @@ import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import android.app.Activity;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
@@ -77,6 +78,7 @@ public class DealActivity extends Activity
 		dealOfferCreatorImage = (SmartImageView) findViewById(R.id.dealActivityCreatorImage);
 		dealExpirationText = (TextView) findViewById(R.id.dealActivityExpires);
 		dealActivityButtonLayout = (LinearLayout) findViewById(R.id.dealActivityButtonLayout);
+		
 		redemptionCode = null;
 
 		try
@@ -148,7 +150,7 @@ public class DealActivity extends Activity
 
 	private void setDealCreatorImage()
 	{
-		final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, deal.getDeal().getDealOfferId(), getApplicationContext())
+		final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, deal.getDeal().getDealOfferId(), getBaseContext())
 		{
 
 			@Override
@@ -281,7 +283,7 @@ public class DealActivity extends Activity
 		catch (Exception e)
 		{
 			AlertMessage alertMessage = new AlertMessage("Gift Via Email Picker","Error on Picker ",e);
-			AndroidUtils.popupMessageWithOk(alertMessage, getApplicationContext());
+			AndroidUtils.popupMessageWithOk(alertMessage, view.getContext());
 		}
 	}
 
@@ -333,7 +335,7 @@ public class DealActivity extends Activity
 		catch (Exception e)
 		{
 			AlertMessage alertMessage = new AlertMessage("Gift Via Email Picker Results","Error on Picker Results ",e);
-			AndroidUtils.popupMessageWithOk(alertMessage, getApplicationContext());
+			AndroidUtils.popupMessageWithOk(alertMessage, getBaseContext());
 		}
 	}
 
@@ -342,7 +344,7 @@ public class DealActivity extends Activity
 
 		if (this.email == null || this.email.isEmpty())
 		{
-			Toast.makeText(getApplicationContext(), "Please select a contact with an email address", Toast.LENGTH_LONG).show();
+			Toast.makeText(getBaseContext(), "Please select a contact with an email address", Toast.LENGTH_LONG).show();
 		}
 		else
 		{
@@ -388,7 +390,7 @@ public class DealActivity extends Activity
 		boolean ret;
 		if (item.getItemId() == R.id.menu_settings)
 		{
-			Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+			Intent intent = new Intent(getBaseContext(), SettingsActivity.class);
 			startActivity(intent);
 			ret = true;
 		}
@@ -419,16 +421,21 @@ public class DealActivity extends Activity
 					dealActivityButtonLayout.addView(redemptionCodeTextView);
 					dealActivityButtonLayout.setGravity(Gravity.CENTER);
 
-					EasyTracker easyTracker = EasyTracker.getInstance(getApplicationContext());
+					EasyTracker easyTracker = EasyTracker.getInstance(getBaseContext());
 					easyTracker.send(MapBuilder
 							.createEvent("gift", "selected", deal.dealAcquireId, null)
 							.build());
+				}
+				else
+				{
+					AlertMessage alertMessage = new AlertMessage("Gift Task Results 2","Error on Results ",exception);
+					AndroidUtils.popupMessageWithOk(alertMessage, getBaseContext());
 				}
 			}
 			catch (Exception e)
 			{
 				AlertMessage alertMessage = new AlertMessage("Gift Task Results","Error on Results ",e);
-				AndroidUtils.popupMessageWithOk(alertMessage, getApplicationContext());
+				AndroidUtils.popupMessageWithOk(alertMessage, getBaseContext());
 			}
 		}
 
