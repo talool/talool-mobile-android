@@ -12,6 +12,7 @@ import android.util.Log;
 import com.talool.api.thrift.Activity_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.mobile.android.persistence.ActivityDao;
+import com.talool.mobile.android.util.AndroidUtils;
 import com.talool.mobile.android.util.ApiUtil;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
@@ -129,9 +130,11 @@ public final class ActivitySupervisor
 						}
 					}
 
-					final List<Activity_t> acts = client.getClient().getActivities(searchOptions);
-					handleActionsPending(acts);
-
+					if (AndroidUtils.hasNetworkConnection())
+					{
+						final List<Activity_t> acts = client.getClient().getActivities(searchOptions);
+						handleActionsPending(acts);
+					}
 				}
 				catch (Exception e)
 				{

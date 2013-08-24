@@ -7,6 +7,8 @@ import org.apache.thrift.transport.TTransportException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ClipDrawable;
@@ -16,6 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.facebook.Request;
@@ -52,9 +55,21 @@ public class LoginActivity extends Activity
 
 	private class CustomerServiceTask extends AsyncTask<String, Void, CTokenAccess_t>
 	{
+		private ProgressDialog pd;
+
+		@Override
+		protected void onPreExecute() {
+			pd = new ProgressDialog(getCurrentFocus().getContext());
+            pd.setTitle("Logging in...");
+            pd.setMessage("One moment, please.");
+            pd.setCancelable(false);
+            pd.setIndeterminate(true);
+            pd.show();
+		}
+		
 		@Override
 		protected void onPostExecute(CTokenAccess_t result)
-		{
+		{	
 			if (exception != null)
 			{
 				popupErrorMessage(exception, errorMessage);
@@ -68,6 +83,11 @@ public class LoginActivity extends Activity
 
 				Intent myDealsIntent = new Intent(getApplicationContext(), MainActivity.class);
 				startActivity(myDealsIntent);
+				
+				if (pd != null && pd.isShowing())
+				{
+					pd.dismiss();
+				}
 			}
 		}
 
@@ -151,11 +171,16 @@ public class LoginActivity extends Activity
 		}
 
 		setTitle(R.string.welcome);
+		
 	}
 
 	public void onLoginClick(View view)
 	{
 		exception = null;
+		
+		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(password.getWindowToken(), 0);
+		
 		CustomerServiceTask task = new CustomerServiceTask();
 		task.execute(new String[] {});
 	}

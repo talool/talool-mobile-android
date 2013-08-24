@@ -22,7 +22,6 @@ import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.Gift_t;
 import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.ServiceException_t;
-import com.talool.mobile.android.MainActivity;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
@@ -52,7 +51,7 @@ public class GiftActivity extends Activity
 	private SmartImageView logoImageView;
 	private SmartImageView dealCreatorImageView;
 	private TextView fromFriend;
-	
+
 	@Override
 	protected void onCreate(final Bundle savedInstanceState)
 	{
@@ -69,7 +68,7 @@ public class GiftActivity extends Activity
 			EasyTracker easyTracker = EasyTracker.getInstance(this);
 
 			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),e),true)                                              
+					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), e), true)
 					.build()
 					);
 		}
@@ -86,7 +85,7 @@ public class GiftActivity extends Activity
 			EasyTracker easyTracker = EasyTracker.getInstance(this);
 
 			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),e),true)                                              
+					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), e), true)
 					.build()
 					);
 		}
@@ -101,7 +100,7 @@ public class GiftActivity extends Activity
 
 		final TextView thumbsUpIcon = (TextView) findViewById(R.id.thumbsDownIcon);
 		thumbsUpIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
-		
+
 		fromFriend = (TextView) findViewById(R.id.fromFriend);
 
 	}
@@ -115,13 +114,12 @@ public class GiftActivity extends Activity
 	public void acceptGiftClick(final View view)
 	{
 		// accept the gift and redirect to "My Deals"
-		final GiftAcceptanceTask task = new GiftAcceptanceTask(client, activity, true,view.getContext())
+		final GiftAcceptanceTask task = new GiftAcceptanceTask(client, activity, true, view.getContext())
 		{
 			@Override
 			protected void onPostExecute(DealAcquire_t result)
 			{
-				final Intent myIntent = new Intent(view.getContext(), MainActivity.class);
-				startActivity(myIntent);
+				finish();
 			}
 
 		};
@@ -132,13 +130,12 @@ public class GiftActivity extends Activity
 	public void rejectGiftClick(final View view)
 	{
 		// accept the gift and redirect to "My Deals"
-		final GiftAcceptanceTask task = new GiftAcceptanceTask(client, activity, false,view.getContext())
+		final GiftAcceptanceTask task = new GiftAcceptanceTask(client, activity, false, view.getContext())
 		{
 			@Override
 			protected void onPostExecute(DealAcquire_t result)
 			{
-				final Intent myIntent = new Intent(view.getContext(), MainActivity.class);
-				startActivity(myIntent);
+				finish();
 			}
 
 		};
@@ -155,13 +152,13 @@ public class GiftActivity extends Activity
 			final DealOffer_t dealOffer = DealOfferCache.get().getDealOffer(gift.getDeal().getDealOfferId());
 			if (dealOffer == null)
 			{
-				final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, gift.getDeal().getDealOfferId(),getApplicationContext())
+				final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, gift.getDeal().getDealOfferId(), getApplicationContext())
 				{
 
 					@Override
 					protected void onPostExecute(final DealOffer_t dealOffer)
 					{
-						if(dealOffer != null)
+						if (dealOffer != null)
 						{
 							setDealCreatorImageView(dealOffer);
 							// make sure we cache the dealOffer
@@ -182,9 +179,9 @@ public class GiftActivity extends Activity
 			final TextView details = (TextView) findViewById(R.id.details);
 
 			setTitle("A Gift to " + gift.getDeal().getMerchant().getName());
-			
+
 			String fn = gift.getFromCustomer().firstName;
-			if (fn.length()>10)
+			if (fn.length() > 10)
 			{
 				fn = (new StringBuilder(fn.substring(0, 7)).append("...")).toString();
 			}
@@ -242,7 +239,7 @@ public class GiftActivity extends Activity
 				EasyTracker easyTracker = EasyTracker.getInstance(getApplicationContext());
 
 				easyTracker.send(MapBuilder
-						.createException(new StandardExceptionParser(getApplicationContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+						.createException(new StandardExceptionParser(getApplicationContext(), null).getDescription(Thread.currentThread().getName(), e), true)
 						.build()
 						);
 			}
@@ -252,7 +249,7 @@ public class GiftActivity extends Activity
 				EasyTracker easyTracker = EasyTracker.getInstance(getApplicationContext());
 
 				easyTracker.send(MapBuilder
-						.createException(new StandardExceptionParser(getApplicationContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+						.createException(new StandardExceptionParser(getApplicationContext(), null).getDescription(Thread.currentThread().getName(), e), true)
 						.build()
 						);
 
@@ -263,7 +260,7 @@ public class GiftActivity extends Activity
 				EasyTracker easyTracker = EasyTracker.getInstance(getApplicationContext());
 
 				easyTracker.send(MapBuilder
-						.createException(new StandardExceptionParser(getApplicationContext(),null).getDescription(Thread.currentThread().getName(),e),true)                                              
+						.createException(new StandardExceptionParser(getApplicationContext(), null).getDescription(Thread.currentThread().getName(), e), true)
 						.build()
 						);
 			}
@@ -281,40 +278,42 @@ public class GiftActivity extends Activity
 		return sb.toString();
 	}
 
-	  @Override
-	  public void onStart() {
-	    super.onStart();
-	    EasyTracker.getInstance(this).activityStart(this);  // Add this method.
-	  }
+	@Override
+	public void onStart()
+	{
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this); // Add this method.
+	}
 
-	  @Override
-	  public void onStop() {
-	    super.onStop();
-	    EasyTracker.getInstance(this).activityStop(this);  // Add this method.
-	  }
+	@Override
+	public void onStop()
+	{
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		// Inflate the menu; this adds items to the action bar if it is present.
+		// getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        boolean ret;
-        if (item.getItemId() == R.id.menu_settings)
-        {
-            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-            startActivity(intent);
-            ret = true;
-        }
-        else
-        {
-            ret = super.onOptionsItemSelected(item);
-        }
-        return ret;
-    }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		boolean ret;
+		if (item.getItemId() == R.id.menu_settings)
+		{
+			Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+			startActivity(intent);
+			ret = true;
+		}
+		else
+		{
+			ret = super.onOptionsItemSelected(item);
+		}
+		return ret;
+	}
 }

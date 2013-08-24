@@ -44,7 +44,9 @@
    <string name="activity_filter_gifts">Gifts</string>
    <string name="activity_filter_messages">Messages</string>
    <string name="activity_filter_transactions">Transactions</string>
-   <string name="activity_filter_friends">Friends Activities</string>
+   <string name="activity_filter_friends">Friends</string>
+   
+   <string name="activity_no_results_prefix">You have no activities of type</string>
 
    <!-- facebook sdk strings -->
    <string name="get_started">OR</string>
