@@ -8,8 +8,8 @@ import org.apache.thrift.transport.TTransportException;
 
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -39,6 +39,7 @@ import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.adapters.MyDealsAdapter;
 import com.talool.mobile.android.cache.FavoriteMerchantCache;
+import com.talool.mobile.android.dialog.DialogFactory;
 import com.talool.mobile.android.persistence.MerchantDao;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
@@ -287,27 +288,23 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	private class MyDealsTask extends AsyncTask<String, Void, List<Merchant_t>>
 	{
 		
-		private ProgressDialog pd;
+		private DialogFragment df;
 
 		@Override
 		protected void onPreExecute() {
 			if (merchants.isEmpty())
 			{
-				pd = new ProgressDialog(context);
-	            pd.setTitle("Fetching Deals...");
-	            pd.setMessage("One moment, please.");
-	            pd.setCancelable(false);
-	            pd.setIndeterminate(true);
-	            pd.show();
+				df = DialogFactory.getProgressDialog();
+	            df.show(getFragmentManager(), "dialog");
 			}
 		}
 
 		@Override
 		protected void onPostExecute(final List<Merchant_t> results)
 		{
-			if (pd != null && pd.isShowing())
+			if (df != null && !df.isHidden())
 			{
-				pd.dismiss();
+				df.dismiss();
 			}
 			
 			merchants = results;

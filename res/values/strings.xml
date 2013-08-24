@@ -14,6 +14,12 @@
     <string name="mydeals">My Deals</string>
     <string name="activity">Activity</string>
     <string name="finddeals">Find Deals</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="retry">Retry</string>
+    
+    <string name="error_login">Error Logging In</string>
+    
     <string name="icon_gift">&#xf06b;</string>
     <string name="icon_envelope_alt">&#xf003;</string>
     <string name="icon_envelope">&#xf0e0;</string>

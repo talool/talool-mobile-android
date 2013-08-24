@@ -32,6 +32,7 @@
         <item name="android:actionBarTabTextStyle">@style/TabTextStyle.Talool</item>
         <item name="android:itemTextAppearance">@style/MenuTextStyle.Talool</item>
         <item name="android:actionButtonStyle">@style/MenuTextStyle.Talool</item>
+        <item name="android:alertDialogTheme">@style/AlertDialogTheme.Talool</item>
     </style>
 
     <style name="ActionBar.Solid.Talool" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
@@ -101,5 +102,22 @@
 		   parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Menu">
         <item name="android:textColor">@color/actionbar_text</item>
     </style>
+    
+    <!-- alert dialog -->
+    <style name="AlertDialogTheme.Talool" parent="@android:style/Theme.Holo.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
+        <item name="android:buttonBarStyle">@style/AlertButtonBarWithBackground</item>
+    </style>
+    <style name="AlertButtonBarWithBackground" parent="@android:style/Holo.ButtonBar.AlertDialog">
+        <item name="android:background">@color/teal</item>     
+    </style>
+
+
+
+    
+
 
 </resources>

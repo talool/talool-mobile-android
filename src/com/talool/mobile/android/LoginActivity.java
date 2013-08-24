@@ -6,10 +6,8 @@ import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
+import android.app.DialogFragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ClipDrawable;
 import android.os.AsyncTask;
@@ -36,6 +34,7 @@ import com.talool.api.thrift.Customer_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.api.thrift.SocialNetwork_t;
 import com.talool.mobile.android.activity.SettingsActivity;
+import com.talool.mobile.android.dialog.DialogFactory;
 import com.talool.mobile.android.tasks.FetchFavoriteMerchantsTask;
 import com.talool.mobile.android.util.FacebookHelper;
 import com.talool.mobile.android.util.TaloolUser;
@@ -52,19 +51,15 @@ public class LoginActivity extends Activity
 	private String errorMessage;
 	private UiLifecycleHelper lifecycleHelper;
 	private boolean isResumed = false;
+	private DialogFragment df;
 
 	private class CustomerServiceTask extends AsyncTask<String, Void, CTokenAccess_t>
 	{
-		private ProgressDialog pd;
-
+		
 		@Override
 		protected void onPreExecute() {
-			pd = new ProgressDialog(getCurrentFocus().getContext());
-            pd.setTitle("Logging in...");
-            pd.setMessage("One moment, please.");
-            pd.setCancelable(false);
-            pd.setIndeterminate(true);
-            pd.show();
+			df = DialogFactory.getProgressDialog();
+            df.show(getFragmentManager(), "dialog");
 		}
 		
 		@Override
@@ -83,11 +78,7 @@ public class LoginActivity extends Activity
 
 				Intent myDealsIntent = new Intent(getApplicationContext(), MainActivity.class);
 				startActivity(myDealsIntent);
-				
-				if (pd != null && pd.isShowing())
-				{
-					pd.dismiss();
-				}
+
 			}
 		}
 
@@ -194,29 +185,17 @@ public class LoginActivity extends Activity
 				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
 				.build()
 				);
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-		alertDialogBuilder.setTitle("Error Logging In");
-
-		alertDialogBuilder.setMessage(errorMessage == null ? exception.getMessage() : errorMessage);
-		alertDialogBuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener()
+		
+		if (df != null && !df.isHidden())
 		{
-			public void onClick(DialogInterface dialog, int which)
-			{
-				dialog.dismiss();
-			}
-		});
-		alertDialogBuilder.setNegativeButton("Register", new DialogInterface.OnClickListener()
-		{
-			public void onClick(DialogInterface dialog, int which)
-			{
-				onRegistrationClicked(null);
-			}
-		});
-		// create alert dialog
-		AlertDialog alertDialog = alertDialogBuilder.create();
-
-		// show it
-		alertDialog.show();
+			df.dismiss();
+		}
+		String message = errorMessage == null ? exception.getMessage() : errorMessage;
+		String title = getResources().getString(R.string.error_login);
+		String label = getResources().getString(R.string.retry);
+		df = DialogFactory.getAlertDialog(title, message, label);
+        df.show(getFragmentManager(), "dialog");
+        
 	}
 
 	public void onRegistrationClicked(View view)
@@ -256,6 +235,8 @@ public class LoginActivity extends Activity
 		super.onStart();
 		EasyTracker.getInstance(this).activityStart(this); // Add this method.
 	}
+	
+	
 
 	@Override
 	public void onStop()
@@ -279,6 +260,11 @@ public class LoginActivity extends Activity
 		lifecycleHelper.onResume();
 		isResumed = true;
 
+		if (df != null && !df.isHidden())
+		{
+			df.dismiss();
+		}
+		
 		Session session = Session.getActiveSession();
 
 		if (session != null && session.isOpened())
@@ -344,4 +330,6 @@ public class LoginActivity extends Activity
 			}
 		}
 	}
+	
+	
 }
