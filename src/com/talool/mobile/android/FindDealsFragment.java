@@ -283,6 +283,7 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 					map.put(deal.merchant.merchantId, deal.dealOfferId);
 				}
 			}
+			numberOfMerchants = map.size();
 			BookCache.get().setNumberOfMerchants(map.size());
 		}
 		return numberOfMerchants;
@@ -345,7 +346,7 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 		listViewLinearLayout.setVisibility(View.VISIBLE);
 
 		TextView textView = (TextView) view.findViewById(R.id.summaryText);
-		textView.setText(dealOffers.size() + " Deal from " + numMerchants +" Merchants");
+		textView.setText(dealOffers.size() + " Deals from " + numMerchants +" Merchants");
 	}
 
 	private class FindDealsTask extends AsyncTask<String, Void, List<Deal_t>>
