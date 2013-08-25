@@ -57,7 +57,11 @@ public class MapActivity extends Activity {
 		setContentView(R.layout.map_activity_layout);
 		createThriftClient();
 		dealsAcquiredList = (ListView) findViewById(R.id.mapActivityDealAcquiresList);
-
+		if (TaloolUser.get().getAccessToken() == null)
+		{
+			Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+			startActivity(intent);
+		}
 		try {
 			byte[] merchantBytes = (byte[]) getIntent().getSerializableExtra("merchant");
 			merchant = new Merchant_t();

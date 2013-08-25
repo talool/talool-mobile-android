@@ -23,6 +23,7 @@ import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.Gift_t;
 import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.ServiceException_t;
+import com.talool.mobile.android.LoginActivity;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.dialog.DialogFactory;
@@ -60,7 +61,11 @@ public class GiftActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.gift_activity);
-
+		if (TaloolUser.get().getAccessToken() == null)
+		{
+			Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+			startActivity(intent);
+		}
 		try
 		{
 			client = new ThriftHelper();

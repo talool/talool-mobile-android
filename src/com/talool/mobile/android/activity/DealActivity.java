@@ -36,6 +36,7 @@ import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.ServiceException_t;
+import com.talool.mobile.android.LoginActivity;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.dialog.DialogFactory;
@@ -44,6 +45,7 @@ import com.talool.mobile.android.tasks.DealOfferFetchTask;
 import com.talool.mobile.android.util.AlertMessage;
 import com.talool.mobile.android.util.AndroidUtils;
 import com.talool.mobile.android.util.TaloolSmartImageView;
+import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.TaloolUtil;
 import com.talool.mobile.android.util.ThriftHelper;
 import com.talool.mobile.android.util.TypefaceFactory;
@@ -83,9 +85,12 @@ public class DealActivity extends Activity
 		dealOfferCreatorImage = (SmartImageView) findViewById(R.id.dealActivityCreatorImage);
 		dealExpirationText = (TextView) findViewById(R.id.dealActivityExpires);
 		dealActivityButtonLayout = (LinearLayout) findViewById(R.id.dealActivityButtonLayout);
-
 		redemptionCode = null;
-
+		if (TaloolUser.get().getAccessToken() == null)
+		{
+			Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+			startActivity(intent);
+		}
 		try
 		{
 			byte[] dealBytes = (byte[]) getIntent().getSerializableExtra("deal");

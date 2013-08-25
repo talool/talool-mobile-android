@@ -38,6 +38,7 @@ import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.activity.LocationSelectActivity;
 import com.talool.mobile.android.adapters.FindDealsAdapter;
+import com.talool.mobile.android.cache.BookCache;
 import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.dialog.DialogFactory;
 import com.talool.mobile.android.dialog.DialogFactory.ConfirmDialogListener;
@@ -158,8 +159,12 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 				@Override
 				protected void onPostExecute(final DealOffer_t dealOffer)
 				{
-					DealOfferCache.get().setDealOffer(dealOffer);
-					boulderBookCompletion(dealOffer);
+					if(dealOffer != null)
+					{
+						DealOfferCache.get().setDealOffer(dealOffer);
+						boulderBookCompletion(dealOffer);
+						
+					}
 				}
 			};
 			dealOfferFetchTask.execute(new String[] {});
@@ -240,6 +245,7 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 				closestBook = vancouverBook;
 			}
 			getActivity().setTitle(closestBook.title);
+			BookCache.get().setClosestBook(closestBook);
 			loadBookImages();
 			loadBookDeals();
 		}
@@ -247,13 +253,28 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 
 	private void loadBookDeals()
 	{		
-		FindDealsTask dealsTask = new FindDealsTask();
-		dealsTask.execute(new String[]{});
+		if(BookCache.get().getDealsInBook().isEmpty())
+		{
+			FindDealsTask dealsTask = new FindDealsTask();
+			dealsTask.execute(new String[]{});
+		}
+		else
+		{
+			dealOffers = BookCache.get().getDealsInBook();
+			loadListView();
+		}
 	}
 
 	private void loadBooks()
 	{
-		if (exception == null)
+		
+		if(BookCache.get().getClosestBook() != null)
+		{
+			closestBook = BookCache.get().getClosestBook();
+			loadBookImages();
+			loadBookDeals();
+		}
+		else if (exception == null)
 		{
 			findDealOfferBooks();
 			determineClosestBook();
@@ -339,7 +360,7 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 			else
 			{
 				dealOffers = results;
-				Log.i(MyDealsFragment.class.toString(), "Number of Merchants: " + results.size());
+				BookCache.get().setDealsInBook(dealOffers);
 				loadListView();
 			}
 		}

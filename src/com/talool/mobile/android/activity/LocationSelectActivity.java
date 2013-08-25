@@ -1,10 +1,12 @@
 package com.talool.mobile.android.activity;
 
 import com.google.analytics.tracking.android.EasyTracker;
+import com.talool.mobile.android.LoginActivity;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.util.TaloolUser;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -15,6 +17,11 @@ public class LocationSelectActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.location_select_activity);
+		if (TaloolUser.get().getAccessToken() == null)
+		{
+			Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+			startActivity(intent);
+		}
 	}
 	
 	public void onBoulderClicked(View view)

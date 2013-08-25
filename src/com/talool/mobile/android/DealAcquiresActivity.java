@@ -96,7 +96,11 @@ public class DealAcquiresActivity extends Activity
 		setIcons();
 		dealsAcquiredList = (ListView) findViewById(R.id.dealsAcquiredList);
 		imageView = (TaloolSmartImageView) findViewById(R.id.dealsMerchantImage);
-
+		if (TaloolUser.get().getAccessToken() == null)
+		{
+			Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+			startActivity(intent);
+		}
 		try
 		{
 			byte[] merchantBytes = (byte[]) getIntent().getSerializableExtra("merchant");

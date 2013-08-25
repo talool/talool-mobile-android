@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
 import com.talool.mobile.android.activity.SettingsActivity;
+import com.talool.mobile.android.util.TaloolUser;
 
 /**
  * An activity that simply presents a WebView
@@ -28,7 +29,6 @@ public class BasicWebViewActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.webview_activity);
-
 		final WebView webView = (WebView) findViewById(R.id.webview);
 		final String targetUrl = (String) getIntent().getSerializableExtra(TARGET_URL_PARAM);
 		final String title = (String) getIntent().getSerializableExtra(TITLE_PARAM);
@@ -38,6 +38,12 @@ public class BasicWebViewActivity extends Activity
 			setTitle(title);
 		}
 
+		if (TaloolUser.get().getAccessToken() == null)
+		{
+			Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+			startActivity(intent);
+		}
+		
 		webView.loadUrl(targetUrl);
 		webView.getSettings().setJavaScriptEnabled(true);
 
