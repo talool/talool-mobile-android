@@ -46,8 +46,8 @@ public class MainActivity extends Activity
 			{
 				TaloolUser.get().setLocation(location);
 				LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-				lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30000, 10, locationListener);
-				lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 30000, 10, locationListener);
+				lm.removeUpdates(locationListener);
+				lm.removeUpdates(locationListener);
 			}
 		}
 
@@ -294,6 +294,9 @@ public class MainActivity extends Activity
 	{
 		super.onStop();
 		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		lm.removeUpdates(locationListener);
+		lm.removeUpdates(locationListener);
 	}
 	
 
