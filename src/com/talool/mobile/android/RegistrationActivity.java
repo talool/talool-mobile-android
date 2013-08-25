@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
+import com.facebook.Session;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
@@ -36,6 +37,12 @@ public class RegistrationActivity extends Activity
 
 	private class RegisterTask extends AsyncTask<String, Void, CTokenAccess_t>
 	{
+		
+		@Override
+		protected void onPreExecute() {
+			df = DialogFactory.getProgressDialog();
+            df.show(getFragmentManager(), "dialog");
+		}
 
 		@Override
 		protected void onPostExecute(CTokenAccess_t result)
@@ -196,5 +203,15 @@ public class RegistrationActivity extends Activity
 	{
 		super.onStop();
 		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+	}
+	
+	@Override
+	protected void onResume()
+	{
+		super.onResume();
+		if (df != null && !df.isHidden())
+		{
+			df.dismiss();
+		}
 	}
 }

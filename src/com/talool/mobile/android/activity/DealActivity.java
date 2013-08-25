@@ -6,6 +6,7 @@ import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.database.Cursor;
@@ -37,6 +38,7 @@ import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
+import com.talool.mobile.android.dialog.DialogFactory;
 import com.talool.mobile.android.tasks.DealRedemptionTask;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
 import com.talool.mobile.android.util.AlertMessage;
@@ -64,6 +66,7 @@ public class DealActivity extends Activity
 	private String email;
 	private Exception exception;
 	private String name;
+	private DialogFragment df;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -399,10 +402,20 @@ public class DealActivity extends Activity
 
 	private class GiftTask extends AsyncTask<String, Void, String>
 	{
+		
+		@Override
+		protected void onPreExecute() {
+			df = DialogFactory.getProgressDialog();
+			df.show(getFragmentManager(), "dialog");
+		}
 
 		@Override
 		protected void onPostExecute(final String results)
 		{
+			if (df != null && !df.isHidden())
+			{
+				df.dismiss();
+			}
 			try{
 				if (exception == null)
 				{
@@ -462,4 +475,15 @@ public class DealActivity extends Activity
 			return results;
 		}
 	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (df != null && !df.isHidden())
+		{
+			df.dismiss();
+		}
+	}
+	
+	
 }

@@ -150,7 +150,20 @@ public class MapActivity extends Activity {
 	private class MapAcquiresTask extends AsyncTask<String,Void,List<DealAcquire_t>>{
 
 		@Override
+		protected void onPreExecute() {
+			if (dealAcquires==null || dealAcquires.isEmpty())
+			{
+				df = DialogFactory.getProgressDialog();
+				df.show(getFragmentManager(), "dialog");
+			}
+		}
+		
+		@Override
 		protected void onPostExecute(List<DealAcquire_t> results) {
+			if (df != null && !df.isHidden())
+			{
+				df.dismiss();
+			}
 			dealAcquires = results;
 			Log.i(MyDealsFragment.class.toString(), "Number of Deals: " + results.size());
 			loadListView();

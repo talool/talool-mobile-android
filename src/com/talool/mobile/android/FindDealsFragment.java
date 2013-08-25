@@ -93,6 +93,11 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 		// TODO Auto-generated method stub
 		super.onResume();
 
+		if (df != null && !df.isHidden())
+		{
+			df.dismiss();
+		}
+		
 		if(TaloolUser.get().getLocation() == null)
 		{
 			Intent intent = new Intent(this.view.getContext(), LocationSelectActivity.class);
@@ -310,10 +315,23 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 
 	private class FindDealsTask extends AsyncTask<String, Void, List<Deal_t>>
 	{
+		
+		@Override
+		protected void onPreExecute() {
+			if (dealOffers == null || dealOffers.isEmpty())
+			{
+				df = DialogFactory.getProgressDialog();
+				df.show(getFragmentManager(), "dialog");
+			}
+		}
 
 		@Override
 		protected void onPostExecute(final List<Deal_t> results)
 		{
+			if (df != null && !df.isHidden())
+			{
+				df.dismiss();
+			}
 			if(exception != null)
 			{
 				popupErrorMessage(exception.getMessage());
@@ -367,9 +385,19 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 	private class RedeemBook extends AsyncTask<Void, Void, Void>
 	{
 		private boolean emptyCode = false;
+		
+		@Override
+		protected void onPreExecute() {
+			df = DialogFactory.getProgressDialog();
+			df.show(getFragmentManager(), "dialog");
+		}
 
 		@Override
 		protected void onPostExecute(Void result) {
+			if (df != null && !df.isHidden())
+			{
+				df.dismiss();
+			}
 			if(exception != null)
 			{
 				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
@@ -391,10 +419,6 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 						.build()
 						);
 				
-				if (df != null && !df.isHidden())
-				{
-					df.dismiss();
-				}
 				String title = getResources().getString(R.string.alert_new_deals_title);
 				String message = getResources().getString(R.string.alert_new_deals_message);
 				df = DialogFactory.getConfirmDialog(title, message, FindDealsFragment.this);

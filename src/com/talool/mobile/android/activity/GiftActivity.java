@@ -4,6 +4,7 @@ import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
+import com.talool.mobile.android.dialog.DialogFactory;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
 import com.talool.mobile.android.tasks.GiftAcceptanceTask;
 import com.talool.mobile.android.util.TaloolSmartImageView;
@@ -51,6 +53,7 @@ public class GiftActivity extends Activity
 	private SmartImageView logoImageView;
 	private SmartImageView dealCreatorImageView;
 	private TextView fromFriend;
+	private DialogFragment df;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState)
@@ -147,6 +150,12 @@ public class GiftActivity extends Activity
 	{
 
 		@Override
+		protected void onPreExecute() {
+			df = DialogFactory.getProgressDialog();
+			df.show(getFragmentManager(), "dialog");
+		}
+		
+		@Override
 		protected void onPostExecute(final Gift_t gift)
 		{
 			final DealOffer_t dealOffer = DealOfferCache.get().getDealOffer(gift.getDeal().getDealOfferId());
@@ -219,6 +228,11 @@ public class GiftActivity extends Activity
 					.append(location.address.zip);
 
 			address1.setText(sb.toString());
+			
+			if (df != null && !df.isHidden())
+			{
+				df.dismiss();
+			}
 
 		}
 
@@ -290,6 +304,15 @@ public class GiftActivity extends Activity
 	{
 		super.onStop();
 		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (df != null && !df.isHidden())
+		{
+			df.dismiss();
+		}
 	}
 
 	@Override
