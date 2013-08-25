@@ -15,9 +15,11 @@ import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.talool.api.thrift.DealAcquire_t;
 import com.talool.api.thrift.Merchant_t;
@@ -35,6 +37,8 @@ import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -79,10 +83,20 @@ public class MapActivity extends Activity {
 
 
 			mapView.getMap().moveCamera(update);
-			mapView.getMap().addMarker(new MarkerOptions()
-			.position(location)
-			.title(merchant.name));
-
+			MarkerOptions marker = new MarkerOptions().position(location).title(merchant.name);
+			mapView.getMap().addMarker(marker);
+			mapView.getMap().setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+				
+				@Override
+				public boolean onMarkerClick(Marker marker) {
+					double lat = marker.getPosition().latitude;
+					double lon = marker.getPosition().longitude;
+					String url = "geo:"+lat+","+lon+"?q="+lat+","+lon+"("+marker.getTitle()+")";
+					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+					startActivity(intent);
+					return true;
+				}
+			});
 
 
 		} catch (GooglePlayServicesNotAvailableException e1) {

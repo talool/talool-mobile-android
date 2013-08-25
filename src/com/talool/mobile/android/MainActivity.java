@@ -42,7 +42,13 @@ public class MainActivity extends Activity
 	{
 		public void onLocationChanged(Location location)
 		{
-			TaloolUser.get().setLocation(location);
+			if(isBetterLocation(location, TaloolUser.get().getLocation()))
+			{
+				TaloolUser.get().setLocation(location);
+				LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+				lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 30000, 10, locationListener);
+				lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 30000, 10, locationListener);
+			}
 		}
 
 		@Override
@@ -77,6 +83,31 @@ public class MainActivity extends Activity
 			ActivitySupervisor.get().pause();
 		}
 	}
+	
+	private void getLastKnownLocation()
+	{
+		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		if(location != null)
+		{
+			TaloolUser.get().setLocation(location);
+		}
+		else
+		{
+			Location networkLocation = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+			if(networkLocation != null)
+			{
+				TaloolUser.get().setLocation(location);
+			}
+		}
+	}
+	
+	private void subscribeForLocationUpdates()
+	{
+		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+		lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -98,17 +129,13 @@ public class MainActivity extends Activity
 		}
 		catch (PackageManager.NameNotFoundException e)
 		{
-			Log.d("bug", "bug");
-
 		}
 		catch (NoSuchAlgorithmException e)
 		{
-
 		}
 
-		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
-
+		getLastKnownLocation();
+		subscribeForLocationUpdates();
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
@@ -267,5 +294,56 @@ public class MainActivity extends Activity
 	{
 		super.onStop();
 		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+	}
+	
+
+	protected boolean isBetterLocation(Location location, Location currentBestLocation) {
+	    if (currentBestLocation == null) {
+	        // A new location is always better than no location
+	        return true;
+	    }
+
+	    // Check whether the new location fix is newer or older
+	    long timeDelta = location.getTime() - currentBestLocation.getTime();
+	    boolean isSignificantlyNewer = timeDelta > 30000;
+	    boolean isSignificantlyOlder = timeDelta < -30000;
+	    boolean isNewer = timeDelta > 0;
+
+	    // If it's been more than two minutes since the current location, use the new location
+	    // because the user has likely moved
+	    if (isSignificantlyNewer) {
+	        return true;
+	    // If the new location is more than two minutes older, it must be worse
+	    } else if (isSignificantlyOlder) {
+	        return false;
+	    }
+
+	    // Check whether the new location fix is more or less accurate
+	    int accuracyDelta = (int) (location.getAccuracy() - currentBestLocation.getAccuracy());
+	    boolean isLessAccurate = accuracyDelta > 0;
+	    boolean isMoreAccurate = accuracyDelta < 0;
+	    boolean isSignificantlyLessAccurate = accuracyDelta > 200;
+
+	    // Check if the old and new location are from the same provider
+	    boolean isFromSameProvider = isSameProvider(location.getProvider(),
+	            currentBestLocation.getProvider());
+
+	    // Determine location quality using a combination of timeliness and accuracy
+	    if (isMoreAccurate) {
+	        return true;
+	    } else if (isNewer && !isLessAccurate) {
+	        return true;
+	    } else if (isNewer && !isSignificantlyLessAccurate && isFromSameProvider) {
+	        return true;
+	    }
+	    return false;
+	}
+
+	/** Checks whether two providers are the same */
+	private boolean isSameProvider(String provider1, String provider2) {
+	    if (provider1 == null) {
+	      return provider2 == null;
+	    }
+	    return provider1.equals(provider2);
 	}
 }
