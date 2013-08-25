@@ -186,8 +186,11 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 				@Override
 				protected void onPostExecute(final DealOffer_t dealOffer)
 				{
-					DealOfferCache.get().setDealOffer(dealOffer);
-					vancouverBookCompletion(dealOffer);
+					if(dealOffer != null)
+					{
+						DealOfferCache.get().setDealOffer(dealOffer);
+						vancouverBookCompletion(dealOffer);
+					}
 				}
 			};
 			dealOfferFetchTask.execute(new String[] {});

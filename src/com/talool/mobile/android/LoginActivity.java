@@ -168,7 +168,7 @@ public class LoginActivity extends Activity
 	public void onLoginClick(View view)
 	{
 		exception = null;
-		
+		errorMessage = null;
 		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(password.getWindowToken(), 0);
 		

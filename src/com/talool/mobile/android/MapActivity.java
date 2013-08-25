@@ -10,6 +10,8 @@ import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -49,7 +51,8 @@ public class MapActivity extends Activity {
 	private Exception exception;
 	private List<DealAcquire_t> dealAcquires;
 	private DialogFragment df;
-	
+	private String errorMessage;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -70,26 +73,29 @@ public class MapActivity extends Activity {
 			mapView = (MapView) findViewById(R.id.map);
 			mapView.onCreate(savedInstanceState);
 			reloadData();
-			
+
 			LatLng location = new LatLng(Double.valueOf(merchant.locations.get(0).location.latitude),Double.valueOf(merchant.locations.get(0).location.longitude));
 			CameraUpdate update = CameraUpdateFactory.newLatLngZoom(location, 13);
-			
-			
+
+
 			mapView.getMap().moveCamera(update);
 			mapView.getMap().addMarker(new MarkerOptions()
 			.position(location)
 			.title(merchant.name));
-			
+
 
 
 		} catch (GooglePlayServicesNotAvailableException e1) {
-			Log.e(DealAcquiresActivity.class.toString(),"Maps was not loaded on this device. Please install");
+			exception = e1;
+			errorMessage = "Google maps is not installed on this device. Please install";
+			popupErrorMessage(exception, errorMessage);
 		} catch (TException e) {
 			// TODO Auto-generated catch block
-			Log.e(DealAcquiresActivity.class.toString(),"Error Loading Merchant. Please go back and try again");
-		}
+			exception = e;
+			errorMessage = "Error loading Map, please try again";
+			popupErrorMessage(exception, errorMessage);		}
 	}
-	
+
 	private void createThriftClient()
 	{
 
@@ -97,10 +103,12 @@ public class MapActivity extends Activity {
 			client = new ThriftHelper();
 		} catch (TTransportException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			exception = e;
+			errorMessage = "Make sure you have a network connection";
+			popupErrorMessage(exception, errorMessage);
 		}
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
@@ -125,32 +133,32 @@ public class MapActivity extends Activity {
 		mapView.onResume();
 	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
 
-        return true;
-    }
+		return true;
+	}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        boolean ret;
-        if (item.getItemId() == R.id.menu_settings)
-        {
-            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-            startActivity(intent);
-            ret = true;
-        }
-        else
-        {
-            ret = super.onOptionsItemSelected(item);
-        }
-        return ret;
-    }
-	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		boolean ret;
+		if (item.getItemId() == R.id.menu_settings)
+		{
+			Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+			startActivity(intent);
+			ret = true;
+		}
+		else
+		{
+			ret = super.onOptionsItemSelected(item);
+		}
+		return ret;
+	}
+
 	private class MapAcquiresTask extends AsyncTask<String,Void,List<DealAcquire_t>>{
 
 		@Override
@@ -161,7 +169,7 @@ public class MapActivity extends Activity {
 				df.show(getFragmentManager(), "dialog");
 			}
 		}
-		
+
 		@Override
 		protected void onPostExecute(List<DealAcquire_t> results) {
 			if (df != null && !df.isHidden())
@@ -169,7 +177,6 @@ public class MapActivity extends Activity {
 				df.dismiss();
 			}
 			dealAcquires = results;
-			Log.i(MyDealsFragment.class.toString(), "Number of Deals: " + results.size());
 			loadListView();
 		}
 
@@ -179,6 +186,7 @@ public class MapActivity extends Activity {
 
 			try {
 				exception = null;
+				errorMessage = null;
 				client.setAccessToken(TaloolUser.get().getAccessToken());
 				SearchOptions_t searchOptions = new SearchOptions_t();
 				searchOptions.setMaxResults(1000).setPage(0).setSortProperty("deal.dealId").setAscending(true);
@@ -187,24 +195,25 @@ public class MapActivity extends Activity {
 				// TODO Auto-generated catch block
 				exception = e;
 				e.printStackTrace();
-
+			}
+			catch (TTransportException e)
+			{
+				errorMessage = "Make sure you have a network connection";
+				exception = e;
 			} catch (TException e) {
 				// TODO Auto-generated catch block
 				exception = e;
 				e.printStackTrace();
-
-			} catch (Exception e)
-			{
+			} catch (Exception e){
 				exception = e;
 				e.printStackTrace();
-
 			}
 
 			return results;
 		}
 
 	}
-	
+
 	private void loadListView()
 	{
 		if(exception == null)
@@ -217,33 +226,43 @@ public class MapActivity extends Activity {
 		}
 		else
 		{
-			popupErrorMessage(exception.getMessage());
+			popupErrorMessage(exception, errorMessage);
 		}
 	}
-	
-	private void popupErrorMessage(String message)
+
+	private void popupErrorMessage(Exception exception, String errorMessage)
 	{
+		EasyTracker easyTracker = EasyTracker.getInstance(this);
+
+		easyTracker.send(MapBuilder
+				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
+				.build()
+				);
+
 		if (df != null && !df.isHidden())
 		{
 			df.dismiss();
 		}
+		String message = errorMessage == null ? exception.getMessage() : errorMessage;
 		String title = getResources().getString(R.string.error_loading_deals);
-		String label = getResources().getString(R.string.ok);
+		String label = getResources().getString(R.string.retry);
 		df = DialogFactory.getAlertDialog(title, message, label);
-        df.show(getFragmentManager(), "dialog");
-        /*
+		df.show(getFragmentManager(), "dialog");
+		/*
         dialog.dismiss();
 		createThriftClient();
 		reloadData();
-		*/
+		 */
 	}
-	
+
 	private void reloadData()
 	{
+		exception = null;
+		errorMessage = null;
 		MapAcquiresTask dealAcquiresTask = new MapAcquiresTask();
 		dealAcquiresTask.execute(new String[]{});
 	}
-	
+
 	protected AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener()
 	{
 
@@ -263,17 +282,17 @@ public class MapActivity extends Activity {
 
 		}
 	};
-	
-	  @Override
-	  public void onStart() {
-	    super.onStart();
-	    EasyTracker.getInstance(this).activityStart(this);  // Add this method.
-	  }
 
-	  @Override
-	  public void onStop() {
-	    super.onStop();
-	    EasyTracker.getInstance(this).activityStop(this);  // Add this method.
-	  }
+	@Override
+	public void onStart() {
+		super.onStart();
+		EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this);  // Add this method.
+	}
 }
 

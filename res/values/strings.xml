@@ -23,6 +23,7 @@
     <string name="error_login">Error Logging In</string>
     <string name="error_reg">Error Registering</string>
     <string name="error_loading_deals">Error Loading Deals</string>
+    <string name="error_loading_maps">Error Loading Maps</string>
     <string name="error_access_code_title">Error Activating Code</string>
     <string name="error_access_code_message">Please check your code and try again.</string>
     <string name="alert_new_deals_title">You\'ve Got Deals!</string>

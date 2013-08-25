@@ -56,6 +56,7 @@ public class DealAcquiresActivity extends Activity
 	private Merchant_t merchant;
 	private Menu menu;
 	private DialogFragment df;
+	private String errorMessage;
 
 	public boolean onCreateOptionsMenu(final Menu menu)
 	{
@@ -185,13 +186,7 @@ public class DealAcquiresActivity extends Activity
 		}
 		else
 		{
-			popupErrorMessage(exception.getMessage());
-			EasyTracker easyTracker = EasyTracker.getInstance(this);
-
-			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),exception),true)                                              
-					.build()
-					);
+			popupErrorMessage(exception,errorMessage);
 		}
 	}
 
@@ -209,31 +204,32 @@ public class DealAcquiresActivity extends Activity
 		}
 		catch (TTransportException e)
 		{
-			EasyTracker easyTracker = EasyTracker.getInstance(this);
-
-			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),exception),true)                                              
-					.build()
-					);
+			exception = e;
+			errorMessage = "Make sure you have a network connection";
+			popupErrorMessage(e, errorMessage);
 		}
 	}
-
-	private void popupErrorMessage(String message)
+	
+	public void popupErrorMessage(Exception exception, String errorMessage)
 	{
+
+		EasyTracker easyTracker = EasyTracker.getInstance(this);
+
+		easyTracker.send(MapBuilder
+				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
+				.build()
+				);
+		
 		if (df != null && !df.isHidden())
 		{
 			df.dismiss();
 		}
+		String message = errorMessage == null ? exception.getMessage() : errorMessage;
 		String title = getResources().getString(R.string.error_loading_deals);
-		String label = getResources().getString(R.string.ok);
+		String label = getResources().getString(R.string.retry);
 		df = DialogFactory.getAlertDialog(title, message, label);
         df.show(getFragmentManager(), "dialog");
-        /*
-        dialog.dismiss();
-		createThriftClient();
-		reloadData();
-		*/
-		
+        
 	}
 
 	protected AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener()
@@ -273,7 +269,6 @@ public class DealAcquiresActivity extends Activity
 				df.dismiss();
 			}
 			dealAcquires = results;
-			Log.i(MyDealsFragment.class.toString(), "Number of Deals: " + results.size());
 			loadListView();
 		}
 
@@ -285,35 +280,29 @@ public class DealAcquiresActivity extends Activity
 			try
 			{
 				exception = null;
+				errorMessage = null;
 				client.setAccessToken(TaloolUser.get().getAccessToken());
 				SearchOptions_t searchOptions = new SearchOptions_t();
 				searchOptions.setMaxResults(1000).setPage(0).setSortProperty("deal.dealId").setAscending(true);
 				results = client.getClient().getDealAcquires(merchant.merchantId, searchOptions);
-
-				if (results != null && results.size() > 0)
-				{
-
-				}
-
 			}
 			catch (ServiceException_t e)
 			{
-				// TODO Auto-generated catch block
+				errorMessage = e.getErrorDesc();
 				exception = e;
-				e.printStackTrace();
-
+			}
+			catch (TTransportException e)
+			{
+				errorMessage = "Make sure you have a network connection";
+				exception = e;
 			}
 			catch (TException e)
 			{
-				// TODO Auto-generated catch block
 				exception = e;
-				e.printStackTrace();
-
 			}
 			catch (Exception e)
 			{
 				exception = e;
-				e.printStackTrace();
 			}
 
 			return results;
