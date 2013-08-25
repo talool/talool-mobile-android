@@ -1,5 +1,6 @@
 package com.talool.mobile.android;
 
+import java.awt.font.NumericShaper;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +70,6 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		this.view = inflater.inflate(R.layout.find_deals_fragment, container,false);
 		bookImage = (TaloolSmartImageView) view.findViewById(R.id.bookImageView);
 		dealOffersListView = (ListView) view.findViewById(R.id.dealOffersListView);
@@ -85,6 +85,7 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 		});		
 		listViewLinearLayout = (LinearLayout) view.findViewById(R.id.listViewLinearLayout);
 		listViewLinearLayout.setVisibility(View.INVISIBLE);
+
 		createThriftClient();
 		return view;
 	}
@@ -261,8 +262,27 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 		else
 		{
 			dealOffers = BookCache.get().getDealsInBook();
-			loadListView();
+
+			loadListView(getNumberOfMerchants());
 		}
+	}
+	
+	private int getNumberOfMerchants()
+	{
+		int numberOfMerchants = BookCache.get().getNumberOfMerchants();
+		if(numberOfMerchants == 0)
+		{
+			Map<String,String> map = new HashMap<String,String>();
+			for(Deal_t deal : dealOffers)
+			{
+				if(map.get(deal.merchant.merchantId) == null)
+				{
+					map.put(deal.merchant.merchantId, deal.dealOfferId);
+				}
+			}
+			BookCache.get().setNumberOfMerchants(map.size());
+		}
+		return numberOfMerchants;
 	}
 
 	private void loadBooks()
@@ -312,7 +332,7 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 		*/
 	}
 
-	private void loadListView()
+	private void loadListView(int numMerchants)
 	{
 		FindDealsAdapter adapter = new FindDealsAdapter(view.getContext(),
 				R.layout.find_deal_row, dealOffers);
@@ -320,18 +340,9 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 		dealOffersListView.setAdapter(dealOffersAdapter);
 		setListViewHeightBasedOnChildren(dealOffersListView);
 		listViewLinearLayout.setVisibility(View.VISIBLE);
-		
-		Map<String,String> map = new HashMap<String,String>();
-		for(Deal_t deal : dealOffers)
-		{
-			if(map.get(deal.merchant.merchantId) == null)
-			{
-				map.put(deal.merchant.merchantId, deal.dealOfferId);
-			}
-		}
 
 		TextView textView = (TextView) view.findViewById(R.id.summaryText);
-		textView.setText(dealOffers.size() + " Deal from " + map.size() +" Merchants");
+		textView.setText(dealOffers.size() + " Deal from " + numMerchants +" Merchants");
 	}
 
 	private class FindDealsTask extends AsyncTask<String, Void, List<Deal_t>>
@@ -361,7 +372,7 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 			{
 				dealOffers = results;
 				BookCache.get().setDealsInBook(dealOffers);
-				loadListView();
+				loadListView(getNumberOfMerchants());
 			}
 		}
 
@@ -493,11 +504,13 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 			return;
 		}
 
-		int totalHeight = 0;
+		int totalHeight = BookCache.get().getTotalHeight();
+		if(totalHeight == 0)
 		for (int i = 0; i < listAdapter.getCount(); i++) {
 			View listItem = listAdapter.getView(i, null, listView);
 			listItem.measure(0, 0);
 			totalHeight += listItem.getMeasuredHeight();
+			BookCache.get().setTotalHeight(totalHeight);
 		}
 
 		ViewGroup.LayoutParams params = listView.getLayoutParams();
