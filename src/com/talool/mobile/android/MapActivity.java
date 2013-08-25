@@ -23,12 +23,14 @@ import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.activity.DealActivity;
 import com.talool.mobile.android.adapters.DealsAcquiredAdapter;
+import com.talool.mobile.android.dialog.DialogFactory;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
 import com.talool.thrift.util.ThriftUtil;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -46,6 +48,7 @@ public class MapActivity extends Activity {
 	private DealsAcquiredAdapter dealAcquiredAdapter;
 	private Exception exception;
 	private List<DealAcquire_t> dealAcquires;
+	private DialogFragment df;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -203,30 +206,19 @@ public class MapActivity extends Activity {
 	
 	private void popupErrorMessage(String message)
 	{
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-		alertDialogBuilder.setTitle("Error Loading Deals");
-		alertDialogBuilder.setMessage(message);
-		alertDialogBuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener()
+		if (df != null && !df.isHidden())
 		{
-			public void onClick(DialogInterface dialog, int which)
-			{
-				dialog.dismiss();
-				createThriftClient();
-				reloadData();
-			}
-		});
-		alertDialogBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener()
-		{
-			public void onClick(DialogInterface dialog, int which)
-			{
-				dialog.dismiss();
-			}
-		});
-		// create alert dialog
-		AlertDialog alertDialog = alertDialogBuilder.create();
-
-		// show it
-		alertDialog.show();
+			df.dismiss();
+		}
+		String title = getResources().getString(R.string.error_loading_deals);
+		String label = getResources().getString(R.string.ok);
+		df = DialogFactory.getAlertDialog(title, message, label);
+        df.show(getFragmentManager(), "dialog");
+        /*
+        dialog.dismiss();
+		createThriftClient();
+		reloadData();
+		*/
 	}
 	
 	private void reloadData()

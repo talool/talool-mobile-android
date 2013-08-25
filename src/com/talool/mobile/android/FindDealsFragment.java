@@ -8,10 +8,9 @@ import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import android.app.ActionBar;
-import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -40,12 +39,14 @@ import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.activity.LocationSelectActivity;
 import com.talool.mobile.android.adapters.FindDealsAdapter;
 import com.talool.mobile.android.cache.DealOfferCache;
+import com.talool.mobile.android.dialog.DialogFactory;
+import com.talool.mobile.android.dialog.DialogFactory.ConfirmDialogListener;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
 import com.talool.mobile.android.util.TaloolSmartImageView;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
 
-public class FindDealsFragment extends Fragment {
+public class FindDealsFragment extends Fragment implements ConfirmDialogListener {
 	private ThriftHelper client;
 	private View view;
 	private Exception exception;
@@ -62,6 +63,7 @@ public class FindDealsFragment extends Fragment {
 	private LinearLayout listViewLinearLayout;
 	private String accessCode;
 	private Button loadDealsButton;
+	private DialogFragment df;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -263,32 +265,25 @@ public class FindDealsFragment extends Fragment {
 		}
 	}
 
-	private void popupErrorMessage(final String message)
+	private void popupErrorMessage(String message)
 	{
-		final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(view.getContext());
-		alertDialogBuilder.setTitle("Error Loading Deals");
-		alertDialogBuilder.setMessage(message);
-		alertDialogBuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener()
+		if (df != null && !df.isHidden())
 		{
-			public void onClick(DialogInterface dialog, int which)
-			{
-				dialog.dismiss();
-				createThriftClient();
-				reloadData();
-			}
-		});
-		alertDialogBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener()
+			df.dismiss();
+		}
+		if (message==null)
 		{
-			public void onClick(DialogInterface dialog, int which)
-			{
-				dialog.dismiss();
-			}
-		});
-		// create alert dialog
-		AlertDialog alertDialog = alertDialogBuilder.create();
-
-		// show it
-		alertDialog.show();
+			message = getResources().getString(R.string.error_access_code_message);
+		}
+		String title = getResources().getString(R.string.error_loading_deals);
+		String label = getResources().getString(R.string.ok);
+		df = DialogFactory.getAlertDialog(title, message, label);
+        df.show(getFragmentManager(), "dialog");
+        /*
+        dialog.dismiss();
+		createThriftClient();
+		reloadData();
+		*/
 	}
 
 	private void loadListView()
@@ -395,18 +390,16 @@ public class FindDealsFragment extends Fragment {
 						.createEvent("redeem_book","selected",closestBook.dealOfferId,null)           
 						.build()
 						);
-				AlertDialog dialog = new AlertDialog.Builder(view.getContext()).setTitle("You've Got Deals!")
-						.setMessage("Would you like to see your new deals?")
-						.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) { 
-								redirectToMyDeals();
-							}
-						})
-						.setNegativeButton("No", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) { 
-							}
-						})
-						.show();			
+				
+				if (df != null && !df.isHidden())
+				{
+					df.dismiss();
+				}
+				String title = getResources().getString(R.string.alert_new_deals_title);
+				String message = getResources().getString(R.string.alert_new_deals_message);
+				df = DialogFactory.getConfirmDialog(title, message, FindDealsFragment.this);
+		        df.show(getFragmentManager(), "dialog");
+		
 			}
 		}
 
@@ -469,4 +462,15 @@ public class FindDealsFragment extends Fragment {
 
 	}
 
+	@Override
+	public void onDialogPositiveClick(DialogFragment dialog) {
+		redirectToMyDeals();
+	}
+
+	@Override
+	public void onDialogNegativeClick(DialogFragment dialog) {
+		// TODO Auto-generated method stub
+	}
+
+	
 }

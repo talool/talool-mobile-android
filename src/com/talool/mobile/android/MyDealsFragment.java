@@ -63,7 +63,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	private Menu menu;
 	private PullToRefreshAttacher mPullToRefreshAttacher;
 	private MerchantDao merchantDao;
-
+	private DialogFragment df;
 	private FilterBy selectedFilter = FilterBy.All;
 
 	private enum FilterBy
@@ -259,30 +259,19 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 
 	private void popupErrorMessage(final String message)
 	{
-		final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-		alertDialogBuilder.setTitle("Error Loading Deals");
-		alertDialogBuilder.setMessage(message);
-		alertDialogBuilder.setPositiveButton("Retry", new DialogInterface.OnClickListener()
+		if (df != null && !df.isHidden())
 		{
-			public void onClick(DialogInterface dialog, int which)
-			{
-				dialog.dismiss();
-				createThriftClient();
-				reloadData();
-			}
-		});
-		alertDialogBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener()
-		{
-			public void onClick(DialogInterface dialog, int which)
-			{
-				dialog.dismiss();
-			}
-		});
-		// create alert dialog
-		AlertDialog alertDialog = alertDialogBuilder.create();
-
-		// show it
-		alertDialog.show();
+			df.dismiss();
+		}
+		String title = getResources().getString(R.string.error_loading_deals);
+		String label = getResources().getString(R.string.ok);
+		df = DialogFactory.getAlertDialog(title, message, label);
+        df.show(getFragmentManager(), "dialog");
+        /*
+        dialog.dismiss();
+		createThriftClient();
+		reloadData();
+		*/
 	}
 
 	private class MyDealsTask extends AsyncTask<String, Void, List<Merchant_t>>

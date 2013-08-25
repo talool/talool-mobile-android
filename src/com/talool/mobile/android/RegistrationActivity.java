@@ -4,13 +4,12 @@ import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.drawable.ClipDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -21,6 +20,7 @@ import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.Customer_t;
 import com.talool.api.thrift.ServiceException_t;
+import com.talool.mobile.android.dialog.DialogFactory;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
 
@@ -32,6 +32,7 @@ public class RegistrationActivity extends Activity
 	private EditText email;
 	private EditText password;
 	private Exception exception;
+	private DialogFragment df;
 
 	private class RegisterTask extends AsyncTask<String, Void, CTokenAccess_t>
 	{
@@ -136,38 +137,51 @@ public class RegistrationActivity extends Activity
 
 	public void popupErrorMessage(Exception exception)
 	{
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-		alertDialogBuilder.setTitle("Error Registering");
-		alertDialogBuilder.setMessage(exception.getMessage());
-		// create alert dialog
-		AlertDialog alertDialog = alertDialogBuilder.create();
-
+		
 		EasyTracker easyTracker = EasyTracker.getInstance(this);
 
 		easyTracker.send(MapBuilder
 				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
 				.build()
 				);
-		// show it
-		alertDialog.show();
+		
+		if (df != null && !df.isHidden())
+		{
+			df.dismiss();
+		}
+		String title = getResources().getString(R.string.error_reg);
+		String label = getResources().getString(R.string.retry);
+		String message;
+		if (exception instanceof ServiceException_t)
+		{
+			message = ((ServiceException_t)exception).errorDesc;
+		}
+		else
+		{
+			message = exception.getMessage();
+		}
+		df = DialogFactory.getAlertDialog(title, message, label);
+        df.show(getFragmentManager(), "dialog");
+        this.exception = null;
 	}
 
 	public void popupErrorMessage(String message)
 	{
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-		alertDialogBuilder.setTitle("Error Registering");
-		alertDialogBuilder.setMessage(message);
-		// create alert dialog
-		AlertDialog alertDialog = alertDialogBuilder.create();
-
 		EasyTracker easyTracker = EasyTracker.getInstance(this);
 
 		easyTracker.send(MapBuilder
 				.createException(message, true)
 				.build()
 				);
-		// show it
-		alertDialog.show();
+		
+		if (df != null && !df.isHidden())
+		{
+			df.dismiss();
+		}
+		String title = getResources().getString(R.string.error_reg);
+		String label = getResources().getString(R.string.retry);
+		df = DialogFactory.getAlertDialog(title, message, label);
+        df.show(getFragmentManager(), "dialog");
 	}
 
 	@Override

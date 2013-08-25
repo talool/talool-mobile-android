@@ -16,9 +16,17 @@
     <string name="finddeals">Find Deals</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string name="retry">Retry</string>
     
     <string name="error_login">Error Logging In</string>
+    <string name="error_reg">Error Registering</string>
+    <string name="error_loading_deals">Error Loading Deals</string>
+    <string name="error_access_code_title">Error Activating Code</string>
+    <string name="error_access_code_message">Please check your code and try again.</string>
+    <string name="alert_new_deals_title">You\'ve Got Deals!</string>
+    <string name="alert_new_deals_message">Would you like to see your new deals?</string>
     
     <string name="icon_gift">&#xf06b;</string>
     <string name="icon_envelope_alt">&#xf003;</string>
