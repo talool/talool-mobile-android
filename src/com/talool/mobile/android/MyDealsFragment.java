@@ -7,11 +7,9 @@ import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
-import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -266,25 +264,24 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		String title = getResources().getString(R.string.error_loading_deals);
 		String label = getResources().getString(R.string.ok);
 		df = DialogFactory.getAlertDialog(title, message, label);
-        df.show(getFragmentManager(), "dialog");
-        /*
-        dialog.dismiss();
-		createThriftClient();
-		reloadData();
-		*/
+		df.show(getFragmentManager(), "dialog");
+		/*
+		 * dialog.dismiss(); createThriftClient(); reloadData();
+		 */
 	}
 
 	private class MyDealsTask extends AsyncTask<String, Void, List<Merchant_t>>
 	{
-		
+
 		private DialogFragment df;
 
 		@Override
-		protected void onPreExecute() {
+		protected void onPreExecute()
+		{
 			if (merchants.isEmpty())
 			{
 				df = DialogFactory.getProgressDialog();
-	            df.show(getFragmentManager(), "dialog");
+				df.show(getFragmentManager(), "dialog");
 			}
 		}
 
@@ -295,7 +292,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 			{
 				df.dismiss();
 			}
-			
+
 			merchants = results;
 			loadListView();
 			mPullToRefreshAttacher.setRefreshComplete();
@@ -347,7 +344,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		super.onResume();
 		reloadData();
 	}
-	
+
 	protected AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener()
 	{
 
@@ -373,10 +370,6 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	public void onDestroy()
 	{
 		super.onDestroy();
-		if (merchantDao != null)
-		{
-			merchantDao.close();
-		}
 	}
 
 	@Override

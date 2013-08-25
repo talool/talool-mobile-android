@@ -65,6 +65,7 @@ public class GiftAcceptanceTask extends AsyncTask<String, Void, DealAcquire_t>
 			ActivityDao dao = new ActivityDao(TaloolApplication.getAppContext());
 			dao.open();
 			dao.saveActivity(activity);
+			ActivitySupervisor.get().refreshFromPersistence();
 
 		}
 		catch (ServiceException_t e)

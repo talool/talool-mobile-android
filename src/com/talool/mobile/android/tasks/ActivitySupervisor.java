@@ -43,7 +43,9 @@ public final class ActivitySupervisor
 
 	private SearchOptions_t searchOptions;
 
-	private boolean isPaused = false;
+	private volatile boolean paused = false;
+
+	private volatile boolean shutdown = false;
 
 	private static final ActivityObservable activityObservable = new ActivityObservable();
 
@@ -101,28 +103,34 @@ public final class ActivitySupervisor
 		private long lastActivityTime;
 		private Object monitor = new Object();
 
-		public void onPause()
+		public void unPause()
 		{
-			isPaused = false;
+			paused = false;
 			synchronized (monitor)
 			{
 				monitor.notifyAll();
 			}
 		}
 
+		public void shutdown()
+		{
+			shutdown = true;
+			this.interrupt();
+		}
+
 		public void pause()
 		{
-			isPaused = true;
+			paused = true;
 		}
 
 		@Override
 		public void run()
 		{
-			while (true)
+			while (!shutdown)
 			{
 				try
 				{
-					if (isPaused)
+					if (paused)
 					{
 						synchronized (monitor)
 						{
@@ -133,7 +141,7 @@ public final class ActivitySupervisor
 					if (AndroidUtils.hasNetworkConnection())
 					{
 						final List<Activity_t> acts = client.getClient().getActivities(searchOptions);
-						handleActionsPending(acts);
+						handleActionsPending(acts, true);
 					}
 				}
 				catch (Exception e)
@@ -147,19 +155,21 @@ public final class ActivitySupervisor
 				}
 				catch (InterruptedException ignoreException)
 				{
+
 					//
-					if (forceRefresh && !isPaused)
+					if (forceRefresh && !paused && !shutdown)
 					{
-						handleActionsPending(activityDao.getAllActivities(null));
+						handleActionsPending(activityDao.getAllActivities(null), false);
 						forceRefresh = false;
 					}
+
 				}
 
 			}
 
 		}
 
-		public void handleActionsPending(final List<Activity_t> acts)
+		public void handleActionsPending(final List<Activity_t> acts, final boolean persist)
 		{
 			if (acts != null && acts.size() > 0)
 			{
@@ -170,7 +180,11 @@ public final class ActivitySupervisor
 					// only update dao of we know something has changed
 					// blindy update everything , optimize in the next release
 					lastActivityTime = mostCurrentActivity.getActivityDate();
-					activityDao.saveActivities(acts);
+					if (persist)
+					{
+						activityDao.saveActivities(acts);
+					}
+
 				}
 
 				if (notificationCallback != null)
@@ -229,14 +243,26 @@ public final class ActivitySupervisor
 		return instance;
 	}
 
-	public void pause()
+	public synchronized void shutdown()
+	{
+		instance.activityPoller.shutdown();
+		instance = null;
+	}
+
+	public synchronized void refreshFromPersistence()
+	{
+		instance.activityPoller.forceRefresh = true;
+		instance.activityPoller.interrupt();
+	}
+
+	public synchronized void pause()
 	{
 		instance.activityPoller.pause();
 	}
 
-	public void resume()
+	public synchronized void resume()
 	{
-		instance.activityPoller.onPause();
+		instance.activityPoller.unPause();
 	}
 
 	public void addActivityObserver(final Observer observer)

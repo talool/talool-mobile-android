@@ -173,7 +173,8 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 				if (activity.getActivityEvent().equals(ActivityEvent_t.TALOOL_REACH) ||
 						activity.getActivityEvent().equals(ActivityEvent_t.WELCOME))
 				{
-					final ActivityActionTakenTask task = new ActivityActionTakenTask(client, activity.getActivityId(), view.getContext());
+					final ActivityActionTakenTask task = new ActivityActionTakenTask(client, activity.getActivityId(),
+							view.getContext(), activityDao, activity);
 					task.execute();
 				}
 			}
@@ -372,10 +373,6 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 	public void onDestroy()
 	{
 		super.onDestroy();
-		if (activityDao != null)
-		{
-			activityDao.close();
-		}
 	}
 
 	@Override
