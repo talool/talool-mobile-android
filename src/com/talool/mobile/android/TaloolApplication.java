@@ -27,17 +27,6 @@ public class TaloolApplication extends Application
 		// cache font-awesome typeface
 		TypefaceFactory.createInstance(getAssets());
 
-		Runtime.getRuntime().addShutdownHook(new Thread()
-		{
-
-			@Override
-			public void run()
-			{
-				System.out.println("Got here");
-			}
-
-		});
-
 	}
 
 	public static Context getAppContext()

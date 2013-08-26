@@ -207,22 +207,31 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		}
 		else
 		{
-			final StringBuilder sb = new StringBuilder();
-
-			noResultsMessage.setVisibility(View.VISIBLE);
-			if (selectedFilter.androidId == R.id.my_deals_filter_favorites)
+			if (selectedFilter != FilterBy.All)
 			{
-				sb.append(getResources().getString(selectedFilter.androidId == R.id.my_deals_filter_favorites ?
-						R.string.my_deals_no_favorites_prefix : R.string.my_deals_no_favorites_prefix));
+				final StringBuilder sb = new StringBuilder();
+
+				noResultsMessage.setVisibility(View.VISIBLE);
+				if (selectedFilter.androidId == R.id.my_deals_filter_favorites)
+				{
+					sb.append(getResources().getString(selectedFilter.androidId == R.id.my_deals_filter_favorites ?
+							R.string.my_deals_no_favorites_prefix : R.string.my_deals_no_favorites_prefix));
+				}
+				else
+				{
+					sb.append(getResources().getString(selectedFilter.androidId == R.id.my_deals_filter_favorites ?
+							R.string.my_deals_no_favorites_prefix : R.string.my_deals_no_favorites_prefix)).append(" '").
+							append(((MenuItem) menu.findItem(selectedFilter.androidId)).getTitle()).append("'");
+				}
+				noResultsMessage.setText(sb.toString());
 			}
 			else
 			{
-				sb.append(getResources().getString(selectedFilter.androidId == R.id.my_deals_filter_favorites ?
-						R.string.my_deals_no_favorites_prefix : R.string.my_deals_no_favorites_prefix)).append(" '").
-						append(((MenuItem) menu.findItem(selectedFilter.androidId)).getTitle()).append("'");
+				// if there are no merchants and ALL is selected, then we have just
+				// logged in
+				refreshViaService();
 			}
 
-			noResultsMessage.setText(sb.toString());
 		}
 
 	}
