@@ -291,7 +291,7 @@ public class DealActivity extends Activity
 	{
 
 		try{
-			Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+			Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Email.CONTENT_URI);
 			startActivityForResult(intent, 100);
 		}
 		catch (Exception e)
@@ -318,7 +318,7 @@ public class DealActivity extends Activity
 					String id = result.getLastPathSegment();
 
 					// query for everything email
-					cursor = getContentResolver().query(Email.CONTENT_URI,  null, Email.CONTACT_ID + "=?", new String[] { id }, null);
+					cursor = getContentResolver().query(Email.CONTENT_URI,  null, Email._ID + "=?", new String[] { id }, null);
 
 					int emailIdx = cursor.getColumnIndex(Email.DATA);
 
@@ -330,11 +330,11 @@ public class DealActivity extends Activity
 					if (cursor != null) {
 						cursor.close();
 					}
+					sendGift();
 					break;
 				}
 			}
 
-			sendGift();
 		}
 		catch (Exception e)
 		{
