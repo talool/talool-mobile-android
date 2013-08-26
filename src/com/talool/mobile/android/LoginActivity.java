@@ -321,7 +321,7 @@ public class LoginActivity extends Activity
 					{
 						facebookCostomer = FacebookHelper.createCostomerFromFacebook(user);
 						username.setText(facebookCostomer.getEmail());
-						password.setText(TALOOL_FB_PASSCODE + facebookCostomer.getSocialAccounts().get(SocialNetwork_t.Facebook).getLoginId());
+						password.setText(TALOOL_FB_PASSCODE + facebookCostomer.getEmail());
 						CustomerServiceTask task = new CustomerServiceTask();
 						task.execute(new String[] {});
 					}
