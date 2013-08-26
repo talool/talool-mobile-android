@@ -9,6 +9,15 @@
     android:paddingRight="9sp"
     android:paddingTop="7sp" >
    
+    <TextView
+            android:id="@+id/activity_no_results_msg"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="top|center_horizontal"
+            android:textColor="@color/tan"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+        
     <ListView
         android:id="@+id/myDealsListView"
         android:layout_width="fill_parent"
