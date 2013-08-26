@@ -47,7 +47,6 @@ public class MainActivity extends Activity
 				TaloolUser.get().setLocation(location);
 				LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 				lm.removeUpdates(locationListener);
-				lm.removeUpdates(locationListener);
 			}
 		}
 
@@ -92,21 +91,12 @@ public class MainActivity extends Activity
 		{
 			TaloolUser.get().setLocation(location);
 		}
-		else
-		{
-			Location networkLocation = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-			if(networkLocation != null)
-			{
-				TaloolUser.get().setLocation(location);
-			}
-		}
 	}
 	
 	private void subscribeForLocationUpdates()
 	{
 		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-		lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 	}
 
 	@Override
@@ -295,7 +285,6 @@ public class MainActivity extends Activity
 		super.onStop();
 		EasyTracker.getInstance(this).activityStop(this); // Add this method.
 		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		lm.removeUpdates(locationListener);
 		lm.removeUpdates(locationListener);
 	}
 	

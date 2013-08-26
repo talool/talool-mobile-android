@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.analytics.tracking.android.EasyTracker;
@@ -55,6 +56,9 @@ public class GiftActivity extends Activity
 	private SmartImageView dealCreatorImageView;
 	private TextView fromFriend;
 	private DialogFragment df;
+	private Exception exception;
+	private String errorMessage;
+	private LinearLayout linearLayout;
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState)
@@ -99,7 +103,7 @@ public class GiftActivity extends Activity
 		}
 
 		giftId = activity.getActivityLink().getLinkElement();
-
+		linearLayout = (LinearLayout) findViewById(R.id.giftLinearLayout);
 		final GiftActivityTask dealsTask = new GiftActivityTask();
 		dealsTask.execute(new String[] {});
 
@@ -163,6 +167,13 @@ public class GiftActivity extends Activity
 		@Override
 		protected void onPostExecute(final Gift_t gift)
 		{
+			if(gift == null)
+			{
+				popupErrorMessage(exception, errorMessage);
+				return;
+			}
+			linearLayout.setVisibility(View.VISIBLE);
+			
 			final DealOffer_t dealOffer = DealOfferCache.get().getDealOffer(gift.getDeal().getDealOfferId());
 			if (dealOffer == null)
 			{
@@ -254,38 +265,47 @@ public class GiftActivity extends Activity
 			}
 			catch (ServiceException_t e)
 			{
-				e.printStackTrace();
-				EasyTracker easyTracker = EasyTracker.getInstance(getApplicationContext());
-
-				easyTracker.send(MapBuilder
-						.createException(new StandardExceptionParser(getApplicationContext(), null).getDescription(Thread.currentThread().getName(), e), true)
-						.build()
-						);
+				errorMessage = e.getErrorDesc();
+				exception = e;
+			}
+			catch (TTransportException e)
+			{
+				errorMessage = "Make sure you have a network connection";
+				exception = e;
 			}
 			catch (TException e)
 			{
-				e.printStackTrace();
-				EasyTracker easyTracker = EasyTracker.getInstance(getApplicationContext());
-
-				easyTracker.send(MapBuilder
-						.createException(new StandardExceptionParser(getApplicationContext(), null).getDescription(Thread.currentThread().getName(), e), true)
-						.build()
-						);
-
+				exception = e;
 			}
 			catch (Exception e)
 			{
-				e.printStackTrace();
-				EasyTracker easyTracker = EasyTracker.getInstance(getApplicationContext());
-
-				easyTracker.send(MapBuilder
-						.createException(new StandardExceptionParser(getApplicationContext(), null).getDescription(Thread.currentThread().getName(), e), true)
-						.build()
-						);
+				exception = e;
 			}
-
 			return gift;
 		}
+	}
+	
+	public void popupErrorMessage(Exception exception, String errorMessage)
+	{
+
+		EasyTracker easyTracker = EasyTracker.getInstance(this);
+
+		easyTracker.send(MapBuilder
+				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
+				.build()
+				);
+		
+		if (df != null && !df.isHidden())
+		{
+			df.dismiss();
+		}
+		String message = errorMessage == null ? exception.getMessage() : errorMessage;
+		String title = getResources().getString(R.string.error_loading_gifts);
+		String label = getResources().getString(R.string.retry);
+		df = DialogFactory.getAlertDialog(title, message, label);
+		df.show(getFragmentManager(), "dialog");
+        
+        
 	}
 
 	private static String getCityStateZip(final MerchantLocation_t location)
