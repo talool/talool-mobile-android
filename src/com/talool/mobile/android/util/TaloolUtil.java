@@ -25,10 +25,10 @@ public class TaloolUtil
 		}
 		else
 		{
-			return "Expires on " + new SafeSimpleDateFormat(Constants.GENERAL_DATE_TIME_FORMAT).format(expirationDate);
+			return "Expires on " + new SafeSimpleDateFormat(Constants.MONTH_DAY_YEAR_FORMAT).format(expirationDate);
 		}
 	}
-	
+
 	public static String getSharedText(long shareDate)
 	{
 		if (shareDate == 0)
@@ -40,7 +40,7 @@ public class TaloolUtil
 			return "Shared on " + new SafeSimpleDateFormat(Constants.GENERAL_DATE_TIME_FORMAT).format(shareDate);
 		}
 	}
-	
+
 	public static String getRedeemedText(long redeemedDate)
 	{
 		if (redeemedDate == 0)
@@ -52,7 +52,7 @@ public class TaloolUtil
 			return "Redeemed on " + new SafeSimpleDateFormat(Constants.GENERAL_DATE_TIME_FORMAT).format(redeemedDate);
 		}
 	}
-	
+
 	public static void sendException(Exception e, Context context)
 	{
 		e.printStackTrace();
