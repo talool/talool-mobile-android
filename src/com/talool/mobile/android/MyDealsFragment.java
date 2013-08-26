@@ -55,6 +55,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	private MyDealsAdapter myDealsAdapter;
 	private ThriftHelper client;
 	private View view;
+	private TextView noResultsMessage;
 	private Context context;
 	private Exception exception;
 	private List<Merchant_t> merchants;
@@ -117,6 +118,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 			return true;
 		}
 
+		noResultsMessage.setVisibility(View.GONE);
 		selectedFilter = FilterBy.filterByMap.get(item.getItemId());
 
 		item.setChecked(item.isChecked() ? false : true);
@@ -142,6 +144,9 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		mPullToRefreshAttacher = ((MainActivity) getActivity())
 				.getPullToRefreshAttacher();
 		mPullToRefreshAttacher.addRefreshableView(myDealsListView, this);
+
+		noResultsMessage = (TextView) view.findViewById(R.id.activity_no_results_msg);
+		noResultsMessage.setVisibility(View.GONE);
 
 		this.context = view.getContext();
 		createThriftClient();
@@ -202,7 +207,22 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		}
 		else
 		{
-			refreshViaService();
+			final StringBuilder sb = new StringBuilder();
+
+			noResultsMessage.setVisibility(View.VISIBLE);
+			if (selectedFilter.androidId == R.id.my_deals_filter_favorites)
+			{
+				sb.append(getResources().getString(selectedFilter.androidId == R.id.my_deals_filter_favorites ?
+						R.string.my_deals_no_favorites_prefix : R.string.my_deals_no_favorites_prefix));
+			}
+			else
+			{
+				sb.append(getResources().getString(selectedFilter.androidId == R.id.my_deals_filter_favorites ?
+						R.string.my_deals_no_favorites_prefix : R.string.my_deals_no_favorites_prefix)).append(" '").
+						append(((MenuItem) menu.findItem(selectedFilter.androidId)).getTitle()).append("'");
+			}
+
+			noResultsMessage.setText(sb.toString());
 		}
 
 	}

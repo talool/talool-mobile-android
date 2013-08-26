@@ -62,6 +62,8 @@
    <string name="activity_filter_friends">Friends</string>
    
    <string name="activity_no_results_prefix">You have no activities of type</string>
+   <string name="my_deals_no_results_prefix">You have no deals with merchants of type</string>
+   <string name="my_deals_no_favorites_prefix">You have no favorite merchants</string>
 
    <!-- facebook sdk strings -->
    <string name="get_started">OR</string>
