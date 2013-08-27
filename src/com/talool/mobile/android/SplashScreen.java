@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.talool.mobile.android.R;
+import com.talool.mobile.android.util.TaloolUser;
 
 public class SplashScreen extends Activity {
 	 
@@ -15,6 +16,13 @@ public class SplashScreen extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        if( TaloolUser.get().getAccessToken()!=null )
+        {
+        	finish();
+        	return;
+        }
+        
         setContentView(R.layout.splash_screen_layout);
  
         new Handler().postDelayed(new Runnable() {
