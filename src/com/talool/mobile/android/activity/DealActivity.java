@@ -7,7 +7,6 @@ import org.apache.thrift.transport.TTransportException;
 
 import android.app.Activity;
 import android.app.DialogFragment;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
@@ -16,7 +15,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Email;
-import android.provider.ContactsContract.Contacts;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -40,10 +38,12 @@ import com.talool.mobile.android.LoginActivity;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.dialog.DialogFactory;
-import com.talool.mobile.android.tasks.DealRedemptionTask;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
+import com.talool.mobile.android.tasks.DealRedemptionTask;
 import com.talool.mobile.android.util.AlertMessage;
 import com.talool.mobile.android.util.AndroidUtils;
+import com.talool.mobile.android.util.Constants;
+import com.talool.mobile.android.util.SafeSimpleDateFormat;
 import com.talool.mobile.android.util.TaloolSmartImageView;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.TaloolUtil;
@@ -146,7 +146,9 @@ public class DealActivity extends Activity
 			dealActivityButtonLayout.removeAllViewsInLayout();
 			dealActivityButtonLayout.setBackgroundDrawable(null);
 			TextView redemptionCodeTextView = new TextView(DealActivity.this);
-			redemptionCodeTextView.setText("Redeemed on " + new Date(deal.redeemed).toString());
+			redemptionCodeTextView.setText("Redeemed on " +
+					new SafeSimpleDateFormat(Constants.GENERAL_DATE_TIME_FORMAT).format(deal.redeemed));
+
 			redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 			redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
 			redemptionCodeTextView.setTypeface(TypefaceFactory.get().getMarkerFelt(), Typeface.NORMAL);
@@ -166,7 +168,7 @@ public class DealActivity extends Activity
 			@Override
 			protected void onPostExecute(final DealOffer_t dealOffer)
 			{
-				if(dealOffer != null)
+				if (dealOffer != null)
 				{
 					setDealCreatorImageView(dealOffer);
 					// make sure we cache the dealOffer
@@ -261,11 +263,11 @@ public class DealActivity extends Activity
 			sb.append("\n").append(location.address.address2);
 		}
 		sb.append("\n")
-		.append(location.address.city)
-		.append(", ")
-		.append(location.address.stateProvinceCounty)
-		.append(" ")
-		.append(location.address.zip);
+				.append(location.address.city)
+				.append(", ")
+				.append(location.address.stateProvinceCounty)
+				.append(" ")
+				.append(location.address.zip);
 
 		dealAddressText.setText(sb.toString());
 	}
@@ -290,13 +292,14 @@ public class DealActivity extends Activity
 	public void onGiftViaEmail(View view)
 	{
 
-		try{
+		try
+		{
 			Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Email.CONTENT_URI);
 			startActivityForResult(intent, 100);
 		}
 		catch (Exception e)
 		{
-			AlertMessage alertMessage = new AlertMessage("Gift Via Email Picker","Error on Picker ",e);
+			AlertMessage alertMessage = new AlertMessage("Gift Via Email Picker", "Error on Picker ", e);
 			AndroidUtils.popupMessageWithOk(alertMessage, DealActivity.this);
 		}
 	}
@@ -305,43 +308,47 @@ public class DealActivity extends Activity
 	{
 		Cursor cursor = null;
 
-		try{
+		try
+		{
 			if (resultCode == RESULT_OK)
 			{
 				switch (requestCode)
 				{
-				case 100:
+					case 100:
 
-					Uri result = data.getData();
+						Uri result = data.getData();
 
-					// get the contact id from the Uri
-					String id = result.getLastPathSegment();
+						// get the contact id from the Uri
+						String id = result.getLastPathSegment();
 
-					// query for everything email
-					cursor = getContentResolver().query(Email.CONTENT_URI,  null, Email._ID + "=?", new String[] { id }, null);
+						// query for everything email
+						cursor = getContentResolver().query(Email.CONTENT_URI, null, Email._ID + "=?", new String[] { id }, null);
 
-					int emailIdx = cursor.getColumnIndex(Email.DATA);
+						int emailIdx = cursor.getColumnIndex(Email.DATA);
 
-					// let's just get the first email
-					if (cursor.moveToFirst()) {
-						email = cursor.getString(emailIdx);
-					} 
+						// let's just get the first email
+						if (cursor.moveToFirst())
+						{
+							email = cursor.getString(emailIdx);
+						}
 
-					if (cursor != null) {
-						cursor.close();
-					}
-					sendGift();
-					break;
+						if (cursor != null)
+						{
+							cursor.close();
+						}
+						sendGift();
+						break;
 				}
 			}
 
 		}
 		catch (Exception e)
 		{
-			if (cursor != null) {
+			if (cursor != null)
+			{
 				cursor.close();
 			}
-			AlertMessage alertMessage = new AlertMessage("Gift Via Email Picker Results","Error on Picker Results ",e);
+			AlertMessage alertMessage = new AlertMessage("Gift Via Email Picker Results", "Error on Picker Results ", e);
 			AndroidUtils.popupMessageWithOk(alertMessage, DealActivity.this);
 		}
 	}
@@ -410,9 +417,10 @@ public class DealActivity extends Activity
 
 	private class GiftTask extends AsyncTask<String, Void, String>
 	{
-		
+
 		@Override
-		protected void onPreExecute() {
+		protected void onPreExecute()
+		{
 			df = DialogFactory.getProgressDialog();
 			df.show(getFragmentManager(), "dialog");
 		}
@@ -424,7 +432,8 @@ public class DealActivity extends Activity
 			{
 				df.dismiss();
 			}
-			try{
+			try
+			{
 				if (exception == null)
 				{
 					dealActivityButtonLayout.removeAllViewsInLayout();
@@ -445,13 +454,13 @@ public class DealActivity extends Activity
 				}
 				else
 				{
-					AlertMessage alertMessage = new AlertMessage("Gift Task Results 2","Error on Results ",exception);
+					AlertMessage alertMessage = new AlertMessage("Gift Task Results 2", "Error on Results ", exception);
 					AndroidUtils.popupMessageWithOk(alertMessage, DealActivity.this);
 				}
 			}
 			catch (Exception e)
 			{
-				AlertMessage alertMessage = new AlertMessage("Gift Task Results","Error on Results ",e);
+				AlertMessage alertMessage = new AlertMessage("Gift Task Results", "Error on Results ", e);
 				AndroidUtils.popupMessageWithOk(alertMessage, DealActivity.this);
 			}
 		}
@@ -485,13 +494,13 @@ public class DealActivity extends Activity
 	}
 
 	@Override
-	protected void onResume() {
+	protected void onResume()
+	{
 		super.onResume();
 		if (df != null && !df.isHidden())
 		{
 			df.dismiss();
 		}
 	}
-	
-	
+
 }
