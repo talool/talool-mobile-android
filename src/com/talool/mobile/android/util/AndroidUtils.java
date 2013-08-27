@@ -25,9 +25,11 @@ public final class AndroidUtils
 
 		if (alertMessage.exception != null)
 		{
-			alertDialogBuilder.setMessage(alertMessage.message + AndroidUtils.getStackTrace(alertMessage.exception));
-
+			alertDialogBuilder.setMessage(alertMessage.message +
+					AndroidUtils.getStackTrace(alertMessage.exception));
 		}
+
+		alertDialogBuilder.setMessage(alertMessage.message);
 
 		alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener()
 		{

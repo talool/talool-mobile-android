@@ -47,7 +47,7 @@ public class DealRedemptionTask extends AbstractTaloolTask<String, Void, String>
 	{
 		if (!AndroidUtils.hasNetworkConnection())
 		{
-			alertMessage = new AlertMessage("Network Issue", "You have no network connection", null);
+			alertMessage = new AlertMessage("You have no network connection", null);
 			cancel(true);
 			return null;
 		}
@@ -70,19 +70,19 @@ public class DealRedemptionTask extends AbstractTaloolTask<String, Void, String>
 		catch (ServiceException_t e)
 		{
 			cancel(true);
-			alertMessage = new AlertMessage("Service Exception", e.getMessage(), e);
+			alertMessage = new AlertMessage("Service Exception", "Service Exception");
 			TaloolUtil.sendException(e, context);
 		}
 		catch (TException e)
 		{
 			cancel(true);
-			alertMessage = new AlertMessage("Transport Exception", e.getMessage(), e);
+			alertMessage = new AlertMessage("Connection error", "Make sure you have a network connection");
 			TaloolUtil.sendException(e, context);
 		}
 		catch (Exception e)
 		{
 			cancel(true);
-			alertMessage = new AlertMessage("Exception", e.getMessage(), e);
+			alertMessage = new AlertMessage("An error has occured", "Please try again", e);
 			TaloolUtil.sendException(e, context);
 		}
 
