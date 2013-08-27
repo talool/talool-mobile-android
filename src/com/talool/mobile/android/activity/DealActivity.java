@@ -453,13 +453,13 @@ public class DealActivity extends Activity
 				}
 				else
 				{
-					AlertMessage alertMessage = new AlertMessage("Gift Task Results 2", "Error on Results ", exception);
+					AlertMessage alertMessage = new AlertMessage("An exception has occured", "Please try again", exception);
 					AndroidUtils.popupMessageWithOk(alertMessage, DealActivity.this);
 				}
 			}
 			catch (Exception e)
 			{
-				AlertMessage alertMessage = new AlertMessage("Gift Task Results", "Error on Results ", e);
+				AlertMessage alertMessage = new AlertMessage("An exception has occured", "Please try again", e);
 				AndroidUtils.popupMessageWithOk(alertMessage, DealActivity.this);
 			}
 		}
