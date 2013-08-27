@@ -208,7 +208,6 @@ public class MapActivity extends Activity {
 			} catch (ServiceException_t e) {
 				// TODO Auto-generated catch block
 				exception = e;
-				e.printStackTrace();
 			}
 			catch (TTransportException e)
 			{
@@ -217,10 +216,8 @@ public class MapActivity extends Activity {
 			} catch (TException e) {
 				// TODO Auto-generated catch block
 				exception = e;
-				e.printStackTrace();
 			} catch (Exception e){
 				exception = e;
-				e.printStackTrace();
 			}
 
 			return results;

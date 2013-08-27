@@ -55,7 +55,6 @@ public class TaloolUtil
 
 	public static void sendException(Exception e, Context context)
 	{
-		e.printStackTrace();
 		EasyTracker.getInstance(context).send(MapBuilder
 				.createException(new StandardExceptionParser(context, null).getDescription(Thread.currentThread().getName(), e), true)
 				.build()

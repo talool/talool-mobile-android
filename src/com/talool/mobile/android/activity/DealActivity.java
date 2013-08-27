@@ -109,7 +109,6 @@ public class DealActivity extends Activity
 		}
 		catch (TException e)
 		{
-			e.printStackTrace();
 			EasyTracker easyTracker = EasyTracker.getInstance(this);
 
 			easyTracker.send(MapBuilder

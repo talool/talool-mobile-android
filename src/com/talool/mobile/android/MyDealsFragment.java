@@ -170,8 +170,6 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		}
 		catch (TTransportException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 			easyTracker.send(MapBuilder
@@ -255,7 +253,6 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
 		}
 
 		myDealsListView.setOnItemClickListener(onClickListener);

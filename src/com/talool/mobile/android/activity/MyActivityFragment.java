@@ -241,7 +241,6 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 			}
 			catch (ServiceException_t e)
 			{
-				e.printStackTrace();
 				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 				easyTracker.send(MapBuilder
@@ -251,7 +250,6 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 			}
 			catch (TException e)
 			{
-				e.printStackTrace();
 				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 				easyTracker.send(MapBuilder
@@ -262,7 +260,6 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 			}
 			catch (Exception e)
 			{
-				e.printStackTrace();
 				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 				easyTracker.send(MapBuilder
@@ -355,7 +352,6 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 		}
 		catch (TTransportException e)
 		{
-			e.printStackTrace();
 			EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 			easyTracker.send(MapBuilder

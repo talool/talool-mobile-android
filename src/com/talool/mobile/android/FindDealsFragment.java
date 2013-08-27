@@ -134,8 +134,6 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 		}
 		catch (TTransportException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 			easyTracker.send(MapBuilder
@@ -396,7 +394,6 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 			{
 				// TODO Auto-generated catch block
 				exception = e;
-				e.printStackTrace();
 			}
 			catch (TException e)
 			{
@@ -485,7 +482,6 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 			{
 				// TODO Auto-generated catch block
 				exception = e;
-				e.printStackTrace();
 			}
 			catch (TException e)
 			{

@@ -71,14 +71,10 @@ public class RegistrationActivity extends Activity
 			}
 			catch (ServiceException_t e)
 			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 				exception = e;
 			}
 			catch (TException e)
 			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 				exception = e;
 			}
 			return tokenAccess;

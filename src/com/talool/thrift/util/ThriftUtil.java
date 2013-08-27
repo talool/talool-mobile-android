@@ -45,8 +45,6 @@ public final class ThriftUtil
 			return bytes;
 
 		} catch (TException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return bytes;
 	}
