@@ -245,23 +245,45 @@ public final class ActivitySupervisor
 
 	public synchronized void shutdown()
 	{
+		if (instance == null)
+		{
+			return;
+		}
+
+		if (activityObservable != null)
+		{
+			activityObservable.deleteObservers();
+		}
+
 		instance.activityPoller.shutdown();
 		instance = null;
 	}
 
 	public synchronized void refreshFromPersistence()
 	{
+		if (instance == null)
+		{
+			return;
+		}
 		instance.activityPoller.forceRefresh = true;
 		instance.activityPoller.interrupt();
 	}
 
 	public synchronized void pause()
 	{
+		if (instance == null)
+		{
+			return;
+		}
 		instance.activityPoller.pause();
 	}
 
 	public synchronized void resume()
 	{
+		if (instance == null)
+		{
+			return;
+		}
 		instance.activityPoller.unPause();
 	}
 
