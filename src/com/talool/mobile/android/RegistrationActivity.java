@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
-import com.facebook.Session;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
@@ -37,11 +36,12 @@ public class RegistrationActivity extends Activity
 
 	private class RegisterTask extends AsyncTask<String, Void, CTokenAccess_t>
 	{
-		
+
 		@Override
-		protected void onPreExecute() {
+		protected void onPreExecute()
+		{
 			df = DialogFactory.getProgressDialog();
-            df.show(getFragmentManager(), "dialog");
+			df.show(getFragmentManager(), "dialog");
 		}
 
 		@Override
@@ -138,20 +138,20 @@ public class RegistrationActivity extends Activity
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		// getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
 	public void popupErrorMessage(Exception exception)
 	{
-		
+
 		EasyTracker easyTracker = EasyTracker.getInstance(this);
 
 		easyTracker.send(MapBuilder
 				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
 				.build()
 				);
-		
+
 		if (df != null && !df.isHidden())
 		{
 			df.dismiss();
@@ -161,15 +161,15 @@ public class RegistrationActivity extends Activity
 		String message;
 		if (exception instanceof ServiceException_t)
 		{
-			message = ((ServiceException_t)exception).errorDesc;
+			message = ((ServiceException_t) exception).errorDesc;
 		}
 		else
 		{
 			message = exception.getMessage();
 		}
 		df = DialogFactory.getAlertDialog(title, message, label);
-        df.show(getFragmentManager(), "dialog");
-        this.exception = null;
+		df.show(getFragmentManager(), "dialog");
+		this.exception = null;
 	}
 
 	public void popupErrorMessage(String message)
@@ -180,7 +180,7 @@ public class RegistrationActivity extends Activity
 				.createException(message, true)
 				.build()
 				);
-		
+
 		if (df != null && !df.isHidden())
 		{
 			df.dismiss();
@@ -188,7 +188,7 @@ public class RegistrationActivity extends Activity
 		String title = getResources().getString(R.string.error_reg);
 		String label = getResources().getString(R.string.retry);
 		df = DialogFactory.getAlertDialog(title, message, label);
-        df.show(getFragmentManager(), "dialog");
+		df.show(getFragmentManager(), "dialog");
 	}
 
 	@Override
@@ -204,7 +204,7 @@ public class RegistrationActivity extends Activity
 		super.onStop();
 		EasyTracker.getInstance(this).activityStop(this); // Add this method.
 	}
-	
+
 	@Override
 	protected void onResume()
 	{

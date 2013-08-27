@@ -32,7 +32,6 @@ import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.Customer_t;
 import com.talool.api.thrift.ServiceException_t;
-import com.talool.api.thrift.SocialNetwork_t;
 import com.talool.mobile.android.activity.SettingsActivity;
 import com.talool.mobile.android.dialog.DialogFactory;
 import com.talool.mobile.android.tasks.FetchFavoriteMerchantsTask;
@@ -55,16 +54,17 @@ public class LoginActivity extends Activity
 
 	private class CustomerServiceTask extends AsyncTask<String, Void, CTokenAccess_t>
 	{
-		
+
 		@Override
-		protected void onPreExecute() {
+		protected void onPreExecute()
+		{
 			df = DialogFactory.getProgressDialog();
-            df.show(getFragmentManager(), "dialog");
+			df.show(getFragmentManager(), "dialog");
 		}
-		
+
 		@Override
 		protected void onPostExecute(CTokenAccess_t result)
-		{	
+		{
 			if (exception != null)
 			{
 				popupErrorMessage(exception, errorMessage);
@@ -162,16 +162,16 @@ public class LoginActivity extends Activity
 		}
 
 		setTitle(R.string.welcome);
-		
+
 	}
 
 	public void onLoginClick(View view)
 	{
 		exception = null;
 		errorMessage = null;
-		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(password.getWindowToken(), 0);
-		
+
 		CustomerServiceTask task = new CustomerServiceTask();
 		task.execute(new String[] {});
 	}
@@ -185,7 +185,7 @@ public class LoginActivity extends Activity
 				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
 				.build()
 				);
-		
+
 		if (df != null && !df.isHidden())
 		{
 			df.dismiss();
@@ -194,8 +194,8 @@ public class LoginActivity extends Activity
 		String title = getResources().getString(R.string.error_login);
 		String label = getResources().getString(R.string.retry);
 		df = DialogFactory.getAlertDialog(title, message, label);
-        df.show(getFragmentManager(), "dialog");
-        
+		df.show(getFragmentManager(), "dialog");
+
 	}
 
 	public void onRegistrationClicked(View view)
@@ -208,7 +208,7 @@ public class LoginActivity extends Activity
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		// getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
@@ -235,8 +235,6 @@ public class LoginActivity extends Activity
 		super.onStart();
 		EasyTracker.getInstance(this).activityStart(this); // Add this method.
 	}
-	
-	
 
 	@Override
 	public void onStop()
@@ -264,7 +262,7 @@ public class LoginActivity extends Activity
 		{
 			df.dismiss();
 		}
-		
+
 		Session session = Session.getActiveSession();
 
 		if (session != null && session.isOpened())
@@ -330,6 +328,5 @@ public class LoginActivity extends Activity
 			}
 		}
 	}
-	
-	
+
 }
