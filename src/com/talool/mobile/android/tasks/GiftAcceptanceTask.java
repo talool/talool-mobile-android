@@ -10,6 +10,7 @@ import com.talool.api.thrift.DealAcquire_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.TaloolApplication;
 import com.talool.mobile.android.persistence.ActivityDao;
+import com.talool.mobile.android.persistence.MerchantDao;
 import com.talool.mobile.android.util.TaloolUtil;
 import com.talool.mobile.android.util.ThriftHelper;
 
@@ -54,6 +55,12 @@ public class GiftAcceptanceTask extends AsyncTask<String, Void, DealAcquire_t>
 			if (accept)
 			{
 				dealAcquire = client.client.acceptGift(getGiftId());
+
+				// make sure we put the merchant acquire in the cache! This is right to
+				// do in the first release because "My Deals pulls from the merchantDao
+				// onResume
+				final MerchantDao mDao = new MerchantDao(TaloolApplication.getAppContext());
+				mDao.saveMerchant(dealAcquire.getDeal().getMerchant());
 			}
 			else
 			{
