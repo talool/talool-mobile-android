@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Email;
+import android.provider.ContactsContract.Contacts;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -323,11 +324,12 @@ public class DealActivity extends Activity
 	                    cursor = getContentResolver().query(Email.CONTENT_URI,  null, Email.CONTACT_ID + "=?", new String[] { id }, null);
 	                    
 						int emailIdx = cursor.getColumnIndex(Email.DATA);
-
+		                int nameId = cursor.getColumnIndex(Contacts.DISPLAY_NAME);
 						// let's just get the first email
 						if (cursor.moveToFirst())
 						{
 							email = cursor.getString(emailIdx);
+							name = cursor.getString(nameId);
 						}
 
 						if (cursor != null)
