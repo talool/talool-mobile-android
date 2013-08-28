@@ -44,7 +44,7 @@ public class MainActivity extends Activity
 		{
 			if(isBetterLocation(location, TaloolUser.get().getLocation()))
 			{
-				TaloolUser.get().setLocation(location);
+				TaloolUser.get().setLocation(location,true);
 				LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 				lm.removeUpdates(locationListener);
 			}
@@ -89,7 +89,7 @@ public class MainActivity extends Activity
 		Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 		if(location != null)
 		{
-			TaloolUser.get().setLocation(location);
+			TaloolUser.get().setLocation(location,true);
 		}
 	}
 	

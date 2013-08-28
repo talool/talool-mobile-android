@@ -24,6 +24,7 @@ public final class TaloolUser
 
 	private CTokenAccess_t accessToken;
 	private Location location;
+	private boolean realLocation = false;
 
 	private TaloolUser()
 	{
@@ -56,9 +57,10 @@ public final class TaloolUser
 		return location;
 	}
 
-	public void setLocation(final Location location)
+	public void setLocation(final Location location, boolean realLocation)
 	{
 		this.location = location;
+		this.realLocation = realLocation;
 	}
 
 	public void logoutUser()
@@ -76,6 +78,11 @@ public final class TaloolUser
 			Session.getActiveSession().closeAndClearTokenInformation();
 		}
 
+	}
+	
+	public boolean isRealLocation()
+	{
+		return this.realLocation;
 	}
 
 }

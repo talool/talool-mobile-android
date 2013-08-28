@@ -83,7 +83,7 @@ public class MyDealsAdapter extends ArrayAdapter<Merchant_t>
 		{
 			holder.myDealsMerchantLocation.setText(merchant.getLocations().get(0).address.city);
 
-			if (TaloolUser.get().getLocation() != null)
+			if (TaloolUser.get().getLocation() != null && TaloolUser.get().isRealLocation())
 			{
 				Location merchantLocation = new Location("Talool");
 				merchantLocation.setLatitude(merchant.getLocations().get(0).location.latitude);
