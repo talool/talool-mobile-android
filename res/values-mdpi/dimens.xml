@@ -9,7 +9,7 @@
     
     <dimen name="reg_edittext_vertical_margin_top">0dp</dimen>
     <dimen name="reg_edittext_vertical_margin_bottom">15dp</dimen>
-    <dimen name="reb_button_vertical_margin_top">15dp</dimen>
+    <dimen name="reg_button_vertical_margin_top">15dp</dimen>
     
     <dimen name="help_font_size_large">19sp</dimen>
     <dimen name="action_bar_tab_font_size">11sp</dimen>
