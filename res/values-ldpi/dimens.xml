@@ -1,0 +1,17 @@
+<resources>
+
+    <dimen name="login_or_vertical_margin_top">20dp</dimen>
+    <dimen name="login_or_vertical_margin_bottom">0dp</dimen>
+    <dimen name="login_edittext_vertical_margin_top">0dp</dimen>
+    <dimen name="login_edittext_vertical_margin_bottom">15dp</dimen>
+    <dimen name="login_edittext_text_size">16sp</dimen>
+    <dimen name="login_reglink_vertical_margin_top">20dp</dimen>
+    
+    <dimen name="reg_edittext_vertical_margin_top">0dp</dimen>
+    <dimen name="reg_edittext_vertical_margin_bottom">15dp</dimen>
+    <dimen name="reg_button_vertical_margin_top">15dp</dimen>
+    
+    <dimen name="help_font_size_large">21sp</dimen>
+    <dimen name="action_bar_tab_font_size">10sp</dimen>
+
+</resources>
