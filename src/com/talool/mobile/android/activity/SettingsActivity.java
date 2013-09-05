@@ -43,7 +43,9 @@ public class SettingsActivity extends Activity
 			{
 				TaloolUser.get().logoutUser();
 				final Intent myIntent = new Intent(view.getContext(), LoginActivity.class);
+				myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 				startActivity(myIntent);
+				finish();
 			}
 		});
 

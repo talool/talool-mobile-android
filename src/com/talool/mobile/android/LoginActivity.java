@@ -76,9 +76,10 @@ public class LoginActivity extends Activity
 
 				doPostLogin();
 
-				Intent myDealsIntent = new Intent(getApplicationContext(), MainActivity.class);
-				startActivity(myDealsIntent);
-
+				final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+				finish();
 			}
 		}
 

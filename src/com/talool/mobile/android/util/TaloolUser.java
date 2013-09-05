@@ -1,5 +1,18 @@
 package com.talool.mobile.android.util;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import org.apache.thrift.TException;
+
+import android.content.Context;
 import android.location.Location;
 
 import com.facebook.Session;
@@ -7,6 +20,7 @@ import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.mobile.android.TaloolApplication;
 import com.talool.mobile.android.cache.FavoriteMerchantCache;
 import com.talool.mobile.android.tasks.ActivitySupervisor;
+import com.talool.thrift.util.ThriftUtil;
 
 /**
  * 
@@ -20,11 +34,14 @@ public final class TaloolUser
 {
 	public final Location BOULDER_LOCATION;
 	public final Location VANCOUVER_LOCATION;
-	private static final TaloolUser instance = new TaloolUser();
 
-	private CTokenAccess_t accessToken;
+	private static final TaloolUser instance = new TaloolUser();
+	private static final String TOKEN_FILE = "talool_token";
+
 	private Location location;
 	private boolean realLocation = false;
+
+	private CTokenAccess_t accessToken;
 
 	private TaloolUser()
 	{
@@ -44,12 +61,87 @@ public final class TaloolUser
 
 	public CTokenAccess_t getAccessToken()
 	{
+		if (accessToken != null)
+		{
+			return accessToken;
+		}
+
+		try
+		{
+			final FileInputStream fis = TaloolApplication.getAppContext().openFileInput(TOKEN_FILE);
+			if (fis == null)
+			{
+				return null;
+			}
+
+			accessToken = new CTokenAccess_t();
+			final BufferedInputStream bis = new BufferedInputStream(fis);
+			final DataInputStream dis = new DataInputStream(bis);
+			byte fileContent[] = toByteArray(dis);
+			ThriftUtil.deserialize(fileContent, accessToken);
+
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		catch (TException e)
+		{
+			e.printStackTrace();
+		}
+
 		return accessToken;
+	}
+
+	public static byte[] toByteArray(InputStream in) throws IOException
+	{
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		copy(in, out);
+		return out.toByteArray();
+	}
+
+	public static long copy(InputStream from, OutputStream to) throws IOException
+	{
+		byte[] buf = new byte[256];
+		long total = 0;
+		while (true)
+		{
+			int r = from.read(buf);
+			if (r == -1)
+			{
+				break;
+			}
+			to.write(buf, 0, r);
+			total += r;
+		}
+		return total;
 	}
 
 	public void setAccessToken(final CTokenAccess_t accessToken)
 	{
-		this.accessToken = accessToken;
+		try
+		{
+			// persist to memory
+			this.accessToken = accessToken;
+			// persist to disk
+			final FileOutputStream fos = TaloolApplication.getAppContext().openFileOutput(TOKEN_FILE, Context.MODE_PRIVATE);
+			fos.write(ThriftUtil.serialize(accessToken));
+			fos.close();
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
+		// this.accessToken = accessToken;
 	}
 
 	public Location getLocation()
@@ -65,7 +157,9 @@ public final class TaloolUser
 
 	public void logoutUser()
 	{
-		this.accessToken = null;
+		// clear token
+		TaloolApplication.getAppContext().deleteFile(TOKEN_FILE);
+		accessToken = null;
 
 		TaloolApplication.getAppContext().deleteDatabase(Constants.DATABASE_NAME);
 
@@ -79,7 +173,7 @@ public final class TaloolUser
 		}
 
 	}
-	
+
 	public boolean isRealLocation()
 	{
 		return this.realLocation;
