@@ -96,6 +96,7 @@
     <style name="TabTextStyle.Talool"
            parent="@android:style/Widget.Holo.Light.ActionBar.TabText">
         <item name="android:textColor">@color/actionbartab_text</item>
+        <item name="android:textSize">@dimen/action_bar_tab_font_size</item>
     </style>
     
     <style name="MenuTextStyle.Talool"

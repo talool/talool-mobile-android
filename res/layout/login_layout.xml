@@ -29,12 +29,13 @@
               android:id="@+id/email"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
-              android:layout_marginBottom="20dp"
-              android:layout_marginTop="5dp"
+              android:layout_marginBottom="@dimen/login_edittext_vertical_margin_bottom"
+              android:layout_marginTop="@dimen/login_edittext_vertical_margin_top"
               android:inputType="textEmailAddress"
               android:singleLine="true"
               android:background="@drawable/clipped_edittext"
-              android:textColor="@color/white" />
+              android:textColor="@color/white"
+              android:textSize="@dimen/login_edittext_text_size" />
 
           <!--  Password Label -->
 
@@ -49,11 +50,12 @@
                 android:id="@+id/password"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginBottom="@dimen/login_edittext_vertical_margin_bottom"
+                android:layout_marginTop="@dimen/login_edittext_vertical_margin_top"
                 android:singleLine="true"
                 android:background="@drawable/clipped_edittext"
                 android:textColor="@color/white"
+                android:textSize="@dimen/login_edittext_text_size"
                 android:inputType="textPassword"/>
           <!-- Login button -->
           <Button android:id="@+id/btnLogin"
@@ -67,8 +69,8 @@
                 android:id="@+id/profile_name"
                 android:layout_width="174dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="@dimen/login_or_vertical_margin_top"
+                android:layout_marginBottom="@dimen/login_or_vertical_margin_bottom"
                 android:lines="2"
                 android:textSize="20sp"
                 android:text="@string/get_started"
@@ -85,7 +87,7 @@
           <TextView android:id="@+id/link_to_register"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="@dimen/login_reglink_vertical_margin_top"
                 android:text="@string/newToTalool"
                 android:gravity="center"
                 android:textSize="18sp"
