@@ -55,6 +55,7 @@ public class RegistrationActivity extends Activity
 			{
 				TaloolUser.get().setAccessToken(result);
 				Intent myDealsIntent = new Intent(getApplicationContext(), MainActivity.class);
+				myDealsIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 				startActivity(myDealsIntent);
 			}
 		}

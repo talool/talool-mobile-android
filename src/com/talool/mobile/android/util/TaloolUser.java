@@ -167,7 +167,7 @@ public final class TaloolUser
 
 		FavoriteMerchantCache.get().clear();
 
-		if (Session.getActiveSession().isOpened())
+		if (Session.getActiveSession() != null && Session.getActiveSession().isOpened())
 		{
 			Session.getActiveSession().closeAndClearTokenInformation();
 		}
