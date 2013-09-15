@@ -12,6 +12,7 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Email;
@@ -263,11 +264,11 @@ public class DealActivity extends Activity
 			sb.append("\n").append(location.address.address2);
 		}
 		sb.append("\n")
-				.append(location.address.city)
-				.append(", ")
-				.append(location.address.stateProvinceCounty)
-				.append(" ")
-				.append(location.address.zip);
+		.append(location.address.city)
+		.append(", ")
+		.append(location.address.stateProvinceCounty)
+		.append(" ")
+		.append(location.address.zip);
 
 		dealAddressText.setText(sb.toString());
 	}
@@ -293,8 +294,16 @@ public class DealActivity extends Activity
 	{
 		try
 		{
-			Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-			startActivityForResult(intent, 100);
+			if(Build.VERSION.SDK_INT < 16)
+			{
+				Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+				startActivityForResult(intent, 100);
+			}
+			else
+			{
+	            Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Email.CONTENT_URI);
+				startActivityForResult(intent, 100);
+			}
 		}
 		catch (Exception e)
 		{
@@ -313,18 +322,20 @@ public class DealActivity extends Activity
 			{
 				switch (requestCode)
 				{
-					case 100:
+				case 100:
 
+					if(Build.VERSION.SDK_INT < 16)
+					{
 						Uri result = data.getData();
 
 						// get the contact id from the Uri
 						String id = result.getLastPathSegment();
 
 						// query for everything email
-	                    cursor = getContentResolver().query(Email.CONTENT_URI,  null, Email.CONTACT_ID + "=?", new String[] { id }, null);
-	                    
+						cursor = getContentResolver().query(Email.CONTENT_URI,  null, Email.CONTACT_ID + "=?", new String[] { id }, null);
+
 						int emailIdx = cursor.getColumnIndex(Email.DATA);
-		                int nameId = cursor.getColumnIndex(Contacts.DISPLAY_NAME);
+						int nameId = cursor.getColumnIndex(Contacts.DISPLAY_NAME);
 						// let's just get the first email
 						if (cursor.moveToFirst())
 						{
@@ -336,8 +347,32 @@ public class DealActivity extends Activity
 						{
 							cursor.close();
 						}
-						sendGift();
-						break;
+					}
+					else
+					{
+						Uri result = data.getData();
+
+						// get the contact id from the Uri
+						String id = result.getLastPathSegment();
+						
+                        cursor = getContentResolver().query(Email.CONTENT_URI, null, Email._ID + "=?", new String[] { id }, null);
+                        
+						int emailIdx = cursor.getColumnIndex(Email.DATA);
+						int nameId = cursor.getColumnIndex(Contacts.DISPLAY_NAME);
+						// let's just get the first email
+						if (cursor.moveToFirst())
+						{
+							email = cursor.getString(emailIdx);
+							name = cursor.getString(nameId);
+						}
+
+						if (cursor != null)
+						{
+							cursor.close();
+						}
+					}
+					sendGift();
+					break;
 				}
 			}
 

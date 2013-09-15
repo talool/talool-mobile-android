@@ -21,11 +21,14 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.talool.api.thrift.Address_t;
 import com.talool.api.thrift.DealAcquire_t;
+import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.activity.DealActivity;
+import com.talool.mobile.android.adapters.MerchantLocationAdapter;
 import com.talool.mobile.android.adapters.DealsAcquiredAdapter;
 import com.talool.mobile.android.dialog.DialogFactory;
 import com.talool.mobile.android.util.TaloolUser;
@@ -50,12 +53,13 @@ public class MapActivity extends Activity {
 	private static ThriftHelper client;
 	private MapView mapView;
 	private Merchant_t merchant;
-	private ListView dealsAcquiredList;
-	private DealsAcquiredAdapter dealAcquiredAdapter;
+	private ListView addressList;
+	private MerchantLocationAdapter addressAdapter;
 	private Exception exception;
-	private List<DealAcquire_t> dealAcquires;
+	private List<MerchantLocation_t> merchantLocations;
 	private DialogFragment df;
 	private String errorMessage;
+	private Boolean mapsConfigured = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +67,7 @@ public class MapActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.map_activity_layout);
 		createThriftClient();
-		dealsAcquiredList = (ListView) findViewById(R.id.mapActivityDealAcquiresList);
+		addressList = (ListView) findViewById(R.id.mapActivityAddressList);
 		if (TaloolUser.get().getAccessToken() == null)
 		{
 			Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -72,33 +76,14 @@ public class MapActivity extends Activity {
 		try {
 			byte[] merchantBytes = (byte[]) getIntent().getSerializableExtra("merchant");
 			merchant = new Merchant_t();
-			MapsInitializer.initialize(this);
 			ThriftUtil.deserialize(merchantBytes,merchant);
+			reloadData();
+			MapsInitializer.initialize(this);
 			mapView = (MapView) findViewById(R.id.map);
 			mapView.onCreate(savedInstanceState);
-			reloadData();
 
-			LatLng location = new LatLng(Double.valueOf(merchant.locations.get(0).location.latitude),Double.valueOf(merchant.locations.get(0).location.longitude));
-			CameraUpdate update = CameraUpdateFactory.newLatLngZoom(location, 13);
-
-
-			mapView.getMap().moveCamera(update);
-			MarkerOptions marker = new MarkerOptions().position(location).title(merchant.name);
-			mapView.getMap().addMarker(marker);
-			mapView.getMap().setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-				
-				@Override
-				public boolean onMarkerClick(Marker marker) {
-					double lat = marker.getPosition().latitude;
-					double lon = marker.getPosition().longitude;
-					String url = "geo:"+lat+","+lon+"?q="+lat+","+lon+"("+marker.getTitle()+")";
-					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-					startActivity(intent);
-					return true;
-				}
-			});
-
-
+			plotLocationsOnMap();
+			mapsConfigured = true;
 		} catch (GooglePlayServicesNotAvailableException e1) {
 			exception = e1;
 			errorMessage = "Google maps is not installed on this device. Please install";
@@ -107,7 +92,34 @@ public class MapActivity extends Activity {
 			// TODO Auto-generated catch block
 			exception = e;
 			errorMessage = "Error loading Map, please try again";
-			popupErrorMessage(exception, errorMessage);		}
+			popupErrorMessage(exception, errorMessage);		
+		}
+	}
+
+	private void plotLocationsOnMap()
+	{
+		for(MerchantLocation_t loc : merchant.locations)
+		{
+			LatLng location = new LatLng(Double.valueOf(loc.location.latitude),Double.valueOf(loc.location.longitude));
+			MarkerOptions marker = new MarkerOptions().position(location).title(merchant.name);
+			mapView.getMap().addMarker(marker);
+		}
+		mapView.getMap().setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+
+			@Override
+			public boolean onMarkerClick(Marker marker) {
+				double lat = marker.getPosition().latitude;
+				double lon = marker.getPosition().longitude;
+				String url = "geo:"+lat+","+lon+"?q="+lat+","+lon+"("+marker.getTitle()+")";
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+				startActivity(intent);
+				return true;
+			}
+		});
+		LatLng location = new LatLng(Double.valueOf(merchant.locations.get(0).location.latitude),Double.valueOf(merchant.locations.get(0).location.longitude));
+		CameraUpdate update = CameraUpdateFactory.newLatLngZoom(location, 13);
+		mapView.getMap().moveCamera(update);
+
 	}
 
 	private void createThriftClient()
@@ -173,72 +185,15 @@ public class MapActivity extends Activity {
 		return ret;
 	}
 
-	private class MapAcquiresTask extends AsyncTask<String,Void,List<DealAcquire_t>>{
-
-		@Override
-		protected void onPreExecute() {
-			if (dealAcquires==null || dealAcquires.isEmpty())
-			{
-				df = DialogFactory.getProgressDialog();
-				df.show(getFragmentManager(), "dialog");
-			}
-		}
-
-		@Override
-		protected void onPostExecute(List<DealAcquire_t> results) {
-			if (df != null && !df.isHidden())
-			{
-				df.dismiss();
-			}
-			dealAcquires = results;
-			loadListView();
-		}
-
-		@Override
-		protected List<DealAcquire_t> doInBackground(String... arg0) {
-			List<DealAcquire_t> results = new ArrayList<DealAcquire_t>();
-
-			try {
-				exception = null;
-				errorMessage = null;
-				client.setAccessToken(TaloolUser.get().getAccessToken());
-				SearchOptions_t searchOptions = new SearchOptions_t();
-				searchOptions.setMaxResults(1000).setPage(0).setSortProperty("deal.dealId").setAscending(true);
-				results = client.getClient().getDealAcquires(merchant.merchantId, searchOptions);
-			} catch (ServiceException_t e) {
-				// TODO Auto-generated catch block
-				exception = e;
-			}
-			catch (TTransportException e)
-			{
-				errorMessage = "Make sure you have a network connection";
-				exception = e;
-			} catch (TException e) {
-				// TODO Auto-generated catch block
-				exception = e;
-			} catch (Exception e){
-				exception = e;
-			}
-
-			return results;
-		}
-
-	}
 
 	private void loadListView()
 	{
-		if(exception == null)
-		{
-			DealsAcquiredAdapter adapter = new DealsAcquiredAdapter(this, 
-					R.layout.deals_acquired_item_row, dealAcquires);
-			dealAcquiredAdapter = adapter;
-			dealsAcquiredList.setAdapter(dealAcquiredAdapter);
-			dealsAcquiredList.setOnItemClickListener(onClickListener);
-		}
-		else
-		{
-			popupErrorMessage(exception, errorMessage);
-		}
+		merchantLocations = merchant.locations;
+		MerchantLocationAdapter adapter = new MerchantLocationAdapter(this, 
+				R.layout.address_row_layout, merchantLocations);
+		addressAdapter = adapter;
+		addressList.setAdapter(addressAdapter);
+		addressList.setOnItemClickListener(onClickListener);
 	}
 
 	private void popupErrorMessage(Exception exception, String errorMessage)
@@ -270,8 +225,7 @@ public class MapActivity extends Activity {
 	{
 		exception = null;
 		errorMessage = null;
-		MapAcquiresTask dealAcquiresTask = new MapAcquiresTask();
-		dealAcquiresTask.execute(new String[]{});
+		loadListView();
 	}
 
 	protected AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener()
@@ -281,15 +235,15 @@ public class MapActivity extends Activity {
 		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 				long arg3)
 		{
-			DealsAcquiredAdapter dealAcquiredAdapter = (DealsAcquiredAdapter) arg0.getAdapter();
-			DealAcquire_t deal = (DealAcquire_t) dealAcquiredAdapter.getItem(position);
+			if(mapsConfigured)
+			{
+				MerchantLocationAdapter merchantLocationAdapter = (MerchantLocationAdapter) arg0.getAdapter();
+				MerchantLocation_t merchantLocation = (MerchantLocation_t) merchantLocationAdapter.getItem(position);
 
-			Intent myIntent = new Intent(arg1.getContext(), DealActivity.class);
-
-			myIntent.putExtra("deal", ThriftUtil.serialize(deal));
-			myIntent.putExtra("merchant", ThriftUtil.serialize(merchant));
-
-			startActivity(myIntent);
+				LatLng location = new LatLng(Double.valueOf(merchantLocation.location.latitude),Double.valueOf(merchantLocation.location.longitude));
+				CameraUpdate update = CameraUpdateFactory.newLatLngZoom(location, 13);
+				mapView.getMap().moveCamera(update);
+			}
 
 		}
 	};
