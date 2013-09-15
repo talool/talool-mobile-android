@@ -22,6 +22,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.LoginActivity;
+import com.talool.mobile.android.MapActivity;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.dialog.DialogFactory;
@@ -65,6 +67,7 @@ public class DealActivity extends Activity
 	private TextView dealSummaryText;
 	private TextView dealValidText;
 	private TextView dealExpirationText;
+	private TextView offerValidAtText;
 	private LinearLayout dealActivityButtonLayout;
 	private String redemptionCode;
 	private String email;
@@ -83,11 +86,29 @@ public class DealActivity extends Activity
 		dealMerchantImage = (TaloolSmartImageView) findViewById(R.id.dealMerchantImage);
 		dealAddressText = (TextView) findViewById(R.id.dealAddressText);
 		dealValidText = (TextView) findViewById(R.id.dealValidText);
+		offerValidAtText = (TextView) findViewById(R.id.offValidAtText);
 		dealSummaryText = (TextView) findViewById(R.id.dealSummaryText);
 		dealOfferCreatorImage = (SmartImageView) findViewById(R.id.dealActivityCreatorImage);
 		dealExpirationText = (TextView) findViewById(R.id.dealActivityExpires);
 		dealActivityButtonLayout = (LinearLayout) findViewById(R.id.dealActivityButtonLayout);
 		redemptionCode = null;
+		
+		dealAddressText.setClickable(true);
+		
+		OnClickListener mapClickListener = new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent myIntent = new Intent(v.getContext(), MapActivity.class);
+				myIntent.putExtra("merchant", ThriftUtil.serialize(merchant));
+				startActivity(myIntent);
+				
+			}
+		};
+		
+		dealAddressText.setOnClickListener(mapClickListener);
+		offerValidAtText.setOnClickListener(mapClickListener);
+		
 		if (TaloolUser.get().getAccessToken() == null)
 		{
 			Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -257,20 +278,27 @@ public class DealActivity extends Activity
 
 	private void setAddressText()
 	{
-		MerchantLocation_t location = merchant.locations.get(0);
-		StringBuilder sb = new StringBuilder(location.address.address1);
-		if (location.address.address2 != null)
+		if(merchant.locations.size() > 1)
 		{
-			sb.append("\n").append(location.address.address2);
+			dealAddressText.setText("Multiple Locations \ncheck the map >");
 		}
-		sb.append("\n")
-		.append(location.address.city)
-		.append(", ")
-		.append(location.address.stateProvinceCounty)
-		.append(" ")
-		.append(location.address.zip);
+		else
+		{
+			MerchantLocation_t location = merchant.locations.get(0);
+			StringBuilder sb = new StringBuilder(location.address.address1);
+			if (location.address.address2 != null)
+			{
+				sb.append("\n").append(location.address.address2);
+			}
+			sb.append("\n")
+			.append(location.address.city)
+			.append(", ")
+			.append(location.address.stateProvinceCounty)
+			.append(" ")
+			.append(location.address.zip);
 
-		dealAddressText.setText(sb.toString());
+			dealAddressText.setText(sb.toString());
+		}
 	}
 
 	private void createThriftClient()
@@ -301,7 +329,7 @@ public class DealActivity extends Activity
 			}
 			else
 			{
-	            Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Email.CONTENT_URI);
+				Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Email.CONTENT_URI);
 				startActivityForResult(intent, 100);
 			}
 		}
@@ -354,9 +382,9 @@ public class DealActivity extends Activity
 
 						// get the contact id from the Uri
 						String id = result.getLastPathSegment();
-						
-                        cursor = getContentResolver().query(Email.CONTENT_URI, null, Email._ID + "=?", new String[] { id }, null);
-                        
+
+						cursor = getContentResolver().query(Email.CONTENT_URI, null, Email._ID + "=?", new String[] { id }, null);
+
 						int emailIdx = cursor.getColumnIndex(Email.DATA);
 						int nameId = cursor.getColumnIndex(Contacts.DISPLAY_NAME);
 						// let's just get the first email

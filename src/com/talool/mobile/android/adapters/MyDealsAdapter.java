@@ -81,7 +81,14 @@ public class MyDealsAdapter extends ArrayAdapter<Merchant_t>
 		holder.myDealsMerchantTitle.setText(merchant.getName());
 		if (merchant.getLocations() != null && merchant.getLocations().size() > 0)
 		{
-			holder.myDealsMerchantLocation.setText(merchant.getLocations().get(0).address.city);
+			if(merchant.locations.size() > 1)
+			{
+				holder.myDealsMerchantLocation.setText("Multiple Locations");
+			}
+			else
+			{
+				holder.myDealsMerchantLocation.setText(merchant.getLocations().get(0).address.address1 + ", " + merchant.getLocations().get(0).address.city);
+			}
 
 			if (TaloolUser.get().getLocation() != null && TaloolUser.get().isRealLocation())
 			{
@@ -94,7 +101,6 @@ public class MyDealsAdapter extends ArrayAdapter<Merchant_t>
 				holder.myDealsMerchantDistance.setText(String.valueOf(TaloolUtil.round(distance, 2)) + " miles");
 
 			}
-			holder.myDealsMerchantLocation.setText(merchant.getLocations().get(0).address.city);
 		}
 		holder.myDealsMerchantArrow.setImageResource(R.drawable.navigation_next_item);
 
