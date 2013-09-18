@@ -1,6 +1,5 @@
 package com.talool.mobile.android;
 
-import java.awt.font.NumericShaper;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +15,6 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,12 +46,14 @@ import com.talool.mobile.android.util.TaloolSmartImageView;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
 
-public class FindDealsFragment extends Fragment implements ConfirmDialogListener {
+public class FindDealsFragment extends Fragment implements ConfirmDialogListener
+{
 	private ThriftHelper client;
 	private View view;
 	private Exception exception;
 	private List<Deal_t> dealOffers;
 	private ListView dealOffersListView;
+	private LinearLayout purchaseClickLayout;
 	private FindDealsAdapter dealOffersAdapter;
 	private static final String DEAL_OFFER_ID_PAYBACK_BOULDER = "4d54d8ef-febb-4719-b9f0-a73578a41803";
 	private static final String DEAL_OFFER_ID_PAYBACK_VANCOUVER = "a067de54-d63d-4613-8d60-9d995765cd52";
@@ -69,29 +69,48 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		this.view = inflater.inflate(R.layout.find_deals_fragment, container,false);
+			Bundle savedInstanceState)
+	{
+		this.view = inflater.inflate(R.layout.find_deals_fragment, container, false);
 		bookImage = (TaloolSmartImageView) view.findViewById(R.id.bookImageView);
 		dealOffersListView = (ListView) view.findViewById(R.id.dealOffersListView);
 		loadDealsButton = (Button) view.findViewById(R.id.loadDealsButton);
-		loadDealsButton.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
+		loadDealsButton.setOnClickListener(new View.OnClickListener()
+		{
+			public void onClick(View v)
+			{
 				RedeemBook redeemBookTask = new RedeemBook();
-				redeemBookTask.execute(new Void[]{});
-				InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+				redeemBookTask.execute(new Void[] {});
+				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 				EditText editText = (EditText) view.findViewById(R.id.accessCode);
 				imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
 			}
-		});		
+		});
 		listViewLinearLayout = (LinearLayout) view.findViewById(R.id.listViewLinearLayout);
 		listViewLinearLayout.setVisibility(View.INVISIBLE);
 
+		purchaseClickLayout = (LinearLayout) view.findViewById(R.id.purchaseClickLayout);
+
+		purchaseClickLayout.setOnClickListener(new View.OnClickListener()
+		{
+
+			@Override
+			public void onClick(View view)
+			{
+				Intent myIntent = new Intent(view.getContext(), PaymentActivity.class);
+				startActivity(myIntent);
+			}
+
+		});
+
+		purchaseClickLayout.setVisibility(View.GONE);
 		createThriftClient();
 		return view;
 	}
 
 	@Override
-	public void onResume() {
+	public void onResume()
+	{
 		// TODO Auto-generated method stub
 		super.onResume();
 
@@ -99,8 +118,8 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 		{
 			df.dismiss();
 		}
-		
-		if(TaloolUser.get().getLocation() == null)
+
+		if (TaloolUser.get().getLocation() == null)
 		{
 			Intent intent = new Intent(this.view.getContext(), LocationSelectActivity.class);
 			startActivity(intent);
@@ -113,7 +132,8 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 	}
 
 	@Override
-	public void onStart() {
+	public void onStart()
+	{
 		super.onStart();
 		EasyTracker easyTracker = EasyTracker.getInstance(getActivity());
 		easyTracker.set(Fields.SCREEN_NAME, "Find Deals");
@@ -121,7 +141,8 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 	}
 
 	@Override
-	public void onStop() {
+	public void onStop()
+	{
 		super.onStop();
 	}
 
@@ -137,7 +158,7 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 			EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
+					.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(), e), true)
 					.build()
 					);
 		}
@@ -158,11 +179,11 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 				@Override
 				protected void onPostExecute(final DealOffer_t dealOffer)
 				{
-					if(dealOffer != null)
+					if (dealOffer != null)
 					{
 						DealOfferCache.get().setDealOffer(dealOffer);
 						boulderBookCompletion(dealOffer);
-						
+
 					}
 				}
 			};
@@ -179,12 +200,12 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 		final DealOffer_t dealOffer = DealOfferCache.get().getDealOffer(DEAL_OFFER_ID_PAYBACK_VANCOUVER);
 		if (dealOffer == null)
 		{
-			final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, DEAL_OFFER_ID_PAYBACK_VANCOUVER,view.getContext())
+			final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, DEAL_OFFER_ID_PAYBACK_VANCOUVER, view.getContext())
 			{
 				@Override
 				protected void onPostExecute(final DealOffer_t dealOffer)
 				{
-					if(dealOffer != null)
+					if (dealOffer != null)
 					{
 						DealOfferCache.get().setDealOffer(dealOffer);
 						vancouverBookCompletion(dealOffer);
@@ -219,7 +240,7 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 
 	private void loadBookImages()
 	{
-		if(closestBook.imageUrl != null)
+		if (closestBook.imageUrl != null)
 		{
 			bookImage.setImageUrl(closestBook.imageUrl);
 		}
@@ -227,9 +248,9 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 
 	private void determineClosestBook()
 	{
-		if(boulderBook == null || vancouverBook == null)
+		if (boulderBook == null || vancouverBook == null)
 		{
-			//return and wait for the other book to be loaded
+			// return and wait for the other book to be loaded
 			return;
 		}
 		else
@@ -238,7 +259,7 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 			float distanceToBoulder = userLocation.distanceTo(TaloolUser.get().BOULDER_LOCATION);
 			float distanceToVan = userLocation.distanceTo(TaloolUser.get().VANCOUVER_LOCATION);
 
-			if(distanceToBoulder <= distanceToVan)
+			if (distanceToBoulder <= distanceToVan)
 			{
 				closestBook = boulderBook;
 			}
@@ -254,11 +275,11 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 	}
 
 	private void loadBookDeals()
-	{		
-		if(BookCache.get().getDealsInBook().isEmpty())
+	{
+		if (BookCache.get().getDealsInBook().isEmpty())
 		{
 			FindDealsTask dealsTask = new FindDealsTask();
-			dealsTask.execute(new String[]{});
+			dealsTask.execute(new String[] {});
 		}
 		else
 		{
@@ -267,16 +288,16 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 			loadListView(getNumberOfMerchants());
 		}
 	}
-	
+
 	private int getNumberOfMerchants()
 	{
 		int numberOfMerchants = BookCache.get().getNumberOfMerchants();
-		if(numberOfMerchants == 0)
+		if (numberOfMerchants == 0)
 		{
-			Map<String,String> map = new HashMap<String,String>();
-			for(Deal_t deal : dealOffers)
+			Map<String, String> map = new HashMap<String, String>();
+			for (Deal_t deal : dealOffers)
 			{
-				if(map.get(deal.merchant.merchantId) == null)
+				if (map.get(deal.merchant.merchantId) == null)
 				{
 					map.put(deal.merchant.merchantId, deal.dealOfferId);
 				}
@@ -289,8 +310,8 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 
 	private void loadBooks()
 	{
-		
-		if(BookCache.get().getClosestBook() != null)
+
+		if (BookCache.get().getClosestBook() != null)
 		{
 			closestBook = BookCache.get().getClosestBook();
 			loadBookImages();
@@ -307,7 +328,7 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 			EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),exception),true)                                              
+					.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(), exception), true)
 					.build()
 					);
 		}
@@ -319,19 +340,17 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 		{
 			df.dismiss();
 		}
-		if (message==null)
+		if (message == null)
 		{
 			message = getResources().getString(R.string.error_access_code_message);
 		}
 		String title = getResources().getString(R.string.error_loading_deals);
 		String label = getResources().getString(R.string.ok);
 		df = DialogFactory.getAlertDialog(title, message, label);
-        df.show(getFragmentManager(), "dialog");
-        /*
-        dialog.dismiss();
-		createThriftClient();
-		reloadData();
-		*/
+		df.show(getFragmentManager(), "dialog");
+		/*
+		 * dialog.dismiss(); createThriftClient(); reloadData();
+		 */
 	}
 
 	private void loadListView(int numMerchants)
@@ -343,15 +362,17 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 		setListViewHeightBasedOnChildren(dealOffersListView);
 		listViewLinearLayout.setVisibility(View.VISIBLE);
 
+		purchaseClickLayout.setVisibility(View.VISIBLE);
 		TextView textView = (TextView) view.findViewById(R.id.summaryText);
-		textView.setText(dealOffers.size() + " Deals from " + numMerchants +" Merchants");
+		textView.setText(dealOffers.size() + " Deals from " + numMerchants + " Merchants");
 	}
 
 	private class FindDealsTask extends AsyncTask<String, Void, List<Deal_t>>
 	{
-		
+
 		@Override
-		protected void onPreExecute() {
+		protected void onPreExecute()
+		{
 			if (dealOffers == null || dealOffers.isEmpty())
 			{
 				df = DialogFactory.getProgressDialog();
@@ -366,7 +387,7 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 			{
 				df.dismiss();
 			}
-			if(exception != null)
+			if (exception != null)
 			{
 				popupErrorMessage(exception.getMessage());
 			}
@@ -375,6 +396,7 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 				dealOffers = results;
 				BookCache.get().setDealsInBook(dealOffers);
 				loadListView(getNumberOfMerchants());
+				purchaseClickLayout.setVisibility(View.VISIBLE);
 			}
 		}
 
@@ -418,25 +440,27 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 	private class RedeemBook extends AsyncTask<Void, Void, Void>
 	{
 		private boolean emptyCode = false;
-		
+
 		@Override
-		protected void onPreExecute() {
+		protected void onPreExecute()
+		{
 			df = DialogFactory.getProgressDialog();
 			df.show(getFragmentManager(), "dialog");
 		}
 
 		@Override
-		protected void onPostExecute(Void result) {
+		protected void onPostExecute(Void result)
+		{
 			if (df != null && !df.isHidden())
 			{
 				df.dismiss();
 			}
-			if(exception != null)
+			if (exception != null)
 			{
 				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
 				easyTracker.send(MapBuilder
-						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),exception),true)                                              
+						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(), exception), true)
 						.build()
 						);
 				popupErrorMessage(exception.getMessage());
@@ -444,19 +468,20 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 			else if (emptyCode)
 			{
 				popupErrorMessage("Access Code cannot be empty");
-			}else
-			{			
+			}
+			else
+			{
 				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 				easyTracker.send(MapBuilder
-						.createEvent("redeem_book","selected",closestBook.dealOfferId,null)           
+						.createEvent("redeem_book", "selected", closestBook.dealOfferId, null)
 						.build()
 						);
-				
+
 				String title = getResources().getString(R.string.alert_new_deals_title);
 				String message = getResources().getString(R.string.alert_new_deals_message);
 				df = DialogFactory.getConfirmDialog(title, message, FindDealsFragment.this);
-		        df.show(getFragmentManager(), "dialog");
-		
+				df.show(getFragmentManager(), "dialog");
+
 			}
 		}
 
@@ -468,7 +493,7 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 				exception = null;
 				EditText editText = (EditText) view.findViewById(R.id.accessCode);
 				accessCode = editText.getText().toString();
-				if(accessCode == null || accessCode == "" || accessCode.isEmpty())
+				if (accessCode == null || accessCode == "" || accessCode.isEmpty())
 				{
 					emptyCode = true;
 					return null;
@@ -491,27 +516,30 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 			catch (Exception e)
 			{
 				exception = e;
-				
+
 			}
 			return null;
 		}
 	}
 
-	public void setListViewHeightBasedOnChildren(ListView listView) {
-		ListAdapter listAdapter = listView.getAdapter(); 
-		if (listAdapter == null) {
+	public void setListViewHeightBasedOnChildren(ListView listView)
+	{
+		ListAdapter listAdapter = listView.getAdapter();
+		if (listAdapter == null)
+		{
 			// pre-condition
 			return;
 		}
 
 		int totalHeight = BookCache.get().getTotalHeight();
-		if(totalHeight == 0)
-		for (int i = 0; i < listAdapter.getCount(); i++) {
-			View listItem = listAdapter.getView(i, null, listView);
-			listItem.measure(0, 0);
-			totalHeight += listItem.getMeasuredHeight();
-			BookCache.get().setTotalHeight(totalHeight);
-		}
+		if (totalHeight == 0)
+			for (int i = 0; i < listAdapter.getCount(); i++)
+			{
+				View listItem = listAdapter.getView(i, null, listView);
+				listItem.measure(0, 0);
+				totalHeight += listItem.getMeasuredHeight();
+				BookCache.get().setTotalHeight(totalHeight);
+			}
 
 		ViewGroup.LayoutParams params = listView.getLayoutParams();
 		params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
@@ -521,14 +549,15 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 	}
 
 	@Override
-	public void onDialogPositiveClick(DialogFragment dialog) {
+	public void onDialogPositiveClick(DialogFragment dialog)
+	{
 		redirectToMyDeals();
 	}
 
 	@Override
-	public void onDialogNegativeClick(DialogFragment dialog) {
+	public void onDialogNegativeClick(DialogFragment dialog)
+	{
 		// TODO Auto-generated method stub
 	}
 
-	
 }

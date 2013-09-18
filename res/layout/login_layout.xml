@@ -65,6 +65,19 @@
                 android:onClick="onLoginClick"
                 android:background="@drawable/btn_teal" 
                 android:textColor="@color/white"/>
+          
+          <!-- Link to Forgot Password -->
+          <TextView android:id="@+id/link_to_forgot_password"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/forgot_password"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:onClick="onForgotPasswordClicked"
+                android:clickable="true"
+                android:textColor="@color/teal"/>
+          
         <TextView
                 android:id="@+id/profile_name"
                 android:layout_width="174dp"

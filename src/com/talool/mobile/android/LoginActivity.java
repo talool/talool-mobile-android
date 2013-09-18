@@ -203,6 +203,12 @@ public class LoginActivity extends Activity
 		startActivity(myIntent);
 	}
 
+	public void onForgotPasswordClicked(View view)
+	{
+		Intent myIntent = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
+		startActivity(myIntent);
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{

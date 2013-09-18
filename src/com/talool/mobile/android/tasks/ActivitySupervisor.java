@@ -138,7 +138,9 @@ public final class ActivitySupervisor
 						}
 					}
 
-					if (AndroidUtils.hasNetworkConnection())
+					boolean hasNetworkConnection = AndroidUtils.hasNetworkConnection();
+
+					if (hasNetworkConnection)
 					{
 						final List<Activity_t> acts = client.getClient().getActivities(searchOptions);
 						handleActionsPending(acts, true);
