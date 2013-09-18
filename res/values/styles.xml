@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- File created by the Android Action Bar Style Generator
+<!--
+     File created by the Android Action Bar Style Generator
 
      Copyright (C) 2011 The Android Open Source Project
      Copyright (C) 2012 readyState Software Ltd
@@ -41,18 +42,16 @@
         <item name="android:backgroundSplit">@drawable/ab_bottom_solid_talool</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Talool</item>
         <item name="android:titleTextStyle">@style/TitleTextStyle.Talool</item>
-        
     </style>
 
     <style name="ActionBar.Transparent.Talool" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">@drawable/ab_transparent_talool</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Talool</item>
-
     </style>
 
     <style name="PopupMenu.Talool" parent="@android:style/Widget.Holo.Light.ListPopupWindow">
         <item name="android:popupBackground">@drawable/menu_dropdown_panel_talool</item>
-        <item name="android:textAppearance">@style/MenuTextStyle.Talool</item>	
+        <item name="android:textAppearance">@style/MenuTextStyle.Talool</item>
     </style>
 
     <style name="DropDownListView.Talool" parent="@android:style/Widget.Holo.Light.ListView.DropDown">
@@ -71,11 +70,11 @@
         <item name="android:textAppearance">@style/MenuTextStyle.Talool</item>
         <item name="android:textColor">@color/orange</item>
     </style>
-    
+
     <style name="ProgressBar.Talool" parent="@android:style/Widget.Holo.Light.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_horizontal_talool</item>
     </style>
-    
+
     <style name="ActionButton.CloseMode.Talool" parent="@android:style/Widget.Holo.Light.ActionButton.CloseMode">
         <item name="android:background">@drawable/btn_cab_done_talool</item>
     </style>
@@ -85,25 +84,22 @@
         <item name="android:popupMenuStyle">@style/PopupMenu.Talool</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Talool</item>
     </style>
-    
+
     <!-- action bar title text -->
-    <style name="TitleTextStyle.Talool"
-           parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+    <style name="TitleTextStyle.Talool" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textColor">@color/actionbar_text</item>
     </style>
 
     <!-- action bar tab text -->
-    <style name="TabTextStyle.Talool"
-           parent="@android:style/Widget.Holo.Light.ActionBar.TabText">
+    <style name="TabTextStyle.Talool" parent="@android:style/Widget.Holo.Light.ActionBar.TabText">
         <item name="android:textColor">@color/actionbartab_text</item>
         <item name="android:textSize">@dimen/action_bar_tab_font_size</item>
     </style>
-    
-    <style name="MenuTextStyle.Talool"
-		   parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Menu">
+
+    <style name="MenuTextStyle.Talool" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Menu">
         <item name="android:textColor">@color/actionbar_text</item>
     </style>
-    
+
     <!-- alert dialog -->
     <style name="AlertDialogTheme.Talool" parent="@android:style/Theme.Holo.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -112,13 +108,15 @@
         <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
         <item name="android:buttonBarStyle">@style/AlertButtonBarWithBackground</item>
     </style>
+
     <style name="AlertButtonBarWithBackground" parent="@android:style/Holo.ButtonBar.AlertDialog">
-        <item name="android:background">@color/teal</item>     
+        <item name="android:background">@color/teal</item>
     </style>
 
-
-
-    
-
+    <style name="PasswordResetFormContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
+    </style>
 
 </resources>

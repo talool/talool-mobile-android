@@ -103,5 +103,16 @@
    <string name="settings_logout_label">Sign Out</string>
    
 
+    <!-- Strings related to password reset -->
+    <string name="title_activity_reset_password">Enter New Password</string>
+    <string name="prompt_confirm">Confirm New Password</string>
+    <string name="prompt_password">New Password</string>
+    <string name="action_pw_reset">Reset Password</string>
+    <string name="error_passwords_dont_match">The passwords don\'t match</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_password_reset_auth_failed">Authentication after password reset failed</string>
+   
+
 
 </resources>
