@@ -183,15 +183,15 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	{
 		switch (selectedFilter)
 		{
-			case All:
-				merchants = merchantDao.getMerchants(null);
-				break;
-			case Favorites:
-				merchants = new ArrayList<Merchant_t>(FavoriteMerchantCache.get().getMerchants());
-				break;
-			default:
-				merchants = merchantDao.getMerchants(selectedFilter.getCategoryId());
-				break;
+		case All:
+			merchants = merchantDao.getMerchants(null);
+			break;
+		case Favorites:
+			merchants = new ArrayList<Merchant_t>(FavoriteMerchantCache.get().getMerchants());
+			break;
+		default:
+			merchants = merchantDao.getMerchants(selectedFilter.getCategoryId());
+			break;
 
 		}
 		if (merchants == null)
@@ -304,7 +304,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		@Override
 		protected void onPreExecute()
 		{
-			if (merchants.isEmpty())
+			if (merchants != null && merchants.isEmpty())
 			{
 				df = DialogFactory.getProgressDialog();
 				df.show(getFragmentManager(), "dialog");
@@ -319,10 +319,17 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 				df.dismiss();
 			}
 
-			merchants = results;
+			if(results != null)
+			{
+				merchants = results;
+			}
 			loadListView();
 			mPullToRefreshAttacher.setRefreshComplete();
-			merchantDao.saveMerchants(results);
+
+			if(results != null)
+			{
+				merchantDao.saveMerchants(results);
+			}
 		}
 
 		@Override
