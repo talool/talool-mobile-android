@@ -42,9 +42,12 @@ import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.dialog.DialogFactory;
 import com.talool.mobile.android.dialog.DialogFactory.ConfirmDialogListener;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
+import com.talool.mobile.android.util.Constants;
+import com.talool.mobile.android.util.SafeSimpleDecimalFormat;
 import com.talool.mobile.android.util.TaloolSmartImageView;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
+import com.talool.thrift.util.ThriftUtil;
 
 public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 {
@@ -55,8 +58,6 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 	private ListView dealOffersListView;
 	private LinearLayout purchaseClickLayout;
 	private FindDealsAdapter dealOffersAdapter;
-	private static final String DEAL_OFFER_ID_PAYBACK_BOULDER = "4d54d8ef-febb-4719-b9f0-a73578a41803";
-	private static final String DEAL_OFFER_ID_PAYBACK_VANCOUVER = "a067de54-d63d-4613-8d60-9d995765cd52";
 	private DealOffer_t boulderBook;
 	private DealOffer_t vancouverBook;
 	private TaloolSmartImageView bookImage;
@@ -97,10 +98,10 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 			@Override
 			public void onClick(View view)
 			{
-				Intent myIntent = new Intent(view.getContext(), PaymentActivity.class);
+				final Intent myIntent = new Intent(view.getContext(), PaymentActivity.class);
+				myIntent.putExtra("dealOffer", ThriftUtil.serialize(closestBook));
 				startActivity(myIntent);
 			}
-
 		});
 
 		purchaseClickLayout.setVisibility(View.GONE);
@@ -171,10 +172,10 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 
 	private void getBoulderBook()
 	{
-		final DealOffer_t dealOffer = DealOfferCache.get().getDealOffer(DEAL_OFFER_ID_PAYBACK_BOULDER);
+		final DealOffer_t dealOffer = DealOfferCache.get().getDealOffer(Constants.DEAL_OFFER_ID_PAYBACK_BOULDER);
 		if (dealOffer == null)
 		{
-			final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, DEAL_OFFER_ID_PAYBACK_BOULDER, view.getContext())
+			final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, Constants.DEAL_OFFER_ID_PAYBACK_BOULDER, view.getContext())
 			{
 				@Override
 				protected void onPostExecute(final DealOffer_t dealOffer)
@@ -197,10 +198,10 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 
 	private void getVancouverBook()
 	{
-		final DealOffer_t dealOffer = DealOfferCache.get().getDealOffer(DEAL_OFFER_ID_PAYBACK_VANCOUVER);
+		final DealOffer_t dealOffer = DealOfferCache.get().getDealOffer(Constants.DEAL_OFFER_ID_PAYBACK_VANCOUVER);
 		if (dealOffer == null)
 		{
-			final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, DEAL_OFFER_ID_PAYBACK_VANCOUVER, view.getContext())
+			final DealOfferFetchTask dealOfferFetchTask = new DealOfferFetchTask(client, Constants.DEAL_OFFER_ID_PAYBACK_VANCOUVER, view.getContext())
 			{
 				@Override
 				protected void onPostExecute(final DealOffer_t dealOffer)
@@ -363,8 +364,19 @@ public class FindDealsFragment extends Fragment implements ConfirmDialogListener
 		listViewLinearLayout.setVisibility(View.VISIBLE);
 
 		purchaseClickLayout.setVisibility(View.VISIBLE);
-		TextView textView = (TextView) view.findViewById(R.id.summaryText);
+		final TextView buyNowView = (TextView) view.findViewById(R.id.buy_now_text);
+		buyNowView.setText(getBuyNowText());
+
+		final TextView textView = (TextView) view.findViewById(R.id.summaryText);
 		textView.setText(dealOffers.size() + " Deals from " + numMerchants + " Merchants");
+	}
+
+	private String getBuyNowText()
+	{
+		final StringBuilder sb = new StringBuilder();
+		sb.append(getResources().getString(R.string.find_deal_buy_now)).append(" ").
+				append(new SafeSimpleDecimalFormat(Constants.FORMAT_DECIMAL_MONEY).format(closestBook.getPrice()));
+		return sb.toString();
 	}
 
 	private class FindDealsTask extends AsyncTask<String, Void, List<Deal_t>>

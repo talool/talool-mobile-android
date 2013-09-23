@@ -113,9 +113,6 @@
                 android:name="com.talool.mobile.android.PaymentActivity"
                 android:label="@string/payment" >
         </activity>
-        
-        ￼<activity 
-        	android:name="com.venmo.touch.activity.PaymentFormActivity"/>
         ￼
         <activity 
         	android:name="com.talool.mobile.android.ForgotPasswordActivity"

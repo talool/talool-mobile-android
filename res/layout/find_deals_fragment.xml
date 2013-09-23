@@ -9,7 +9,6 @@
  	    android:id="@+id/purchaseClickLayout"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginBottom="10dp"
         android:background="@drawable/button_bar1"
         android:gravity="center|center_vertical"
         android:orientation="vertical"
@@ -17,7 +16,7 @@
         android:padding="10dp" >
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/buy_now_text"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_gravity="center|center_vertical"

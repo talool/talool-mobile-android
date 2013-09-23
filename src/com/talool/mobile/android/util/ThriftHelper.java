@@ -11,15 +11,13 @@ import com.talool.api.thrift.CustomerService_t;
 
 public class ThriftHelper
 {
-	// private final static String URL = "http://dev-api.talool.com/1.1";
-	private final static String URL = "http://api.talool.com/1.1";
 	public THttpClient tHttpClient;
 	public TProtocol protocol;
 	public CustomerService_t.Client client;
 
 	public ThriftHelper() throws TTransportException
 	{
-		tHttpClient = new THttpClient(URL);
+		tHttpClient = new THttpClient(Constants.API_URL);
 		protocol = new TBinaryProtocol(tHttpClient);
 		client = new CustomerService_t.Client(protocol);
 
@@ -32,7 +30,7 @@ public class ThriftHelper
 
 	public ThriftHelper(CTokenAccess_t accessToken) throws TTransportException
 	{
-		tHttpClient = new THttpClient(URL);
+		tHttpClient = new THttpClient(Constants.API_URL);
 		protocol = new TBinaryProtocol(tHttpClient);
 		client = new CustomerService_t.Client(protocol);
 		tHttpClient.setCustomHeader(CustomerServiceConstants.CTOKEN_NAME, accessToken.getToken());

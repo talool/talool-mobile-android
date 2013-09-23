@@ -1,7 +1,5 @@
 package com.talool.mobile.android;
 
-import org.apache.thrift.transport.TTransportException;
-
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
@@ -11,20 +9,21 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.analytics.tracking.android.EasyTracker;
-import com.google.analytics.tracking.android.MapBuilder;
-import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.dialog.DialogFactory;
+import com.talool.mobile.android.dialog.DialogFactory.ConfirmDialogListener;
 import com.talool.mobile.android.util.ThriftHelper;
 
-public class ForgotPasswordActivity extends Activity
+public class ForgotPasswordActivity extends Activity implements ConfirmDialogListener
 {
 	private EditText email;
-	private Exception exception;
+	private String errorMessage;
 	private DialogFragment df;
+	private Button sendEmailBtn;
 
 	private class ForgotPasswordTask extends AsyncTask<String, Void, Void>
 	{
@@ -39,36 +38,64 @@ public class ForgotPasswordActivity extends Activity
 		@Override
 		protected void onPostExecute(Void nothing)
 		{
-			if (exception != null)
+			if (df != null && !df.isHidden())
 			{
-				popupErrorMessage(exception);
+				df.dismiss();
 			}
-			else
-			{
 
-				Intent myDealsIntent = new Intent(getApplicationContext(), MainActivity.class);
-				myDealsIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-				startActivity(myDealsIntent);
+			if (errorMessage != null)
+			{
+				popupErrorMessage(errorMessage);
+				return;
 			}
+
+			sendEmailBtn.setVisibility(View.GONE);
+			final String title = getResources().getString(R.string.alert_sent_password_reset_title);
+			final String message = getResources().getString(R.string.alert_sent_password_reset_message);
+			df = DialogFactory.getAlertDialog(title, message, "Ok", ForgotPasswordActivity.this);
+			df.show(getFragmentManager(), "dialog");
 		}
 
 		@Override
 		protected Void doInBackground(String... arg0)
 		{
-			ThriftHelper client = null;
+			final ThriftHelper client;
 
 			try
 			{
 				client = new ThriftHelper();
+				client.getClient().sendResetPasswordEmail(email.getText().toString());
 			}
-			catch (TTransportException e)
+			catch (ServiceException_t e)
 			{
-				popupErrorMessage(e);
+				errorMessage = e.getErrorDesc();
+				return null;
+			}
+			catch (Exception e)
+			{
+				popupErrorMessage("There was a problem generating your password reset request");
 				return null;
 			}
 
 			return null;
+
 		}
+	}
+
+	public void onForgotPasswordClick(final View view)
+	{
+		final String emailStr = email.getText().toString();
+
+		if (TextUtils.isEmpty(emailStr))
+		{
+			popupErrorMessage("Your email is required");
+		}
+		else
+		{
+			final ForgotPasswordTask task = new ForgotPasswordTask();
+			task.execute(new String[] {});
+		}
+
 	}
 
 	@Override
@@ -78,23 +105,10 @@ public class ForgotPasswordActivity extends Activity
 		setContentView(R.layout.forgot_password_layout);
 
 		email = (EditText) findViewById(R.id.forgot_password_email);
+		sendEmailBtn = (Button) findViewById(R.id.sendEmailBtn);
 
 		ClipDrawable username_bg = (ClipDrawable) email.getBackground();
 		username_bg.setLevel(1500);
-
-	}
-
-	public void onRegistrationClick(View view)
-	{
-		if (TextUtils.isEmpty(email.getText().toString()))
-		{
-			popupErrorMessage("Your email is required");
-		}
-		else
-		{
-			ForgotPasswordTask registerTask = new ForgotPasswordTask();
-			registerTask.execute(new String[] {});
-		}
 
 	}
 
@@ -106,53 +120,18 @@ public class ForgotPasswordActivity extends Activity
 		return true;
 	}
 
-	public void popupErrorMessage(Exception exception)
-	{
-
-		EasyTracker easyTracker = EasyTracker.getInstance(this);
-
-		easyTracker.send(MapBuilder
-				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
-				.build()
-				);
-
-		if (df != null && !df.isHidden())
-		{
-			df.dismiss();
-		}
-		String title = getResources().getString(R.string.error_reg);
-		String label = getResources().getString(R.string.retry);
-		String message;
-		if (exception instanceof ServiceException_t)
-		{
-			message = ((ServiceException_t) exception).errorDesc;
-		}
-		else
-		{
-			message = exception.getMessage();
-		}
-		df = DialogFactory.getAlertDialog(title, message, label);
-		df.show(getFragmentManager(), "dialog");
-		this.exception = null;
-	}
-
 	public void popupErrorMessage(String message)
 	{
-		EasyTracker easyTracker = EasyTracker.getInstance(this);
-
-		easyTracker.send(MapBuilder
-				.createException(message, true)
-				.build()
-				);
-
 		if (df != null && !df.isHidden())
 		{
 			df.dismiss();
 		}
-		String title = getResources().getString(R.string.error_reg);
+		String title = "";
 		String label = getResources().getString(R.string.retry);
 		df = DialogFactory.getAlertDialog(title, message, label);
 		df.show(getFragmentManager(), "dialog");
+
+		errorMessage = null;
 	}
 
 	@Override
@@ -177,5 +156,19 @@ public class ForgotPasswordActivity extends Activity
 		{
 			df.dismiss();
 		}
+	}
+
+	@Override
+	public void onDialogPositiveClick(DialogFragment dialog)
+	{
+		Intent myDealsIntent = new Intent(getApplicationContext(), LoginActivity.class);
+		myDealsIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		startActivity(myDealsIntent);
+	}
+
+	@Override
+	public void onDialogNegativeClick(DialogFragment dialog)
+	{
+
 	}
 }
