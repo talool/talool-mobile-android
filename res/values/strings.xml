@@ -118,6 +118,11 @@
     <string name="error_field_required">This field is required</string>
     <string name="error_password_reset_auth_failed">Authentication after password reset failed</string>
    
+    <string name="payment_trans_success_title">Transaction Success</string>
+    <string name="payment_trans_success_message">You have successfully purchased \'%1$s\'</string>
+    <string name="payment_trans_success_positive_label">View Your Deals</string>
+    
+    
 
 
 </resources>

@@ -40,7 +40,7 @@ import com.talool.mobile.android.adapters.FindDealsAdapter;
 import com.talool.mobile.android.cache.BookCache;
 import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.dialog.DialogFactory;
-import com.talool.mobile.android.dialog.DialogFactory.ConfirmDialogListener;
+import com.talool.mobile.android.dialog.DialogFactory.DialogClickListener;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
 import com.talool.mobile.android.util.Constants;
 import com.talool.mobile.android.util.SafeSimpleDecimalFormat;
@@ -49,7 +49,7 @@ import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
 import com.talool.thrift.util.ThriftUtil;
 
-public class FindDealsFragment extends Fragment implements ConfirmDialogListener
+public class FindDealsFragment extends Fragment implements DialogClickListener
 {
 	private ThriftHelper client;
 	private View view;

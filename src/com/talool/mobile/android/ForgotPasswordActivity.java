@@ -15,10 +15,10 @@ import android.widget.EditText;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.dialog.DialogFactory;
-import com.talool.mobile.android.dialog.DialogFactory.ConfirmDialogListener;
+import com.talool.mobile.android.dialog.DialogFactory.DialogClickListener;
 import com.talool.mobile.android.util.ThriftHelper;
 
-public class ForgotPasswordActivity extends Activity implements ConfirmDialogListener
+public class ForgotPasswordActivity extends Activity implements DialogClickListener
 {
 	private EditText email;
 	private String errorMessage;
@@ -52,7 +52,7 @@ public class ForgotPasswordActivity extends Activity implements ConfirmDialogLis
 			sendEmailBtn.setVisibility(View.GONE);
 			final String title = getResources().getString(R.string.alert_sent_password_reset_title);
 			final String message = getResources().getString(R.string.alert_sent_password_reset_message);
-			df = DialogFactory.getAlertDialog(title, message, "Ok", ForgotPasswordActivity.this);
+			df = DialogFactory.getConfirmDialog(title, message, "Ok", ForgotPasswordActivity.this);
 			df.show(getFragmentManager(), "dialog");
 		}
 

@@ -32,6 +32,8 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.Talool" >
 
+        <activity android:name="com.venmo.touch.activity.PaymentFormActivity" />
+        
         <!-- Splash screen -->
         <activity
             android:name="com.talool.mobile.android.SplashScreen"
