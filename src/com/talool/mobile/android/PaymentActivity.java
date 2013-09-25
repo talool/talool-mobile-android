@@ -59,11 +59,17 @@ public class PaymentActivity extends Activity implements DialogPositiveClickList
 
 	private class PaymentTask extends AsyncTask<String, Void, TransactionResult_t>
 	{
-		private final PaymentDetail_t paymentDetail;
+		private PaymentDetail_t paymentDetail;
+		private String paymentCode;
 
 		public PaymentTask(final PaymentDetail_t paymentDetail)
 		{
 			this.paymentDetail = paymentDetail;
+		}
+
+		public PaymentTask(final String paymentCode)
+		{
+			this.paymentCode = paymentCode;
 		}
 
 		@Override
@@ -119,7 +125,15 @@ public class PaymentActivity extends Activity implements DialogPositiveClickList
 
 			try
 			{
-				transactionResult = thriftHelper.getClient().purchaseByCard(dealOffer.getDealOfferId(), paymentDetail);
+				if (paymentDetail != null)
+				{
+					transactionResult = thriftHelper.getClient().purchaseByCard(dealOffer.getDealOfferId(), paymentDetail);
+				}
+				else
+				{
+					transactionResult = thriftHelper.getClient().purchaseByCode(dealOffer.getDealOfferId(), paymentCode);
+				}
+
 			}
 			catch (TServiceException_t e)
 			{
@@ -224,7 +238,8 @@ public class PaymentActivity extends Activity implements DialogPositiveClickList
 
 	public void processVenmoTouchCard(final CardStub stub)
 	{
-
+		final PaymentTask task = new PaymentTask(stub.getPaymentMethodCode());
+		task.execute(new String[] {});
 	}
 
 	public void processNewCard(final CardDetails details, final boolean saveToTouch,
@@ -256,7 +271,7 @@ public class PaymentActivity extends Activity implements DialogPositiveClickList
 			df.dismiss();
 		}
 
-		df = DialogFactory.getAlertDialog("", message, getResources().getString(R.string.retry));
+		df = DialogFactory.getAlertDialog("An error has occured", message, getResources().getString(R.string.retry));
 		df.show(getFragmentManager(), "dialog");
 		errorMessage = null;
 	}
