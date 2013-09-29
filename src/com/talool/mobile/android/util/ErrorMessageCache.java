@@ -13,7 +13,7 @@ import com.talool.api.thrift.ErrorCode_t;
 public final class ErrorMessageCache
 {
 	private static final Map<ErrorCode_t, String> ERR_MAP = new HashMap<ErrorCode_t, String>();
-	private static final String UNMAPPED_CODE_MSG = "An unknwn error has occured";
+	private static final String UNMAPPED_CODE_MSG = "An unknown error has occured";
 
 	static
 	{
@@ -27,6 +27,7 @@ public final class ErrorMessageCache
 		ERR_MAP.put(ErrorCode_t.PASS_RESET_CODE_INVALID, "Password reset code is invalid");
 		ERR_MAP.put(ErrorCode_t.EMAIL_ALREADY_TAKEN, "Email is already taken");
 		ERR_MAP.put(ErrorCode_t.INVALID_USERNAME_OR_PASSWORD, "Invalid username or password");
+
 		ERR_MAP.put(ErrorCode_t.CUSTOMER_DOES_NOT_OWN_DEAL, "Deal is not owned by you");
 		ERR_MAP.put(ErrorCode_t.DEAL_ALREADY_REDEEMED, "The deal has already been redeemed");
 		ERR_MAP.put(ErrorCode_t.GIFTING_NOT_ALLOWED, "Gifting is not allowed");
