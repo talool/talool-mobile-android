@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="85dp"
         android:layout_margin="0dp"
-        android:background="@drawable/button_bar2_brown"
+        android:background="@drawable/button_bar_3"
         android:orientation="horizontal"
         android:baselineAligned="false" >
 
@@ -41,16 +41,47 @@
                 android:layout_marginTop="5dp"
                 android:text="Use Deal Now"
                 android:textColor="@color/tan" 
-                android:textSize="12sp" />
+                android:textSize="11sp" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/facebookLinearLayout"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="7dp"          
+            android:layout_weight="0.33"
+            android:gravity="center"
+            android:onClick="onGiftViaFacebook"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/facebookIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/icon_facebook"
+                android:textColor="@color/tan"
+                android:textSize="32sp" />
+
+            <TextView
+                android:id="@+id/facebookText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="Gift via Facebook"
+                android:textColor="@color/tan" 
+                android:textSize="11sp" />
+        </LinearLayout>
+        
+                <LinearLayout
             android:id="@+id/giftLinearLayout"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
+            android:layout_marginTop="7dp"            
             android:layout_marginRight="7dp"
-            android:layout_marginTop="7dp"
-            android:layout_weight="0.3"
+            android:layout_weight="0.33"
             android:gravity="center"
             android:onClick="onGiftViaEmail"
             android:orientation="vertical" >
@@ -70,9 +101,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="Gift Via Email"
+                android:text="Gift via Email"
                 android:textColor="@color/tan" 
-                android:textSize="12sp" />
+                android:textSize="11sp" />
         </LinearLayout>
     </LinearLayout>
 

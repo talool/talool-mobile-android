@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.Session;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
@@ -74,6 +75,7 @@ public class DealActivity extends Activity
 	private Exception exception;
 	private String name;
 	private DialogFragment df;
+	private Session facebookSession;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -94,6 +96,8 @@ public class DealActivity extends Activity
 		redemptionCode = null;
 		
 		dealAddressText.setClickable(true);
+		
+		facebookSession = Session.getActiveSession();
 		
 		OnClickListener mapClickListener = new OnClickListener() {
 			
@@ -142,6 +146,7 @@ public class DealActivity extends Activity
 
 	}
 
+	
 	private void checkDealRedeemed()
 	{
 
@@ -338,6 +343,10 @@ public class DealActivity extends Activity
 			AlertMessage alertMessage = new AlertMessage("Gift Via Email Picker", "Error on Picker ", e);
 			AndroidUtils.popupMessageWithOk(alertMessage, DealActivity.this);
 		}
+	}
+	
+	public void onGiftViaFacebook(View view)
+	{
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
