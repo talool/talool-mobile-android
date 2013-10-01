@@ -174,7 +174,7 @@ public class DealActivity extends Activity
 			dealActivityButtonLayout.setBackgroundDrawable(null);
 			TextView redemptionCodeTextView = new TextView(DealActivity.this);
 			redemptionCodeTextView.setText("Redeemed on " +
-					new SafeSimpleDateFormat(Constants.GENERAL_DATE_TIME_FORMAT).format(deal.redeemed));
+					new SafeSimpleDateFormat(Constants.FORMAT_GENERAL_DATE_TIME).format(deal.redeemed));
 
 			redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 			redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));

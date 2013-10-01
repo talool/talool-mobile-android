@@ -10,51 +10,72 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.talool.mobile.android.R;
+import com.talool.mobile.android.dialog.DialogFactory.DialogPositiveClickListener;
 
-public class TaloolAlertDialogFragment extends DialogFragment {
+/**
+ * 
+ * @author dmccuen, clintz
+ * 
+ */
+public class TaloolAlertDialogFragment extends DialogFragment
+{
+	protected String message;
+	protected String title;
+	protected String positiveLabel;
+	protected DialogPositiveClickListener listener;
 
-	String message;
-	String title;
-	String positiveLabel;
+	public TaloolAlertDialogFragment()
+	{}
 
-	public void setPositiveLabel(String positiveLabel) {
+	public TaloolAlertDialogFragment(final DialogPositiveClickListener dialogClickListener)
+	{
+		this.listener = dialogClickListener;
+	}
+
+	public void setPositiveLabel(String positiveLabel)
+	{
 		this.positiveLabel = positiveLabel;
 	}
 
-	public void setMessage(String message) {
+	public void setMessage(String message)
+	{
 		this.message = message;
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(String title)
+	{
 		this.title = title;
 	}
 
 	@Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // Use the Builder class for convenient dialog construction
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+	public Dialog onCreateDialog(Bundle savedInstanceState)
+	{
+		// Use the Builder class for convenient dialog construction
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        // Get the layout inflater
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.alert_dialog_layout, null);
-        
-        TextView tView = (TextView) view.findViewById(R.id.title);
-        tView.setText(title);
-        TextView mView = (TextView) view.findViewById(R.id.message);
-        mView.setText(message);
-        
-        builder.setView(view)
-               .setPositiveButton(positiveLabel, new DialogInterface.OnClickListener() {
-                   public void onClick(DialogInterface dialog, int id) {
-                       dialog.dismiss();
-                   }
-               });
-        
-        
-        return builder.create();
-    }
-	
-	
-	
-	
+		// Get the layout inflater
+		LayoutInflater inflater = getActivity().getLayoutInflater();
+		View view = inflater.inflate(R.layout.alert_dialog_layout, null);
+
+		TextView tView = (TextView) view.findViewById(R.id.title);
+		tView.setText(title);
+		TextView mView = (TextView) view.findViewById(R.id.message);
+		mView.setText(message);
+
+		builder.setView(view)
+				.setPositiveButton(positiveLabel, new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int id)
+					{
+						dialog.dismiss();
+						if (listener != null)
+						{
+							listener.onDialogPositiveClick(TaloolAlertDialogFragment.this);
+						}
+					}
+				});
+
+		return builder.create();
+	}
+
 }

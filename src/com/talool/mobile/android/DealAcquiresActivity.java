@@ -3,22 +3,18 @@ package com.talool.mobile.android;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.view.MenuItem;
-import com.talool.mobile.android.activity.SettingsActivity;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DialogFragment;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -32,6 +28,7 @@ import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.activity.DealActivity;
+import com.talool.mobile.android.activity.SettingsActivity;
 import com.talool.mobile.android.adapters.DealsAcquiredAdapter;
 import com.talool.mobile.android.dialog.DialogFactory;
 import com.talool.mobile.android.util.TaloolSmartImageView;
@@ -47,7 +44,6 @@ import com.talool.thrift.util.ThriftUtil;
  */
 public class DealAcquiresActivity extends Activity
 {
-	private static ThriftHelper client;
 	private TaloolSmartImageView imageView;
 	private ListView dealsAcquiredList;
 	private DealsAcquiredAdapter dealAcquiredAdapter;
@@ -62,7 +58,7 @@ public class DealAcquiresActivity extends Activity
 	{
 		final MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.heart_action_bar, menu);
-        inflater.inflate(R.menu.main, menu);
+		inflater.inflate(R.menu.main, menu);
 
 		menu.getItem(0).setActionProvider(new FavoriteMerchantProvider(merchant, getApplicationContext()));
 
@@ -71,29 +67,29 @@ public class DealAcquiresActivity extends Activity
 		return true;
 	}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        boolean ret;
-        if (item.getItemId() == R.id.menu_settings)
-        {
-            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-            startActivity(intent);
-            ret = true;
-        }
-        else
-        {
-            ret = super.onOptionsItemSelected(item);
-        }
-        return ret;
-    }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		boolean ret;
+		if (item.getItemId() == R.id.menu_settings)
+		{
+			Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+			startActivity(intent);
+			ret = true;
+		}
+		else
+		{
+			ret = super.onOptionsItemSelected(item);
+		}
+		return ret;
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.deal_acquires_activity_layout);
-		createThriftClient();
+
 		setIcons();
 		dealsAcquiredList = (ListView) findViewById(R.id.dealsAcquiredList);
 		imageView = (TaloolSmartImageView) findViewById(R.id.dealsMerchantImage);
@@ -109,7 +105,7 @@ public class DealAcquiresActivity extends Activity
 			ThriftUtil.deserialize(merchantBytes, merchant);
 
 			setTitle(merchant.getName());
-			//reloadData();
+			// reloadData();
 
 			if (merchant.locations.get(0).merchantImageUrl != null)
 			{
@@ -121,7 +117,7 @@ public class DealAcquiresActivity extends Activity
 			EasyTracker easyTracker = EasyTracker.getInstance(this);
 
 			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(),exception),true)                                              
+					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
 					.build()
 					);
 		}
@@ -185,7 +181,7 @@ public class DealAcquiresActivity extends Activity
 		}
 		else
 		{
-			popupErrorMessage(exception,errorMessage);
+			popupErrorMessage(exception, errorMessage);
 		}
 	}
 
@@ -195,20 +191,6 @@ public class DealAcquiresActivity extends Activity
 		dealAcquiresTask.execute(new String[] {});
 	}
 
-	private void createThriftClient()
-	{
-		try
-		{
-			client = new ThriftHelper();
-		}
-		catch (TTransportException e)
-		{
-			exception = e;
-			errorMessage = "Make sure you have a network connection";
-			popupErrorMessage(e, errorMessage);
-		}
-	}
-	
 	public void popupErrorMessage(Exception exception, String errorMessage)
 	{
 
@@ -218,7 +200,7 @@ public class DealAcquiresActivity extends Activity
 				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
 				.build()
 				);
-		
+
 		if (df != null && !df.isHidden())
 		{
 			df.dismiss();
@@ -227,8 +209,8 @@ public class DealAcquiresActivity extends Activity
 		String title = getResources().getString(R.string.error_loading_deals);
 		String label = getResources().getString(R.string.retry);
 		df = DialogFactory.getAlertDialog(title, message, label);
-        df.show(getFragmentManager(), "dialog");
-        
+		df.show(getFragmentManager(), "dialog");
+
 	}
 
 	protected AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener()
@@ -250,10 +232,11 @@ public class DealAcquiresActivity extends Activity
 
 	private class DealAcquiresTask extends AsyncTask<String, Void, List<DealAcquire_t>>
 	{
-		
+
 		@Override
-		protected void onPreExecute() {
-			if (dealAcquires==null || dealAcquires.isEmpty())
+		protected void onPreExecute()
+		{
+			if (dealAcquires == null || dealAcquires.isEmpty())
 			{
 				df = DialogFactory.getProgressDialog();
 				df.show(getFragmentManager(), "dialog");
@@ -278,6 +261,7 @@ public class DealAcquiresActivity extends Activity
 
 			try
 			{
+				ThriftHelper client = new ThriftHelper();
 				exception = null;
 				errorMessage = null;
 				client.setAccessToken(TaloolUser.get().getAccessToken());
@@ -308,25 +292,27 @@ public class DealAcquiresActivity extends Activity
 		}
 
 	}
-	
-	  @Override
-	  public void onStart() {
-	    super.onStart();
-	    EasyTracker easyTracker = EasyTracker.getInstance(this);
 
-	    easyTracker.activityStart(this);  // Add this method.
+	@Override
+	public void onStart()
+	{
+		super.onStart();
+		EasyTracker easyTracker = EasyTracker.getInstance(this);
 
-	    // MapBuilder.createEvent().build() returns a Map of event fields and values
-	    // that are set and sent with the hit.
-	    easyTracker.send(MapBuilder
-	        .createEvent("deal_acquire_action","selected",merchant.merchantId,null)           
-	        .build()
-	    );
-	  }
+		easyTracker.activityStart(this); // Add this method.
 
-	  @Override
-	  public void onStop() {
-	    super.onStop();
-	    EasyTracker.getInstance(this).activityStop(this);  // Add this method.
-	  }
+		// MapBuilder.createEvent().build() returns a Map of event fields and values
+		// that are set and sent with the hit.
+		easyTracker.send(MapBuilder
+				.createEvent("deal_acquire_action", "selected", merchant.merchantId, null)
+				.build()
+				);
+	}
+
+	@Override
+	public void onStop()
+	{
+		super.onStop();
+		EasyTracker.getInstance(this).activityStop(this); // Add this method.
+	}
 }

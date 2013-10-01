@@ -32,6 +32,8 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.Talool" >
 
+        <activity android:name="com.venmo.touch.activity.PaymentFormActivity" />
+        
         <!-- Splash screen -->
         <activity
             android:name="com.talool.mobile.android.SplashScreen"
@@ -108,10 +110,34 @@
             android:name="com.facebook.LoginActivity"
             android:label="@string/title_facebook_login" >
         </activity>
+        
+         <activity
+                android:name="com.talool.mobile.android.PaymentActivity"
+                android:label="@string/payment" >
+        </activity>
+        ￼
+        <activity 
+        	android:name="com.talool.mobile.android.ForgotPasswordActivity"
+        	android:label="@string/forgot_password" />
+        
+        <receiver
+			android:name="com.venmo.touch.service.VenmoTouchUpdateReceiver"
+			android:exported="true" >
+			<intent-filter>
+			<action android:name="com.venmo.touch.UPDATE"/>
+			</intent-filter>
+		</receiver>
+		
+		<service android:name="com.venmo.touch.service.VenmoTouchUpdateService" />
+		
+		<meta-data
+		    android:name="venmo_touch.enabled"
+		    android:value="true" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBzk6qFSqAgy8w4VVNDKEoEdTVhZGE1uIw" />
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -129,6 +155,7 @@
             </intent-filter>
             
         </activity>
+
     </application>
 
 </manifest>

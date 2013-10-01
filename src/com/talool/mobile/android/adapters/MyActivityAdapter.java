@@ -92,7 +92,7 @@ public class MyActivityAdapter extends ArrayAdapter<Activity_t>
 
 		holder.activityTitle.setText(activity.getTitle());
 		holder.activitySubtitle.setText(activity.getSubtitle());
-		holder.activityDate.setText(new SafeSimpleDateFormat(Constants.GENERAL_DATE_TIME_FORMAT).format(activity.getActivityDate()));
+		holder.activityDate.setText(new SafeSimpleDateFormat(Constants.FORMAT_GENERAL_DATE_TIME).format(activity.getActivityDate()));
 
 		return row;
 	}

@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.talool.mobile.android.R;
-import com.talool.mobile.android.dialog.DialogFactory.ConfirmDialogListener;
+import com.talool.mobile.android.dialog.DialogFactory.DialogClickListener;
 
 public class TaloolConfirmDialogFragment extends DialogFragment {
 
@@ -18,7 +18,7 @@ public class TaloolConfirmDialogFragment extends DialogFragment {
 	String title;
 	String positiveLabel;
 	String negativeLabel;
-	ConfirmDialogListener mListener;
+	DialogClickListener mListener;
 
 	public void setPositiveLabel(String positiveLabel) {
 		this.positiveLabel = positiveLabel;
@@ -36,7 +36,7 @@ public class TaloolConfirmDialogFragment extends DialogFragment {
 		this.title = title;
 	}
 
-	public void setListener(ConfirmDialogListener listener) {
+	public void setListener(DialogClickListener listener) {
 		this.mListener = listener;
 	}
 

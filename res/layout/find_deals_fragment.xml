@@ -5,12 +5,34 @@
     android:background="@drawable/my_deals_background"
     android:orientation="vertical" >
 
+ 	<LinearLayout
+ 	    android:id="@+id/purchaseClickLayout"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/button_bar1"
+        android:gravity="center|center_vertical"
+        android:orientation="vertical"
+        android:onClick="purchaseClick"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/buy_now_text"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center|center_vertical"
+            android:gravity="center"
+            android:text="Buy Now For $9.99"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#ffffff"
+            android:textSize="26sp" />
+    </LinearLayout>
+    
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingTop="10dp" >
+        android:paddingTop="5dp" >
 
         <LinearLayout
             android:layout_width="match_parent"

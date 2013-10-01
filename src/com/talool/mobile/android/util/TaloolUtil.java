@@ -25,7 +25,7 @@ public class TaloolUtil
 		}
 		else
 		{
-			return "Expires on " + new SafeSimpleDateFormat(Constants.MONTH_DAY_YEAR_FORMAT).format(expirationDate);
+			return "Expires on " + new SafeSimpleDateFormat(Constants.FORMAT_MONTH_DAY_YEAR).format(expirationDate);
 		}
 	}
 
@@ -37,7 +37,7 @@ public class TaloolUtil
 		}
 		else
 		{
-			return "Shared on " + new SafeSimpleDateFormat(Constants.GENERAL_DATE_TIME_FORMAT).format(shareDate);
+			return "Shared on " + new SafeSimpleDateFormat(Constants.FORMAT_GENERAL_DATE_TIME).format(shareDate);
 		}
 	}
 
@@ -49,7 +49,7 @@ public class TaloolUtil
 		}
 		else
 		{
-			return "Redeemed on " + new SafeSimpleDateFormat(Constants.GENERAL_DATE_TIME_FORMAT).format(redeemedDate);
+			return "Redeemed on " + new SafeSimpleDateFormat(Constants.FORMAT_GENERAL_DATE_TIME).format(redeemedDate);
 		}
 	}
 

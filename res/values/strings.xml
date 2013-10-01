@@ -6,13 +6,17 @@
     <string name="hello_world">Hello world!</string>
     <string name="password">Password</string>
     <string name="newToTalool">New to Talool? Please Register.</string>
+    <string name="forgot_password">Forgot Password?</string>
+    
     <string name="email">Email</string>
     <string name="login">Login</string>
     <string name="welcome">Welcome</string>
     <string name="register">Registration</string>
+    <string name="forgot_password">Forgot Password</string>
     <string name="settings">Settings</string>
     <string name="mydeals">My Deals</string>
     <string name="activity">Activity</string>
+    <string name="payment">Payment</string>
     <string name="finddeals">Find Deals</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
@@ -30,6 +34,9 @@
     <string name="alert_new_deals_title">You\'ve Got Deals!</string>
     <string name="alert_new_deals_message">Would you like to see your new deals?</string>
     
+    <string name="alert_sent_password_reset_title">Your reset request has been sent</string>
+    <string name="alert_sent_password_reset_message">You will receive an email with instructions.</string>
+    
     <string name="icon_gift">&#xf06b;</string>
     <string name="icon_envelope_alt">&#xf003;</string>
     <string name="icon_facebook">&#xf09a;</string>
@@ -43,6 +50,7 @@
     <string name="icon_ticket">&#xf145;</string>
     <string name="icon_glass">&#xf000;</string>
     <string name="icon_heart">&#xf004;</string>
+    <string name="icon_lock">&#xf023;</string>
     <string name="icon_heart_empty">&#xf08a;</string>
     <string name="icon_thumbs_up_alt">&#xf087;</string>
     <string name="icon_thumbs_down_alt">&#xf088;</string>
@@ -72,6 +80,7 @@
    <string name="facebook_app_id">342739092494152</string>
    <string name="title_facebook_login">Authenticating with Facebook</string>
 
+    <string name="find_deal_buy_now">Buy Now For</string>
     
    <string name="my_deals_filter_all">Show All</string>
    <string name="my_deals_filter_favorites">Favorites</string>
@@ -110,6 +119,11 @@
     <string name="error_field_required">This field is required</string>
     <string name="error_password_reset_auth_failed">Authentication after password reset failed</string>
    
+    <string name="payment_trans_success_title">Transaction Success</string>
+    <string name="payment_trans_success_message">You have successfully purchased \'%1$s\'</string>
+    <string name="payment_trans_success_positive_label">View Your Deals</string>
+    
+    
 
 
 </resources>
