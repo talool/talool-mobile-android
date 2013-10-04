@@ -113,7 +113,8 @@
         
          <activity
                 android:name="com.talool.mobile.android.PaymentActivity"
-                android:label="@string/payment" >
+                android:label="@string/payment" 
+                android:windowSoftInputMode="adjustPan">
         </activity>
         ￼
         <activity 

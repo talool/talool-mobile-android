@@ -122,6 +122,12 @@
     <string name="payment_trans_success_message">You have successfully purchased \'%1$s\'</string>
     <string name="payment_trans_success_positive_label">View Your Deals</string>
     
+    <!-- Strings related to payment -->
+    <string name="payment_title">Payment</string>
+    <string name="payment_price">Price: </string>
+    <string name="payment_instructions">Please provide your method of payment below.</string>
+    <string name="payment_saved_card">Pay with a Saved Card</string>
+    <string name="payment_new_card">Pay with a New Card</string>
     
 
 
