@@ -101,13 +101,13 @@
     </style>
 
     <!-- alert dialog -->
-    <style name="AlertDialogTheme.Talool" parent="@android:style/Theme.Holo.Dialog">
+    <style name="AlertDialogTheme.Talool" parent="@android:style/Theme.Holo.Light.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
         <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
         <item name="android:buttonBarStyle">@style/AlertButtonBarWithBackground</item>
-    </style>
+	</style>
 
     <style name="AlertButtonBarWithBackground" parent="@android:style/Holo.ButtonBar.AlertDialog">
         <item name="android:background">@color/teal</item>

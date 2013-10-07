@@ -31,8 +31,9 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.Talool" >
-        <activity android:name="com.venmo.touch.activity.PaymentFormActivity" />
 
+        <activity android:name="com.venmo.touch.activity.PaymentFormActivity" />
+        
         <!-- Splash screen -->
         <activity
             android:name="com.talool.mobile.android.SplashScreen"
@@ -94,12 +95,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.talool.mobile.android.activity.FacebookFriendActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name="com.talool.mobile.android.activity.LocationSelectActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
@@ -115,31 +110,35 @@
             android:name="com.facebook.LoginActivity"
             android:label="@string/title_facebook_login" >
         </activity>
-        <activity
-            android:name="com.talool.mobile.android.PaymentActivity"
-            android:label="@string/payment" >
+        
+         <activity
+                android:name="com.talool.mobile.android.PaymentActivity"
+                android:label="@string/payment" 
+                android:windowSoftInputMode="adjustPan">
         </activity>
         ￼
-        <activity
-            android:name="com.talool.mobile.android.ForgotPasswordActivity"
-            android:label="@string/forgot_password" />
-
+        <activity 
+        	android:name="com.talool.mobile.android.ForgotPasswordActivity"
+        	android:label="@string/forgot_password" />
+        
         <receiver
-            android:name="com.venmo.touch.service.VenmoTouchUpdateReceiver"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="com.venmo.touch.UPDATE" />
-            </intent-filter>
-        </receiver>
+			android:name="com.venmo.touch.service.VenmoTouchUpdateReceiver"
+			android:exported="true" >
+			<intent-filter>
+			<action android:name="com.venmo.touch.UPDATE"/>
+			</intent-filter>
+		</receiver>
+		
+		<service android:name="com.venmo.touch.service.VenmoTouchUpdateService" />
+		
+		<meta-data
+		    android:name="venmo_touch.enabled"
+		    android:value="true" />
 
-        <service android:name="com.venmo.touch.service.VenmoTouchUpdateService" />
-
-        <meta-data
-            android:name="venmo_touch.enabled"
-            android:value="true" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBzk6qFSqAgy8w4VVNDKEoEdTVhZGE1uIw" />
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -148,17 +147,16 @@
             android:name="com.talool.mobile.android.ResetPasswordActivity"
             android:label="@string/title_activity_reset_password"
             android:windowSoftInputMode="adjustResize|stateVisible" >
+            
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="password"
-                    android:scheme="talool" />
+                <data android:scheme="talool" android:host="password"/>
             </intent-filter>
+            
         </activity>
+
     </application>
 
 </manifest>

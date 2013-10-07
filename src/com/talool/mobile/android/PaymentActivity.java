@@ -185,7 +185,9 @@ public class PaymentActivity extends Activity implements DialogPositiveClickList
 		setContentView(R.layout.venmo_payment_activity_layout);
 		touchClient = VenmoTouchClient.forSandboxMerchant(this, Constants.BRAINTREE_MERCHANT_ID, Constants.BRAINTREE_MERCHANT_KEY);
 		comboView = (VTComboCardView) findViewById(R.id.combo_view);
-		comboView.getNewCardTitle().setText("Add Card");
+		comboView.getNewCardTitle().setText(getResources().getString(R.string.payment_new_card));
+		
+		comboView.getSavedCardTitle().setText(getResources().getString(R.string.payment_saved_card));
 
 		mComboController = new VTComboCardViewController(this, touchClient, comboView);
 
@@ -216,8 +218,11 @@ public class PaymentActivity extends Activity implements DialogPositiveClickList
 		{
 			ThriftUtil.deserialize(dealOfferBytes, dealOffer);
 
-			TextView textView = (TextView) findViewById(R.id.payment_deal_offer_detail);
-			textView.setText(formatDealDetail());
+			TextView titleView = (TextView) findViewById(R.id.payment_deal_offer_detail);
+			titleView.setText(dealOffer.getTitle());
+			
+			TextView priceView = (TextView) findViewById(R.id.payment_deal_offer_price);
+			priceView.setText(formatDealPrice());
 
 			// holder.myDealsMerchantIcon.setText(ApiUtil.getIcon(merchant.category));
 		}
@@ -227,12 +232,13 @@ public class PaymentActivity extends Activity implements DialogPositiveClickList
 		}
 
 	}
-
-	private String formatDealDetail()
+	
+	private String formatDealPrice()
 	{
 		final StringBuilder sb = new StringBuilder();
-		sb.append(dealOffer.getTitle()).append(" - ").append(
-				new SafeSimpleDecimalFormat(Constants.FORMAT_DECIMAL_MONEY).format(dealOffer.getPrice()));
+		sb.append(getResources().getString(R.string.payment_price))
+		  .append(" ")
+		  .append(new SafeSimpleDecimalFormat(Constants.FORMAT_DECIMAL_MONEY).format(dealOffer.getPrice()));
 		return sb.toString();
 	}
 
