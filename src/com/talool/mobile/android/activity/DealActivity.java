@@ -10,6 +10,7 @@ import org.apache.thrift.transport.TTransportException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -35,7 +36,11 @@ import com.facebook.FacebookRequestError;
 import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.Session;
+import com.facebook.Session.AuthorizationRequest;
+import com.facebook.Session.OpenRequest;
 import com.facebook.SessionState;
+import com.facebook.internal.SessionAuthorizationType;
+import com.facebook.internal.SessionTracker;
 import com.facebook.model.GraphObject;
 import com.facebook.model.GraphUser;
 import com.facebook.model.OpenGraphAction;
@@ -76,6 +81,7 @@ import com.talool.thrift.util.ThriftUtil;
 public class DealActivity extends Activity
 {
 	private static final int REAUTH_ACTIVITY_CODE = 300;
+	private static final int FACEBOOK_REQUEST_CODE = 666;
 	private boolean pendingAnnounce;
 	private static final String PENDING_ANNOUNCE_KEY = "pendingAnnounce";
 	private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
@@ -101,6 +107,7 @@ public class DealActivity extends Activity
 	private Session facebookSession;
 	private String giftId;
 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -121,8 +128,6 @@ public class DealActivity extends Activity
 
 		dealAddressText.setClickable(true);
 
-		facebookSession = Session.getActiveSession();
-
 		OnClickListener mapClickListener = new OnClickListener() {
 
 			@Override
@@ -137,6 +142,7 @@ public class DealActivity extends Activity
 		dealAddressText.setOnClickListener(mapClickListener);
 		offerValidAtText.setOnClickListener(mapClickListener);
 
+		facebookSession = Session.getActiveSession();
 		if (TaloolUser.get().getAccessToken() == null)
 		{
 			Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -390,10 +396,23 @@ public class DealActivity extends Activity
 
 	public void onGiftViaFacebook(View view)
 	{
-		if(facebookSession == null)
+		final Context context = view.getContext();
+		if(facebookSession != null && facebookSession.isOpened())
+		{
+			Intent intent = new Intent();
+			intent.setData(FacebookFriendActivity.FRIEND_PICKER);
+			intent.setClass(view.getContext(), FacebookFriendActivity.class);
+			startActivityForResult(intent, 200);
+
+		}
+		else
 		{
 			// start Facebook Login
-			Session.openActiveSession(this, true, new Session.StatusCallback() {
+			
+            facebookSession = new Session.Builder(context).setApplicationId(getString(R.string.facebook_app_id)).build();
+            Session.setActiveSession(facebookSession);
+            OpenRequest openRequest = new Session.OpenRequest(this);
+            openRequest.setCallback(new Session.StatusCallback() {
 
 				// callback when session changes state
 				@Override
@@ -403,30 +422,21 @@ public class DealActivity extends Activity
 						facebookSession = session;
 						Intent intent = new Intent();
 						intent.setData(FacebookFriendActivity.FRIEND_PICKER);
-						intent.setClass(getBaseContext(), FacebookFriendActivity.class);
+						intent.setClass(context, FacebookFriendActivity.class);
 						startActivityForResult(intent, 200);
 					}
 					else if(state == SessionState.OPENED || state == SessionState.OPENED_TOKEN_UPDATED)
 					{
 						Intent intent = new Intent();
 						intent.setData(FacebookFriendActivity.FRIEND_PICKER);
-						intent.setClass(getBaseContext(), FacebookFriendActivity.class);
+						intent.setClass(context, FacebookFriendActivity.class);
 						startActivityForResult(intent, 200);
-					}
-					else if (state == SessionState.CLOSED || exception != null)
-					{
-						AlertMessage alertMessage = new AlertMessage("Error Loggin with Facebook", "Please retry", exception);
-						AndroidUtils.popupMessageWithOk(alertMessage, DealActivity.this);
 					}
 				}
 			});
-		}
-		else
-		{
-			Intent intent = new Intent();
-			intent.setData(FacebookFriendActivity.FRIEND_PICKER);
-			intent.setClass(view.getContext(), FacebookFriendActivity.class);
-			startActivityForResult(intent, 200);
+            openRequest.setRequestCode(FACEBOOK_REQUEST_CODE);
+            openRequest.setPermissions(PERMISSIONS);
+            facebookSession.openForPublish(openRequest);
 		}
 	}
 
@@ -585,8 +595,24 @@ public class DealActivity extends Activity
 
 		try
 		{
-
-			if(requestCode == 200)
+			if(requestCode == FACEBOOK_REQUEST_CODE)
+			{
+				facebookSession = Session.getActiveSession();
+				facebookSession.onActivityResult(this, requestCode, resultCode, data);
+				if(facebookSession != null && facebookSession.isOpened())
+				{
+					Intent intent = new Intent();
+					intent.setData(FacebookFriendActivity.FRIEND_PICKER);
+					intent.setClass(getBaseContext(), FacebookFriendActivity.class);
+					startActivityForResult(intent, 200);
+				}
+				else
+				{
+					AlertMessage alertMessage = new AlertMessage("Error Sharing Gift", "Error sharing gift. Please retry", null);
+					AndroidUtils.popupMessageWithOk(alertMessage, DealActivity.this);
+				}
+			}
+			else if(requestCode == 200)
 			{
 				processFacebookResult(requestCode,resultCode,data);
 			}
