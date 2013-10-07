@@ -1,12 +1,16 @@
 package com.talool.mobile.android.activity;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
@@ -27,8 +31,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.FacebookRequestError;
+import com.facebook.HttpMethod;
+import com.facebook.Request;
 import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.model.GraphObject;
+import com.facebook.model.GraphUser;
+import com.facebook.model.OpenGraphAction;
 import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.Log;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.loopj.android.image.SmartImageView;
@@ -45,9 +57,14 @@ import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.dialog.DialogFactory;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
 import com.talool.mobile.android.tasks.DealRedemptionTask;
+import com.talool.mobile.android.tasks.FacebookGiftIdTask;
+import com.talool.mobile.android.tasks.FacebookShareTask;
 import com.talool.mobile.android.util.AlertMessage;
 import com.talool.mobile.android.util.AndroidUtils;
 import com.talool.mobile.android.util.Constants;
+import com.talool.mobile.android.util.FacebookHelper;
+import com.talool.mobile.android.util.OGDealAction;
+import com.talool.mobile.android.util.OGDealObject;
 import com.talool.mobile.android.util.SafeSimpleDateFormat;
 import com.talool.mobile.android.util.TaloolSmartImageView;
 import com.talool.mobile.android.util.TaloolUser;
@@ -58,6 +75,12 @@ import com.talool.thrift.util.ThriftUtil;
 
 public class DealActivity extends Activity
 {
+	private static final int REAUTH_ACTIVITY_CODE = 300;
+	private boolean pendingAnnounce;
+	private static final String PENDING_ANNOUNCE_KEY = "pendingAnnounce";
+	private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
+	private static final Uri M_FACEBOOK_URL = Uri.parse("http://m.facebook.com");
+
 	private static ThriftHelper client;
 	private DealAcquire_t deal;
 	private Merchant_t merchant;
@@ -76,6 +99,7 @@ public class DealActivity extends Activity
 	private String name;
 	private DialogFragment df;
 	private Session facebookSession;
+	private String giftId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -94,25 +118,25 @@ public class DealActivity extends Activity
 		dealExpirationText = (TextView) findViewById(R.id.dealActivityExpires);
 		dealActivityButtonLayout = (LinearLayout) findViewById(R.id.dealActivityButtonLayout);
 		redemptionCode = null;
-		
+
 		dealAddressText.setClickable(true);
-		
+
 		facebookSession = Session.getActiveSession();
-		
+
 		OnClickListener mapClickListener = new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Intent myIntent = new Intent(v.getContext(), MapActivity.class);
 				myIntent.putExtra("merchant", ThriftUtil.serialize(merchant));
 				startActivity(myIntent);
-				
+
 			}
 		};
-		
+
 		dealAddressText.setOnClickListener(mapClickListener);
 		offerValidAtText.setOnClickListener(mapClickListener);
-		
+
 		if (TaloolUser.get().getAccessToken() == null)
 		{
 			Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -146,7 +170,20 @@ public class DealActivity extends Activity
 
 	}
 
-	
+	private void updateBackgroundForFacebookShare(String name)
+	{
+		dealActivityButtonLayout.removeAllViewsInLayout();
+		dealActivityButtonLayout.setBackgroundDrawable(null);
+		TextView redemptionCodeTextView = new TextView(DealActivity.this);
+		redemptionCodeTextView.setText("Gifted to " + name);
+		redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+		redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
+		redemptionCodeTextView.setTypeface(TypefaceFactory.get().getMarkerFelt(), Typeface.NORMAL);
+		redemptionCodeTextView.setPadding(30, 0, 30, 0);
+		dealActivityButtonLayout.addView(redemptionCodeTextView);
+		dealActivityButtonLayout.setGravity(Gravity.CENTER);
+	}
+
 	private void checkDealRedeemed()
 	{
 
@@ -241,6 +278,12 @@ public class DealActivity extends Activity
 		if (useDealIcon != null)
 		{
 			useDealIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
+		}
+
+		final TextView facebookIcon = (TextView) findViewById(R.id.facebookIcon);
+		if (facebookIcon != null)
+		{
+			facebookIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
 		}
 
 		final TextView giftIcon = (TextView) findViewById(R.id.giftIcon);
@@ -344,9 +387,196 @@ public class DealActivity extends Activity
 			AndroidUtils.popupMessageWithOk(alertMessage, DealActivity.this);
 		}
 	}
-	
+
 	public void onGiftViaFacebook(View view)
 	{
+		if(facebookSession == null)
+		{
+			// start Facebook Login
+			Session.openActiveSession(this, true, new Session.StatusCallback() {
+
+				// callback when session changes state
+				@Override
+				public void call(Session session, SessionState state, Exception exception) {
+					if(state.isOpened())
+					{
+						facebookSession = session;
+						Intent intent = new Intent();
+						intent.setData(FacebookFriendActivity.FRIEND_PICKER);
+						intent.setClass(getBaseContext(), FacebookFriendActivity.class);
+						startActivityForResult(intent, 200);
+					}
+					else if(state == SessionState.OPENED || state == SessionState.OPENED_TOKEN_UPDATED)
+					{
+						Intent intent = new Intent();
+						intent.setData(FacebookFriendActivity.FRIEND_PICKER);
+						intent.setClass(getBaseContext(), FacebookFriendActivity.class);
+						startActivityForResult(intent, 200);
+					}
+					else if (state == SessionState.CLOSED || exception != null)
+					{
+						AlertMessage alertMessage = new AlertMessage("Error Loggin with Facebook", "Please retry", exception);
+						AndroidUtils.popupMessageWithOk(alertMessage, DealActivity.this);
+					}
+				}
+			});
+		}
+		else
+		{
+			Intent intent = new Intent();
+			intent.setData(FacebookFriendActivity.FRIEND_PICKER);
+			intent.setClass(view.getContext(), FacebookFriendActivity.class);
+			startActivityForResult(intent, 200);
+		}
+	}
+
+	protected void processFacebookResult(int requestCode, int resultCode, Intent data)
+	{
+		if (resultCode == Activity.RESULT_OK) {
+			executeFacebookTask();
+		}
+	}
+
+	protected void executeFacebookTask()
+	{
+		String facebookId = FacebookHelper.get().getSelectedFriends().get(0).getId();
+		String name = FacebookHelper.get().getSelectedFriends().get(0).getName();
+		if(giftId != null && !giftId.equalsIgnoreCase(""))
+		{
+			executeFacebookShareTask(giftId);
+		}
+		else
+		{
+			FacebookGiftIdTask task = new FacebookGiftIdTask(client,deal.dealAcquireId,facebookId,name,this){
+				@Override
+				protected void onPostExecute(String result) {
+					if(result != null && result != "")
+					{
+						giftId = result;
+						executeFacebookShareTask(result);
+					}
+					else
+					{
+						//TODO cory - show error
+					}
+				};
+			};
+			task.execute();
+		}
+	}
+
+	protected void executeFacebookShareTask(String giftId)
+	{	
+		FacebookShareTask task = new FacebookShareTask(giftId){
+			@Override
+			protected void onPostExecute(com.facebook.Response result) {
+				if (result != null && result.getError() != null) {
+					handleError(result.getError());
+				} else {
+					deal.status = AcquireStatus_t.PENDING_ACCEPT_CUSTOMER_SHARE;
+					updateBackgroundForFacebookShare(FacebookHelper.get().getSelectedFriends().get(0).getName());
+				}
+			};
+		};
+		task.execute();
+	}
+	private void requestPublishPermissions(Session session) {
+		if (session != null) {
+			Session.NewPermissionsRequest newPermissionsRequest = 
+					new Session.NewPermissionsRequest(this, PERMISSIONS).
+					setRequestCode(REAUTH_ACTIVITY_CODE);
+			session.requestNewPublishPermissions(newPermissionsRequest);
+		}
+	}
+
+	protected void handleError(FacebookRequestError error)
+	{
+		DialogInterface.OnClickListener listener = null;
+		String dialogBody = null;
+
+		if (error == null) {
+			// There was no response from the server.
+			dialogBody = "No Response From Facebook Server";
+		} else {
+			switch (error.getCategory()) {
+			case AUTHENTICATION_RETRY:
+				// Tell the user what happened by getting the
+				// message id, and retry the operation later.
+				String userAction = (error.shouldNotifyUser()) ? "" :
+					getString(error.getUserActionMessageId());
+				dialogBody = "Error on Authentication Retry" +userAction;
+				listener = new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, 
+							int i) {
+						// Take the user to the mobile site.
+						Intent intent = new Intent(Intent.ACTION_VIEW, 
+								M_FACEBOOK_URL);
+						startActivity(intent);
+					}
+				};
+				break;
+
+			case AUTHENTICATION_REOPEN_SESSION:
+				// Close the session and reopen it.
+				dialogBody = 
+				"Error on Authentication Reopen";
+				listener = new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, 
+							int i) {
+						Session session = Session.getActiveSession();
+						if (session != null && !session.isClosed()) {
+							session.closeAndClearTokenInformation();
+						}
+					}
+				};
+				break;
+
+			case PERMISSION:
+				// A permissions-related error
+				dialogBody = "You do not have permission to perform this action";
+				listener = new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, 
+							int i) {
+						pendingAnnounce = true;
+						// Request publish permission
+						requestPublishPermissions(Session.getActiveSession());
+					}
+				};
+				break;
+
+			case SERVER:
+			case THROTTLING:
+				// This is usually temporary, don't clear the fields, and
+				// ask the user to try again.
+				dialogBody = "Throttling Error";
+				break;
+
+			case BAD_REQUEST:
+				// This is likely a coding error, ask the user to file a bug.
+				dialogBody = "Error, bad request - " + error.getErrorMessage();
+				break;
+
+			case OTHER:
+			case CLIENT:
+			default:
+				// An unknown issue occurred, this could be a code error, or
+				// a server side issue, log the issue, and either ask the
+				// user to retry, or file a bug.
+				dialogBody = "Unknown Error" +  error.getErrorMessage();
+				break;
+			}
+		}
+
+		// Show the error and pass in the listener so action
+		// can be taken, if necessary.
+		new AlertDialog.Builder(this)
+		.setPositiveButton("Okay", listener)
+		.setTitle("Facebook Error")
+		.setMessage("Could not share via Facebook" + dialogBody)
+		.show();
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -355,7 +585,19 @@ public class DealActivity extends Activity
 
 		try
 		{
-			if (resultCode == RESULT_OK)
+
+			if(requestCode == 200)
+			{
+				processFacebookResult(requestCode,resultCode,data);
+			}
+			else if(requestCode == REAUTH_ACTIVITY_CODE)
+			{
+				if(giftId != null && giftId != "")
+				{
+					executeFacebookShareTask(giftId);
+				}
+			}
+			else if (resultCode == RESULT_OK)
 			{
 				switch (requestCode)
 				{
@@ -420,7 +662,7 @@ public class DealActivity extends Activity
 			{
 				cursor.close();
 			}
-			AlertMessage alertMessage = new AlertMessage("Gift Via Email Picker Results", "Error on Picker Results ", e);
+			AlertMessage alertMessage = new AlertMessage("Error Sharing Gift", "Error sharing gift. Please retry", e);
 			AndroidUtils.popupMessageWithOk(alertMessage, DealActivity.this);
 		}
 	}

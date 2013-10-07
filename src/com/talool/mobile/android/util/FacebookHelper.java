@@ -1,8 +1,8 @@
 package com.talool.mobile.android.util;
 
-import com.facebook.Request;
-import com.facebook.Response;
-import com.facebook.Session;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.facebook.model.GraphUser;
 import com.talool.api.thrift.Customer_t;
 import com.talool.api.thrift.SocialAccount_t;
@@ -16,7 +16,23 @@ import com.talool.api.thrift.SocialNetwork_t;
  * To change this template use File | Settings | File Templates.
  */
 public class FacebookHelper {
+	public static final String OG_GIFT_PAGE = "http://talool.com/gift";
+	public static final String OG_DEAL_PAGE = "http://talool.com/deal";
+	public static final String OG_OFFER_PAGE = "http://talool.com/offer";
+	public static final String MERCHANT_PAGE = "http://talool.com/location";
+	private static final FacebookHelper instance = new FacebookHelper();
+    private List<GraphUser> selectedFriends;
 
+	private FacebookHelper()
+	{
+		selectedFriends = new ArrayList<GraphUser>();
+	}
+	
+	public static FacebookHelper get()
+	{
+		return instance;
+	}
+	
     public static Customer_t createCostomerFromFacebook(GraphUser user){
 
         //verify email
@@ -28,5 +44,18 @@ public class FacebookHelper {
         return customer;
     }
 
+	public List<GraphUser> getSelectedFriends() {
+		return selectedFriends;
+	}
 
+	public void setSelectedFriends(List<GraphUser> selectedFriends) {
+		this.selectedFriends = selectedFriends;
+	}
+    
+	public static String dealObjectForGift(String giftId)
+	{
+	    String url = OG_GIFT_PAGE+ "/"+giftId;
+
+	    return url;
+	}
 }

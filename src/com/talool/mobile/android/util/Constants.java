@@ -9,8 +9,8 @@ public final class Constants
 {
 	// ****** REMEMBER TO CHANGE DEAL OFFERS WHEN PUSHING TO PROD ALSO ******* //
 	// public static final String API_URL = "http://10.0.1.3:8082/1.1";
-	public static final String API_URL = "http://dev-api.talool.com/1.1";
-	// public static final String API_URL = "http://api.talool.com/1.1";
+	//public static final String API_URL = "http://dev-api.talool.com/1.1";
+	public static final String API_URL = "http://api.talool.com/1.1";
 
 	public static final String FORMAT_GENERAL_DATE_TIME = "MM/dd/yyyy hh:mm:ss a";
 	public static final String FORMAT_DECIMAL_MONEY = "$#,###.00";
