@@ -16,10 +16,7 @@ import com.talool.api.thrift.SocialNetwork_t;
  * To change this template use File | Settings | File Templates.
  */
 public class FacebookHelper {
-	public static final String OG_GIFT_PAGE = "http://talool.com/gift";
-	public static final String OG_DEAL_PAGE = "http://talool.com/deal";
-	public static final String OG_OFFER_PAGE = "http://talool.com/offer";
-	public static final String MERCHANT_PAGE = "http://talool.com/location";
+
 	private static final FacebookHelper instance = new FacebookHelper();
     private List<GraphUser> selectedFriends;
 
@@ -54,7 +51,7 @@ public class FacebookHelper {
     
 	public static String dealObjectForGift(String giftId)
 	{
-	    String url = OG_GIFT_PAGE+ "/"+giftId;
+	    String url = Constants.OG_GIFT_PAGE+ "/"+giftId;
 
 	    return url;
 	}
