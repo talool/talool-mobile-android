@@ -408,20 +408,20 @@ public class DealActivity extends Activity
 		else
 		{
 			// start Facebook Login
-			
-            facebookSession = new Session.Builder(context).setApplicationId(getString(R.string.facebook_app_id)).build();
-            Session.setActiveSession(facebookSession);
-            OpenRequest openRequest = new Session.OpenRequest(this);
-            openRequest.setCallback(new Session.StatusCallback() {
+
+			facebookSession = new Session.Builder(context).setApplicationId(getString(R.string.facebook_app_id)).build();
+			Session.setActiveSession(facebookSession);
+			OpenRequest openRequest = new Session.OpenRequest(this);
+			openRequest.setCallback(new Session.StatusCallback() {
 
 				// callback when session changes state
 				@Override
 				public void call(Session session, SessionState state, Exception exception) {
 				}
 			});
-            openRequest.setRequestCode(FACEBOOK_REQUEST_CODE);
-            openRequest.setPermissions(PERMISSIONS);
-            facebookSession.openForPublish(openRequest);
+			openRequest.setRequestCode(FACEBOOK_REQUEST_CODE);
+			openRequest.setPermissions(PERMISSIONS);
+			facebookSession.openForPublish(openRequest);
 		}
 	}
 
@@ -434,37 +434,41 @@ public class DealActivity extends Activity
 
 	protected void executeFacebookTask()
 	{
-		df = DialogFactory.getProgressDialog();
-		df.show(getFragmentManager(), "dialog");
-		String facebookId = FacebookHelper.get().getSelectedFriends().get(0).getId();
-		String name = FacebookHelper.get().getSelectedFriends().get(0).getName();
-		if(giftId != null && !giftId.equalsIgnoreCase(""))
+		if(FacebookHelper.get().getSelectedFriends() != null && !FacebookHelper.get().getSelectedFriends().isEmpty())
 		{
-			executeFacebookShareTask(giftId);
-		}
-		else
-		{
-			FacebookGiftIdTask task = new FacebookGiftIdTask(client,deal.dealAcquireId,facebookId,name,this){
-				@Override
-				protected void onPostExecute(String result) {
-					if(result != null && result != "")
-					{
-						giftId = result;
-						executeFacebookShareTask(result);
-					}
-					else
-					{
-						if (df != null && !df.isHidden())
+			df = DialogFactory.getProgressDialog();
+
+			df.show(getFragmentManager(), "dialog");
+			String facebookId = FacebookHelper.get().getSelectedFriends().get(0).getId();
+			String name = FacebookHelper.get().getSelectedFriends().get(0).getName();
+			if(giftId != null && !giftId.equalsIgnoreCase(""))
+			{
+				executeFacebookShareTask(giftId);
+			}
+			else
+			{
+				FacebookGiftIdTask task = new FacebookGiftIdTask(client,deal.dealAcquireId,facebookId,name,this){
+					@Override
+					protected void onPostExecute(String result) {
+						if(result != null && result != "")
 						{
-							df.dismiss();
+							giftId = result;
+							executeFacebookShareTask(result);
 						}
-						
-						AlertMessage alertMessage = new AlertMessage("Check your network connection and retry", "Error sharing gift", null);
-						AndroidUtils.popupMessageWithOk(alertMessage, DealActivity.this);
-					}
+						else
+						{
+							if (df != null && !df.isHidden())
+							{
+								df.dismiss();
+							}
+
+							AlertMessage alertMessage = new AlertMessage("Check your network connection and retry", "Error sharing gift", null);
+							AndroidUtils.popupMessageWithOk(alertMessage, DealActivity.this);
+						}
+					};
 				};
-			};
-			task.execute();
+				task.execute();
+			}
 		}
 	}
 
@@ -681,6 +685,11 @@ public class DealActivity extends Activity
 		}
 		catch (Exception e)
 		{
+			if (df != null && !df.isHidden())
+			{
+				df.dismiss();
+			}
+
 			if (cursor != null)
 			{
 				cursor.close();
