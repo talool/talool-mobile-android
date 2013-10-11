@@ -15,10 +15,11 @@ import android.widget.EditText;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.dialog.DialogFactory;
-import com.talool.mobile.android.dialog.DialogFactory.DialogClickListener;
+import com.talool.mobile.android.dialog.DialogFactory.DialogPositiveClickListener;
+import com.talool.mobile.android.util.ErrorMessageCache;
 import com.talool.mobile.android.util.ThriftHelper;
 
-public class ForgotPasswordActivity extends Activity implements DialogClickListener
+public class ForgotPasswordActivity extends Activity implements DialogPositiveClickListener
 {
 	private EditText email;
 	private String errorMessage;
@@ -52,7 +53,7 @@ public class ForgotPasswordActivity extends Activity implements DialogClickListe
 			sendEmailBtn.setVisibility(View.GONE);
 			final String title = getResources().getString(R.string.alert_sent_password_reset_title);
 			final String message = getResources().getString(R.string.alert_sent_password_reset_message);
-			df = DialogFactory.getConfirmDialog(title, message, "Ok", ForgotPasswordActivity.this);
+			df = DialogFactory.getAlertDialog(title, message, "Ok", ForgotPasswordActivity.this);
 			df.show(getFragmentManager(), "dialog");
 		}
 
@@ -73,7 +74,7 @@ public class ForgotPasswordActivity extends Activity implements DialogClickListe
 			}
 			catch (Exception e)
 			{
-				popupErrorMessage("There was a problem generating your password reset request");
+				popupErrorMessage(ErrorMessageCache.Message.PasswordResetGeneral.getText());
 				return null;
 			}
 
@@ -86,9 +87,9 @@ public class ForgotPasswordActivity extends Activity implements DialogClickListe
 	{
 		final String emailStr = email.getText().toString();
 
-		if (TextUtils.isEmpty(emailStr))
+		if (TextUtils.isEmpty(emailStr) || !android.util.Patterns.EMAIL_ADDRESS.matcher(emailStr).matches())
 		{
-			popupErrorMessage("Your email is required");
+			popupErrorMessage(ErrorMessageCache.Message.ProvideValidEmailAddr.getText());
 		}
 		else
 		{
@@ -115,8 +116,6 @@ public class ForgotPasswordActivity extends Activity implements DialogClickListe
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		// getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
@@ -126,9 +125,20 @@ public class ForgotPasswordActivity extends Activity implements DialogClickListe
 		{
 			df.dismiss();
 		}
-		String title = "";
-		String label = getResources().getString(R.string.retry);
-		df = DialogFactory.getAlertDialog(title, message, label);
+
+		sendEmailBtn.setVisibility(View.INVISIBLE);
+		df = DialogFactory.getAlertDialog(ErrorMessageCache.Message.EmailMessageFailureTitle.getText(),
+				message, "Ok",
+				new DialogPositiveClickListener()
+				{
+					@Override
+					public void onDialogPositiveClick(DialogFragment dialog)
+					{
+						sendEmailBtn.setVisibility(View.VISIBLE);
+					}
+				}
+				);
+
 		df.show(getFragmentManager(), "dialog");
 
 		errorMessage = null;
@@ -166,9 +176,4 @@ public class ForgotPasswordActivity extends Activity implements DialogClickListe
 		startActivity(myDealsIntent);
 	}
 
-	@Override
-	public void onDialogNegativeClick(DialogFragment dialog)
-	{
-
-	}
 }
