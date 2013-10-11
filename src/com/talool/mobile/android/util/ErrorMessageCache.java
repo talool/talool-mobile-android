@@ -15,6 +15,27 @@ public final class ErrorMessageCache
 	private static final Map<ErrorCode_t, String> ERR_MAP = new HashMap<ErrorCode_t, String>();
 	private static final String UNMAPPED_CODE_MSG = "An unknown error has occured";
 
+	public enum Message
+	{
+		ProvideValidEmailAddr("Please provide a valid email address"),
+		PasswordResetGeneral("There was a problem generating your password reset request"),
+		EmailMessageFailureTitle("Email Failure"),
+		ResetPasswordFailureTitle("Reset Password Failure");
+
+		private String text;
+
+		Message(String text)
+		{
+			this.text = text;
+		}
+
+		public String getText()
+		{
+			return text;
+		}
+
+	}
+
 	static
 	{
 		ERR_MAP.put(ErrorCode_t.ACTIVIATION_CODE_ALREADY_ACTIVATED, "Activation code is already activated");

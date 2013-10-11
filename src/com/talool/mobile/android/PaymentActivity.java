@@ -119,7 +119,7 @@ public class PaymentActivity extends Activity implements DialogPositiveClickList
 			catch (TTransportException e)
 			{
 				errorMessage = ErrorMessageCache.getServiceErrorMessage();
-				Log.i(LOG_TAG, e.getMessage(), e);
+				Log.e(LOG_TAG, e.getMessage(), e);
 				return null;
 			}
 
@@ -138,22 +138,22 @@ public class PaymentActivity extends Activity implements DialogPositiveClickList
 			catch (TServiceException_t e)
 			{
 				errorMessage = ErrorMessageCache.getServiceErrorMessage();
-				Log.i(LOG_TAG, e.getMessage(), e);
+				Log.e(LOG_TAG, e.getMessage(), e);
 			}
 			catch (TUserException_t e)
 			{
 				errorMessage = ErrorMessageCache.getMessage(e.getErrorCode());
-				Log.i(LOG_TAG, e.getErrorCode().name(), e);
+				Log.e(LOG_TAG, e.getErrorCode().name(), e);
 			}
 			catch (TNotFoundException_t e)
 			{
 				errorMessage = ErrorMessageCache.getNotFoundMessage(e.getIdentifier(), e.getKey());
-				Log.i(LOG_TAG, errorMessage, e);
+				Log.e(LOG_TAG, errorMessage, e);
 			}
 			catch (TException e)
 			{
 				errorMessage = ErrorMessageCache.getNetworkIssueMessage();
-				Log.i(LOG_TAG, e.getMessage(), e);
+				Log.e(LOG_TAG, e.getMessage(), e);
 			}
 
 			return transactionResult;
@@ -186,7 +186,7 @@ public class PaymentActivity extends Activity implements DialogPositiveClickList
 		touchClient = VenmoTouchClient.forSandboxMerchant(this, Constants.BRAINTREE_MERCHANT_ID, Constants.BRAINTREE_MERCHANT_KEY);
 		comboView = (VTComboCardView) findViewById(R.id.combo_view);
 		comboView.getNewCardTitle().setText(getResources().getString(R.string.payment_new_card));
-		
+
 		comboView.getSavedCardTitle().setText(getResources().getString(R.string.payment_saved_card));
 
 		mComboController = new VTComboCardViewController(this, touchClient, comboView);
@@ -220,7 +220,7 @@ public class PaymentActivity extends Activity implements DialogPositiveClickList
 
 			TextView titleView = (TextView) findViewById(R.id.payment_deal_offer_detail);
 			titleView.setText(dealOffer.getTitle());
-			
+
 			TextView priceView = (TextView) findViewById(R.id.payment_deal_offer_price);
 			priceView.setText(formatDealPrice());
 
@@ -232,13 +232,13 @@ public class PaymentActivity extends Activity implements DialogPositiveClickList
 		}
 
 	}
-	
+
 	private String formatDealPrice()
 	{
 		final StringBuilder sb = new StringBuilder();
 		sb.append(getResources().getString(R.string.payment_price))
-		  .append(" ")
-		  .append(new SafeSimpleDecimalFormat(Constants.FORMAT_DECIMAL_MONEY).format(dealOffer.getPrice()));
+				.append(" ")
+				.append(new SafeSimpleDecimalFormat(Constants.FORMAT_DECIMAL_MONEY).format(dealOffer.getPrice()));
 		return sb.toString();
 	}
 
