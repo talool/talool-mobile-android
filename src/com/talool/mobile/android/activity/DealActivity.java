@@ -459,7 +459,7 @@ public class DealActivity extends Activity
 							df.dismiss();
 						}
 						
-						AlertMessage alertMessage = new AlertMessage("Error Sharing Gift", "Error sharing gift. Please retry", null);
+						AlertMessage alertMessage = new AlertMessage("Check your network connection and retry", "Error sharing gift", null);
 						AndroidUtils.popupMessageWithOk(alertMessage, DealActivity.this);
 					}
 				};
