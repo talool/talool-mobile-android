@@ -434,6 +434,8 @@ public class DealActivity extends Activity
 
 	protected void executeFacebookTask()
 	{
+		df = DialogFactory.getProgressDialog();
+		df.show(getFragmentManager(), "dialog");
 		String facebookId = FacebookHelper.get().getSelectedFriends().get(0).getId();
 		String name = FacebookHelper.get().getSelectedFriends().get(0).getName();
 		if(giftId != null && !giftId.equalsIgnoreCase(""))
@@ -452,7 +454,13 @@ public class DealActivity extends Activity
 					}
 					else
 					{
-						//TODO cory - show error
+						if (df != null && !df.isHidden())
+						{
+							df.dismiss();
+						}
+						
+						AlertMessage alertMessage = new AlertMessage("Error Sharing Gift", "Error sharing gift. Please retry", null);
+						AndroidUtils.popupMessageWithOk(alertMessage, DealActivity.this);
 					}
 				};
 			};
@@ -465,6 +473,10 @@ public class DealActivity extends Activity
 		FacebookShareTask task = new FacebookShareTask(giftId){
 			@Override
 			protected void onPostExecute(com.facebook.Response result) {
+				if (df != null && !df.isHidden())
+				{
+					df.dismiss();
+				}
 				if (result != null && result.getError() != null) {
 					handleError(result.getError());
 				} else {
@@ -822,10 +834,6 @@ public class DealActivity extends Activity
 	protected void onResume()
 	{
 		super.onResume();
-		if (df != null && !df.isHidden())
-		{
-			df.dismiss();
-		}
 	}
 
 }
