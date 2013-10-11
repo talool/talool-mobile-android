@@ -47,6 +47,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.talool.mobile.android.WelcomeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_welcome"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.talool.mobile.android.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"

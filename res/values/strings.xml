@@ -5,11 +5,12 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="password">Password</string>
-    <string name="newToTalool">New to Talool? Please Register.</string>
+    <string name="newToTalool">Register New Account</string>
     <string name="forgot_password">Forgot Password?</string>
     
     <string name="email">Email</string>
-    <string name="login">Login</string>
+    <string name="login">Log in</string>
+    <string name="login_with_talool">Log in with Talool</string>
     <string name="welcome">Welcome</string>
     <string name="register">Registration</string>
     <string name="forgot_password">Forgot Password</string>
@@ -76,7 +77,7 @@
    <string name="my_deals_no_favorites_prefix">You have no favorite merchants</string>
 
    <!-- facebook sdk strings -->
-   <string name="get_started">OR</string>
+   <string name="or">OR</string>
    <string name="facebook_app_id">342739092494152</string>
    <string name="title_facebook_login">Authenticating with Facebook</string>
 
@@ -130,6 +131,6 @@
     <string name="payment_saved_card">Pay with a Saved Card</string>
     <string name="payment_new_card">Pay with a New Card</string>
     
-
+	<string name="title_activity_welcome">WelcomeActivity</string>
 
 </resources>

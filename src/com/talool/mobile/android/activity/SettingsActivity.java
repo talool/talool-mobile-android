@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.talool.mobile.android.BasicWebViewActivity;
-import com.talool.mobile.android.LoginActivity;
 import com.talool.mobile.android.R;
+import com.talool.mobile.android.WelcomeActivity;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.TypefaceFactory;
 
@@ -42,7 +42,7 @@ public class SettingsActivity extends Activity
 			public void onClick(final View view)
 			{
 				TaloolUser.get().logoutUser();
-				final Intent myIntent = new Intent(view.getContext(), LoginActivity.class);
+				final Intent myIntent = new Intent(view.getContext(), WelcomeActivity.class);
 				myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 				startActivity(myIntent);
 				finish();

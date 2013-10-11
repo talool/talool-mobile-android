@@ -7,42 +7,45 @@ import org.apache.thrift.transport.TTransportException;
 
 import android.app.Activity;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ClipDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.talool.api.thrift.CTokenAccess_t;
+import com.talool.api.thrift.Customer_t;
 import com.talool.api.thrift.ServiceException_t;
-import com.talool.mobile.android.activity.SettingsActivity;
 import com.talool.mobile.android.dialog.DialogFactory;
 import com.talool.mobile.android.tasks.FetchFavoriteMerchantsTask;
+import com.talool.mobile.android.util.FacebookHelper;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.ThriftHelper;
 
-public class LoginActivity extends Activity
-{
+public class WelcomeActivity extends Activity {
+	
+	private UiLifecycleHelper lifecycleHelper;
+	public static final String TALOOL_FB_PASSCODE = "talool4";
 	private static ThriftHelper client;
-	private EditText usernameEditText;
-	private EditText passwordEditText;
+	private Customer_t facebookCostomer;
 	private String username;
 	private String password;
 	private Exception exception;
 	private String errorMessage;
 	private boolean isResumed = false;
 	private DialogFragment df;
-
+	
 	private class CustomerServiceTask extends AsyncTask<String, Void, CTokenAccess_t>
 	{
 
@@ -89,7 +92,14 @@ public class LoginActivity extends Activity
 
 			try
 			{
-				tokenAccess = client.getClient().authenticate(username, password);
+				if (facebookCostomer != null && !client.getClient().customerEmailExists(facebookCostomer.getEmail()))
+				{
+					tokenAccess = client.getClient().createAccount(facebookCostomer, password);
+				}
+				else
+				{
+					tokenAccess = client.getClient().authenticate(username, password);
+				}
 			}
 			catch (ServiceException_t e)
 			{
@@ -110,20 +120,17 @@ public class LoginActivity extends Activity
 	}
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		setContentView(R.layout.login_layout);
-
-		usernameEditText = (EditText) findViewById(R.id.email);
-		passwordEditText = (EditText) findViewById(R.id.password);
-
-		ClipDrawable username_bg = (ClipDrawable) usernameEditText.getBackground();
-		username_bg.setLevel(1500);
-		ClipDrawable password_bg = (ClipDrawable) passwordEditText.getBackground();
-		password_bg.setLevel(1500);
-
+		
+		lifecycleHelper = new UiLifecycleHelper(this, statusCallback);
+		lifecycleHelper.onCreate(savedInstanceState);
+		
+		setContentView(R.layout.activity_welcome);
+		
+		LoginButton authButton = (LoginButton) this.findViewById(R.id.login_button);
+		authButton.setReadPermissions(Arrays.asList("email", "user_birthday"));
+		
 		try
 		{
 			client = new ThriftHelper();
@@ -139,22 +146,27 @@ public class LoginActivity extends Activity
 					);
 		}
 
-		setTitle(R.string.login_with_talool);
-
+		setTitle(R.string.welcome);
 	}
-
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		return true;
+	}
+	
 	public void onLoginClick(View view)
 	{
-		exception = null;
-		errorMessage = null;
-		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.hideSoftInputFromWindow(passwordEditText.getWindowToken(), 0);
-		username = usernameEditText.getText().toString();
-		password = passwordEditText.getText().toString();
-		CustomerServiceTask task = new CustomerServiceTask();
-		task.execute(new String[] {});
+		Intent myIntent = new Intent(getApplicationContext(), LoginActivity.class);
+		startActivity(myIntent);
 	}
-
+	
+	public void onRegistrationClicked(View view)
+	{
+		Intent myIntent = new Intent(getApplicationContext(), RegistrationActivity.class);
+		startActivity(myIntent);
+	}
+	
 	public void popupErrorMessage(Exception exception, String errorMessage)
 	{
 
@@ -176,38 +188,7 @@ public class LoginActivity extends Activity
 		df.show(getFragmentManager(), "dialog");
 
 	}
-
-	public void onForgotPasswordClicked(View view)
-	{
-		Intent myIntent = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
-		startActivity(myIntent);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		// getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
-		boolean ret;
-		if (item.getItemId() == R.id.menu_settings)
-		{
-			Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-			startActivity(intent);
-			ret = true;
-		}
-		else
-		{
-			ret = super.onOptionsItemSelected(item);
-		}
-		return ret;
-	}
-
+	
 	@Override
 	public void onStart()
 	{
@@ -226,6 +207,7 @@ public class LoginActivity extends Activity
 	protected void onPause()
 	{
 		super.onPause();
+		lifecycleHelper.onPause();
 		isResumed = false;
 	}
 
@@ -233,16 +215,66 @@ public class LoginActivity extends Activity
 	protected void onResume()
 	{
 		super.onResume();
+		lifecycleHelper.onResume();
 		isResumed = true;
 
 		if (df != null && !df.isHidden())
 		{
 			df.dismiss();
 		}
-
 	}
 
+	@Override
+	protected void onSaveInstanceState(Bundle outState)
+	{
+		super.onSaveInstanceState(outState);
+		lifecycleHelper.onSaveInstanceState(outState);
+	}
 
+	@Override
+	protected void onDestroy()
+	{
+		super.onDestroy();
+		lifecycleHelper.onDestroy();
+	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		super.onActivityResult(requestCode, resultCode, data);
+		lifecycleHelper.onActivityResult(requestCode, resultCode, data);
+	}
+	
+	private Session.StatusCallback statusCallback = new Session.StatusCallback()
+	{
+		@Override
+		public void call(Session session, SessionState state, Exception exception)
+		{
+			onSessionStateChange(session, state, exception);
+		}
+	};
+	
+	private void onSessionStateChange(Session session, SessionState state, Exception exception)
+	{
+		if (isResumed)
+		{
+			if (state.isOpened() && TaloolUser.get().getAccessToken() == null)
+			{
+				Request request = Request.newMeRequest(Session.getActiveSession(), new Request.GraphUserCallback()
+				{
+					@Override
+					public void onCompleted(GraphUser user, Response response)
+					{
+						facebookCostomer = FacebookHelper.createCostomerFromFacebook(user);
+						username = facebookCostomer.getEmail();
+						password = TALOOL_FB_PASSCODE + facebookCostomer.getEmail();
+						CustomerServiceTask task = new CustomerServiceTask();
+						task.execute(new String[] {});
+					}
+				});
+				request.executeAsync();
+			}
+		}
+	}
 
 }

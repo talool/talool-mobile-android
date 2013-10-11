@@ -1,7 +1,7 @@
 <resources>
 
     <dimen name="login_or_vertical_margin_top">20dp</dimen>
-    <dimen name="login_or_vertical_margin_bottom">0dp</dimen>
+    <dimen name="login_or_vertical_margin_bottom">20dp</dimen>
     <dimen name="login_edittext_vertical_margin_top">0dp</dimen>
     <dimen name="login_edittext_vertical_margin_bottom">15dp</dimen>
     <dimen name="login_edittext_text_size">16sp</dimen>
