@@ -44,8 +44,10 @@ public class LoginActivity extends Activity
 	public static final String TALOOL_FB_PASSCODE = "talool4";
 	private static ThriftHelper client;
 	private Customer_t facebookCostomer;
-	private EditText username;
-	private EditText password;
+	private EditText usernameEditText;
+	private EditText passwordEditText;
+	private String username;
+	private String password;
 	private Exception exception;
 	private String errorMessage;
 	private UiLifecycleHelper lifecycleHelper;
@@ -100,11 +102,11 @@ public class LoginActivity extends Activity
 			{
 				if (facebookCostomer != null && !client.getClient().customerEmailExists(facebookCostomer.getEmail()))
 				{
-					tokenAccess = client.getClient().createAccount(facebookCostomer, password.getText().toString());
+					tokenAccess = client.getClient().createAccount(facebookCostomer, password);
 				}
 				else
 				{
-					tokenAccess = client.getClient().authenticate(username.getText().toString(), password.getText().toString());
+					tokenAccess = client.getClient().authenticate(username, password);
 				}
 			}
 			catch (ServiceException_t e)
@@ -137,12 +139,12 @@ public class LoginActivity extends Activity
 		LoginButton authButton = (LoginButton) this.findViewById(R.id.login_button);
 		authButton.setReadPermissions(Arrays.asList("email", "user_birthday"));
 
-		username = (EditText) findViewById(R.id.email);
-		password = (EditText) findViewById(R.id.password);
+		usernameEditText = (EditText) findViewById(R.id.email);
+		passwordEditText = (EditText) findViewById(R.id.password);
 
-		ClipDrawable username_bg = (ClipDrawable) username.getBackground();
+		ClipDrawable username_bg = (ClipDrawable) usernameEditText.getBackground();
 		username_bg.setLevel(1500);
-		ClipDrawable password_bg = (ClipDrawable) password.getBackground();
+		ClipDrawable password_bg = (ClipDrawable) passwordEditText.getBackground();
 		password_bg.setLevel(1500);
 
 		try
@@ -169,8 +171,9 @@ public class LoginActivity extends Activity
 		exception = null;
 		errorMessage = null;
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.hideSoftInputFromWindow(password.getWindowToken(), 0);
-
+		imm.hideSoftInputFromWindow(passwordEditText.getWindowToken(), 0);
+		username = usernameEditText.getText().toString();
+		password = passwordEditText.getText().toString();
 		CustomerServiceTask task = new CustomerServiceTask();
 		task.execute(new String[] {});
 	}
@@ -323,8 +326,8 @@ public class LoginActivity extends Activity
 					public void onCompleted(GraphUser user, Response response)
 					{
 						facebookCostomer = FacebookHelper.createCostomerFromFacebook(user);
-						username.setText(facebookCostomer.getEmail());
-						password.setText(TALOOL_FB_PASSCODE + facebookCostomer.getEmail());
+						username = facebookCostomer.getEmail();
+						password = TALOOL_FB_PASSCODE + facebookCostomer.getEmail();
 						CustomerServiceTask task = new CustomerServiceTask();
 						task.execute(new String[] {});
 					}

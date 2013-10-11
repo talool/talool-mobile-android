@@ -417,21 +417,6 @@ public class DealActivity extends Activity
 				// callback when session changes state
 				@Override
 				public void call(Session session, SessionState state, Exception exception) {
-					if(state.isOpened())
-					{
-						facebookSession = session;
-						Intent intent = new Intent();
-						intent.setData(FacebookFriendActivity.FRIEND_PICKER);
-						intent.setClass(context, FacebookFriendActivity.class);
-						startActivityForResult(intent, 200);
-					}
-					else if(state == SessionState.OPENED || state == SessionState.OPENED_TOKEN_UPDATED)
-					{
-						Intent intent = new Intent();
-						intent.setData(FacebookFriendActivity.FRIEND_PICKER);
-						intent.setClass(context, FacebookFriendActivity.class);
-						startActivityForResult(intent, 200);
-					}
 				}
 			});
             openRequest.setRequestCode(FACEBOOK_REQUEST_CODE);
