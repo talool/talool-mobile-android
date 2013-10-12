@@ -33,19 +33,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.FacebookRequestError;
-import com.facebook.HttpMethod;
-import com.facebook.Request;
 import com.facebook.Session;
-import com.facebook.Session.AuthorizationRequest;
 import com.facebook.Session.OpenRequest;
 import com.facebook.SessionState;
-import com.facebook.internal.SessionAuthorizationType;
-import com.facebook.internal.SessionTracker;
-import com.facebook.model.GraphObject;
-import com.facebook.model.GraphUser;
-import com.facebook.model.OpenGraphAction;
 import com.google.analytics.tracking.android.EasyTracker;
-import com.google.analytics.tracking.android.Log;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.loopj.android.image.SmartImageView;
@@ -60,6 +51,7 @@ import com.talool.mobile.android.MapActivity;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.dialog.DialogFactory;
+import com.talool.mobile.android.dialog.DialogFactory.DialogClickListener;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
 import com.talool.mobile.android.tasks.DealRedemptionTask;
 import com.talool.mobile.android.tasks.FacebookGiftIdTask;
@@ -68,8 +60,6 @@ import com.talool.mobile.android.util.AlertMessage;
 import com.talool.mobile.android.util.AndroidUtils;
 import com.talool.mobile.android.util.Constants;
 import com.talool.mobile.android.util.FacebookHelper;
-import com.talool.mobile.android.util.OGDealAction;
-import com.talool.mobile.android.util.OGDealObject;
 import com.talool.mobile.android.util.SafeSimpleDateFormat;
 import com.talool.mobile.android.util.TaloolSmartImageView;
 import com.talool.mobile.android.util.TaloolUser;
@@ -107,7 +97,6 @@ public class DealActivity extends Activity
 	private Session facebookSession;
 	private String giftId;
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -128,10 +117,12 @@ public class DealActivity extends Activity
 
 		dealAddressText.setClickable(true);
 
-		OnClickListener mapClickListener = new OnClickListener() {
+		OnClickListener mapClickListener = new OnClickListener()
+		{
 
 			@Override
-			public void onClick(View v) {
+			public void onClick(View v)
+			{
 				Intent myIntent = new Intent(v.getContext(), MapActivity.class);
 				myIntent.putExtra("merchant", ThriftUtil.serialize(merchant));
 				startActivity(myIntent);
@@ -302,37 +293,67 @@ public class DealActivity extends Activity
 
 	public void onUseDealNowClick(final View view)
 	{
-		DealRedemptionTask dealAcceptanceTask = new DealRedemptionTask(client, deal.dealAcquireId, view.getContext())
-		{
+		df = DialogFactory.getConfirmDialog(getResources().getString(R.string.please_confirm),
+				getResources().getString(R.string.deal_activity_confirm_redeem_message), new DialogClickListener()
+				{
 
-			@Override
-			protected void onPostExecute(String result)
-			{
-				redemptionCode = result;
-				dealActivityButtonLayout.removeAllViewsInLayout();
-				dealActivityButtonLayout.setBackgroundDrawable(null);
-				TextView redemptionCodeTextView = new TextView(DealActivity.this);
-				redemptionCodeTextView.setText("Redemption code " + redemptionCode);
-				redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-				redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
-				redemptionCodeTextView.setTypeface(TypefaceFactory.get().getMarkerFelt(), Typeface.NORMAL);
-				redemptionCodeTextView.setPadding(30, 0, 30, 0);
-				dealActivityButtonLayout.addView(redemptionCodeTextView);
-				dealActivityButtonLayout.setGravity(Gravity.CENTER);
+					@Override
+					public void onDialogPositiveClick(DialogFragment dialog)
+					{
+						DealRedemptionTask dealAcceptanceTask = new DealRedemptionTask(client, deal.dealAcquireId, view.getContext())
+						{
+							@Override
+							protected void onPreExecute()
+							{
+								df = DialogFactory.getProgressDialog();
+								df.show(getFragmentManager(), "dialog");
+							}
 
-				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
-				easyTracker.send(MapBuilder
-						.createEvent("redeem", "selected", deal.dealAcquireId, null)
-						.build());
-			}
+							@Override
+							protected void onPostExecute(String result)
+							{
+								if (df != null && !df.isHidden())
+								{
+									df.dismiss();
+								}
 
-		};
-		dealAcceptanceTask.execute(new String[] {});
+								redemptionCode = result;
+								dealActivityButtonLayout.removeAllViewsInLayout();
+								dealActivityButtonLayout.setBackgroundDrawable(null);
+								TextView redemptionCodeTextView = new TextView(DealActivity.this);
+								redemptionCodeTextView.setText("Redemption code " + redemptionCode);
+								redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+								redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
+								redemptionCodeTextView.setTypeface(TypefaceFactory.get().getMarkerFelt(), Typeface.NORMAL);
+								redemptionCodeTextView.setPadding(30, 0, 30, 0);
+								dealActivityButtonLayout.addView(redemptionCodeTextView);
+								dealActivityButtonLayout.setGravity(Gravity.CENTER);
+
+								EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+								easyTracker.send(MapBuilder
+										.createEvent("redeem", "selected", deal.dealAcquireId, null)
+										.build());
+							}
+
+						};
+						dealAcceptanceTask.execute(new String[] {});
+
+					}
+
+					@Override
+					public void onDialogNegativeClick(DialogFragment dialog)
+					{
+						// do nothing
+					}
+				});
+
+		df.show(getFragmentManager(), "dialog");
+
 	}
 
 	private void setAddressText()
 	{
-		if(merchant.locations.size() > 1)
+		if (merchant.locations.size() > 1)
 		{
 			dealAddressText.setText("Multiple Locations \ncheck the map >");
 		}
@@ -345,11 +366,11 @@ public class DealActivity extends Activity
 				sb.append("\n").append(location.address.address2);
 			}
 			sb.append("\n")
-			.append(location.address.city)
-			.append(", ")
-			.append(location.address.stateProvinceCounty)
-			.append(" ")
-			.append(location.address.zip);
+					.append(location.address.city)
+					.append(", ")
+					.append(location.address.stateProvinceCounty)
+					.append(" ")
+					.append(location.address.zip);
 
 			dealAddressText.setText(sb.toString());
 		}
@@ -376,7 +397,7 @@ public class DealActivity extends Activity
 	{
 		try
 		{
-			if(Build.VERSION.SDK_INT < 16)
+			if (Build.VERSION.SDK_INT < 16)
 			{
 				Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
 				startActivityForResult(intent, 100);
@@ -397,7 +418,7 @@ public class DealActivity extends Activity
 	public void onGiftViaFacebook(View view)
 	{
 		final Context context = view.getContext();
-		if(facebookSession != null && facebookSession.isOpened())
+		if (facebookSession != null && facebookSession.isOpened())
 		{
 			Intent intent = new Intent();
 			intent.setData(FacebookFriendActivity.FRIEND_PICKER);
@@ -412,12 +433,13 @@ public class DealActivity extends Activity
 			facebookSession = new Session.Builder(context).setApplicationId(getString(R.string.facebook_app_id)).build();
 			Session.setActiveSession(facebookSession);
 			OpenRequest openRequest = new Session.OpenRequest(this);
-			openRequest.setCallback(new Session.StatusCallback() {
+			openRequest.setCallback(new Session.StatusCallback()
+			{
 
 				// callback when session changes state
 				@Override
-				public void call(Session session, SessionState state, Exception exception) {
-				}
+				public void call(Session session, SessionState state, Exception exception)
+				{}
 			});
 			openRequest.setRequestCode(FACEBOOK_REQUEST_CODE);
 			openRequest.setPermissions(PERMISSIONS);
@@ -427,30 +449,33 @@ public class DealActivity extends Activity
 
 	protected void processFacebookResult(int requestCode, int resultCode, Intent data)
 	{
-		if (resultCode == Activity.RESULT_OK) {
+		if (resultCode == Activity.RESULT_OK)
+		{
 			executeFacebookTask();
 		}
 	}
 
 	protected void executeFacebookTask()
 	{
-		if(FacebookHelper.get().getSelectedFriends() != null && !FacebookHelper.get().getSelectedFriends().isEmpty())
+		if (FacebookHelper.get().getSelectedFriends() != null && !FacebookHelper.get().getSelectedFriends().isEmpty())
 		{
 			df = DialogFactory.getProgressDialog();
 
 			df.show(getFragmentManager(), "dialog");
 			String facebookId = FacebookHelper.get().getSelectedFriends().get(0).getId();
 			String name = FacebookHelper.get().getSelectedFriends().get(0).getName();
-			if(giftId != null && !giftId.equalsIgnoreCase(""))
+			if (giftId != null && !giftId.equalsIgnoreCase(""))
 			{
 				executeFacebookShareTask(giftId);
 			}
 			else
 			{
-				FacebookGiftIdTask task = new FacebookGiftIdTask(client,deal.dealAcquireId,facebookId,name,this){
+				FacebookGiftIdTask task = new FacebookGiftIdTask(client, deal.dealAcquireId, facebookId, name, this)
+				{
 					@Override
-					protected void onPostExecute(String result) {
-						if(result != null && result != "")
+					protected void onPostExecute(String result)
+					{
+						if (result != null && result != "")
 						{
 							giftId = result;
 							executeFacebookShareTask(result);
@@ -473,17 +498,22 @@ public class DealActivity extends Activity
 	}
 
 	protected void executeFacebookShareTask(String giftId)
-	{	
-		FacebookShareTask task = new FacebookShareTask(giftId){
+	{
+		FacebookShareTask task = new FacebookShareTask(giftId)
+		{
 			@Override
-			protected void onPostExecute(com.facebook.Response result) {
+			protected void onPostExecute(com.facebook.Response result)
+			{
 				if (df != null && !df.isHidden())
 				{
 					df.dismiss();
 				}
-				if (result != null && result.getError() != null) {
+				if (result != null && result.getError() != null)
+				{
 					handleError(result.getError());
-				} else {
+				}
+				else
+				{
 					deal.status = AcquireStatus_t.PENDING_ACCEPT_CUSTOMER_SHARE;
 					updateBackgroundForFacebookShare(FacebookHelper.get().getSelectedFriends().get(0).getName());
 				}
@@ -491,11 +521,14 @@ public class DealActivity extends Activity
 		};
 		task.execute();
 	}
-	private void requestPublishPermissions(Session session) {
-		if (session != null) {
-			Session.NewPermissionsRequest newPermissionsRequest = 
+
+	private void requestPublishPermissions(Session session)
+	{
+		if (session != null)
+		{
+			Session.NewPermissionsRequest newPermissionsRequest =
 					new Session.NewPermissionsRequest(this, PERMISSIONS).
-					setRequestCode(REAUTH_ACTIVITY_CODE);
+							setRequestCode(REAUTH_ACTIVITY_CODE);
 			session.requestNewPublishPermissions(newPermissionsRequest);
 		}
 	}
@@ -505,89 +538,100 @@ public class DealActivity extends Activity
 		DialogInterface.OnClickListener listener = null;
 		String dialogBody = null;
 
-		if (error == null) {
+		if (error == null)
+		{
 			// There was no response from the server.
 			dialogBody = "No Response From Facebook Server";
-		} else {
-			switch (error.getCategory()) {
-			case AUTHENTICATION_RETRY:
-				// Tell the user what happened by getting the
-				// message id, and retry the operation later.
-				String userAction = (error.shouldNotifyUser()) ? "" :
-					getString(error.getUserActionMessageId());
-				dialogBody = "Error on Authentication Retry" +userAction;
-				listener = new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialogInterface, 
-							int i) {
-						// Take the user to the mobile site.
-						Intent intent = new Intent(Intent.ACTION_VIEW, 
-								M_FACEBOOK_URL);
-						startActivity(intent);
-					}
-				};
-				break;
-
-			case AUTHENTICATION_REOPEN_SESSION:
-				// Close the session and reopen it.
-				dialogBody = 
-				"Error on Authentication Reopen";
-				listener = new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialogInterface, 
-							int i) {
-						Session session = Session.getActiveSession();
-						if (session != null && !session.isClosed()) {
-							session.closeAndClearTokenInformation();
+		}
+		else
+		{
+			switch (error.getCategory())
+			{
+				case AUTHENTICATION_RETRY:
+					// Tell the user what happened by getting the
+					// message id, and retry the operation later.
+					String userAction = (error.shouldNotifyUser()) ? "" :
+							getString(error.getUserActionMessageId());
+					dialogBody = "Error on Authentication Retry" + userAction;
+					listener = new DialogInterface.OnClickListener()
+					{
+						@Override
+						public void onClick(DialogInterface dialogInterface,
+								int i)
+						{
+							// Take the user to the mobile site.
+							Intent intent = new Intent(Intent.ACTION_VIEW,
+									M_FACEBOOK_URL);
+							startActivity(intent);
 						}
-					}
-				};
-				break;
+					};
+					break;
 
-			case PERMISSION:
-				// A permissions-related error
-				dialogBody = "You do not have permission to perform this action";
-				listener = new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialogInterface, 
-							int i) {
-						pendingAnnounce = true;
-						// Request publish permission
-						requestPublishPermissions(Session.getActiveSession());
-					}
-				};
-				break;
+				case AUTHENTICATION_REOPEN_SESSION:
+					// Close the session and reopen it.
+					dialogBody =
+							"Error on Authentication Reopen";
+					listener = new DialogInterface.OnClickListener()
+					{
+						@Override
+						public void onClick(DialogInterface dialogInterface,
+								int i)
+						{
+							Session session = Session.getActiveSession();
+							if (session != null && !session.isClosed())
+							{
+								session.closeAndClearTokenInformation();
+							}
+						}
+					};
+					break;
 
-			case SERVER:
-			case THROTTLING:
-				// This is usually temporary, don't clear the fields, and
-				// ask the user to try again.
-				dialogBody = "Throttling Error";
-				break;
+				case PERMISSION:
+					// A permissions-related error
+					dialogBody = "You do not have permission to perform this action";
+					listener = new DialogInterface.OnClickListener()
+					{
+						@Override
+						public void onClick(DialogInterface dialogInterface,
+								int i)
+						{
+							pendingAnnounce = true;
+							// Request publish permission
+							requestPublishPermissions(Session.getActiveSession());
+						}
+					};
+					break;
 
-			case BAD_REQUEST:
-				// This is likely a coding error, ask the user to file a bug.
-				dialogBody = "Error, bad request - " + error.getErrorMessage();
-				break;
+				case SERVER:
+				case THROTTLING:
+					// This is usually temporary, don't clear the fields, and
+					// ask the user to try again.
+					dialogBody = "Throttling Error";
+					break;
 
-			case OTHER:
-			case CLIENT:
-			default:
-				// An unknown issue occurred, this could be a code error, or
-				// a server side issue, log the issue, and either ask the
-				// user to retry, or file a bug.
-				dialogBody = "Unknown Error" +  error.getErrorMessage();
-				break;
+				case BAD_REQUEST:
+					// This is likely a coding error, ask the user to file a bug.
+					dialogBody = "Error, bad request - " + error.getErrorMessage();
+					break;
+
+				case OTHER:
+				case CLIENT:
+				default:
+					// An unknown issue occurred, this could be a code error, or
+					// a server side issue, log the issue, and either ask the
+					// user to retry, or file a bug.
+					dialogBody = "Unknown Error" + error.getErrorMessage();
+					break;
 			}
 		}
 
 		// Show the error and pass in the listener so action
 		// can be taken, if necessary.
 		new AlertDialog.Builder(this)
-		.setPositiveButton("Okay", listener)
-		.setTitle("Facebook Error")
-		.setMessage("Could not share via Facebook" + dialogBody)
-		.show();
+				.setPositiveButton("Okay", listener)
+				.setTitle("Facebook Error")
+				.setMessage("Could not share via Facebook" + dialogBody)
+				.show();
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -596,11 +640,11 @@ public class DealActivity extends Activity
 
 		try
 		{
-			if(requestCode == FACEBOOK_REQUEST_CODE)
+			if (requestCode == FACEBOOK_REQUEST_CODE)
 			{
 				facebookSession = Session.getActiveSession();
 				facebookSession.onActivityResult(this, requestCode, resultCode, data);
-				if(facebookSession != null && facebookSession.isOpened())
+				if (facebookSession != null && facebookSession.isOpened())
 				{
 					Intent intent = new Intent();
 					intent.setData(FacebookFriendActivity.FRIEND_PICKER);
@@ -613,13 +657,13 @@ public class DealActivity extends Activity
 					AndroidUtils.popupMessageWithOk(alertMessage, DealActivity.this);
 				}
 			}
-			else if(requestCode == 200)
+			else if (requestCode == 200)
 			{
-				processFacebookResult(requestCode,resultCode,data);
+				processFacebookResult(requestCode, resultCode, data);
 			}
-			else if(requestCode == REAUTH_ACTIVITY_CODE)
+			else if (requestCode == REAUTH_ACTIVITY_CODE)
 			{
-				if(giftId != null && giftId != "")
+				if (giftId != null && giftId != "")
 				{
 					executeFacebookShareTask(giftId);
 				}
@@ -628,57 +672,57 @@ public class DealActivity extends Activity
 			{
 				switch (requestCode)
 				{
-				case 100:
+					case 100:
 
-					if(Build.VERSION.SDK_INT < 16)
-					{
-						Uri result = data.getData();
-
-						// get the contact id from the Uri
-						String id = result.getLastPathSegment();
-
-						// query for everything email
-						cursor = getContentResolver().query(Email.CONTENT_URI,  null, Email.CONTACT_ID + "=?", new String[] { id }, null);
-
-						int emailIdx = cursor.getColumnIndex(Email.DATA);
-						int nameId = cursor.getColumnIndex(Contacts.DISPLAY_NAME);
-						// let's just get the first email
-						if (cursor.moveToFirst())
+						if (Build.VERSION.SDK_INT < 16)
 						{
-							email = cursor.getString(emailIdx);
-							name = cursor.getString(nameId);
-						}
+							Uri result = data.getData();
 
-						if (cursor != null)
+							// get the contact id from the Uri
+							String id = result.getLastPathSegment();
+
+							// query for everything email
+							cursor = getContentResolver().query(Email.CONTENT_URI, null, Email.CONTACT_ID + "=?", new String[] { id }, null);
+
+							int emailIdx = cursor.getColumnIndex(Email.DATA);
+							int nameId = cursor.getColumnIndex(Contacts.DISPLAY_NAME);
+							// let's just get the first email
+							if (cursor.moveToFirst())
+							{
+								email = cursor.getString(emailIdx);
+								name = cursor.getString(nameId);
+							}
+
+							if (cursor != null)
+							{
+								cursor.close();
+							}
+						}
+						else
 						{
-							cursor.close();
+							Uri result = data.getData();
+
+							// get the contact id from the Uri
+							String id = result.getLastPathSegment();
+
+							cursor = getContentResolver().query(Email.CONTENT_URI, null, Email._ID + "=?", new String[] { id }, null);
+
+							int emailIdx = cursor.getColumnIndex(Email.DATA);
+							int nameId = cursor.getColumnIndex(Contacts.DISPLAY_NAME);
+							// let's just get the first email
+							if (cursor.moveToFirst())
+							{
+								email = cursor.getString(emailIdx);
+								name = cursor.getString(nameId);
+							}
+
+							if (cursor != null)
+							{
+								cursor.close();
+							}
 						}
-					}
-					else
-					{
-						Uri result = data.getData();
-
-						// get the contact id from the Uri
-						String id = result.getLastPathSegment();
-
-						cursor = getContentResolver().query(Email.CONTENT_URI, null, Email._ID + "=?", new String[] { id }, null);
-
-						int emailIdx = cursor.getColumnIndex(Email.DATA);
-						int nameId = cursor.getColumnIndex(Contacts.DISPLAY_NAME);
-						// let's just get the first email
-						if (cursor.moveToFirst())
-						{
-							email = cursor.getString(emailIdx);
-							name = cursor.getString(nameId);
-						}
-
-						if (cursor != null)
-						{
-							cursor.close();
-						}
-					}
-					sendGift();
-					break;
+						sendGift();
+						break;
 				}
 			}
 

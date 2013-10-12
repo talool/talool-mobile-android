@@ -126,7 +126,7 @@ public class WelcomeActivity extends Activity {
 		lifecycleHelper = new UiLifecycleHelper(this, statusCallback);
 		lifecycleHelper.onCreate(savedInstanceState);
 		
-		setContentView(R.layout.activity_welcome);
+		setContentView(R.layout.welcome_activity);
 		
 		LoginButton authButton = (LoginButton) this.findViewById(R.id.login_button);
 		authButton.setReadPermissions(Arrays.asList("email", "user_birthday"));

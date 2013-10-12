@@ -110,6 +110,10 @@
    <string name="settings_logout_label">Sign Out</string>
    
 
+    <string name="please_confirm">Please Confirm</string> <!-- generic message -->
+  
+    <string name="deal_activity_confirm_redeem_message">Would you like to redeem this deal?</string>
+  
     <!-- Strings related to password reset -->
     <string name="title_activity_reset_password">Enter New Password</string>
     <string name="prompt_confirm">Confirm New Password</string>
