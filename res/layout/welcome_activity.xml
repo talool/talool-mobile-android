@@ -43,8 +43,8 @@
           android:background="@drawable/btn_teal" 
           android:textColor="@color/white"
           android:textStyle="bold"
-          android:textSize="18sp"
-          android:paddingRight="15dp"
+          android:textSize="16sp"
+          android:paddingRight="10dp"
           android:paddingLeft="10dp"/>
     
     <!-- Link to Registration Screen -->

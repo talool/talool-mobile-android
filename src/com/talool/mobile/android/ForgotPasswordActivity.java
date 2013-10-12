@@ -7,6 +7,7 @@ import android.graphics.drawable.ClipDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,7 @@ import com.talool.mobile.android.util.ThriftHelper;
 
 public class ForgotPasswordActivity extends Activity implements DialogPositiveClickListener
 {
+	private static final String LOG_TAG = ForgotPasswordActivity.class.getSimpleName();
 	private EditText email;
 	private String errorMessage;
 	private DialogFragment df;
@@ -69,13 +71,13 @@ public class ForgotPasswordActivity extends Activity implements DialogPositiveCl
 			}
 			catch (ServiceException_t e)
 			{
+				Log.e(LOG_TAG, e.getMessage(), e);
 				errorMessage = e.getErrorDesc();
-				return null;
 			}
 			catch (Exception e)
 			{
-				popupErrorMessage(ErrorMessageCache.Message.PasswordResetGeneral.getText());
-				return null;
+				Log.e(LOG_TAG, e.getMessage(), e);
+				errorMessage = ErrorMessageCache.Message.PasswordResetGeneral.getText();
 			}
 
 			return null;
