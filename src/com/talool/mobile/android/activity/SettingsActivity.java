@@ -11,6 +11,7 @@ import com.google.analytics.tracking.android.EasyTracker;
 import com.talool.mobile.android.BasicWebViewActivity;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.WelcomeActivity;
+import com.talool.mobile.android.util.AndroidUtils;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.TypefaceFactory;
 
@@ -80,6 +81,15 @@ public class SettingsActivity extends Activity
 				title = getResources().getString(R.string.settings_publisher_services);
 				break;
 
+			case R.id.settings_send_feedback_layout:
+				final StringBuilder sb = new StringBuilder();
+				sb.append(getResources().getString(R.string.settings_send_feedback_url));
+				sb.append("?fromEmail=" + TaloolUser.get().getAccessToken().getCustomer().getEmail());
+				sb.append("&feedbackSrc=");
+				sb.append(AndroidUtils.getReleaseInfo());
+				url = sb.toString();
+				title = getResources().getString(R.string.settings_send_feedback);
+				break;
 		}
 
 		intent.putExtra(BasicWebViewActivity.TARGET_URL_PARAM, url);

@@ -183,6 +183,37 @@
             android:src="@drawable/navigation_next_item" />
     </LinearLayout>
     
+     <LinearLayout
+        android:id="@+id/settings_send_feedback_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/tan_rounded"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:clickable="true"
+        android:onClick="openUrl">
+
+        <TextView
+            android:id="@+id/settings_send_feedback_services"
+            android:layout_width="wrap_content"
+            android:layout_weight="0.95"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:layout_margin="5dp"  
+            android:text="@string/settings_send_feedback" />
+        
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right"
+            android:contentDescription="@string/arrow_content_desc"
+            android:cropToPadding="false"
+            android:layout_weight="0.05"
+            android:src="@drawable/navigation_next_item" />
+    </LinearLayout>
+    
     
    <TextView
             android:id="@+id/settings_copyright"

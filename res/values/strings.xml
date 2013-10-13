@@ -97,11 +97,14 @@
    <string name="settings_merchant_services">Merchant Services</string>
    <string name="settings_terms_of_service">Terms of Service</string>
    <string name="settings_privacy_policy">Privacy Policy</string>
+   <string name="settings_send_feedback">Send Feedback</string>
    
    <string name="settings_publisher_services_url">http://www.talool.com/services/publishers</string>
    <string name="settings_merchant_services_url">http://www.talool.com/services/merchants</string>
    <string name="settings_terms_of_service_url">http://www.talool.com/termsofservice</string>
+   <string name="settings_terms_of_service_url">http://dev-www.talool.com/termsofservice</string>
    <string name="settings_privacy_policy_url">http://www.talool.com/privacy</string>
+   <string name="settings_send_feedback_url">http://www.talool.com/feedback</string>
    
    
    <string name="settings_about">About Talool</string>

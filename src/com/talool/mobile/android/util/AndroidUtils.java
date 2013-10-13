@@ -6,6 +6,7 @@ import java.io.StringWriter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
@@ -130,5 +131,26 @@ public final class AndroidUtils
 			}
 		}
 		return haveConnectedWifi || haveConnectedMobile;
+	}
+
+	public static String getReleaseInfo()
+	{
+		final StringBuilder sb = new StringBuilder();
+		sb.append("talool-");
+		try
+		{
+			sb.append(TaloolApplication.getAppContext().getPackageManager().getPackageInfo(
+					TaloolApplication.getAppContext().getPackageName(), 0).versionName);
+			sb.append(", ");
+			sb.append("android-").append(android.os.Build.VERSION.RELEASE);
+		}
+		catch (NameNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+
+		sb.append(", sdk-").append(android.os.Build.VERSION.SDK_INT);
+		return sb.toString();
+
 	}
 }
