@@ -33,6 +33,7 @@ import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.google.android.gms.maps.MapView;
 import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.Deal_t;
+import com.talool.api.thrift.ErrorCode_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.activity.LocationSelectActivity;
@@ -43,6 +44,7 @@ import com.talool.mobile.android.dialog.DialogFactory;
 import com.talool.mobile.android.dialog.DialogFactory.DialogClickListener;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
 import com.talool.mobile.android.util.Constants;
+import com.talool.mobile.android.util.ErrorMessageCache;
 import com.talool.mobile.android.util.SafeSimpleDecimalFormat;
 import com.talool.mobile.android.util.TaloolSmartImageView;
 import com.talool.mobile.android.util.TaloolUser;
@@ -475,7 +477,21 @@ public class FindDealsFragment extends Fragment implements DialogClickListener
 						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(), exception), true)
 						.build()
 						);
-				popupErrorMessage(exception.getMessage());
+				if (exception instanceof ServiceException_t)
+				{
+					if (((ServiceException_t) exception).getErrorCode() == 3001)
+					{
+						popupErrorMessage(ErrorMessageCache.getMessage(ErrorCode_t.ACTIVIATION_CODE_ALREADY_ACTIVATED));
+					}
+					else if (((ServiceException_t) exception).getErrorCode() == 3000)
+					{
+						popupErrorMessage(ErrorMessageCache.getMessage(ErrorCode_t.ACTIVIATION_CODE_NOT_FOUND));
+					}
+				}
+				else
+				{
+					popupErrorMessage(exception.getMessage());
+				}
 			}
 			else if (emptyCode)
 			{
@@ -517,18 +533,15 @@ public class FindDealsFragment extends Fragment implements DialogClickListener
 			}
 			catch (ServiceException_t e)
 			{
-				// TODO Auto-generated catch block
 				exception = e;
 			}
 			catch (TException e)
 			{
-				// TODO Auto-generated catch block
 				exception = e;
 			}
 			catch (Exception e)
 			{
 				exception = e;
-
 			}
 			return null;
 		}

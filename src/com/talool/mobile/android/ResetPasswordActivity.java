@@ -52,7 +52,7 @@ public class ResetPasswordActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_reset_password);
+		setContentView(R.layout.reset_password_activity);
 
 		// get the limited use token from the URI
 		final Uri uri;
@@ -146,12 +146,12 @@ public class ResetPasswordActivity extends Activity
 			}
 			catch (TServiceException_t e)
 			{
-				errorMessage = ErrorMessageCache.getServiceErrorMessage();
+				errorMessage = ErrorMessageCache.getMessage(e.getErrorCode());
 				Log.e(LOG_TAG, e.getMessage(), e);
 			}
 			catch (TUserException_t e)
 			{
-				errorMessage = ErrorMessageCache.getServiceErrorMessage();
+				errorMessage = ErrorMessageCache.getMessage(e.getErrorCode());
 				Log.e(LOG_TAG, e.getMessage(), e);
 			}
 			catch (TNotFoundException_t e)

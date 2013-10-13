@@ -38,13 +38,13 @@ public final class ErrorMessageCache
 
 	static
 	{
-		ERR_MAP.put(ErrorCode_t.ACTIVIATION_CODE_ALREADY_ACTIVATED, "Activation code is already activated");
+		ERR_MAP.put(ErrorCode_t.ACTIVIATION_CODE_ALREADY_ACTIVATED, "That activation code has already been used.  Codes can only be used once.");
 		ERR_MAP.put(ErrorCode_t.UNKNOWN, "An unknown error has occured");
 		ERR_MAP.put(ErrorCode_t.VALID_EMAIL_REQUIRED, "A valid email is required");
 		ERR_MAP.put(ErrorCode_t.PASS_REQUIRED, "Password is required");
 		ERR_MAP.put(ErrorCode_t.PASS_CONFIRM_MUST_MATCH, "Confirm password must match password");
 		ERR_MAP.put(ErrorCode_t.PASS_RESET_CODE_REQUIRED, "Password reset code is required");
-		ERR_MAP.put(ErrorCode_t.PASS_RESET_CODE_EXPIRED, "Password reset code expired");
+		ERR_MAP.put(ErrorCode_t.PASS_RESET_CODE_EXPIRED, "Your password reset code has expired. Please request a new password reset.");
 		ERR_MAP.put(ErrorCode_t.PASS_RESET_CODE_INVALID, "Password reset code is invalid");
 		ERR_MAP.put(ErrorCode_t.EMAIL_ALREADY_TAKEN, "Email is already taken");
 		ERR_MAP.put(ErrorCode_t.INVALID_USERNAME_OR_PASSWORD, "Invalid username or password");
