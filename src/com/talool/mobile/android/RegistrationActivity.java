@@ -141,14 +141,6 @@ public class RegistrationActivity extends Activity
 
 	public void popupErrorMessage(Exception exception)
 	{
-
-		EasyTracker easyTracker = EasyTracker.getInstance(this);
-
-		easyTracker.send(MapBuilder
-				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
-				.build()
-				);
-
 		if (df != null && !df.isHidden())
 		{
 			df.dismiss();
@@ -159,10 +151,20 @@ public class RegistrationActivity extends Activity
 		if (exception instanceof ServiceException_t)
 		{
 			message = ((ServiceException_t) exception).errorDesc;
+			EasyTracker easyTracker = EasyTracker.getInstance(this);
+			easyTracker.send(MapBuilder
+					.createEvent("registration", "failure", ((ServiceException_t) exception).getErrorDesc(), null)
+					.build());
 		}
 		else
 		{
 			message = exception.getMessage();
+			EasyTracker easyTracker = EasyTracker.getInstance(this);
+
+			easyTracker.send(MapBuilder
+					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
+					.build()
+					);
 		}
 		df = DialogFactory.getAlertDialog(title, message, label);
 		df.show(getFragmentManager(), "dialog");

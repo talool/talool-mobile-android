@@ -471,14 +471,12 @@ public class FindDealsFragment extends Fragment implements DialogClickListener
 			}
 			if (exception != null)
 			{
-				EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
-
-				easyTracker.send(MapBuilder
-						.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(), exception), true)
-						.build()
-						);
 				if (exception instanceof ServiceException_t)
 				{
+					EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+					easyTracker.send(MapBuilder
+							.createEvent("redeemBook", "failure", ((ServiceException_t) exception).getErrorDesc(), null)
+							.build());
 					if (((ServiceException_t) exception).getErrorCode() == 3001)
 					{
 						popupErrorMessage(ErrorMessageCache.getMessage(ErrorCode_t.ACTIVIATION_CODE_ALREADY_ACTIVATED));
@@ -487,10 +485,19 @@ public class FindDealsFragment extends Fragment implements DialogClickListener
 					{
 						popupErrorMessage(ErrorMessageCache.getMessage(ErrorCode_t.ACTIVIATION_CODE_NOT_FOUND));
 					}
+					
+
 				}
 				else
 				{
+					EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+
+					easyTracker.send(MapBuilder
+							.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(), exception), true)
+							.build()
+							);
 					popupErrorMessage(exception.getMessage());
+
 				}
 			}
 			else if (emptyCode)

@@ -265,11 +265,25 @@ public class WelcomeActivity extends Activity {
 					@Override
 					public void onCompleted(GraphUser user, Response response)
 					{
-						facebookCostomer = FacebookHelper.createCostomerFromFacebook(user);
-						username = facebookCostomer.getEmail();
-						password = TALOOL_FB_PASSCODE + facebookCostomer.getEmail();
-						CustomerServiceTask task = new CustomerServiceTask();
-						task.execute(new String[] {});
+						if(user != null)
+						{
+							facebookCostomer = FacebookHelper.createCostomerFromFacebook(user);
+							username = facebookCostomer.getEmail();
+							password = TALOOL_FB_PASSCODE + facebookCostomer.getEmail();
+							CustomerServiceTask task = new CustomerServiceTask();
+							task.execute(new String[] {});
+						}
+						else
+						{
+							if (df != null && !df.isHidden())
+							{
+								df.dismiss();
+							}
+							String message = "Error Logging in with facebook";
+							String title = getResources().getString(R.string.error_login);
+							String label = getResources().getString(R.string.retry);
+							df = DialogFactory.getAlertDialog(title, message, label);
+							df.show(getFragmentManager(), "dialog");						}
 					}
 				});
 				request.executeAsync();
