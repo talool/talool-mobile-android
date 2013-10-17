@@ -45,6 +45,13 @@ public class LoginActivity extends Activity
 
 	private class CustomerServiceTask extends AsyncTask<String, Void, CTokenAccess_t>
 	{
+		private Context context;
+
+		public CustomerServiceTask(Context context)
+		{
+			super();
+			this.context = context;
+		}
 
 		@Override
 		protected void onPreExecute()
@@ -58,7 +65,18 @@ public class LoginActivity extends Activity
 		{
 			if (exception != null)
 			{
-				popupErrorMessage(exception, errorMessage);
+				if(exception instanceof ServiceException_t)
+				{
+					EasyTracker easyTracker = EasyTracker.getInstance(context);
+					easyTracker.send(MapBuilder
+							.createEvent("login", "failure", ((ServiceException_t) exception).getErrorDesc(), null)
+							.build());
+				}
+				else
+				{
+					popupErrorMessage(exception, errorMessage);
+
+				}
 			}
 			else
 			{
@@ -94,7 +112,7 @@ public class LoginActivity extends Activity
 			catch (ServiceException_t e)
 			{
 				errorMessage = e.getErrorDesc();
-				exception = e;
+				exception = e;						
 			}
 			catch (TTransportException e)
 			{
@@ -151,15 +169,13 @@ public class LoginActivity extends Activity
 		imm.hideSoftInputFromWindow(passwordEditText.getWindowToken(), 0);
 		username = usernameEditText.getText().toString();
 		password = passwordEditText.getText().toString();
-		CustomerServiceTask task = new CustomerServiceTask();
+		CustomerServiceTask task = new CustomerServiceTask(this);
 		task.execute(new String[] {});
 	}
 
 	public void popupErrorMessage(Exception exception, String errorMessage)
 	{
-
 		EasyTracker easyTracker = EasyTracker.getInstance(this);
-
 		easyTracker.send(MapBuilder
 				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
 				.build()
