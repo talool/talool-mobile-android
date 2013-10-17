@@ -86,6 +86,12 @@
             android:label=""
             android:screenOrientation="portrait"
             android:uiOptions="splitActionBarWhenNarrow" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="talool" android:host="gift"/>
+            </intent-filter>
         </activity>
         <activity
             android:name="com.talool.mobile.android.MapActivity"

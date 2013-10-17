@@ -6,8 +6,10 @@ import org.apache.thrift.transport.TTransportException;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +27,7 @@ import com.talool.api.thrift.Gift_t;
 import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.LoginActivity;
+import com.talool.mobile.android.MainActivity;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.dialog.DialogFactory;
@@ -85,22 +88,40 @@ public class GiftActivity extends Activity
 		}
 
 		byte[] activityObjBytes = (byte[]) getIntent().getSerializableExtra(ACTIVITY_OBJ_PARAM);
-		activity = new Activity_t();
-		try
+		if (activityObjBytes != null && activityObjBytes.length>0)
 		{
-			ThriftUtil.deserialize(activityObjBytes, activity);
+			activity = new Activity_t();
+			try
+			{
+				ThriftUtil.deserialize(activityObjBytes, activity);
+			}
+			catch (TException e)
+			{
+				EasyTracker easyTracker = EasyTracker.getInstance(this);
+	
+				easyTracker.send(MapBuilder
+						.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), e), true)
+						.build()
+						);
+			}
+	
+			giftId = activity.getActivityLink().getLinkElement();
 		}
-		catch (TException e)
+		else
 		{
-			EasyTracker easyTracker = EasyTracker.getInstance(this);
-
-			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), e), true)
-					.build()
-					);
+			// Deep link.  Parse the URI
+			final Uri uri;
+			try
+			{
+				uri = getIntent().getData();
+				giftId = uri.getPathSegments().get(0);
+			}
+			catch (Exception e)
+			{
+				Log.e("ParseDeepLinkForGift", e.getLocalizedMessage());
+			}
 		}
-
-		giftId = activity.getActivityLink().getLinkElement();
+		
 		linearLayout = (LinearLayout) findViewById(R.id.giftLinearLayout);
 		final GiftActivityTask dealsTask = new GiftActivityTask();
 		dealsTask.execute(new String[] {});
@@ -123,34 +144,78 @@ public class GiftActivity extends Activity
 
 	public void acceptGiftClick(final View view)
 	{
-		// accept the gift and redirect to "My Deals"
-		final GiftAcceptanceTask task = new GiftAcceptanceTask(client, activity, true, view.getContext())
+		if (activity != null)
 		{
-			@Override
-			protected void onPostExecute(DealAcquire_t result)
+			// accept the gift and finish to return to My Activity
+			final GiftAcceptanceTask task = new GiftAcceptanceTask(client, activity, true, view.getContext())
 			{
-				finish();
-			}
-
-		};
-
-		task.execute(new String[] {});
+				@Override
+				protected void onPostExecute(DealAcquire_t result)
+				{
+					finish();
+				}
+	
+			};
+	
+			task.execute(new String[] {});
+		}
+		else
+		{
+			// Deep Link Acceptance
+			// accept the gift and redirect to "My Deals"
+			final GiftAcceptanceTask task = new GiftAcceptanceTask(client, giftId, true, view.getContext())
+			{
+				@Override
+				protected void onPostExecute(DealAcquire_t result)
+				{
+					final Intent intent = new Intent(GiftActivity.this, MainActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent);
+					finish();
+				}
+	
+			};
+	
+			task.execute(new String[] {});
+		}
 	}
 
 	public void rejectGiftClick(final View view)
 	{
-		// accept the gift and redirect to "My Deals"
-		final GiftAcceptanceTask task = new GiftAcceptanceTask(client, activity, false, view.getContext())
+		if (activity != null)
 		{
-			@Override
-			protected void onPostExecute(DealAcquire_t result)
+			// reject the gift and finish to return to My Activity
+			final GiftAcceptanceTask task = new GiftAcceptanceTask(client, activity, false, view.getContext())
 			{
-				finish();
-			}
-
-		};
-
-		task.execute(new String[] {});
+				@Override
+				protected void onPostExecute(DealAcquire_t result)
+				{
+					finish();
+				}
+	
+			};
+	
+			task.execute(new String[] {});
+		}
+		else
+		{
+			// Deep Link Rejection
+			// reject the gift and redirect to "My Deals"
+			final GiftAcceptanceTask task = new GiftAcceptanceTask(client, giftId, false, view.getContext())
+			{
+				@Override
+				protected void onPostExecute(DealAcquire_t result)
+				{
+					final Intent intent = new Intent(GiftActivity.this, MainActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent);
+					finish();
+				}
+	
+			};
+	
+			task.execute(new String[] {});
+		}
 	}
 
 	private class GiftActivityTask extends AsyncTask<String, Void, Gift_t>

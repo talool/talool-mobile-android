@@ -23,6 +23,7 @@ public class GiftAcceptanceTask extends AsyncTask<String, Void, DealAcquire_t>
 {
 	private ThriftHelper client;
 	private Activity_t activity;
+	private String giftId;
 	private boolean accept = false;
 	private Context context;
 
@@ -32,11 +33,20 @@ public class GiftAcceptanceTask extends AsyncTask<String, Void, DealAcquire_t>
 		this.accept = accept;
 		this.activity = activity;
 		this.context = context;
+		this.giftId = activity.getActivityLink().getLinkElement();
+	}
+	
+	public GiftAcceptanceTask(final ThriftHelper client, final String giftId, boolean accept, final Context context)
+	{
+		this.client = client;
+		this.accept = accept;
+		this.giftId = giftId;
+		this.context = context;
 	}
 
 	public String getGiftId()
 	{
-		return activity.getActivityLink().getLinkElement();
+		return giftId;
 	}
 
 	@Override
@@ -68,12 +78,14 @@ public class GiftAcceptanceTask extends AsyncTask<String, Void, DealAcquire_t>
 			}
 
 			// make sure we update our cache
-			activity.setActionTaken(true);
-			ActivityDao dao = new ActivityDao(TaloolApplication.getAppContext());
-			dao.open();
-			dao.saveActivity(activity);
-			ActivitySupervisor.get().refreshFromPersistence();
-
+			if (activity != null)
+			{
+				activity.setActionTaken(true);
+				ActivityDao dao = new ActivityDao(TaloolApplication.getAppContext());
+				dao.open();
+				dao.saveActivity(activity);
+				ActivitySupervisor.get().refreshFromPersistence();
+			}
 		}
 		catch (ServiceException_t e)
 		{
