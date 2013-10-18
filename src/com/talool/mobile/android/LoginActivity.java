@@ -1,7 +1,5 @@
 package com.talool.mobile.android;
 
-import java.util.Arrays;
-
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
@@ -19,7 +17,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.facebook.widget.LoginButton;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
@@ -65,18 +62,16 @@ public class LoginActivity extends Activity
 		{
 			if (exception != null)
 			{
-				if(exception instanceof ServiceException_t)
+				if (exception instanceof ServiceException_t)
 				{
 					EasyTracker easyTracker = EasyTracker.getInstance(context);
 					easyTracker.send(MapBuilder
 							.createEvent("login", "failure", ((ServiceException_t) exception).getErrorDesc(), null)
 							.build());
 				}
-				else
-				{
-					popupErrorMessage(exception, errorMessage);
 
-				}
+				popupErrorMessage(exception, errorMessage);
+
 			}
 			else
 			{
@@ -112,7 +107,7 @@ public class LoginActivity extends Activity
 			catch (ServiceException_t e)
 			{
 				errorMessage = e.getErrorDesc();
-				exception = e;						
+				exception = e;
 			}
 			catch (TTransportException e)
 			{
@@ -257,8 +252,5 @@ public class LoginActivity extends Activity
 		}
 
 	}
-
-
-
 
 }

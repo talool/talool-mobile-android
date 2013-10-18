@@ -33,7 +33,6 @@ import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.google.android.gms.maps.MapView;
 import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.Deal_t;
-import com.talool.api.thrift.ErrorCode_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.mobile.android.activity.LocationSelectActivity;
@@ -477,24 +476,19 @@ public class FindDealsFragment extends Fragment implements DialogClickListener
 					easyTracker.send(MapBuilder
 							.createEvent("redeemBook", "failure", ((ServiceException_t) exception).getErrorDesc(), null)
 							.build());
-					if (((ServiceException_t) exception).getErrorCode() == 3001)
-					{
-						popupErrorMessage(ErrorMessageCache.getMessage(ErrorCode_t.ACTIVIATION_CODE_ALREADY_ACTIVATED));
-					}
-					else if (((ServiceException_t) exception).getErrorCode() == 3000)
-					{
-						popupErrorMessage(ErrorMessageCache.getMessage(ErrorCode_t.ACTIVIATION_CODE_NOT_FOUND));
-					}
-					
+
+					popupErrorMessage(ErrorMessageCache.getMessage(((ServiceException_t) exception).getErrorCode()));
 
 				}
 				else
 				{
 					EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 
-					easyTracker.send(MapBuilder
-							.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(), exception), true)
-							.build()
+					easyTracker
+							.send(MapBuilder
+									.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(), exception),
+											true)
+									.build()
 							);
 					popupErrorMessage(exception.getMessage());
 
