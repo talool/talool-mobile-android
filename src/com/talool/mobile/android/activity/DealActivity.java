@@ -179,6 +179,8 @@ public class DealActivity extends Activity
 		redemptionCodeTextView.setPadding(30, 0, 30, 0);
 		dealActivityButtonLayout.addView(redemptionCodeTextView);
 		dealActivityButtonLayout.setGravity(Gravity.CENTER);
+		dealActivityButtonLayout.setBackgroundColor(getResources().getColor(R.color.orange));
+		dealActivityButtonLayout.setPadding(0, 0, 0, 0);
 	}
 
 	private void checkDealRedeemed()
@@ -196,6 +198,8 @@ public class DealActivity extends Activity
 			redemptionCodeTextView.setPadding(30, 0, 30, 0);
 			dealActivityButtonLayout.addView(redemptionCodeTextView);
 			dealActivityButtonLayout.setGravity(Gravity.CENTER);
+			dealActivityButtonLayout.setBackgroundColor(getResources().getColor(R.color.orange));
+			dealActivityButtonLayout.setPadding(0, 0, 0, 0);
 			return;
 		}
 		else if (deal.redeemed == 0)
@@ -216,6 +220,8 @@ public class DealActivity extends Activity
 			redemptionCodeTextView.setPadding(30, 0, 30, 0);
 			dealActivityButtonLayout.addView(redemptionCodeTextView);
 			dealActivityButtonLayout.setGravity(Gravity.CENTER);
+			dealActivityButtonLayout.setBackgroundColor(getResources().getColor(R.color.orange));
+			dealActivityButtonLayout.setPadding(0, 0, 0, 0);
 			return;
 		}
 
@@ -328,6 +334,8 @@ public class DealActivity extends Activity
 								redemptionCodeTextView.setPadding(30, 0, 30, 0);
 								dealActivityButtonLayout.addView(redemptionCodeTextView);
 								dealActivityButtonLayout.setGravity(Gravity.CENTER);
+								dealActivityButtonLayout.setBackgroundColor(getResources().getColor(R.color.orange));
+								dealActivityButtonLayout.setPadding(0, 0, 0, 0);
 
 								EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
 								easyTracker.send(MapBuilder
@@ -836,6 +844,8 @@ public class DealActivity extends Activity
 					redemptionCodeTextView.setPadding(30, 0, 30, 0);
 					dealActivityButtonLayout.addView(redemptionCodeTextView);
 					dealActivityButtonLayout.setGravity(Gravity.CENTER);
+					dealActivityButtonLayout.setPadding(0, 0, 0, 0);
+					dealActivityButtonLayout.setBackgroundColor(getResources().getColor(R.color.orange));
 
 					EasyTracker easyTracker = EasyTracker.getInstance(DealActivity.this);
 					easyTracker.send(MapBuilder

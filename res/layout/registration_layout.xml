@@ -2,26 +2,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/my_deals_background"
+    android:background="@drawable/hero_android_large"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:scrollbars="vertical"
-    tools:context=".RegistrationActivity" >
+    tools:context=".RegistrationActivity"
+    android:isScrollContainer="false" >
     
     <LinearLayout
           android:orientation="vertical"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:padding="10dip">
-          <!--  First Name Label -->
-          <TextView android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/gray_2"
-                android:textStyle="bold"
-                android:text="First Name"/>
+
           <EditText 
                 android:id="@+id/firstName"
                 android:layout_width="fill_parent"
@@ -31,13 +27,9 @@
                 android:singleLine="true"
                 android:inputType="textCapWords"
                 android:background="@drawable/clipped_edittext"
-                android:textColor="@color/white"/>
-          <!--  Last Name Label -->
-          <TextView android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/gray_2"
-                android:textStyle="bold"
-                android:text="Last Name"/>
+                android:textColor="@color/brown"
+                android:hint="@string/first_name"/>
+
           <EditText 
                 android:id="@+id/lastName"
                 android:layout_width="fill_parent"
@@ -45,16 +37,11 @@
                 android:layout_marginTop="@dimen/reg_edittext_vertical_margin_top"
                 android:layout_marginBottom="@dimen/reg_edittext_vertical_margin_bottom"
                 android:inputType="textCapWords"
-                android:capitalize="words"
                 android:singleLine="true"
                 android:background="@drawable/clipped_edittext"
-                android:textColor="@color/white"/>
-        <!--  Email Label -->
-          <TextView android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/gray_2"
-                android:textStyle="bold"
-                android:text="@string/email"/>
+                android:textColor="@color/brown"
+                android:hint="@string/last_name"/>
+
           <EditText 
                 android:id="@+id/registrationEmail"
                 android:layout_width="fill_parent"
@@ -64,13 +51,9 @@
                 android:inputType="textEmailAddress"
                 android:singleLine="true"
                 android:background="@drawable/clipped_edittext"
-                android:textColor="@color/white"/>
-          <!--  Password Label -->
-          <TextView android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/gray_2"
-                android:textStyle="bold"
-                android:text="@string/password"/>
+                android:textColor="@color/brown"
+                android:hint="@string/email"/>
+
           <EditText 
                 android:id="@+id/registrationPassword"
                 android:layout_width="fill_parent"
@@ -80,16 +63,24 @@
                 android:singleLine="true"
                 android:inputType="textPassword"
                 android:background="@drawable/clipped_edittext"
-                android:textColor="@color/white"/>
+                android:textColor="@color/brown"
+                android:hint="@string/password"
+                android:fontFamily=""/>
+          
           <!-- Login button -->
           <Button android:id="@+id/btnRegister"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/reg_button_vertical_margin_top"
                 android:onClick="onRegistrationClick"
-                android:text="Register"
+                android:text="@string/register"
                 android:background="@drawable/btn_teal" 
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:shadowColor="@color/teal_dark"
+		        android:shadowDx="1.5"
+		        android:shadowDy="1.5"
+		        android:shadowRadius="3.0"/>
           <!-- Link to Registration Screen -->
  
 </LinearLayout>

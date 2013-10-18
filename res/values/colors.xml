@@ -4,7 +4,8 @@
 	<color name="gray">#C0C0C0</color>
 	<color name="tan">#fff2f2e6</color>
 	<color name="dark_tan">#ffccccb3</color>
-	<color name="orange">#ffcc5926</color>
+	<color name="orange">#f15a24</color>
+	<color name="orange_dark">#ffcc5926</color>
 	<color name="white">#FFFFFFFF</color>
 	<color name="pressed_talool">#CCDAD7C5</color>
 	<color name="actionbar_text">#FFFFFFFF</color>
@@ -12,6 +13,7 @@
 	<color name="locationBackground">#ffbfb399</color>
 	<color name="brown">#ff4D4040</color>
 	<color name="teal">#19BCB9</color>
+	<color name="teal_dark">#128d8b</color>
 	<color name="gray_1">#dad7c5</color>
 	<color name="gray_2">#b9ac97</color>
 	<color name="gray_3">#998675</color>

@@ -2,12 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/my_deals_background"
-    android:orientation="vertical"
-    android:paddingBottom="7sp"
-    android:paddingLeft="9sp"
-    android:paddingRight="9sp"
-    android:paddingTop="7sp" >
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <TextView
             android:id="@+id/activity_no_results_msg"
@@ -22,7 +18,6 @@
         android:id="@+id/myActivityListView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/tan_rounded_bottom_only"
         android:orientation="vertical" >
     </ListView>
 

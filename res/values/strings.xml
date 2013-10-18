@@ -5,14 +5,15 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="password">Password</string>
-    <string name="newToTalool">Register New Account</string>
+    <string name="newToTalool">Register a New Account</string>
     <string name="forgot_password">Forgot Password?</string>
     
-    <string name="email">Email</string>
+    <string name="email">Email Address</string>
     <string name="login">Log in</string>
     <string name="login_with_talool">Log in with Talool</string>
     <string name="welcome">Welcome</string>
-    <string name="register">Registration</string>
+    <string name="register">Register</string>
+    <string name="registration">Registration</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="settings">Settings</string>
     <string name="mydeals">My Deals</string>
@@ -37,6 +38,12 @@
     
     <string name="alert_sent_password_reset_title">Your reset request has been sent</string>
     <string name="alert_sent_password_reset_message">You will receive an email with instructions.</string>
+    
+    <string name="instruction_send_password_reset">Enter your email below and you will be sent password reset instructions.</string>
+    <string name="request_password_change">Request Password Change</string>
+    
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
     
     <string name="icon_gift">&#xf06b;</string>
     <string name="icon_envelope_alt">&#xf003;</string>

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/my_deals_background"
+    android:background="@drawable/hero_android_large"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -26,9 +26,10 @@
         android:layout_marginBottom="@dimen/login_or_vertical_margin_bottom"
         android:lines="1"
         android:textSize="20sp"
+        android:textStyle="bold"
         android:text="@string/or"
         android:layout_gravity="center_horizontal"
-        android:textColor="@color/gray_2" 
+        android:textColor="@color/brown" 
         android:gravity="center_horizontal"/>
     
     <!-- Login button -->
@@ -43,9 +44,13 @@
           android:background="@drawable/btn_teal" 
           android:textColor="@color/white"
           android:textStyle="bold"
-          android:textSize="16sp"
-          android:paddingRight="10dp"
-          android:paddingLeft="10dp"/>
+          android:textSize="17sp"
+          android:paddingRight="15dp"
+          android:paddingLeft="10dp"
+          android:shadowColor="@color/teal_dark"
+		  android:shadowDx="1.5"
+		  android:shadowDy="1.5"
+		  android:shadowRadius="3.0"/>
     
     <!-- Link to Registration Screen -->
     <TextView android:id="@+id/link_to_register"
@@ -55,8 +60,14 @@
           android:text="@string/newToTalool"
           android:gravity="center"
           android:textSize="18sp"
+          android:textStyle="bold"
           android:onClick="onRegistrationClicked"
           android:clickable="true"
-          android:textColor="@color/teal"/>
+          android:textColor="@color/teal_dark"
+          
+          android:shadowColor="@color/white"
+          android:shadowDx="1.5"
+          android:shadowDy="1.5"
+          android:shadowRadius="3.0"/>
 
 </LinearLayout>
