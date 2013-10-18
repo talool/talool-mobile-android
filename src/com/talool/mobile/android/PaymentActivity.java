@@ -143,7 +143,7 @@ public class PaymentActivity extends Activity implements DialogPositiveClickList
 			catch (TUserException_t e)
 			{
 				errorMessage = ErrorMessageCache.getMessage(e.getErrorCode());
-				Log.e(LOG_TAG, e.getErrorCode().name(), e);
+				Log.e(LOG_TAG, e.getMessage(), e);
 			}
 			catch (TNotFoundException_t e)
 			{
