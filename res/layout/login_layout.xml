@@ -42,7 +42,6 @@
                 android:background="@drawable/clipped_edittext"
                 android:textColor="@color/brown"
                 android:textSize="@dimen/login_edittext_text_size"
-                android:fontFamily=""
                 android:inputType="textPassword"/>
           
           <!-- Login button -->

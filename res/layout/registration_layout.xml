@@ -64,8 +64,7 @@
                 android:inputType="textPassword"
                 android:background="@drawable/clipped_edittext"
                 android:textColor="@color/brown"
-                android:hint="@string/password"
-                android:fontFamily=""/>
+                android:hint="@string/password"/>
           
           <!-- Login button -->
           <Button android:id="@+id/btnRegister"
