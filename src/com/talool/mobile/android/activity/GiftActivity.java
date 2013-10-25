@@ -32,8 +32,10 @@ import com.talool.mobile.android.MainActivity;
 import com.talool.mobile.android.R;
 import com.talool.mobile.android.cache.DealOfferCache;
 import com.talool.mobile.android.dialog.DialogFactory;
+import com.talool.mobile.android.dialog.DialogFactory.DialogPositiveClickListener;
 import com.talool.mobile.android.tasks.DealOfferFetchTask;
 import com.talool.mobile.android.tasks.GiftAcceptanceTask;
+import com.talool.mobile.android.util.ErrorMessageCache;
 import com.talool.mobile.android.util.TaloolSmartImageView;
 import com.talool.mobile.android.util.TaloolUser;
 import com.talool.mobile.android.util.TaloolUtil;
@@ -207,10 +209,7 @@ public class GiftActivity extends Activity
 				@Override
 				protected void onPostExecute(DealAcquire_t result)
 				{
-					final Intent intent = new Intent(GiftActivity.this, MainActivity.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
-					finish();
+					redirectToMain();
 				}
 
 			};
@@ -219,10 +218,16 @@ public class GiftActivity extends Activity
 		}
 	}
 
+	private void redirectToMain()
+	{
+		final Intent intent = new Intent(GiftActivity.this, MainActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
+		finish();
+	}
+
 	private class GiftActivityTask extends AsyncTask<String, Void, Gift_t>
 	{
-		private boolean pushToMain = false;
-
 		@Override
 		protected void onPreExecute()
 		{
@@ -235,14 +240,6 @@ public class GiftActivity extends Activity
 		{
 			if (gift == null)
 			{
-				if (pushToMain)
-				{
-					final Intent intent = new Intent(GiftActivity.this, MainActivity.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(intent);
-					finish();
-					return;
-				}
 				popupErrorMessage(exception, errorMessage);
 				return;
 			}
@@ -343,7 +340,8 @@ public class GiftActivity extends Activity
 						// TODO replace with proper routing to the deal in future release.
 						// The future release will require persisting dealAcquires/gifts
 						gift = null;
-						pushToMain = true;
+						exception = new Exception(ErrorMessageCache.Message.AlreadyAcceptedGift.getText());
+
 					}
 				}
 
@@ -386,8 +384,16 @@ public class GiftActivity extends Activity
 		}
 		String message = errorMessage == null ? exception.getMessage() : errorMessage;
 		String title = getResources().getString(R.string.error_loading_gifts);
-		String label = getResources().getString(R.string.retry);
-		df = DialogFactory.getAlertDialog(title, message, label);
+		String label = getResources().getString(R.string.ok);
+		df = DialogFactory.getAlertDialog(title, message, label, new DialogPositiveClickListener()
+		{
+			@Override
+			public void onDialogPositiveClick(DialogFragment dialog)
+			{
+				redirectToMain();
+				finish();
+			}
+		});
 		df.show(getFragmentManager(), "dialog");
 
 	}
