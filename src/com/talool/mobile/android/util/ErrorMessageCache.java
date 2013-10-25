@@ -18,7 +18,8 @@ public final class ErrorMessageCache
 		ProvideValidEmailAddr("Please provide a valid email address"),
 		PasswordResetGeneral("There was a problem generating your password reset request"),
 		EmailMessageFailureTitle("Email Failure"),
-		ResetPasswordFailureTitle("Reset Password Failure");
+		ResetPasswordFailureTitle("Reset Password Failure"),
+		AlreadyAcceptedGift("You have already accepted this gift");
 
 		private String text;
 

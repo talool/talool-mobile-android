@@ -23,6 +23,7 @@ import com.loopj.android.image.SmartImageView;
 import com.talool.api.thrift.Activity_t;
 import com.talool.api.thrift.DealAcquire_t;
 import com.talool.api.thrift.DealOffer_t;
+import com.talool.api.thrift.GiftStatus_t;
 import com.talool.api.thrift.Gift_t;
 import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.ServiceException_t;
@@ -88,7 +89,7 @@ public class GiftActivity extends Activity
 		}
 
 		byte[] activityObjBytes = (byte[]) getIntent().getSerializableExtra(ACTIVITY_OBJ_PARAM);
-		if (activityObjBytes != null && activityObjBytes.length>0)
+		if (activityObjBytes != null && activityObjBytes.length > 0)
 		{
 			activity = new Activity_t();
 			try
@@ -98,18 +99,18 @@ public class GiftActivity extends Activity
 			catch (TException e)
 			{
 				EasyTracker easyTracker = EasyTracker.getInstance(this);
-	
+
 				easyTracker.send(MapBuilder
 						.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), e), true)
 						.build()
 						);
 			}
-	
+
 			giftId = activity.getActivityLink().getLinkElement();
 		}
 		else
 		{
-			// Deep link.  Parse the URI
+			// Deep link. Parse the URI
 			final Uri uri;
 			try
 			{
@@ -121,7 +122,7 @@ public class GiftActivity extends Activity
 				Log.e("ParseDeepLinkForGift", e.getLocalizedMessage());
 			}
 		}
-		
+
 		linearLayout = (LinearLayout) findViewById(R.id.giftLinearLayout);
 		final GiftActivityTask dealsTask = new GiftActivityTask();
 		dealsTask.execute(new String[] {});
@@ -154,9 +155,9 @@ public class GiftActivity extends Activity
 				{
 					finish();
 				}
-	
+
 			};
-	
+
 			task.execute(new String[] {});
 		}
 		else
@@ -173,9 +174,9 @@ public class GiftActivity extends Activity
 					startActivity(intent);
 					finish();
 				}
-	
+
 			};
-	
+
 			task.execute(new String[] {});
 		}
 	}
@@ -192,9 +193,9 @@ public class GiftActivity extends Activity
 				{
 					finish();
 				}
-	
+
 			};
-	
+
 			task.execute(new String[] {});
 		}
 		else
@@ -211,32 +212,42 @@ public class GiftActivity extends Activity
 					startActivity(intent);
 					finish();
 				}
-	
+
 			};
-	
+
 			task.execute(new String[] {});
 		}
 	}
 
 	private class GiftActivityTask extends AsyncTask<String, Void, Gift_t>
 	{
+		private boolean pushToMain = false;
 
 		@Override
-		protected void onPreExecute() {
+		protected void onPreExecute()
+		{
 			df = DialogFactory.getProgressDialog();
 			df.show(getFragmentManager(), "dialog");
 		}
-		
+
 		@Override
 		protected void onPostExecute(final Gift_t gift)
 		{
-			if(gift == null)
+			if (gift == null)
 			{
+				if (pushToMain)
+				{
+					final Intent intent = new Intent(GiftActivity.this, MainActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent);
+					finish();
+					return;
+				}
 				popupErrorMessage(exception, errorMessage);
 				return;
 			}
 			linearLayout.setVisibility(View.VISIBLE);
-			
+
 			final DealOffer_t dealOffer = DealOfferCache.get().getDealOffer(gift.getDeal().getDealOfferId());
 			if (dealOffer == null)
 			{
@@ -307,7 +318,7 @@ public class GiftActivity extends Activity
 					.append(location.address.zip);
 
 			address1.setText(sb.toString());
-			
+
 			if (df != null && !df.isHidden())
 			{
 				df.dismiss();
@@ -324,6 +335,17 @@ public class GiftActivity extends Activity
 			{
 				client.setAccessToken(TaloolUser.get().getAccessToken());
 				gift = client.getClient().getGift(giftId);
+
+				if (gift != null)
+				{
+					if (gift.getGiftStatus().equals(GiftStatus_t.ACCEPTED))
+					{
+						// TODO replace with proper routing to the deal in future release.
+						// The future release will require persisting dealAcquires/gifts
+						gift = null;
+						pushToMain = true;
+					}
+				}
 
 			}
 			catch (ServiceException_t e)
@@ -347,7 +369,7 @@ public class GiftActivity extends Activity
 			return gift;
 		}
 	}
-	
+
 	public void popupErrorMessage(Exception exception, String errorMessage)
 	{
 
@@ -357,7 +379,7 @@ public class GiftActivity extends Activity
 				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
 				.build()
 				);
-		
+
 		if (df != null && !df.isHidden())
 		{
 			df.dismiss();
@@ -367,8 +389,7 @@ public class GiftActivity extends Activity
 		String label = getResources().getString(R.string.retry);
 		df = DialogFactory.getAlertDialog(title, message, label);
 		df.show(getFragmentManager(), "dialog");
-        
-        
+
 	}
 
 	private static String getCityStateZip(final MerchantLocation_t location)
@@ -393,9 +414,10 @@ public class GiftActivity extends Activity
 		super.onStop();
 		EasyTracker.getInstance(this).activityStop(this); // Add this method.
 	}
-	
+
 	@Override
-	protected void onResume() {
+	protected void onResume()
+	{
 		super.onResume();
 		if (df != null && !df.isHidden())
 		{
