@@ -24,9 +24,11 @@ import com.facebook.widget.LoginButton;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
+import com.talool.api.thrift.CTokenAccessResponse_t;
 import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.Customer_t;
 import com.talool.api.thrift.ServiceException_t;
+import com.talool.api.thrift.SocialNetwork_t;
 import com.talool.mobile.android.dialog.DialogFactory;
 import com.talool.mobile.android.tasks.FetchFavoriteMerchantsTask;
 import com.talool.mobile.android.util.FacebookHelper;
@@ -38,7 +40,7 @@ public class WelcomeActivity extends Activity {
 	private UiLifecycleHelper lifecycleHelper;
 	public static final String TALOOL_FB_PASSCODE = "talool4";
 	private static ThriftHelper client;
-	private Customer_t facebookCostomer;
+	private Customer_t facebookCustomer;
 	private String username;
 	private String password;
 	private Exception exception;
@@ -88,13 +90,34 @@ public class WelcomeActivity extends Activity {
 		@Override
 		protected CTokenAccess_t doInBackground(String... arg0)
 		{
+			CTokenAccessResponse_t tokenResponse = null;
 			CTokenAccess_t tokenAccess = null;
-
+						
 			try
-			{
-				if (facebookCostomer != null && !client.getClient().customerEmailExists(facebookCostomer.getEmail()))
+			{				
+				if(facebookCustomer != null)		
 				{
-					tokenAccess = client.getClient().createAccount(facebookCostomer, password);
+					if(facebookCustomer.getEmail() == null ||facebookCustomer.getEmail().isEmpty())
+					{	
+						ServiceException_t e = new ServiceException_t();
+						e.errorDesc = "Facebook User Must have an email. Please verify facebook email";
+						e.errorCode = 7777;
+						exception = e;
+						errorMessage = e.errorDesc;
+					}
+					else
+					{
+						String faceBookId = facebookCustomer.getSocialAccounts().get(SocialNetwork_t.Facebook).loginId;
+						tokenResponse = client.getClient().loginFacebook(faceBookId, Session.getActiveSession().getAccessToken());
+						if(tokenResponse.tokenAccess == null)
+						{
+							tokenAccess = client.getClient().createAccount(facebookCustomer, password);
+						}
+						else
+						{
+							tokenAccess = tokenResponse.tokenAccess;
+						}
+					}
 				}
 				else
 				{
@@ -267,9 +290,9 @@ public class WelcomeActivity extends Activity {
 					{
 						if(user != null)
 						{
-							facebookCostomer = FacebookHelper.createCostomerFromFacebook(user);
-							username = facebookCostomer.getEmail();
-							password = TALOOL_FB_PASSCODE + facebookCostomer.getEmail();
+							facebookCustomer = FacebookHelper.createCustomerFromFacebook(user);
+							username = facebookCustomer.getEmail();
+							password = TALOOL_FB_PASSCODE + facebookCustomer.getEmail();
 							CustomerServiceTask task = new CustomerServiceTask();
 							task.execute(new String[] {});
 						}

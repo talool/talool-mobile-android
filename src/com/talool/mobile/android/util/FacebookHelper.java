@@ -30,7 +30,7 @@ public class FacebookHelper {
 		return instance;
 	}
 	
-    public static Customer_t createCostomerFromFacebook(GraphUser user){
+    public static Customer_t createCustomerFromFacebook(GraphUser user){
 
         //verify email
         Customer_t customer = new Customer_t(user.getFirstName(), user.getLastName(), user.getProperty("email").toString());
