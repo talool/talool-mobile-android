@@ -9,14 +9,15 @@ public final class Constants
 {
 	// ****** REMEMBER TO CHANGE DEAL OFFERS WHEN PUSHING TO PROD ALSO ******* //
 	// public static final String API_URL = "http://10.0.1.3:8082/1.1";
+
 	public static final String API_URL = "http://dev-api.talool.com/1.1";
-	//public static final String API_URL = "http://api.talool.com/1.1";
+	// public static final String API_URL = "http://api.talool.com/1.1";
 
 	public static final String OG_GIFT_PAGE = "http://dev-www.talool.com/gift";
 	public static final String OG_DEAL_PAGE = "http://dev-www.talool.com/deal";
 	public static final String OG_OFFER_PAGE = "http://dev-www.talool.com/offer";
 	public static final String MERCHANT_PAGE = "http://dev-www.talool.com/location";
-	
+
 	public static final String FORMAT_GENERAL_DATE_TIME = "MM/dd/yyyy hh:mm:ss a";
 	public static final String FORMAT_DECIMAL_MONEY = "$#,###.00";
 	public static final String FORMAT_MONTH_DAY_YEAR = "MM/dd/yyyy";
@@ -37,8 +38,6 @@ public final class Constants
 
 	public static final String DEAL_OFFER_ID_PAYBACK_BOULDER = "e11dcc50-3ee1-477d-9e2d-ab99f0c28675";
 
-	
-	
 	// private static final String DEAL_OFFER_ID_PAYBACK_VANCOUVER =
 	// "a067de54-d63d-4613-8d60-9d995765cd52";
 

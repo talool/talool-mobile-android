@@ -29,15 +29,15 @@ public class TaloolUtil
 		}
 	}
 
-	public static String getSharedText(long shareDate)
+	public static String getGiftedText(long giftedDate)
 	{
-		if (shareDate == 0)
+		if (giftedDate == 0)
 		{
 			return "";
 		}
 		else
 		{
-			return "Shared on " + new SafeSimpleDateFormat(Constants.FORMAT_GENERAL_DATE_TIME).format(shareDate);
+			return "Gifted on " + new SafeSimpleDateFormat(Constants.FORMAT_GENERAL_DATE_TIME).format(giftedDate);
 		}
 	}
 

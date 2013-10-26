@@ -46,10 +46,11 @@ public class DealsAcquiredAdapter extends ArrayAdapter<DealAcquire_t>
 		holder.dealsAcquiredTitle = (TextView) row.findViewById(R.id.dealsAcquiredTitle);
 		holder.dealsAcquiredExpires = (TextView) row.findViewById(R.id.dealsAcquiredExpires);
 		holder.dealsAcquiredArrow = (ImageView) row.findViewById(R.id.dealsAcquiredArrow);
+		holder.dealsAcquiredGifted = (TextView) row.findViewById(R.id.dealsAcquiredGifted);
 
 		row.setTag(holder);
 
-		DealAcquire_t dealAcquire = data.get(position);
+		final DealAcquire_t dealAcquire = data.get(position);
 
 		holder.dealsAcquiredIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
 		holder.dealsAcquiredIcon.setTextColor(this.context.getResources().getColor(R.color.teal));
@@ -66,11 +67,37 @@ public class DealsAcquiredAdapter extends ArrayAdapter<DealAcquire_t>
 
 		}
 
-		if(dealAcquire.getStatus() == AcquireStatus_t.PENDING_ACCEPT_CUSTOMER_SHARE)
+		if (dealAcquire.getStatus() == AcquireStatus_t.PENDING_ACCEPT_CUSTOMER_SHARE)
 		{
 			holder.dealsAcquiredTitle.setPaintFlags(holder.dealsAcquiredTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 			holder.dealsAcquiredIcon.setTextColor(this.context.getResources().getColor(R.color.gray_icon));
-			holder.dealsAcquiredExpires.setText(TaloolUtil.getSharedText(dealAcquire.deal.updated));
+			holder.dealsAcquiredExpires.setText(TaloolUtil.getGiftedText(dealAcquire.deal.updated));
+		}
+
+		if (dealAcquire.getGiftDetail() != null)
+		{
+			holder.dealsAcquiredGifted.setVisibility(View.VISIBLE);
+			final StringBuilder sb = new StringBuilder();
+
+			if (dealAcquire.getStatus() == AcquireStatus_t.PENDING_ACCEPT_CUSTOMER_SHARE)
+			{
+				sb.append("Gifted to ").append(dealAcquire.getGiftDetail().toFirstName).append(" ")
+						.append(dealAcquire.getGiftDetail().toLastName);
+			}
+
+			else if (dealAcquire.getStatus() == AcquireStatus_t.ACCEPTED_CUSTOMER_SHARE ||
+					dealAcquire.getStatus() == AcquireStatus_t.REDEEMED)
+			{
+				sb.append("Gifted from ").append(dealAcquire.getGiftDetail().fromFirstName).append(" ")
+						.append(dealAcquire.getGiftDetail().fromLastName);
+			}
+			else if (dealAcquire.getStatus() == AcquireStatus_t.REJECTED_CUSTOMER_SHARE)
+			{
+				sb.append("Your gift to ").append(dealAcquire.getGiftDetail().toFirstName).append(" ")
+						.append(dealAcquire.getGiftDetail().toLastName).append(" was rejected");
+			}
+
+			holder.dealsAcquiredGifted.setText(sb.toString());
 
 		}
 
