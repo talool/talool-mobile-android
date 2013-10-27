@@ -183,7 +183,15 @@ public class PaymentActivity extends Activity implements DialogPositiveClickList
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.venmo_payment_activity_layout);
-		touchClient = VenmoTouchClient.forSandboxMerchant(this, Constants.BRAINTREE_MERCHANT_ID, Constants.BRAINTREE_MERCHANT_KEY);
+		if (Constants.IS_DEVELOPMENT_MODE)
+		{
+			touchClient = VenmoTouchClient.forSandboxMerchant(this, Constants.BRAINTREE_MERCHANT_ID, Constants.BRAINTREE_MERCHANT_KEY);
+		}
+		else
+		{
+			touchClient = VenmoTouchClient.forMerchant(this, Constants.BRAINTREE_MERCHANT_ID, Constants.BRAINTREE_MERCHANT_KEY);
+		}
+
 		comboView = (VTComboCardView) findViewById(R.id.combo_view);
 		comboView.getNewCardTitle().setText(getResources().getString(R.string.payment_new_card));
 
