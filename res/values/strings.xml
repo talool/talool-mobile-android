@@ -45,6 +45,10 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     
+    <string name="access_code">access code</string>
+    <string name="buy_now">Buy Now</string>
+    <string name="load_deals">Load Deals</string>
+    
     <string name="icon_gift">&#xf06b;</string>
     <string name="icon_envelope_alt">&#xf003;</string>
     <string name="icon_facebook">&#xf09a;</string>
@@ -146,5 +150,9 @@
     <string name="payment_new_card">Pay with a New Card</string>
     
 	<string name="title_activity_welcome">WelcomeActivity</string>
+	
+	<string name="arrow_mydeals">Arrow to My Deals</string>
+	<string name="arrow_finddeals">Arrow to Find Deals</string>
+	<string name="arrow_activity">Arrow to My Activity</string>
 
 </resources>

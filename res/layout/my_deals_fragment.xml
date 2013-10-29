@@ -18,8 +18,14 @@
         android:id="@+id/myDealsListView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false" >
     </ListView>
+    <View
+    	android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
     
     <!-- Help Container -->
     <ScrollView
@@ -41,19 +47,19 @@
 		            android:layout_width="0dp"
 		            android:layout_height="wrap_content"
 		            android:layout_weight="1"
-		            android:contentDescription="Arrow to My Deals"/>
+		            android:contentDescription="@string/arrow_mydeals"/>
 	            <ImageView 
 	                android:id="@+id/arrow2"
 		            android:layout_width="0dp"
 		            android:layout_height="wrap_content"
 		            android:layout_weight="1"
-		            android:contentDescription="Arrow to Find Deals"/>
+		            android:contentDescription="@string/arrow_finddeals"/>
 	            <ImageView 
 	                android:id="@+id/arrow3"
 		            android:layout_width="0dp"
 		            android:layout_height="wrap_content"
 		            android:layout_weight="1"
-		            android:contentDescription="Arrow to Activity"/>
+		            android:contentDescription="@string/arrow_activity"/>
 	            
 	        </LinearLayout>
 	        
@@ -63,7 +69,7 @@
 		        android:layout_height="wrap_content"
 		        android:gravity="bottom"
 		        android:padding="20dp"
-		        android:textColor="@color/tan" 
+		        android:textColor="@color/brown" 
 		        android:textSize="@dimen/help_font_size_large" />
 	        
 	    </LinearLayout>

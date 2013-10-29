@@ -22,7 +22,7 @@
             android:layout_height="fill_parent"
             android:layout_gravity="center|center_vertical"
             android:gravity="center"
-            android:text="Buy Now For $9.99"
+            android:text="@string/buy_now"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ffffff"
             android:textSize="26sp" />
@@ -60,11 +60,12 @@
 
                     <EditText
                         android:id="@+id/accessCode"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dip"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:hint="access code"
+                        android:hint="@string/access_code"
+                        android:background="@drawable/clipped_edittext"
                         android:inputType="textCapCharacters" />
 
                     <Button
@@ -72,7 +73,7 @@
                         style="?android:attr/buttonStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Load Deals" />
+                        android:text="@string/load_deals" />
                 </LinearLayout>
             </LinearLayout>
 

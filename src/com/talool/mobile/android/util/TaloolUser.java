@@ -165,7 +165,7 @@ public final class TaloolUser
 		this.realLocation = realLocation;
 	}
 
-	public void logoutUser()
+	public void logoutUser(Context context)
 	{
 		// clear token
 		TaloolApplication.getAppContext().deleteFile(TOKEN_FILE);
@@ -177,6 +177,8 @@ public final class TaloolUser
 
 		FavoriteMerchantCache.get().clear();
 
+		// pull the active session from cache if needed
+		Session.openActiveSessionFromCache(context);
 		if (Session.getActiveSession() != null)
 		{
 			Session.getActiveSession().closeAndClearTokenInformation();

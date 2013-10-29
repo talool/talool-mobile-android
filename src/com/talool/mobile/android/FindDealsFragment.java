@@ -12,6 +12,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ClipDrawable;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -76,6 +77,12 @@ public class FindDealsFragment extends Fragment implements DialogClickListener
 		this.view = inflater.inflate(R.layout.find_deals_fragment, container, false);
 		bookImage = (TaloolSmartImageView) view.findViewById(R.id.bookImageView);
 		dealOffersListView = (ListView) view.findViewById(R.id.dealOffersListView);
+		
+		final EditText accessCode = (EditText) view.findViewById(R.id.accessCode);
+		ClipDrawable accessCode_bg = (ClipDrawable) accessCode.getBackground();
+		accessCode_bg.setLevel(1500);
+		
+		
 		loadDealsButton = (Button) view.findViewById(R.id.loadDealsButton);
 		loadDealsButton.setOnClickListener(new View.OnClickListener()
 		{
@@ -84,8 +91,7 @@ public class FindDealsFragment extends Fragment implements DialogClickListener
 				RedeemBook redeemBookTask = new RedeemBook();
 				redeemBookTask.execute(new Void[] {});
 				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-				EditText editText = (EditText) view.findViewById(R.id.accessCode);
-				imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+				imm.hideSoftInputFromWindow(accessCode.getWindowToken(), 0);
 			}
 		});
 		listViewLinearLayout = (LinearLayout) view.findViewById(R.id.listViewLinearLayout);
