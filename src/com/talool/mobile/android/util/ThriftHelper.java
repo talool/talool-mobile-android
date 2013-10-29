@@ -17,7 +17,7 @@ public class ThriftHelper
 
 	public ThriftHelper() throws TTransportException
 	{
-		tHttpClient = new THttpClient(Constants.API_URL);
+		tHttpClient = new THttpClient(Constants.getApiUrl());
 		protocol = new TBinaryProtocol(tHttpClient);
 		client = new CustomerService_t.Client(protocol);
 
@@ -30,7 +30,7 @@ public class ThriftHelper
 
 	public ThriftHelper(CTokenAccess_t accessToken) throws TTransportException
 	{
-		tHttpClient = new THttpClient(Constants.API_URL);
+		tHttpClient = new THttpClient(Constants.getApiUrl());
 		protocol = new TBinaryProtocol(tHttpClient);
 		client = new CustomerService_t.Client(protocol);
 		tHttpClient.setCustomHeader(CustomerServiceConstants.CTOKEN_NAME, accessToken.getToken());

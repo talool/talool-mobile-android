@@ -51,7 +51,7 @@ public class FacebookHelper {
     
 	public static String dealObjectForGift(String giftId)
 	{
-	    String url = Constants.OG_GIFT_PAGE+ "/"+giftId;
+	    String url = Constants.getOGGiftPage()+ "/"+giftId;
 
 	    return url;
 	}

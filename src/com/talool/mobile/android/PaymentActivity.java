@@ -185,11 +185,11 @@ public class PaymentActivity extends Activity implements DialogPositiveClickList
 		setContentView(R.layout.venmo_payment_activity_layout);
 		if (Constants.IS_DEVELOPMENT_MODE)
 		{
-			touchClient = VenmoTouchClient.forSandboxMerchant(this, Constants.BRAINTREE_MERCHANT_ID, Constants.BRAINTREE_MERCHANT_KEY);
+			touchClient = VenmoTouchClient.forSandboxMerchant(this, Constants.getBTMerchantId(), Constants.getBTMerchantKey());
 		}
 		else
 		{
-			touchClient = VenmoTouchClient.forMerchant(this, Constants.BRAINTREE_MERCHANT_ID, Constants.BRAINTREE_MERCHANT_KEY);
+			touchClient = VenmoTouchClient.forMerchant(this, Constants.getBTMerchantId(), Constants.getBTMerchantKey());
 		}
 
 		comboView = (VTComboCardView) findViewById(R.id.combo_view);
