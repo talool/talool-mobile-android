@@ -32,7 +32,7 @@ public class FacebookHelper {
 	
     public static Customer_t createCustomerFromFacebook(GraphUser user){
 
-        //verify email
+        // TODO verify email.  if null, prompt user to enter it prior to registration
         Customer_t customer = new Customer_t(user.getFirstName(), user.getLastName(), user.getProperty("email").toString());
 
         SocialAccount_t socialAccount = new SocialAccount_t(SocialNetwork_t.Facebook, user.getId());

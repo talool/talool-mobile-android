@@ -1,5 +1,6 @@
 package com.talool.mobile.android;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,6 +64,7 @@ public class FindDealsFragment extends Fragment implements DialogClickListener
 	private DealOffer_t boulderBook;
 	private DealOffer_t vancouverBook;
 	private TaloolSmartImageView bookImage;
+	private TextView bookDescription;
 	private DealOffer_t closestBook;
 	private MapView mapView;
 	private LinearLayout listViewLinearLayout;
@@ -77,7 +79,7 @@ public class FindDealsFragment extends Fragment implements DialogClickListener
 		this.view = inflater.inflate(R.layout.find_deals_fragment, container, false);
 		bookImage = (TaloolSmartImageView) view.findViewById(R.id.bookImageView);
 		dealOffersListView = (ListView) view.findViewById(R.id.dealOffersListView);
-		
+		bookDescription = (TextView) view.findViewById(R.id.dealOfferDescription);
 		final EditText accessCode = (EditText) view.findViewById(R.id.accessCode);
 		ClipDrawable accessCode_bg = (ClipDrawable) accessCode.getBackground();
 		accessCode_bg.setLevel(1500);
@@ -246,11 +248,16 @@ public class FindDealsFragment extends Fragment implements DialogClickListener
 		getVancouverBook();
 	}
 
-	private void loadBookImages()
+	private void loadBookDetails()
 	{
 		if (closestBook.imageUrl != null)
 		{
 			bookImage.setImageUrl(closestBook.imageUrl);
+		}
+		
+		if (closestBook.summary != null)
+		{
+			bookDescription.setText(closestBook.summary);
 		}
 	}
 
@@ -277,7 +284,7 @@ public class FindDealsFragment extends Fragment implements DialogClickListener
 			}
 			getActivity().setTitle(closestBook.title);
 			BookCache.get().setClosestBook(closestBook);
-			loadBookImages();
+			loadBookDetails();
 			loadBookDeals();
 		}
 	}
@@ -322,7 +329,7 @@ public class FindDealsFragment extends Fragment implements DialogClickListener
 		if (BookCache.get().getClosestBook() != null)
 		{
 			closestBook = BookCache.get().getClosestBook();
-			loadBookImages();
+			loadBookDetails();
 			loadBookDeals();
 		}
 		else if (exception == null)
@@ -370,9 +377,17 @@ public class FindDealsFragment extends Fragment implements DialogClickListener
 		setListViewHeightBasedOnChildren(dealOffersListView);
 		listViewLinearLayout.setVisibility(View.VISIBLE);
 
-		purchaseClickLayout.setVisibility(View.VISIBLE);
-		final TextView buyNowView = (TextView) view.findViewById(R.id.buy_now_text);
-		buyNowView.setText(getBuyNowText());
+		Date now = new Date();
+		if (closestBook.expires > now.getTime())
+		{
+			purchaseClickLayout.setVisibility(View.VISIBLE);
+			final TextView buyNowView = (TextView) view.findViewById(R.id.buy_now_text);
+			buyNowView.setText(getBuyNowText());
+		}
+		else
+		{
+			purchaseClickLayout.setVisibility(View.GONE);
+		}
 
 		final TextView textView = (TextView) view.findViewById(R.id.summaryText);
 		textView.setText(dealOffers.size() + " Deals from " + numMerchants + " Merchants");
@@ -415,7 +430,6 @@ public class FindDealsFragment extends Fragment implements DialogClickListener
 				dealOffers = results;
 				BookCache.get().setDealsInBook(dealOffers);
 				loadListView(getNumberOfMerchants());
-				purchaseClickLayout.setVisibility(View.VISIBLE);
 			}
 		}
 
