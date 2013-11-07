@@ -81,20 +81,17 @@ public class DealsAcquiredAdapter extends ArrayAdapter<DealAcquire_t>
 
 			if (dealAcquire.getStatus() == AcquireStatus_t.PENDING_ACCEPT_CUSTOMER_SHARE)
 			{
-				sb.append("Gifted to ").append(dealAcquire.getGiftDetail().toFirstName).append(" ")
-						.append(dealAcquire.getGiftDetail().toLastName);
+				sb.append("Gifted to ").append(dealAcquire.getGiftDetail().getToName());
 			}
 
 			else if (dealAcquire.getStatus() == AcquireStatus_t.ACCEPTED_CUSTOMER_SHARE ||
 					dealAcquire.getStatus() == AcquireStatus_t.REDEEMED)
 			{
-				sb.append("Gifted from ").append(dealAcquire.getGiftDetail().fromFirstName).append(" ")
-						.append(dealAcquire.getGiftDetail().fromLastName);
+				sb.append("Gifted from ").append(dealAcquire.getGiftDetail().getFromName());
 			}
 			else if (dealAcquire.getStatus() == AcquireStatus_t.REJECTED_CUSTOMER_SHARE)
 			{
-				sb.append("Your gift to ").append(dealAcquire.getGiftDetail().toFirstName).append(" ")
-						.append(dealAcquire.getGiftDetail().toLastName).append(" was rejected");
+				sb.append("Your gift to ").append(dealAcquire.getGiftDetail().getToName()).append(" was rejected");
 			}
 
 			holder.dealsAcquiredGifted.setText(sb.toString());
