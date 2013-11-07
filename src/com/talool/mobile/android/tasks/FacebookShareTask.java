@@ -38,7 +38,7 @@ public class FacebookShareTask extends AsyncTask<Void, Void, Response> {
 			// Set up a request with the active session, set up
 	        // an HTTP POST to the eat action endpoint
 	        Request request = new Request(Session.getActiveSession(),
-	        		"me/taloolclient:share", null, HttpMethod.POST);
+	        		"me/taloolclient:gift", null, HttpMethod.POST);
 	        // Add the post parameter, the eat action
 	        request.setGraphObject(dealAction);
 	        // Execute the request synchronously in the background

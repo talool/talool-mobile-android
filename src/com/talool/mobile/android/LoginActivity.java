@@ -151,7 +151,6 @@ public class LoginActivity extends Activity
 					.build()
 					);
 		}
-
 		setTitle(R.string.login_with_talool);
 
 	}

@@ -19,8 +19,10 @@ public final class ErrorMessageCache
 		PasswordResetGeneral("There was a problem generating your password reset request"),
 		EmailMessageFailureTitle("Email Failure"),
 		ResetPasswordFailureTitle("Reset Password Failure"),
-		AlreadyAcceptedGift("You have already accepted this gift");
-
+		AlreadyAcceptedGift("You have already accepted this gift"),
+		FacebookAuthenticationRetry("Error on Authentication Please Retry"),
+		FacebookPermissionRetry("You do not have permission to perform this action"),
+		FacebookRetry("Facbeook Error, Please Try Again");
 		private String text;
 
 		Message(String text)

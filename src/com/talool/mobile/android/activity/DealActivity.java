@@ -59,6 +59,7 @@ import com.talool.mobile.android.tasks.FacebookShareTask;
 import com.talool.mobile.android.util.AlertMessage;
 import com.talool.mobile.android.util.AndroidUtils;
 import com.talool.mobile.android.util.Constants;
+import com.talool.mobile.android.util.ErrorMessageCache;
 import com.talool.mobile.android.util.FacebookHelper;
 import com.talool.mobile.android.util.SafeSimpleDateFormat;
 import com.talool.mobile.android.util.TaloolSmartImageView;
@@ -560,7 +561,7 @@ public class DealActivity extends Activity
 					// message id, and retry the operation later.
 					String userAction = (error.shouldNotifyUser()) ? "" :
 							getString(error.getUserActionMessageId());
-					dialogBody = "Error on Authentication Retry" + userAction;
+					dialogBody = ErrorMessageCache.Message.FacebookAuthenticationRetry.getText();
 					listener = new DialogInterface.OnClickListener()
 					{
 						@Override
@@ -578,7 +579,7 @@ public class DealActivity extends Activity
 				case AUTHENTICATION_REOPEN_SESSION:
 					// Close the session and reopen it.
 					dialogBody =
-							"Error on Authentication Reopen";
+							 ErrorMessageCache.Message.FacebookAuthenticationRetry.getText();
 					listener = new DialogInterface.OnClickListener()
 					{
 						@Override
@@ -596,7 +597,7 @@ public class DealActivity extends Activity
 
 				case PERMISSION:
 					// A permissions-related error
-					dialogBody = "You do not have permission to perform this action";
+					dialogBody = ErrorMessageCache.Message.FacebookPermissionRetry.getText();
 					listener = new DialogInterface.OnClickListener()
 					{
 						@Override
@@ -611,15 +612,17 @@ public class DealActivity extends Activity
 					break;
 
 				case SERVER:
+					dialogBody = ErrorMessageCache.Message.FacebookRetry.getText();
+					break;
 				case THROTTLING:
 					// This is usually temporary, don't clear the fields, and
 					// ask the user to try again.
-					dialogBody = "Throttling Error";
+					dialogBody =  ErrorMessageCache.Message.FacebookRetry.getText();
 					break;
 
 				case BAD_REQUEST:
 					// This is likely a coding error, ask the user to file a bug.
-					dialogBody = "Error, bad request - " + error.getErrorMessage();
+					dialogBody = ErrorMessageCache.Message.FacebookRetry.getText();
 					break;
 
 				case OTHER:
@@ -628,7 +631,7 @@ public class DealActivity extends Activity
 					// An unknown issue occurred, this could be a code error, or
 					// a server side issue, log the issue, and either ask the
 					// user to retry, or file a bug.
-					dialogBody = "Unknown Error" + error.getErrorMessage();
+					dialogBody = ErrorMessageCache.Message.FacebookRetry.getText();
 					break;
 			}
 		}
