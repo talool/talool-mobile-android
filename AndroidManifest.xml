@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.talool.mobile.android"
+    package="com.talool.android"
     android:versionCode="2"
     android:versionName="1.1.2" >
 
@@ -26,7 +26,7 @@
         android:required="true" />
 
     <application
-        android:name="com.talool.mobile.android.TaloolApplication"
+        android:name="com.talool.android.TaloolApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -36,7 +36,7 @@
         
         <!-- Splash screen -->
         <activity
-            android:name="com.talool.mobile.android.SplashScreen"
+            android:name="com.talool.android.SplashScreen"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
@@ -47,43 +47,43 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.talool.mobile.android.WelcomeActivity"
+            android:name="com.talool.android.WelcomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_welcome"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.talool.mobile.android.LoginActivity"
+            android:name="com.talool.android.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible" >
         </activity>
         <activity
-            android:name="com.talool.mobile.android.RegistrationActivity"
+            android:name="com.talool.android.RegistrationActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/registration"
             android:screenOrientation="portrait" 
             android:windowSoftInputMode="stateVisible">
         </activity>
         <activity
-            android:name="com.talool.mobile.android.DealAcquiresActivity"
+            android:name="com.talool.android.DealAcquiresActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/mydeals"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.talool.mobile.android.MainActivity"
+            android:name="com.talool.android.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.talool.mobile.android.BasicWebViewActivity"
+            android:name="com.talool.android.BasicWebViewActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.talool.mobile.android.activity.GiftActivity"
+            android:name="com.talool.android.activity.GiftActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label=""
             android:screenOrientation="portrait"
@@ -96,33 +96,33 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.talool.mobile.android.MapActivity"
+            android:name="com.talool.android.MapActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:launchMode="standard"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.talool.mobile.android.activity.DealActivity"
+            android:name="com.talool.android.activity.DealActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/activity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.talool.mobile.android.activity.LocationSelectActivity"
+            android:name="com.talool.android.activity.LocationSelectActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.talool.mobile.android.activity.FacebookFriendActivity"
+            android:name="com.talool.android.activity.FacebookFriendActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait" 
             android:theme="@android:style/Theme.NoTitleBar">
         </activity>
         <activity
-            android:name="com.talool.mobile.android.activity.SettingsActivity"
+            android:name="com.talool.android.activity.SettingsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/settings"
             android:screenOrientation="portrait" >
@@ -133,13 +133,13 @@
         </activity>
         
          <activity
-                android:name="com.talool.mobile.android.PaymentActivity"
+                android:name="com.talool.android.PaymentActivity"
                 android:label="@string/payment" 
                 android:windowSoftInputMode="stateVisible">
         </activity>
         ￼
         <activity 
-        	android:name="com.talool.mobile.android.ForgotPasswordActivity"
+        	android:name="com.talool.android.ForgotPasswordActivity"
         	android:label="@string/forgot_password"
         	android:windowSoftInputMode="stateVisible" />
         
@@ -166,7 +166,7 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name="com.talool.mobile.android.ResetPasswordActivity"
+            android:name="com.talool.android.ResetPasswordActivity"
             android:label="@string/title_activity_reset_password"
             android:windowSoftInputMode="stateVisible" >
             

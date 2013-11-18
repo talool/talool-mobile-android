@@ -92,7 +92,7 @@
 	        android:layout_height="match_parent"
 	        android:orientation="vertical">
 	
-	       <com.talool.mobile.android.util.TaloolSmartImageView
+	       <com.talool.android.util.TaloolSmartImageView
 	            android:id="@+id/dealImage"
 	            android:layout_width="fill_parent"
 	            android:layout_height="100dp"
