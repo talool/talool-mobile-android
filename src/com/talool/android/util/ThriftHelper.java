@@ -26,7 +26,6 @@ public class ThriftHelper
 			tHttpClient.setCustomHeader(CustomerServiceConstants.CTOKEN_NAME,
 					TaloolUser.get().getAccessToken().getToken());
 		}
-		String header = AndroidUtils.getUserAgent();
 		tHttpClient.setCustomHeader("User-Agent", AndroidUtils.getUserAgent());
 	}
 
