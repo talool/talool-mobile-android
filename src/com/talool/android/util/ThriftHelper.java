@@ -26,6 +26,8 @@ public class ThriftHelper
 			tHttpClient.setCustomHeader(CustomerServiceConstants.CTOKEN_NAME,
 					TaloolUser.get().getAccessToken().getToken());
 		}
+		String header = AndroidUtils.getUserAgent();
+		tHttpClient.setCustomHeader("User-Agent", AndroidUtils.getUserAgent());
 	}
 
 	public ThriftHelper(CTokenAccess_t accessToken) throws TTransportException
@@ -34,6 +36,8 @@ public class ThriftHelper
 		protocol = new TBinaryProtocol(tHttpClient);
 		client = new CustomerService_t.Client(protocol);
 		tHttpClient.setCustomHeader(CustomerServiceConstants.CTOKEN_NAME, accessToken.getToken());
+		tHttpClient.setCustomHeader("User-Agent", AndroidUtils.getUserAgent());
+
 	}
 
 	public TProtocol getProtocol()

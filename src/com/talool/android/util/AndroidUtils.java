@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 
 import com.talool.android.TaloolApplication;
 
@@ -132,6 +133,54 @@ public final class AndroidUtils
 		}
 		return haveConnectedWifi || haveConnectedMobile;
 	}
+
+	public static String getTaloolVersion()
+	{
+		try {
+			return TaloolApplication.getAppContext().getPackageManager().getPackageInfo(
+					TaloolApplication.getAppContext().getPackageName(), 0).versionName;
+		} catch (NameNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "";
+		}	
+	}
+
+	public static String getUserAgent()
+	{
+		final StringBuilder sb = new StringBuilder();
+		sb.append("Talool/");
+		sb.append(getTaloolVersion());
+		sb.append(" (Linux; Android ");
+		sb.append(android.os.Build.VERSION.RELEASE);
+		sb.append("; ");
+		sb.append(getDeviceName());
+		sb.append(")");
+		return sb.toString();
+	}
+
+	public static String getDeviceName() {
+		String manufacturer = Build.MANUFACTURER;
+		String model = Build.MODEL;
+		if (model.startsWith(manufacturer)) {
+			return capitalize(model);
+		} else {
+			return capitalize(manufacturer) + " " + model;
+		}
+	}
+
+
+	private static String capitalize(String s) {
+		if (s == null || s.length() == 0) {
+			return "";
+		}
+		char first = s.charAt(0);
+		if (Character.isUpperCase(first)) {
+			return s;
+		} else {
+			return Character.toUpperCase(first) + s.substring(1);
+		}
+	} 
 
 	public static String getReleaseInfo()
 	{
