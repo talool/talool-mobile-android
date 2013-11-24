@@ -38,7 +38,6 @@ public class LoginActivity extends Activity
 	private String password;
 	private Exception exception;
 	private String errorMessage;
-	private boolean isResumed = false;
 	private DialogFragment df;
 
 	private class CustomerServiceTask extends AsyncTask<String, Void, CTokenAccess_t>
@@ -237,14 +236,12 @@ public class LoginActivity extends Activity
 	protected void onPause()
 	{
 		super.onPause();
-		isResumed = false;
 	}
 
 	@Override
 	protected void onResume()
 	{
 		super.onResume();
-		isResumed = true;
 
 		if (df != null && !df.isHidden())
 		{

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/discoverDealsLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <com.talool.android.util.TaloolSmartImageView
+        android:id="@+id/discoverDealsImage"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:adjustViewBounds="false"
+        android:contentDescription="Deals Merchant Image"
+        android:scaleType="fitXY" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight=".9"
+        android:gravity="left"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/discoverDealsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:text="Title" 
+            android:textSize="18sp" />
+        
+        <TextView
+            android:id="@+id/discoverDealsSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:text="Subtitle" 
+            android:textSize="16sp" />
+            
+        <TextView
+            android:id="@+id/discoverDealsPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="5dp"
+            android:text="Price: $20.00"
+            android:textSize="14sp" />
+        
+        <TextView
+            android:id="@+id/discoverDealsSummary"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="5dp"
+            android:text="70 Deals from 30 Merchants"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>
