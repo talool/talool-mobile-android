@@ -46,8 +46,6 @@ import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.ServiceException_t;
-import com.talool.android.LoginActivity;
-import com.talool.android.MapActivity;
 import com.talool.android.R;
 import com.talool.android.cache.DealOfferCache;
 import com.talool.android.dialog.DialogFactory;
@@ -69,7 +67,7 @@ import com.talool.android.util.ThriftHelper;
 import com.talool.android.util.TypefaceFactory;
 import com.talool.thrift.util.ThriftUtil;
 
-public class DealActivity extends Activity
+public class DealActivity extends TaloolActivity
 {
 	private static final int REAUTH_ACTIVITY_CODE = 300;
 	private static final int FACEBOOK_REQUEST_CODE = 666;
@@ -78,7 +76,6 @@ public class DealActivity extends Activity
 	private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
 	private static final Uri M_FACEBOOK_URL = Uri.parse("http://m.facebook.com");
 
-	private static ThriftHelper client;
 	private DealAcquire_t deal;
 	private Merchant_t merchant;
 	private TaloolSmartImageView dealMerchantImage;
@@ -92,19 +89,16 @@ public class DealActivity extends Activity
 	private LinearLayout dealActivityButtonLayout;
 	private String redemptionCode;
 	private String email;
-	private Exception exception;
 	private String name;
-	private DialogFragment df;
 	private Session facebookSession;
 	private String giftId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.deal_activity_layout);
-		createThriftClient();
+
 		logoImageView = (SmartImageView) findViewById(R.id.dealLogoImage);
 		dealMerchantImage = (TaloolSmartImageView) findViewById(R.id.dealMerchantImage);
 		dealAddressText = (TextView) findViewById(R.id.dealAddressText);
@@ -158,12 +152,7 @@ public class DealActivity extends Activity
 		}
 		catch (TException e)
 		{
-			EasyTracker easyTracker = EasyTracker.getInstance(this);
-
-			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), e), true)
-					.build()
-					);
+			sendExceptionToAnalytics(e);
 		}
 
 	}
@@ -382,23 +371,6 @@ public class DealActivity extends Activity
 					.append(location.address.zip);
 
 			dealAddressText.setText(sb.toString());
-		}
-	}
-
-	private void createThriftClient()
-	{
-		try
-		{
-			client = new ThriftHelper();
-		}
-		catch (TTransportException e)
-		{
-			EasyTracker easyTracker = EasyTracker.getInstance(this);
-
-			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), e), true)
-					.build()
-					);
 		}
 	}
 

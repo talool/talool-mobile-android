@@ -1,4 +1,4 @@
-package com.talool.android.activity;
+package com.talool.android.fragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +32,11 @@ import com.talool.api.thrift.ActivityEvent_t;
 import com.talool.api.thrift.Activity_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
-import com.talool.android.BasicWebViewActivity;
 import com.talool.android.MainActivity;
 import com.talool.android.R;
 import com.talool.android.TaloolApplication;
+import com.talool.android.activity.BasicWebViewActivity;
+import com.talool.android.activity.GiftActivity;
 import com.talool.android.adapters.MyActivityAdapter;
 import com.talool.android.persistence.ActivityDao;
 import com.talool.android.tasks.ActivityActionTakenTask;

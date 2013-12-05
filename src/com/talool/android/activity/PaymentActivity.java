@@ -1,4 +1,4 @@
-package com.talool.android;
+package com.talool.android.activity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +19,12 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.talool.android.MainActivity;
 import com.talool.android.R;
+import com.talool.android.R.id;
+import com.talool.android.R.layout;
+import com.talool.android.R.menu;
+import com.talool.android.R.string;
 import com.talool.android.dialog.DialogFactory;
 import com.talool.android.dialog.DialogFactory.DialogPositiveClickListener;
 import com.talool.android.util.Constants;

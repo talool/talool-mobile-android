@@ -1,4 +1,4 @@
-package com.talool.android;
+package com.talool.android.activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
-import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -22,10 +20,8 @@ import android.widget.TextView;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
-import com.google.analytics.tracking.android.StandardExceptionParser;
+import com.talool.android.FavoriteMerchantProvider;
 import com.talool.android.R;
-import com.talool.android.activity.DealActivity;
-import com.talool.android.activity.SettingsActivity;
 import com.talool.android.adapters.DealsAcquiredAdapter;
 import com.talool.android.dialog.DialogFactory;
 import com.talool.android.util.TaloolSmartImageView;
@@ -43,17 +39,13 @@ import com.talool.thrift.util.ThriftUtil;
  * @author czachman,clintz
  * 
  */
-public class DealAcquiresActivity extends Activity
+public class DealAcquiresActivity extends TaloolActivity
 {
 	private TaloolSmartImageView imageView;
 	private ListView dealsAcquiredList;
 	private DealsAcquiredAdapter dealAcquiredAdapter;
-	private Exception exception;
 	private List<DealAcquire_t> dealAcquires;
 	private Merchant_t merchant;
-	private Menu menu;
-	private DialogFragment df;
-	private String errorMessage;
 
 	public boolean onCreateOptionsMenu(final Menu menu)
 	{
@@ -63,7 +55,6 @@ public class DealAcquiresActivity extends Activity
 
 		menu.getItem(0).setActionProvider(new FavoriteMerchantProvider(merchant, getApplicationContext()));
 
-		this.menu = menu;
 
 		return true;
 	}
@@ -115,12 +106,7 @@ public class DealAcquiresActivity extends Activity
 		}
 		catch (TException e)
 		{
-			EasyTracker easyTracker = EasyTracker.getInstance(this);
-
-			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
-					.build()
-					);
+			sendExceptionToAnalytics(exception);
 		}
 
 	}
@@ -129,10 +115,6 @@ public class DealAcquiresActivity extends Activity
 	protected void onResume()
 	{
 		super.onResume();
-		if (df != null && !df.isHidden())
-		{
-			df.dismiss();
-		}
 		reloadData();
 	}
 
@@ -190,28 +172,6 @@ public class DealAcquiresActivity extends Activity
 	{
 		DealAcquiresTask dealAcquiresTask = new DealAcquiresTask();
 		dealAcquiresTask.execute(new String[] {});
-	}
-
-	public void popupErrorMessage(Exception exception, String errorMessage)
-	{
-
-		EasyTracker easyTracker = EasyTracker.getInstance(this);
-
-		easyTracker.send(MapBuilder
-				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
-				.build()
-				);
-
-		if (df != null && !df.isHidden())
-		{
-			df.dismiss();
-		}
-		String message = errorMessage == null ? exception.getMessage() : errorMessage;
-		String title = getResources().getString(R.string.error_loading_deals);
-		String label = getResources().getString(R.string.retry);
-		df = DialogFactory.getAlertDialog(title, message, label);
-		df.show(getFragmentManager(), "dialog");
-
 	}
 
 	protected AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener()

@@ -1,12 +1,10 @@
-package com.talool.android;
+package com.talool.android.activity;
 
 import java.util.List;
 
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
-import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,8 +15,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.analytics.tracking.android.EasyTracker;
-import com.google.analytics.tracking.android.MapBuilder;
-import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,26 +25,20 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.talool.android.R;
-import com.talool.android.activity.SettingsActivity;
 import com.talool.android.adapters.MerchantLocationAdapter;
-import com.talool.android.dialog.DialogFactory;
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.ThriftHelper;
 import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.thrift.util.ThriftUtil;
 
-public class MapActivity extends Activity
+public class MapActivity extends TaloolActivity
 {
-	private static ThriftHelper client;
 	private MapView mapView;
 	private Merchant_t merchant;
 	private ListView addressList;
 	private MerchantLocationAdapter addressAdapter;
-	private Exception exception;
 	private List<MerchantLocation_t> merchantLocations;
-	private DialogFragment df;
-	private String errorMessage;
 	private Boolean mapsConfigured = false;
 
 	@Override
@@ -57,7 +47,6 @@ public class MapActivity extends Activity
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.map_activity_layout);
-		createThriftClient();
 		addressList = (ListView) findViewById(R.id.mapActivityAddressList);
 		if (TaloolUser.get().getAccessToken() == null)
 		{
@@ -122,22 +111,6 @@ public class MapActivity extends Activity
 
 	}
 
-	private void createThriftClient()
-	{
-
-		try
-		{
-			client = new ThriftHelper();
-		}
-		catch (TTransportException e)
-		{
-			// TODO Auto-generated catch block
-			exception = e;
-			errorMessage = "Make sure you have a network connection";
-			popupErrorMessage(exception, errorMessage);
-		}
-	}
-
 	@Override
 	protected void onDestroy()
 	{
@@ -150,7 +123,6 @@ public class MapActivity extends Activity
 	@Override
 	protected void onPause()
 	{
-		// TODO Auto-generated method stub
 		super.onPause();
 		MapView mapView = (MapView) findViewById(R.id.map);
 		mapView.onPause();
@@ -159,7 +131,6 @@ public class MapActivity extends Activity
 	@Override
 	protected void onResume()
 	{
-		// TODO Auto-generated method stub
 		super.onResume();
 		MapView mapView = (MapView) findViewById(R.id.map);
 		mapView.onResume();
@@ -199,29 +170,6 @@ public class MapActivity extends Activity
 		addressAdapter = adapter;
 		addressList.setAdapter(addressAdapter);
 		addressList.setOnItemClickListener(onClickListener);
-	}
-
-	private void popupErrorMessage(Exception exception, String errorMessage)
-	{
-		EasyTracker easyTracker = EasyTracker.getInstance(this);
-
-		easyTracker.send(MapBuilder
-				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
-				.build()
-				);
-
-		if (df != null && !df.isHidden())
-		{
-			df.dismiss();
-		}
-		String message = errorMessage == null ? exception.getMessage() : errorMessage;
-		String title = getResources().getString(R.string.error_loading_deals);
-		String label = getResources().getString(R.string.retry);
-		df = DialogFactory.getAlertDialog(title, message, label);
-		df.show(getFragmentManager(), "dialog");
-		/*
-		 * dialog.dismiss(); createThriftClient(); reloadData();
-		 */
 	}
 
 	private void reloadData()

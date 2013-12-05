@@ -20,8 +20,11 @@ import android.view.MenuItem;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.talool.android.R;
-import com.talool.android.activity.MyActivityFragment;
+import com.talool.android.activity.LoginActivity;
 import com.talool.android.activity.SettingsActivity;
+import com.talool.android.fragment.DiscoverDealsFragment;
+import com.talool.android.fragment.MyActivityFragment;
+import com.talool.android.fragment.MyDealsFragment;
 import com.talool.android.tasks.ActivitySupervisor;
 import com.talool.android.util.NotificationHelper;
 import com.talool.android.util.TaloolUser;
@@ -104,8 +107,8 @@ public class MainActivity extends Activity
 
 		Tab tab = actionBar.newTab().setText("My Deals").setTabListener(
 				new MyTabListener(this, MyDealsFragment.class.getName()));
-		Tab tab2 = actionBar.newTab().setText("Find Deals").setTabListener(
-				new MyTabListener(this, FindDealsFragment.class.getName()));
+		Tab tab2 = actionBar.newTab().setText("Discover Deals").setTabListener(
+				new MyTabListener(this, DiscoverDealsFragment.class.getName()));
 		Tab tab3 = actionBar.newTab().setCustomView(R.layout.activity_tab_layout).setTabListener(
 				new MyTabListener(this, MyActivityFragment.class.getName()));
 
@@ -217,7 +220,7 @@ public class MainActivity extends Activity
 			if (prevFragment != null)
 			{
 				mFragment = prevFragment;
-			} // \previous Fragment management
+			} // previous Fragment management
 
 			// Check if the fragment is already initialized
 			if (mFragment == null)

@@ -1,16 +1,15 @@
-package com.talool.android;
-
-import android.content.Intent;
-import android.view.Menu;
-import android.view.MenuItem;
-import com.google.analytics.tracking.android.EasyTracker;
+package com.talool.android.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.webkit.WebView;
+
+import com.google.analytics.tracking.android.EasyTracker;
 import com.talool.android.R;
-import com.talool.android.activity.SettingsActivity;
 import com.talool.android.util.TaloolUser;
 
 /**

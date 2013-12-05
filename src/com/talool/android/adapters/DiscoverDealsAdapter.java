@@ -8,12 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.loopj.android.image.SmartImageView;
+import com.google.analytics.tracking.android.Log;
 import com.talool.android.R;
-import com.talool.android.util.ApiUtil;
-import com.talool.android.util.TypefaceFactory;
+import com.talool.android.util.ImageDownloader;
+import com.talool.android.util.TaloolSmartImageView;
+import com.talool.android.util.TaloolUtil;
+import com.talool.api.thrift.CoreConstants;
 import com.talool.api.thrift.DealOfferGeoSummary_t;
 
 public class DiscoverDealsAdapter extends ArrayAdapter<DealOfferGeoSummary_t> {
@@ -42,12 +45,13 @@ public class DiscoverDealsAdapter extends ArrayAdapter<DealOfferGeoSummary_t> {
 			row = inflater.inflate(layoutResourceId, parent, false);
 
 			holder = new DiscoverDealsRow();
-			holder.dealImage = (SmartImageView) row.findViewById(R.id.discoverDealsImage);
+			holder.dealImage = (TaloolSmartImageView) row.findViewById(R.id.discoverDealsImage);
+			holder.dealLayout = (LinearLayout) row.findViewById(R.id.discoverDealsLinearLayout);
 			holder.dealTitle = (TextView) row.findViewById(R.id.discoverDealsTitle);
 			holder.dealSubtitle = (TextView) row.findViewById(R.id.discoverDealsSubtitle);
 			holder.dealPrice = (TextView) row.findViewById(R.id.discoverDealsPrice);
 			holder.dealSummary = (TextView) row.findViewById(R.id.discoverDealsSummary);
-			
+
 			row.setTag(holder);
 		}
 		else
@@ -55,16 +59,26 @@ public class DiscoverDealsAdapter extends ArrayAdapter<DealOfferGeoSummary_t> {
 			holder = (DiscoverDealsRow) row.getTag();
 		}
 
-		DealOfferGeoSummary_t dealOffer = data.get(position);
+		DealOfferGeoSummary_t dealOffer = data.get(position);				
+		
+		holder.dealTitle.setText(dealOffer.dealOffer.title);
+		holder.dealPrice.setText(TaloolUtil.moneyFormattedString(dealOffer.dealOffer.price));
+		holder.dealSubtitle.setText(dealOffer.dealOffer.summary);
+		holder.dealImage.setImageUrl(dealOffer.dealOffer.dealOfferMerchantLogo);
+		holder.dealLayout.setBackgroundResource(0);
+		holder.dealSummary.setText(getSummaryText(dealOffer));
 
-//		holder.dealIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
-//		holder.dealIcon.setText(ApiUtil.getIcon(dealOffer.merchant.category));
-//		holder.dealIcon.setTextColor(row.getResources().getColor(ApiUtil.getIconColor(dealOffer.merchant.category)));
-//		
-//		holder.dealTitle.setText(dealOffer.getTitle());
-//		holder.dealMerchant.setText(dealOffer.merchant.name);
-
+		ImageDownloader imageDownloader = new ImageDownloader(holder.dealLayout);
+		imageDownloader.execute(dealOffer.dealOffer.dealOfferBackgroundImage);
+		Log.i(dealOffer.dealOffer.dealOfferBackgroundImage);
 
 		return row;
+	}
+
+	public String getSummaryText(DealOfferGeoSummary_t dealOffer)
+	{
+		String summaryString = String.valueOf(dealOffer.getLongMetrics().get(CoreConstants.METRIC_TOTAL_DEALS));
+		summaryString = summaryString + " deals from " + String.valueOf(dealOffer.getLongMetrics().get(CoreConstants.METRIC_TOTAL_MERCHANTS)) +" merchants";
+		return summaryString;
 	}
 }

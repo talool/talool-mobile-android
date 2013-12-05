@@ -1,4 +1,4 @@
-package com.talool.android;
+package com.talool.android.activity;
 
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -15,6 +15,9 @@ import android.widget.EditText;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.talool.android.R;
+import com.talool.android.R.id;
+import com.talool.android.R.layout;
+import com.talool.android.R.string;
 import com.talool.android.dialog.DialogFactory;
 import com.talool.android.dialog.DialogFactory.DialogPositiveClickListener;
 import com.talool.android.util.ErrorMessageCache;

@@ -3,22 +3,23 @@
     android:id="@+id/discoverDealsLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal">
 
     <com.talool.android.util.TaloolSmartImageView
         android:id="@+id/discoverDealsImage"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:adjustViewBounds="false"
+        android:layout_width="75dp"
+        android:layout_height="50dp"
+        android:adjustViewBounds="true"
         android:contentDescription="Deals Merchant Image"
-        android:scaleType="fitXY" />
+        android:padding="10dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_launcher" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dip"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_weight=".9"
+        android:layout_margin="5dp"
+        android:layout_weight="2"
         android:gravity="left"
         android:orientation="vertical" >
 
@@ -30,6 +31,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:text="Title" 
+            android:textStyle="bold"
             android:textSize="18sp" />
         
         <TextView
@@ -40,13 +42,18 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:text="Subtitle" 
-            android:textSize="16sp" />
+            android:ellipsize="end"
+            android:lines="4"
+            android:maxLines="4"
+            android:textSize="14sp" />
             
         <TextView
             android:id="@+id/discoverDealsPrice"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            
             android:text="Price: $20.00"
             android:textSize="14sp" />
         
@@ -55,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_marginLeft="5dp"
-            android:text="70 Deals from 30 Merchants"
+            android:text="XX Deals from XX Merchants"
             android:textSize="12sp" />
     </LinearLayout>
 

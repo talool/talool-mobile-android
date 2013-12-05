@@ -1,12 +1,10 @@
-package com.talool.android;
+package com.talool.android.activity;
 
 import java.util.Arrays;
 
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
-import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,32 +20,26 @@ import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
 import com.google.analytics.tracking.android.EasyTracker;
-import com.google.analytics.tracking.android.MapBuilder;
-import com.google.analytics.tracking.android.StandardExceptionParser;
+import com.talool.android.MainActivity;
 import com.talool.android.R;
 import com.talool.android.dialog.DialogFactory;
 import com.talool.android.tasks.FetchFavoriteMerchantsTask;
 import com.talool.android.util.FacebookHelper;
 import com.talool.android.util.TaloolUser;
-import com.talool.android.util.ThriftHelper;
 import com.talool.api.thrift.CTokenAccessResponse_t;
 import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.Customer_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.api.thrift.SocialNetwork_t;
 
-public class WelcomeActivity extends Activity {
+public class WelcomeActivity extends TaloolActivity {
 	
 	private UiLifecycleHelper lifecycleHelper;
 	public static final String TALOOL_FB_PASSCODE = "talool4";
-	private static ThriftHelper client;
 	private Customer_t facebookCustomer;
 	private String username;
 	private String password;
-	private Exception exception;
-	private String errorMessage;
 	private boolean isResumed = false;
-	private DialogFragment df;
 	
 	private class CustomerServiceTask extends AsyncTask<String, Void, CTokenAccess_t>
 	{
@@ -145,8 +137,7 @@ public class WelcomeActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
+		super.onCreate(savedInstanceState);	
 		lifecycleHelper = new UiLifecycleHelper(this, statusCallback);
 		lifecycleHelper.onCreate(savedInstanceState);
 		
@@ -154,22 +145,6 @@ public class WelcomeActivity extends Activity {
 		
 		LoginButton authButton = (LoginButton) this.findViewById(R.id.login_button);
 		authButton.setReadPermissions(Arrays.asList("email", "user_birthday"));
-		
-		try
-		{
-			client = new ThriftHelper();
-		}
-		catch (TTransportException e)
-		{
-			popupErrorMessage(e, errorMessage);
-			EasyTracker easyTracker = EasyTracker.getInstance(this);
-
-			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), e), true)
-					.build()
-					);
-		}
-
 		setTitle(R.string.welcome);
 	}
 	
@@ -189,28 +164,6 @@ public class WelcomeActivity extends Activity {
 	{
 		Intent myIntent = new Intent(getApplicationContext(), RegistrationActivity.class);
 		startActivity(myIntent);
-	}
-	
-	public void popupErrorMessage(Exception exception, String errorMessage)
-	{
-
-		EasyTracker easyTracker = EasyTracker.getInstance(this);
-
-		easyTracker.send(MapBuilder
-				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
-				.build()
-				);
-
-		if (df != null && !df.isHidden())
-		{
-			df.dismiss();
-		}
-		String message = errorMessage == null ? exception.getMessage() : errorMessage;
-		String title = getResources().getString(R.string.error_login);
-		String label = getResources().getString(R.string.retry);
-		df = DialogFactory.getAlertDialog(title, message, label);
-		df.show(getFragmentManager(), "dialog");
-
 	}
 	
 	@Override
@@ -241,11 +194,6 @@ public class WelcomeActivity extends Activity {
 		super.onResume();
 		lifecycleHelper.onResume();
 		isResumed = true;
-
-		if (df != null && !df.isHidden())
-		{
-			df.dismiss();
-		}
 	}
 
 	@Override

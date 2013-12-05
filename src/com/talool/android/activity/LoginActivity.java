@@ -1,10 +1,8 @@
-package com.talool.android;
+package com.talool.android.activity;
 
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
-import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ClipDrawable;
@@ -20,8 +18,8 @@ import android.widget.EditText;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
+import com.talool.android.MainActivity;
 import com.talool.android.R;
-import com.talool.android.activity.SettingsActivity;
 import com.talool.android.dialog.DialogFactory;
 import com.talool.android.tasks.FetchFavoriteMerchantsTask;
 import com.talool.android.util.TaloolUser;
@@ -29,16 +27,12 @@ import com.talool.android.util.ThriftHelper;
 import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.ServiceException_t;
 
-public class LoginActivity extends Activity
+public class LoginActivity extends TaloolActivity
 {
-	private static ThriftHelper client;
 	private EditText usernameEditText;
 	private EditText passwordEditText;
 	private String username;
 	private String password;
-	private Exception exception;
-	private String errorMessage;
-	private DialogFragment df;
 
 	private class CustomerServiceTask extends AsyncTask<String, Void, CTokenAccess_t>
 	{
@@ -137,20 +131,6 @@ public class LoginActivity extends Activity
 		ClipDrawable password_bg = (ClipDrawable) passwordEditText.getBackground();
 		password_bg.setLevel(1500);
 
-		try
-		{
-			client = new ThriftHelper();
-		}
-		catch (TTransportException e)
-		{
-			popupErrorMessage(e, errorMessage);
-			EasyTracker easyTracker = EasyTracker.getInstance(this);
-
-			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), e), true)
-					.build()
-					);
-		}
 		setTitle(R.string.login_with_talool);
 
 	}
@@ -165,26 +145,6 @@ public class LoginActivity extends Activity
 		password = passwordEditText.getText().toString();
 		CustomerServiceTask task = new CustomerServiceTask(this);
 		task.execute(new String[] {});
-	}
-
-	public void popupErrorMessage(Exception exception, String errorMessage)
-	{
-		EasyTracker easyTracker = EasyTracker.getInstance(this);
-		easyTracker.send(MapBuilder
-				.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
-				.build()
-				);
-
-		if (df != null && !df.isHidden())
-		{
-			df.dismiss();
-		}
-		String message = errorMessage == null ? exception.getMessage() : errorMessage;
-		String title = getResources().getString(R.string.error_login);
-		String label = getResources().getString(R.string.retry);
-		df = DialogFactory.getAlertDialog(title, message, label);
-		df.show(getFragmentManager(), "dialog");
-
 	}
 
 	public void onForgotPasswordClicked(View view)
@@ -242,12 +202,6 @@ public class LoginActivity extends Activity
 	protected void onResume()
 	{
 		super.onResume();
-
-		if (df != null && !df.isHidden())
-		{
-			df.dismiss();
-		}
-
 	}
 
 }

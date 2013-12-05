@@ -1,4 +1,4 @@
-package com.talool.android;
+package com.talool.android.fragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,15 @@ import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.Fields;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
+import com.talool.android.MainActivity;
 import com.talool.android.R;
+import com.talool.android.TaloolApplication;
+import com.talool.android.R.drawable;
+import com.talool.android.R.id;
+import com.talool.android.R.layout;
+import com.talool.android.R.menu;
+import com.talool.android.R.string;
+import com.talool.android.activity.DealAcquiresActivity;
 import com.talool.android.adapters.MyDealsAdapter;
 import com.talool.android.cache.FavoriteMerchantCache;
 import com.talool.android.dialog.DialogFactory;
@@ -57,7 +65,6 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	private ThriftHelper client;
 	private View view;
 	private TextView noResultsMessage;
-	private Context context;
 	private Exception exception;
 	private List<Merchant_t> merchants;
 	private Menu menu;
@@ -149,9 +156,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		noResultsMessage = (TextView) view.findViewById(R.id.activity_no_results_msg);
 		noResultsMessage.setVisibility(View.GONE);
 
-		this.context = view.getContext();
 		createThriftClient();
-
 		setHasOptionsMenu(true);
 
 		StringBuilder sb = new StringBuilder();

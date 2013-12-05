@@ -1,7 +1,6 @@
 package com.talool.android.activity;
 
 import com.google.analytics.tracking.android.EasyTracker;
-import com.talool.android.LoginActivity;
 import com.talool.android.R;
 import com.talool.android.util.TaloolUser;
 

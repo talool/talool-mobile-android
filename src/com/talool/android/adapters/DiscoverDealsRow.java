@@ -1,11 +1,13 @@
 package com.talool.android.adapters;
 
-import com.loopj.android.image.SmartImageView;
+import com.talool.android.util.TaloolSmartImageView;
 
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class DiscoverDealsRow {
-    public SmartImageView dealImage;
+	public LinearLayout dealLayout;
+    public TaloolSmartImageView dealImage;
     public TextView dealTitle;
     public TextView dealSubtitle;
     public TextView dealPrice;

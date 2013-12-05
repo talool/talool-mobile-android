@@ -31,9 +31,8 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.Talool" >
-
         <activity android:name="com.venmo.touch.activity.PaymentFormActivity" />
-        
+
         <!-- Splash screen -->
         <activity
             android:name="com.talool.android.SplashScreen"
@@ -47,27 +46,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.talool.android.WelcomeActivity"
+            android:name="com.talool.android.activity.WelcomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_welcome"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.talool.android.LoginActivity"
+            android:name="com.talool.android.activity.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible" >
         </activity>
         <activity
-            android:name="com.talool.android.RegistrationActivity"
+            android:name="com.talool.android.activity.RegistrationActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/registration"
-            android:screenOrientation="portrait" 
-            android:windowSoftInputMode="stateVisible">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" >
         </activity>
         <activity
-            android:name="com.talool.android.DealAcquiresActivity"
+            android:name="com.talool.android.activity.DealAcquiresActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/mydeals"
             android:screenOrientation="portrait" >
@@ -79,7 +78,13 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.talool.android.BasicWebViewActivity"
+            android:name="com.talool.android.activity.FindDealsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.talool.android.activity.BasicWebViewActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
@@ -90,13 +95,17 @@
             android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="talool" android:host="gift"/>
+
+                <data
+                    android:host="gift"
+                    android:scheme="talool" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.talool.android.MapActivity"
+            android:name="com.talool.android.activity.MapActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:launchMode="standard"
@@ -118,8 +127,8 @@
             android:name="com.talool.android.activity.FacebookFriendActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" 
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
             android:name="com.talool.android.activity.SettingsActivity"
@@ -129,56 +138,54 @@
         </activity>
         <activity
             android:name="com.facebook.LoginActivity"
-            android:label="@string/title_facebook_login">
+            android:label="@string/title_facebook_login" >
         </activity>
-        
-         <activity
-                android:name="com.talool.android.PaymentActivity"
-                android:label="@string/payment" 
-                android:windowSoftInputMode="stateVisible">
+        <activity
+            android:name="com.talool.android.activity.PaymentActivitytActivity"
+            android:label="@string/payment"
+            android:windowSoftInputMode="stateVisible" >
         </activity>
         ￼
-        <activity 
-        	android:name="com.talool.android.ForgotPasswordActivity"
-        	android:label="@string/forgot_password"
-        	android:windowSoftInputMode="stateVisible" />
-        
-        <receiver
-			android:name="com.venmo.touch.service.VenmoTouchUpdateReceiver"
-			android:exported="true" >
-			<intent-filter>
-			<action android:name="com.venmo.touch.UPDATE"/>
-			</intent-filter>
-		</receiver>
-		
-		<service android:name="com.venmo.touch.service.VenmoTouchUpdateService" />
-		
-		<meta-data
-		    android:name="venmo_touch.enabled"
-		    android:value="true" />
+        <activity
+            android:name="com.talool.android.activity.ForgotPasswordActivity"
+            android:label="@string/forgot_password"
+            android:windowSoftInputMode="stateVisible" />
 
+        <receiver
+            android:name="com.venmo.touch.service.VenmoTouchUpdateReceiver"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.venmo.touch.UPDATE" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.venmo.touch.service.VenmoTouchUpdateService" />
+
+        <meta-data
+            android:name="venmo_touch.enabled"
+            android:value="true" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBzk6qFSqAgy8w4VVNDKEoEdTVhZGE1uIw" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name="com.talool.android.ResetPasswordActivity"
+         android:name="com.talool.android.activity.ResetPasswordActivity"
             android:label="@string/title_activity_reset_password"
             android:windowSoftInputMode="stateVisible" >
-            
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="talool" android:host="password"/>
-            </intent-filter>
-            
-        </activity>
 
+                <data
+                    android:host="password"
+                    android:scheme="talool" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.talool.android;
+package com.talool.android.activity;
 
 import org.apache.thrift.TException;
 
@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.talool.android.MainActivity;
 import com.talool.android.R;
 import com.talool.android.dialog.DialogFactory;
 import com.talool.android.util.ErrorMessageCache;

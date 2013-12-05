@@ -3,7 +3,6 @@ package com.talool.android.activity;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.net.Uri;
@@ -20,14 +19,6 @@ import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.loopj.android.image.SmartImageView;
-import com.talool.api.thrift.Activity_t;
-import com.talool.api.thrift.DealAcquire_t;
-import com.talool.api.thrift.DealOffer_t;
-import com.talool.api.thrift.GiftStatus_t;
-import com.talool.api.thrift.Gift_t;
-import com.talool.api.thrift.MerchantLocation_t;
-import com.talool.api.thrift.ServiceException_t;
-import com.talool.android.LoginActivity;
 import com.talool.android.MainActivity;
 import com.talool.android.R;
 import com.talool.android.cache.DealOfferCache;
@@ -41,6 +32,13 @@ import com.talool.android.util.TaloolUser;
 import com.talool.android.util.TaloolUtil;
 import com.talool.android.util.ThriftHelper;
 import com.talool.android.util.TypefaceFactory;
+import com.talool.api.thrift.Activity_t;
+import com.talool.api.thrift.DealAcquire_t;
+import com.talool.api.thrift.DealOffer_t;
+import com.talool.api.thrift.GiftStatus_t;
+import com.talool.api.thrift.Gift_t;
+import com.talool.api.thrift.MerchantLocation_t;
+import com.talool.api.thrift.ServiceException_t;
 import com.talool.thrift.util.ThriftUtil;
 
 /**
@@ -49,21 +47,17 @@ import com.talool.thrift.util.ThriftUtil;
  * 
  * @TODO Wire up proper exception handling/logging
  */
-public class GiftActivity extends Activity
+public class GiftActivity extends TaloolActivity
 {
 	public static String GIFT_ID_PARAM = "giftId";
 	public static String ACTIVITY_OBJ_PARAM = "activityObj";
 
-	private ThriftHelper client;
 	private String giftId;
 	private Activity_t activity;
 	private TaloolSmartImageView dealImageView;
 	private SmartImageView logoImageView;
 	private SmartImageView dealCreatorImageView;
 	private TextView fromFriend;
-	private DialogFragment df;
-	private Exception exception;
-	private String errorMessage;
 	private LinearLayout linearLayout;
 
 	@Override
@@ -82,12 +76,7 @@ public class GiftActivity extends Activity
 		}
 		catch (TTransportException e)
 		{
-			EasyTracker easyTracker = EasyTracker.getInstance(this);
-
-			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), e), true)
-					.build()
-					);
+			sendExceptionToAnalytics(e);
 		}
 
 		byte[] activityObjBytes = (byte[]) getIntent().getSerializableExtra(ACTIVITY_OBJ_PARAM);
@@ -100,12 +89,7 @@ public class GiftActivity extends Activity
 			}
 			catch (TException e)
 			{
-				EasyTracker easyTracker = EasyTracker.getInstance(this);
-
-				easyTracker.send(MapBuilder
-						.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), e), true)
-						.build()
-						);
+				sendExceptionToAnalytics(e);
 			}
 
 			giftId = activity.getActivityLink().getLinkElement();
@@ -368,7 +352,8 @@ public class GiftActivity extends Activity
 		}
 	}
 
-	public void popupErrorMessage(Exception exception, String errorMessage)
+	@Override
+	protected void popupErrorMessage(Exception exception, String errorMessage)
 	{
 
 		EasyTracker easyTracker = EasyTracker.getInstance(this);
@@ -396,15 +381,6 @@ public class GiftActivity extends Activity
 		});
 		df.show(getFragmentManager(), "dialog");
 
-	}
-
-	private static String getCityStateZip(final MerchantLocation_t location)
-	{
-		final StringBuilder sb = new StringBuilder();
-		sb.append(location.getAddress().getCity()).append(", ").append(location.getAddress().getStateProvinceCounty());
-		sb.append(" ").append(location.getAddress().getZip());
-
-		return sb.toString();
 	}
 
 	@Override

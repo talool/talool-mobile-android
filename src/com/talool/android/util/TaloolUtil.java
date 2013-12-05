@@ -1,6 +1,7 @@
 package com.talool.android.util;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 
 import android.content.Context;
 
@@ -60,4 +61,13 @@ public class TaloolUtil
 				.build()
 				);
 	}
+	
+	public static String moneyFormattedString(double price)
+	{
+		NumberFormat formatter = NumberFormat.getCurrencyInstance();
+		String moneyString = formatter.format(price);
+		moneyString = "Price: " + moneyString;
+		return moneyString;
+	}
+	
 }
