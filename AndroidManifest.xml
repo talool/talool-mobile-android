@@ -141,7 +141,7 @@
             android:label="@string/title_facebook_login" >
         </activity>
         <activity
-            android:name="com.talool.android.activity.PaymentActivitytActivity"
+            android:name="com.talool.android.activity.PaymentActivity"
             android:label="@string/payment"
             android:windowSoftInputMode="stateVisible" >
         </activity>

@@ -18,7 +18,7 @@ public class DealSampleActivity extends TaloolActivity implements DialogClickLis
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.deal_activity_layout);
+		setContentView(R.layout.deal_sample_activity_layout);
 
 		if (TaloolUser.get().getAccessToken() == null)
 		{
@@ -27,7 +27,6 @@ public class DealSampleActivity extends TaloolActivity implements DialogClickLis
 		}
 
 		byte[] dealBytes = (byte[]) getIntent().getSerializableExtra("deal");
-		byte[] merchantBytes = (byte[]) getIntent().getSerializableExtra("merchant");
 
 	}
 

@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -29,6 +30,7 @@ import com.google.analytics.tracking.android.Fields;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.talool.android.R;
+import com.talool.android.adapters.DiscoverDealsAdapter;
 import com.talool.android.adapters.FindDealsAdapter;
 import com.talool.android.dialog.DialogFactory;
 import com.talool.android.dialog.DialogFactory.DialogClickListener;
@@ -38,6 +40,7 @@ import com.talool.android.util.SafeSimpleDecimalFormat;
 import com.talool.android.util.TaloolSmartImageView;
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.ThriftHelper;
+import com.talool.api.thrift.DealOfferGeoSummary_t;
 import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.Deal_t;
 import com.talool.api.thrift.SearchOptions_t;
@@ -274,12 +277,29 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
 		return numberOfMerchants;
 	}
 
+	protected AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener()
+	{
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+				long arg3)
+		{
+			FindDealsAdapter findDealsAdapter = (FindDealsAdapter) arg0.getAdapter();
+			Deal_t deal = (Deal_t) findDealsAdapter.getItem(position);
+		
+			Intent myIntent = new Intent(arg1.getContext(), DealSampleActivity.class);
+			myIntent.putExtra("deal", ThriftUtil.serialize(deal));
+			startActivity(myIntent);
+		}
+	};
+	
 	private void loadListView(int numMerchants)
 	{
 		FindDealsAdapter adapter = new FindDealsAdapter(this,
 				R.layout.find_deal_row, dealOffers);
 		dealOffersAdapter = adapter;
 		dealOffersListView.setAdapter(dealOffersAdapter);
+		//dealOffersListView.setOnItemClickListener(listener);
 		setListViewHeightBasedOnChildren(dealOffersListView);
 		listViewLinearLayout.setVisibility(View.VISIBLE);
 

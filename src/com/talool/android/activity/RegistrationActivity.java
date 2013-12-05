@@ -3,8 +3,6 @@ package com.talool.android.activity;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
-import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.drawable.ClipDrawable;
 import android.os.AsyncTask;
@@ -19,9 +17,6 @@ import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.talool.android.MainActivity;
 import com.talool.android.R;
-import com.talool.android.R.id;
-import com.talool.android.R.layout;
-import com.talool.android.R.string;
 import com.talool.android.dialog.DialogFactory;
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.ThriftHelper;
@@ -29,15 +24,12 @@ import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.Customer_t;
 import com.talool.api.thrift.ServiceException_t;
 
-public class RegistrationActivity extends Activity
+public class RegistrationActivity extends TaloolActivity
 {
-	private static ThriftHelper client;
 	private EditText firstName;
 	private EditText lastName;
 	private EditText email;
 	private EditText password;
-	private Exception exception;
-	private DialogFragment df;
 
 	private class RegisterTask extends AsyncTask<String, Void, CTokenAccess_t>
 	{
@@ -108,15 +100,6 @@ public class RegistrationActivity extends Activity
 		ClipDrawable password_bg = (ClipDrawable) password.getBackground();
 		password_bg.setLevel(1500);
 
-		try
-		{
-			client = new ThriftHelper();
-		}
-		catch (TTransportException e)
-		{
-			popupErrorMessage(e);
-		}
-
 	}
 
 	public void onRegistrationClick(View view)
@@ -144,7 +127,7 @@ public class RegistrationActivity extends Activity
 		return true;
 	}
 
-	public void popupErrorMessage(Exception exception)
+	protected void popupErrorMessage(Exception exception)
 	{
 		if (df != null && !df.isHidden())
 		{
@@ -164,12 +147,7 @@ public class RegistrationActivity extends Activity
 		else
 		{
 			message = exception.getMessage();
-			EasyTracker easyTracker = EasyTracker.getInstance(this);
-
-			easyTracker.send(MapBuilder
-					.createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception), true)
-					.build()
-					);
+			sendExceptionToAnalytics(exception);
 		}
 		df = DialogFactory.getAlertDialog(title, message, label);
 		df.show(getFragmentManager(), "dialog");
@@ -207,15 +185,5 @@ public class RegistrationActivity extends Activity
 	{
 		super.onStop();
 		EasyTracker.getInstance(this).activityStop(this); // Add this method.
-	}
-
-	@Override
-	protected void onResume()
-	{
-		super.onResume();
-		if (df != null && !df.isHidden())
-		{
-			df.dismiss();
-		}
 	}
 }
