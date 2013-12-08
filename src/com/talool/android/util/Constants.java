@@ -10,7 +10,7 @@ public final class Constants
 	// TODO: MAKE SURE THIS IS FALSE FOR PRODUCTION DEPLOYS
 	public static boolean IS_DEVELOPMENT_MODE = true;
 
-	public static final int MAX_DISCOVER_MILES = 500;
+	public static final int MAX_DISCOVER_MILES = 2000;
 	
 	public static final String FORMAT_GENERAL_DATE_TIME = "MM/dd/yyyy hh:mm:ss a";
 	public static final String FORMAT_DECIMAL_MONEY = "$#,###.00";

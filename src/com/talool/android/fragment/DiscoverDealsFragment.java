@@ -187,7 +187,7 @@ public class DiscoverDealsFragment extends Fragment implements PullToRefreshAtta
 					location = new Location_t(userLocation.getLongitude(),userLocation.getLatitude());
 				}
 				CustomerService_t.Client helper = client.getClient();
-				DealOfferGeoSummariesResponse_t response = helper.getDealOfferGeoSummariesWithin(null, Constants.MAX_DISCOVER_MILES, fallbackOptions, fallbackOptions);
+				DealOfferGeoSummariesResponse_t response = helper.getDealOfferGeoSummariesWithin(location, Constants.MAX_DISCOVER_MILES, fallbackOptions, fallbackOptions);
 				results = response.getDealOfferGeoSummaries();
 			}
 			catch (ServiceException_t e)
