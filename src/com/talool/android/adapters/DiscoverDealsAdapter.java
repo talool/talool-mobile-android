@@ -2,8 +2,6 @@ package com.talool.android.adapters;
 
 import java.util.List;
 
-import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
