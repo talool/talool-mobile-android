@@ -3,7 +3,6 @@ package com.talool.android.activity;
 import java.util.List;
 
 import org.apache.thrift.TException;
-import org.apache.thrift.transport.TTransportException;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -27,7 +26,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.talool.android.R;
 import com.talool.android.adapters.MerchantLocationAdapter;
 import com.talool.android.util.TaloolUser;
-import com.talool.android.util.ThriftHelper;
 import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.thrift.util.ThriftUtil;

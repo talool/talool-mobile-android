@@ -2,18 +2,17 @@ package com.talool.android.tasks;
 
 import java.util.List;
 
+import android.os.AsyncTask;
+
 import com.facebook.HttpMethod;
 import com.facebook.Request;
+import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.model.GraphObject;
 import com.facebook.model.GraphUser;
-import com.facebook.Response;
 import com.talool.android.util.FacebookHelper;
 import com.talool.android.util.OGDealAction;
 import com.talool.android.util.OGDealObject;
-import com.talool.api.thrift.DealAcquire_t;
-
-import android.os.AsyncTask;
 
 public class FacebookShareTask extends AsyncTask<Void, Void, Response> {
 	private String giftId;

@@ -2,23 +2,18 @@ package com.talool.android.adapters;
 
 import java.util.List;
 
-import com.talool.api.thrift.DealAcquire_t;
-import com.talool.api.thrift.Deal_t;
-import com.talool.api.thrift.Merchant_t;
-import com.talool.android.R;
-import com.talool.android.util.ApiUtil;
-import com.talool.android.util.TaloolUtil;
-import com.talool.android.util.TypefaceFactory;
-
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.talool.android.R;
+import com.talool.android.util.ApiUtil;
+import com.talool.android.util.TypefaceFactory;
+import com.talool.api.thrift.Deal_t;
 
 public class FindDealsAdapter extends ArrayAdapter<Deal_t> {
 

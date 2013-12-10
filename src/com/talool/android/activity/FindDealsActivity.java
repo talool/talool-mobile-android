@@ -30,7 +30,6 @@ import com.google.analytics.tracking.android.Fields;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.talool.android.R;
-import com.talool.android.adapters.DiscoverDealsAdapter;
 import com.talool.android.adapters.FindDealsAdapter;
 import com.talool.android.dialog.DialogFactory;
 import com.talool.android.dialog.DialogFactory.DialogClickListener;
@@ -40,7 +39,6 @@ import com.talool.android.util.SafeSimpleDecimalFormat;
 import com.talool.android.util.TaloolSmartImageView;
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.ThriftHelper;
-import com.talool.api.thrift.DealOfferGeoSummary_t;
 import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.Deal_t;
 import com.talool.api.thrift.SearchOptions_t;
@@ -190,17 +188,7 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
 		{
 			df.dismiss();
 		}
-
-		if (TaloolUser.get().getLocation() == null)
-		{
-			Intent intent = new Intent(this, LocationSelectActivity.class);
-			startActivity(intent);
-		}
-		else
-		{
-			reloadData();
-		}
-
+		reloadData();
 	}
 
 	@Override
@@ -286,13 +274,13 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
 		{
 			FindDealsAdapter findDealsAdapter = (FindDealsAdapter) arg0.getAdapter();
 			Deal_t deal = (Deal_t) findDealsAdapter.getItem(position);
-		
+
 			Intent myIntent = new Intent(arg1.getContext(), DealSampleActivity.class);
 			myIntent.putExtra("deal", ThriftUtil.serialize(deal));
 			startActivity(myIntent);
 		}
 	};
-	
+
 	private void loadListView(int numMerchants)
 	{
 		FindDealsAdapter adapter = new FindDealsAdapter(this,

@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.thrift.TException;
-import org.apache.thrift.transport.TTransportException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -38,14 +37,7 @@ import com.facebook.Session.OpenRequest;
 import com.facebook.SessionState;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
-import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.loopj.android.image.SmartImageView;
-import com.talool.api.thrift.AcquireStatus_t;
-import com.talool.api.thrift.DealAcquire_t;
-import com.talool.api.thrift.DealOffer_t;
-import com.talool.api.thrift.MerchantLocation_t;
-import com.talool.api.thrift.Merchant_t;
-import com.talool.api.thrift.ServiceException_t;
 import com.talool.android.R;
 import com.talool.android.cache.DealOfferCache;
 import com.talool.android.dialog.DialogFactory;
@@ -63,8 +55,13 @@ import com.talool.android.util.SafeSimpleDateFormat;
 import com.talool.android.util.TaloolSmartImageView;
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.TaloolUtil;
-import com.talool.android.util.ThriftHelper;
 import com.talool.android.util.TypefaceFactory;
+import com.talool.api.thrift.AcquireStatus_t;
+import com.talool.api.thrift.DealAcquire_t;
+import com.talool.api.thrift.DealOffer_t;
+import com.talool.api.thrift.MerchantLocation_t;
+import com.talool.api.thrift.Merchant_t;
+import com.talool.api.thrift.ServiceException_t;
 import com.talool.thrift.util.ThriftUtil;
 
 public class DealActivity extends TaloolActivity

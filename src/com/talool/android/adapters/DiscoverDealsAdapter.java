@@ -2,6 +2,8 @@ package com.talool.android.adapters;
 
 import java.util.List;
 
+import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
+
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -68,8 +70,15 @@ public class DiscoverDealsAdapter extends ArrayAdapter<DealOfferGeoSummary_t> {
 		holder.dealLayout.setBackgroundResource(0);
 		holder.dealSummary.setText(getSummaryText(dealOffer));
 
-		ImageDownloader imageDownloader = new ImageDownloader(holder.dealLayout);
-		imageDownloader.execute(dealOffer.dealOffer.dealOfferBackgroundImage);
+		if(dealOffer.dealOffer.dealOfferBackgroundImage != null)
+		{
+			ImageDownloader imageDownloader = new ImageDownloader(holder.dealLayout);
+			imageDownloader.execute(dealOffer.dealOffer.dealOfferBackgroundImage);
+		}
+		else
+		{
+			holder.dealLayout.setBackgroundResource(R.drawable.deal_offer_bg);
+		}
 		Log.i(dealOffer.dealOffer.dealOfferBackgroundImage);
 
 		return row;

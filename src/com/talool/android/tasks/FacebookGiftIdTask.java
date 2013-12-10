@@ -2,14 +2,13 @@ package com.talool.android.tasks;
 
 import org.apache.thrift.TException;
 
+import android.content.Context;
+import android.os.AsyncTask;
+
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.TaloolUtil;
 import com.talool.android.util.ThriftHelper;
-import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.ServiceException_t;
-
-import android.content.Context;
-import android.os.AsyncTask;
 
 public class FacebookGiftIdTask extends AsyncTask<String, String, String> {
 	private ThriftHelper thriftHelper;

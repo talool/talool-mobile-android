@@ -1,7 +1,6 @@
 package com.talool.android.activity;
 
 import org.apache.thrift.TException;
-import org.apache.thrift.transport.TTransportException;
 
 import android.content.Intent;
 import android.graphics.drawable.ClipDrawable;
@@ -14,12 +13,10 @@ import android.widget.EditText;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
-import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.talool.android.MainActivity;
 import com.talool.android.R;
 import com.talool.android.dialog.DialogFactory;
 import com.talool.android.util.TaloolUser;
-import com.talool.android.util.ThriftHelper;
 import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.Customer_t;
 import com.talool.api.thrift.ServiceException_t;

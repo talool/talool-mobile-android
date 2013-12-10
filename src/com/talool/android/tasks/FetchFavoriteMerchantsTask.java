@@ -6,7 +6,6 @@ import org.apache.thrift.TException;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.talool.android.cache.FavoriteMerchantCache;
 import com.talool.android.util.TaloolUtil;
