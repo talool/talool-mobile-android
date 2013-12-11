@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>talool-mobile-android</name>
-	<comment></comment>
+	<name>talool-android</name>
+	<comment>NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
 	<projects>
-		<project>actionbar-pulltorefresh</project>
-		<project>BraintreeAndroidEncryption</project>
-		<project>FacebookSDK</project>
-		<project>google-play-services_lib</project>
-		<project>VenmoTouch</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
