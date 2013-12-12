@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+        <parent>
+		<groupId>com.talool</groupId>
+		<artifactId>talool-base</artifactId>
+		<version>1.0.4-SNAPSHOT</version>
+	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.talool</groupId>
 	<artifactId>talool-android</artifactId>
@@ -8,6 +13,28 @@
 	<packaging>apk</packaging>
 	<name>talool-android</name>
 
+        <repositories>
+		<repository>
+			<id>talool-maven-thirdparty</id>
+			<url>http://maven.talool.com:8081/nexus/content/repositories/thirdparty/</url>
+			<releases>
+			   <enabled>true</enabled>
+			</releases>
+			<snapshots>
+			   <enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>talool-maven-snapshots</id>
+			<url>http://maven.talool.com:8081/nexus/content/repositories/snapshots/</url>
+			<releases>
+			   <enabled>false</enabled>
+			</releases>
+			<snapshots>
+			   <enabled>true</enabled>
+			</snapshots>
+		</repository>
+        </repositories>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<platform.version>4.3_r2</platform.version>
@@ -48,19 +75,22 @@
 			<version>13</version>
 			<type>jar</type>
 		</dependency>
+                  <dependency>
+      <groupId>android.support</groupId>
+      <artifactId>compatibility-v4</artifactId>
+      <version>19</version>
+    </dependency>
                 <dependency>
     <groupId>com.github.avianey</groupId>
     <artifactId>facebook-android-api</artifactId>
     <version>3.5.2</version>
     <type>apklib</type>
-<!--
     <exclusions>
       <exclusion>
         <artifactId>support-v4</artifactId>
         <groupId>com.google.android</groupId>
       </exclusion>
     </exclusions>
--->
   </dependency>
 		<dependency>
 			<groupId>com.braintree</groupId>
@@ -70,7 +100,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.braintree.android</groupId>
-			<artifactId>venmo-touch</artifactId>
+			<artifactId>venmo-touch-lib</artifactId>
 			<version>1.0.0-b4</version>
 		</dependency>
 		<dependency>
