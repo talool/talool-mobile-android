@@ -124,12 +124,6 @@
             <artifactId>facebook-android-api</artifactId>
             <version>3.5.2</version>
             <type>apklib</type>
-            <exclusions>
-                <exclusion>
-                    <artifactId>support-v4</artifactId>
-                    <groupId>com.google.android</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
 
