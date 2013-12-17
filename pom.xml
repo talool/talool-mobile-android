@@ -16,6 +16,7 @@
         <repository>
             <id>talool-maven-releases</id>
             <url>http://maven.talool.com:8081/nexus/content/repositories/releases/</url>
+
             <releases>
                 <enabled>true</enabled>
             </releases>
