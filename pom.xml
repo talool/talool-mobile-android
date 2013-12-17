@@ -8,11 +8,10 @@
         <version>1.0.4-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>talool-android</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
+    <artifactId>talool-mobile-android</artifactId>
+    <version>1.1.3-SNAPSHOT</version>
     <packaging>apk</packaging>
     <name>talool-android</name>
-
     <repositories>
         <repository>
             <id>talool-maven-releases</id>
@@ -49,6 +48,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <platform.version>4.3_r2</platform.version>
         <android.plugin.version>3.6.0</android.plugin.version>
+        <android.sdk.path>/Applications/Android Studio.app/sdk</android.sdk.path>
     </properties>
     <dependencies>
         <dependency>
@@ -133,12 +133,12 @@
         </dependency>
 
 
-		<dependency>
-			<groupId>com.braintree</groupId>
-			<artifactId>braintree-android-encryption</artifactId>
-			<version>1.0.0-b4</version>
-			<type>apklib</type>
-		</dependency>
+        <dependency>
+            <groupId>com.braintree</groupId>
+            <artifactId>braintree-android-encryption</artifactId>
+            <version>1.0.0-b4</version>
+            <type>apklib</type>
+        </dependency>
 
         <dependency>
             <groupId>com.braintree.android</groupId>
@@ -188,8 +188,6 @@
                     <groupId>commons-logging</groupId>
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
-
-
             </exclusions>
         </dependency>
 
@@ -250,8 +248,89 @@
                     <sdk>
                         <platform>18</platform>
                     </sdk>
+                    <sign>
+                        <debug>false</debug>
+                    </sign>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>sign</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                        <artifactId>android-maven-plugin</artifactId>
+                        <configuration>
+                            <sdk>
+                                <platform>18</platform>
+                            </sdk>
+                            <sign>
+                                <debug>false</debug>
+                            </sign>
+                            <release>true</release>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.1.1</version>
+                        <executions>
+                            <execution>
+                                <id>zipalign</id>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <phase>install</phase>
+                                <configuration>
+                                    <executable>${android.sdk.path}/tools/zipalign</executable>
+                                    <arguments>
+                                        <argument>-f</argument>
+                                        <argument>4</argument>
+                                        <argument>target/${project.build.finalName}.apk</argument>
+                                        <argument>target/${project.build.finalName}-zipped.apk</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jarsigner-plugin</artifactId>
+                        <version>1.2</version>
+                        <executions>
+                            <execution>
+                                <id>signing</id>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <phase>package</phase>
+                                <inherited>true</inherited>
+                                <configuration>
+                                    <archiveDirectory></archiveDirectory>
+                                    <includes>
+                                        <include>target/*.apk</include>
+                                    </includes>
+                                    <keystore>
+                                        keys/talool-release-key.keystore
+                                    </keystore>
+                                    <storepass>${storepass}</storepass>
+                                    <keypass>${keypass}</keypass>
+                                    <alias>talool_release</alias>
+                                    <arguments>
+                                        <argument>-sigalg</argument>
+                                        <argument>MD5withRSA</argument>
+                                        <argument>-digestalg</argument>
+                                        <argument>SHA1</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
