@@ -48,7 +48,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <platform.version>4.3_r2</platform.version>
         <android.plugin.version>3.6.0</android.plugin.version>
-        <android.sdk.path>/Applications/Android Studio.app/sdk</android.sdk.path>
     </properties>
     <dependencies>
         <dependency>
@@ -285,7 +284,7 @@
                                 </goals>
                                 <phase>install</phase>
                                 <configuration>
-                                    <executable>${android.sdk.path}/tools/zipalign</executable>
+                                    <executable>${env.ANDROID_HOME}/tools/zipalign</executable>
                                     <arguments>
                                         <argument>-f</argument>
                                         <argument>4</argument>
