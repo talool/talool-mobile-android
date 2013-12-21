@@ -116,15 +116,6 @@
             <scope>provided</scope>
         </dependency>
 
-
-        <!--
-                <dependency>
-                    <groupId>com.facebook</groupId>
-                    <artifactId>facebook-android-sdk</artifactId>
-                    <version>3.5</version>
-                    <type>apklib</type>
-                </dependency>
-                -->
         <dependency>
             <groupId>com.github.avianey</groupId>
             <artifactId>facebook-android-api</artifactId>
