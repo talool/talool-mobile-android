@@ -278,7 +278,7 @@
                                 <goals>
                                     <goal>exec</goal>
                                 </goals>
-                                <phase>install</phase>
+                                <phase>package</phase>
                                 <configuration>
                                     <executable>${env.ANDROID_HOME}/tools/zipalign</executable>
                                     <arguments>
