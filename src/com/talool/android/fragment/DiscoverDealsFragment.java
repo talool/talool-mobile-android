@@ -36,6 +36,7 @@ import com.talool.api.thrift.DealOfferGeoSummary_t;
 import com.talool.api.thrift.Location_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
+import com.talool.api.thrift.TServiceException_t;
 import com.talool.thrift.util.ThriftUtil;
 
 public class DiscoverDealsFragment extends Fragment implements PullToRefreshAttacher.OnRefreshListener {	
@@ -191,7 +192,7 @@ public class DiscoverDealsFragment extends Fragment implements PullToRefreshAtta
 				DealOfferGeoSummariesResponse_t response = helper.getDealOfferGeoSummariesWithin(location, Constants.MAX_DISCOVER_MILES, fallbackOptions, fallbackOptions);
 				results = response.getDealOfferGeoSummaries();
 			}
-			catch (ServiceException_t e)
+			catch (TServiceException_t e)
 			{
 				exception = e;
 			}

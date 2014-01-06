@@ -212,13 +212,11 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 				noResultsMessage.setVisibility(View.VISIBLE);
 				if (selectedFilter.androidId == R.id.my_deals_filter_favorites)
 				{
-					sb.append(getResources().getString(selectedFilter.androidId == R.id.my_deals_filter_favorites ?
-							R.string.my_deals_no_favorites_prefix : R.string.my_deals_no_favorites_prefix));
+					sb.append(getResources().getString(R.string.my_deals_no_favorites_prefix));
 				}
 				else
 				{
-					sb.append(getResources().getString(selectedFilter.androidId == R.id.my_deals_filter_favorites ?
-							R.string.my_deals_no_favorites_prefix : R.string.my_deals_no_favorites_prefix)).append(" '").
+					sb.append(getResources().getString(R.string.my_deals_no_results_prefix)).append(" '").
 							append(((MenuItem) menu.findItem(selectedFilter.androidId)).getTitle()).append("'");
 				}
 				noResultsMessage.setText(sb.toString());

@@ -3,6 +3,7 @@ package com.talool.android.activity;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.apache.thrift.TException;
 
@@ -178,7 +179,7 @@ public class DealActivity extends TaloolActivity
 			dealActivityButtonLayout.removeAllViewsInLayout();
 			dealActivityButtonLayout.setBackgroundDrawable(null);
 			TextView redemptionCodeTextView = new TextView(DealActivity.this);
-			redemptionCodeTextView.setText("Gifted on " + new Date(deal.getUpdated()).toString());
+            redemptionCodeTextView.setText(TaloolUtil.getGiftedText(deal.updated));
 			redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 			redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
 			redemptionCodeTextView.setTypeface(TypefaceFactory.get().getMarkerFelt(), Typeface.NORMAL);
@@ -198,8 +199,7 @@ public class DealActivity extends TaloolActivity
 			dealActivityButtonLayout.removeAllViewsInLayout();
 			dealActivityButtonLayout.setBackgroundDrawable(null);
 			TextView redemptionCodeTextView = new TextView(DealActivity.this);
-			redemptionCodeTextView.setText("Redeemed on " +
-					new SafeSimpleDateFormat(Constants.FORMAT_GENERAL_DATE_TIME).format(deal.redeemed));
+			redemptionCodeTextView.setText(TaloolUtil.getRedeemedText(deal.redeemed));
 
 			redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 			redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
@@ -809,7 +809,7 @@ public class DealActivity extends TaloolActivity
 					dealActivityButtonLayout.removeAllViewsInLayout();
 					dealActivityButtonLayout.setBackgroundDrawable(null);
 					TextView redemptionCodeTextView = new TextView(DealActivity.this);
-					redemptionCodeTextView.setText("Gifted on " + new Date());
+					redemptionCodeTextView.setText(TaloolUtil.getGiftedText(new Date().getTime()));
 					redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 					redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
 					redemptionCodeTextView.setTypeface(TypefaceFactory.get().getMarkerFelt(), Typeface.NORMAL);

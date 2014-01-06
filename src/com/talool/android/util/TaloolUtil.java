@@ -2,6 +2,8 @@ package com.talool.android.util;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 import android.content.Context;
 
@@ -26,7 +28,8 @@ public class TaloolUtil
 		}
 		else
 		{
-			return "Expires on " + new SafeSimpleDateFormat(Constants.FORMAT_MONTH_DAY_YEAR).format(expirationDate);
+            return "Expires on " + new SafeSimpleDateFormat(Constants.FORMAT_GENERAL_DATE_TIME).format(expirationDate);
+
 		}
 	}
 
@@ -38,7 +41,8 @@ public class TaloolUtil
 		}
 		else
 		{
-			return "Gifted on " + new SafeSimpleDateFormat(Constants.FORMAT_GENERAL_DATE_TIME).format(giftedDate);
+            return "Gifted on " + new SafeSimpleDateFormat(Constants.FORMAT_GENERAL_DATE_TIME).format(giftedDate);
+
 		}
 	}
 
