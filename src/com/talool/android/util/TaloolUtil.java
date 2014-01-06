@@ -28,8 +28,7 @@ public class TaloolUtil
 		}
 		else
 		{
-            return "Expires on " + new SafeSimpleDateFormat(Constants.FORMAT_GENERAL_DATE_TIME).format(expirationDate);
-
+			return "Expires on " + new SafeSimpleDateFormat(Constants.FORMAT_MONTH_DAY_YEAR).format(expirationDate);
 		}
 	}
 
