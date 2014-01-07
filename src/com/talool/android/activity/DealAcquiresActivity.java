@@ -235,15 +235,14 @@ public class DealAcquiresActivity extends TaloolActivity
 				errorMessage = e.getErrorDesc();
 				exception = e;
 			}
-			catch (TTransportException e)
-			{
-				errorMessage = "Make sure you have a network connection";
-				exception = e;
-			}
-			catch (TException e)
-			{
-				exception = e;
-			}
+            catch (TException e)
+            {
+                if( e instanceof TTransportException)
+                {
+                    errorMessage = "Make sure you have a network connection";
+                }
+                exception = e;
+            }
 			catch (Exception e)
 			{
 				exception = e;

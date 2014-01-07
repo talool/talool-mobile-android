@@ -67,7 +67,8 @@ public class WelcomeActivity extends TaloolActivity {
 
 				final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
 				finish();
 			}
 		}
@@ -122,15 +123,14 @@ public class WelcomeActivity extends TaloolActivity {
 				errorMessage = e.getErrorDesc();
 				exception = e;
 			}
-			catch (TTransportException e)
-			{
-				errorMessage = "Make sure you have a network connection";
-				exception = e;
-			}
-			catch (TException e)
-			{
-				exception = e;
-			}
+            catch (TException e)
+            {
+                if( e instanceof TTransportException)
+                {
+                    errorMessage = "Make sure you have a network connection";
+                }
+                exception = e;
+            }
 			return tokenAccess;
 		}
 	}
@@ -158,12 +158,14 @@ public class WelcomeActivity extends TaloolActivity {
 	{
 		Intent myIntent = new Intent(getApplicationContext(), LoginActivity.class);
 		startActivity(myIntent);
-	}
+        finish();
+    }
 	
 	public void onRegistrationClicked(View view)
 	{
 		Intent myIntent = new Intent(getApplicationContext(), RegistrationActivity.class);
 		startActivity(myIntent);
+        finish();
 	}
 	
 	@Override
@@ -260,6 +262,17 @@ public class WelcomeActivity extends TaloolActivity {
 				});
 				request.executeAsync();
 			}
+            else if (state.isOpened() && TaloolUser.get().getAccessToken() != null)
+            {
+                final FetchFavoriteMerchantsTask favMerchantTask = new FetchFavoriteMerchantsTask(getApplicationContext());
+
+                favMerchantTask.execute(new String[] {});
+                final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
 		}
 	}
 

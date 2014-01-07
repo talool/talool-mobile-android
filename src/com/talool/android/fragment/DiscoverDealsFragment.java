@@ -192,14 +192,10 @@ public class DiscoverDealsFragment extends Fragment implements PullToRefreshAtta
 				DealOfferGeoSummariesResponse_t response = helper.getDealOfferGeoSummariesWithin(location, Constants.MAX_DISCOVER_MILES, fallbackOptions, fallbackOptions);
 				results = response.getDealOfferGeoSummaries();
 			}
-			catch (ServiceException_t e)
-			{
-				exception = e;
-			}
-			catch (TException e)
-			{
-				exception = e;
-			}
+            catch (TException e)
+            {
+                exception = e;
+            }
 			catch (Exception e)
 			{
 				exception = e;

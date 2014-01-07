@@ -7,6 +7,8 @@ import android.graphics.drawable.ClipDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -74,8 +76,26 @@ public class RegistrationActivity extends TaloolActivity
 			}
 			return tokenAccess;
 		}
-
 	}
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+            Log.d(this.getClass().getName(), "back button pressed");
+            final Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        else
+        {
+            return super.onKeyDown(keyCode, event);
+        }
+    }
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)

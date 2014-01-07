@@ -104,15 +104,6 @@ public class FavoriteMerchantProvider extends ActionProvider
 
 						return true;
 					}
-					catch (TApplicationException e)
-					{
-						EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
-
-						easyTracker.send(MapBuilder
-								.createException(new StandardExceptionParser(view.getContext(), null).getDescription(Thread.currentThread().getName(),e),true)                                              
-								.build()
-								);
-					}
 					catch (ServiceException_t e)
 					{
 						EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());

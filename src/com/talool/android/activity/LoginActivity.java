@@ -9,6 +9,7 @@ import android.graphics.drawable.ClipDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -73,8 +74,8 @@ public class LoginActivity extends TaloolActivity
 				doPostLogin();
 
 				final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
 				finish();
 			}
 		}
@@ -101,15 +102,14 @@ public class LoginActivity extends TaloolActivity
 				errorMessage = e.getErrorDesc();
 				exception = e;
 			}
-			catch (TTransportException e)
-			{
-				errorMessage = "Make sure you have a network connection";
-				exception = e;
-			}
-			catch (TException e)
-			{
-				exception = e;
-			}
+            catch (TException e)
+            {
+                if( e instanceof TTransportException)
+                {
+                    errorMessage = "Make sure you have a network connection";
+                }
+                exception = e;
+            }
 			return tokenAccess;
 		}
 	}
@@ -176,7 +176,26 @@ public class LoginActivity extends TaloolActivity
 		return ret;
 	}
 
-	@Override
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+            Log.d(this.getClass().getName(), "back button pressed");
+            final Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        else
+        {
+            return super.onKeyDown(keyCode, event);
+        }
+    }
+
+    @Override
 	public void onStart()
 	{
 		super.onStart();
