@@ -107,7 +107,7 @@ public class MainActivity extends Activity
 
 		Tab tab = actionBar.newTab().setText("My Deals").setTabListener(
 				new MyTabListener(this, MyDealsFragment.class.getName()));
-		Tab tab2 = actionBar.newTab().setText("Discover Deals").setTabListener(
+		Tab tab2 = actionBar.newTab().setText("Find Deals").setTabListener(
 				new MyTabListener(this, DiscoverDealsFragment.class.getName()));
 		Tab tab3 = actionBar.newTab().setCustomView(R.layout.activity_tab_layout).setTabListener(
 				new MyTabListener(this, MyActivityFragment.class.getName()));

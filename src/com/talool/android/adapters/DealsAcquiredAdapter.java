@@ -63,7 +63,7 @@ public class DealsAcquiredAdapter extends ArrayAdapter<DealAcquire_t>
 		{
 			holder.dealsAcquiredTitle.setPaintFlags(holder.dealsAcquiredTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 			holder.dealsAcquiredIcon.setTextColor(this.context.getResources().getColor(R.color.gray_icon));
-			holder.dealsAcquiredExpires.setText(TaloolUtil.getRedeemedText(dealAcquire.redeemed));
+			holder.dealsAcquiredExpires.setText(TaloolUtil.getRedeemedTextNoCode(dealAcquire.redeemed));
 
 		}
 

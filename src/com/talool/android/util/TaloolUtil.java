@@ -45,7 +45,7 @@ public class TaloolUtil
 		}
 	}
 
-	public static String getRedeemedText(long redeemedDate)
+	public static String getRedeemedText(String redemptionCode, long redeemedDate)
 	{
 		if (redeemedDate == 0)
 		{
@@ -53,9 +53,21 @@ public class TaloolUtil
 		}
 		else
 		{
-			return "Redeemed on " + new SafeSimpleDateFormat(Constants.FORMAT_GENERAL_DATE_TIME).format(redeemedDate);
+			return "Redemption Code: " +redemptionCode + " issued on " + new SafeSimpleDateFormat(Constants.FORMAT_GENERAL_DATE_TIME).format(redeemedDate);
 		}
 	}
+
+    public static String getRedeemedTextNoCode(long redeemedDate)
+    {
+        if (redeemedDate == 0)
+        {
+            return "";
+        }
+        else
+        {
+            return "Redeemed on " + new SafeSimpleDateFormat(Constants.FORMAT_GENERAL_DATE_TIME).format(redeemedDate);
+        }
+    }
 
 	public static void sendException(Exception e, Context context)
 	{
