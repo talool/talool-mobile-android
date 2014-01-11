@@ -296,7 +296,9 @@ public class PaymentActivity extends Activity implements DialogPositiveClickList
 	public void onDialogPositiveClick(DialogFragment dialog)
 	{
 		final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Bundle b = new Bundle();
+        b.putInt(Constants.TAB_SELECTED_KEY, 0); //Your id
+        intent.putExtras(b); //Put your id to your next Intent
 		startActivity(intent);
 	}
 
