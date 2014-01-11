@@ -16,6 +16,8 @@ public final class Constants
 	public static final String FORMAT_DECIMAL_MONEY = "$#,###.00";
 	public static final String FORMAT_MONTH_DAY_YEAR = "MM/dd/yyyy";
 
+    public static final String TAB_SELECTED_KEY = "TAB_SELECTED";
+
 	public static final int FOOD_CATEGORY_ID = 1;
 	public static final int SHOPPING_CATEGORY_ID = 2;
 	public static final int FUN_CATEGORY_ID = 3;

@@ -29,6 +29,7 @@ import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.Fields;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
+import com.talool.android.MainActivity;
 import com.talool.android.R;
 import com.talool.android.adapters.FindDealsAdapter;
 import com.talool.android.dialog.DialogFactory;
@@ -372,8 +373,12 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
 		//TODO CZ figure out what to do here
 		//		ActionBar bar = this.getActionBar();
 		//		bar.setSelectedNavigationItem(0);
-		super.onBackPressed();   
 
+        final Intent myIntent = new Intent(this, MainActivity.class);
+        Bundle b = new Bundle();
+        b.putInt(Constants.TAB_SELECTED_KEY, 0); //Your id
+        myIntent.putExtras(b); //Put your id to your next Intent
+        startActivity(myIntent);
 	}
 
 	private class RedeemBook extends AsyncTask<Void, Void, Void>

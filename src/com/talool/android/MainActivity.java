@@ -26,6 +26,7 @@ import com.talool.android.fragment.DiscoverDealsFragment;
 import com.talool.android.fragment.MyActivityFragment;
 import com.talool.android.fragment.MyDealsFragment;
 import com.talool.android.tasks.ActivitySupervisor;
+import com.talool.android.util.Constants;
 import com.talool.android.util.NotificationHelper;
 import com.talool.android.util.TaloolUser;
 
@@ -129,7 +130,7 @@ public class MainActivity extends Activity
 	{
 		super.onResume();
 
-		if (TaloolUser.get().getAccessToken() != null && notificationHelper == null)
+        if (TaloolUser.get().getAccessToken() != null && notificationHelper == null)
 		{
 			notificationHelper = new NotificationHelper(getActionBar().getTabAt(2), getApplicationContext());
 		}
@@ -139,7 +140,23 @@ public class MainActivity extends Activity
 			ActivitySupervisor.get().resume();
 		}
 
+        selectPassedInTab();
+
 	}
+
+    private void selectPassedInTab()
+    {
+        Bundle b = getIntent().getExtras();
+        if(b!=null)
+        {
+            int tabSelectedValue = b.getInt(Constants.TAB_SELECTED_KEY);
+            if(tabSelectedValue < 3){
+                getActionBar().setSelectedNavigationItem(tabSelectedValue);
+            }else{
+                getActionBar().setSelectedNavigationItem(0);
+            }
+        }
+    }
 
 	private void showLogin()
 	{
@@ -157,7 +174,13 @@ public class MainActivity extends Activity
 		return true;
 	}
 
-	@Override
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+    }
+
+    @Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
 		boolean ret;

@@ -79,7 +79,8 @@
             android:name="com.talool.android.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask">
         </activity>
         <activity
             android:name="com.talool.android.activity.FindDealsActivity"
