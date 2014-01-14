@@ -9,6 +9,7 @@ import org.apache.thrift.transport.TTransportException;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,8 +22,11 @@ import android.widget.TextView;
 
 import com.talool.android.MainActivity;
 import com.talool.android.R;
+import com.talool.android.TaloolApplication;
 import com.talool.android.dialog.DialogFactory;
 import com.talool.android.dialog.DialogFactory.DialogPositiveClickListener;
+import com.talool.android.persistence.MerchantDao;
+import com.talool.android.tasks.MyDealsTask;
 import com.talool.android.util.Constants;
 import com.talool.android.util.ErrorMessageCache;
 import com.talool.android.util.SafeSimpleDecimalFormat;
@@ -30,6 +34,7 @@ import com.talool.android.util.ThriftHelper;
 import com.talool.android.util.TypefaceFactory;
 import com.talool.api.thrift.Card_t;
 import com.talool.api.thrift.DealOffer_t;
+import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.PaymentDetail_t;
 import com.talool.api.thrift.TNotFoundException_t;
 import com.talool.api.thrift.TServiceException_t;
@@ -47,7 +52,7 @@ import com.venmo.touch.view.VTComboCardView;
  * @author clintz
  * 
  */
-public class PaymentActivity extends Activity implements DialogPositiveClickListener
+public class PaymentActivity extends TaloolActivity implements DialogPositiveClickListener
 {
 	private static final String LOG_TAG = PaymentActivity.class.getSimpleName();
 
@@ -56,7 +61,6 @@ public class PaymentActivity extends Activity implements DialogPositiveClickList
 	private VTComboCardViewController mComboController;
 
 	private DealOffer_t dealOffer;
-	private DialogFragment df;
 	private String errorMessage;
 
 	private class PaymentTask extends AsyncTask<String, Void, TransactionResult_t>
@@ -295,11 +299,32 @@ public class PaymentActivity extends Activity implements DialogPositiveClickList
 	@Override
 	public void onDialogPositiveClick(DialogFragment dialog)
 	{
-		final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        Bundle b = new Bundle();
-        b.putInt(Constants.TAB_SELECTED_KEY, 0); //Your id
-        intent.putExtras(b); //Put your id to your next Intent
-		startActivity(intent);
+        final MerchantDao merchantDao = new MerchantDao(TaloolApplication.getAppContext());
+        final Context context = this;
+        MyDealsTask task = new MyDealsTask(client, this, merchantDao) {
+
+            @Override
+            protected void onPreExecute() {
+                df = DialogFactory.getProgressDialog();
+                df.show(getFragmentManager(), "dialog");
+            }
+
+            @Override
+            protected void onPostExecute(final List<Merchant_t> results) {
+                if (df != null && !df.isHidden()) {
+                    df.dismiss();
+                }
+                if (results != null) {
+                    merchantDao.saveMerchants(results);
+                    final Intent myIntent = new Intent(context, MainActivity.class);
+                    Bundle b = new Bundle();
+                    b.putInt(Constants.TAB_SELECTED_KEY, 0);
+                    myIntent.putExtras(b);
+                    startActivity(myIntent);
+                }
+            }
+        };
+        task.execute(new String[]{});
 	}
 
 	@Override
