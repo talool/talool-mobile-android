@@ -48,7 +48,7 @@ public class DiscoverDealsFragment extends Fragment implements PullToRefreshAtta
 	private DialogFragment df;
 	private DiscoverDealsAdapter discoverDealsAdapter;
 	private PullToRefreshAttacher mPullToRefreshAttacher;
-    private static final String DISCOVER_DEALS_TITLE="Discover Deals";
+    private static final String FIND_DEALS_TITLE="Find Deals";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,7 +58,7 @@ public class DiscoverDealsFragment extends Fragment implements PullToRefreshAtta
 		discoverDealsListView = (ListView) view.findViewById(R.id.discoverDealsListView);
 		createThriftClient();
 
-        getActivity().setTitle(DISCOVER_DEALS_TITLE);
+        getActivity().setTitle(FIND_DEALS_TITLE);
 
 
         mPullToRefreshAttacher = ((MainActivity) getActivity())
@@ -91,7 +91,7 @@ public class DiscoverDealsFragment extends Fragment implements PullToRefreshAtta
 	{
 		super.onStart();
 		EasyTracker easyTracker = EasyTracker.getInstance(getActivity());
-		easyTracker.set(Fields.SCREEN_NAME, DISCOVER_DEALS_TITLE);
+		easyTracker.set(Fields.SCREEN_NAME, FIND_DEALS_TITLE);
 		easyTracker.send(MapBuilder.createAppView().build());
 	}
 
