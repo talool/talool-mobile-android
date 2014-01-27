@@ -13,8 +13,14 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
 
-
+    <permission android:name="com.talool.android.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.talool.android.permission.C2D_MESSAGE" />
 
     <!--
      The following two permissions are not required to use
@@ -33,6 +39,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.Talool" >
+
         <activity android:name="com.venmo.touch.activity.PaymentFormActivity" />
 
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
