@@ -54,10 +54,9 @@ public class MainActivity extends Activity
      * Substitute you own sender ID here. This is the project number you got
      * from the API Console, as described in "Getting Started."
      */
-    private String SENDER_ID = "Your-Sender-ID";
+    private String SENDER_ID = "447579835837";
     private GoogleCloudMessaging gcm;
     private AtomicInteger msgId = new AtomicInteger();
-    private SharedPreferences prefs;
     private Context context;
     private String regid;
 
@@ -152,6 +151,7 @@ public class MainActivity extends Activity
 
 		mPullToRefreshAttacher = PullToRefreshAttacher.get(this);
 
+        context = getApplicationContext();
         // Check device for Play Services APK.
         if (checkPlayServices()) {
             gcm = GoogleCloudMessaging.getInstance(this);
@@ -189,6 +189,8 @@ public class MainActivity extends Activity
             Log.i("GCM", "App version changed.");
             return "";
         }
+
+        Log.i("GCM",registrationId);
         return registrationId;
     }
     /**
@@ -229,17 +231,7 @@ public class MainActivity extends Activity
                         gcm = GoogleCloudMessaging.getInstance(context);
                     }
                     regid = gcm.register(SENDER_ID);
-                    msg = "Device registered, registration ID=" + regid;
-
-                    // You should send the registration ID to your server over HTTP,
-                    // so it can use GCM/HTTP or CCS to send messages to your app.
-                    // The request to your server should be authenticated if your app
-                    // is using accounts.
-                    sendRegistrationIdToBackend();
-
-                    // For this demo: we don't need to send it because the device
-                    // will send upstream messages to a server that echo back the
-                    // message using the 'from' address in the message.
+                    Log.i("GCM","Device registered, registration ID=" + regid);
 
                     // Persist the regID - no need to register again.
                     storeRegistrationId(context, regid);
@@ -273,16 +265,6 @@ public class MainActivity extends Activity
         editor.putString(PROPERTY_REG_ID, regId);
         editor.putInt(PROPERTY_APP_VERSION, appVersion);
         editor.commit();
-    }
-
-    /**
-     * Sends the registration ID to your server over HTTP, so it can use GCM/HTTP
-     * or CCS to send messages to your app. Not needed for this demo since the
-     * device sends upstream messages to a server that echoes back the message
-     * using the 'from' address in the message.
-     */
-    private void sendRegistrationIdToBackend() {
-        // Your implementation here.
     }
 
 	@Override
