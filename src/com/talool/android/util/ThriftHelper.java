@@ -1,5 +1,10 @@
 package com.talool.android.util;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Base64;
+import android.util.Log;
+
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.THttpClient;
@@ -21,12 +26,12 @@ public class ThriftHelper
 		protocol = new TBinaryProtocol(tHttpClient);
 		client = new CustomerService_t.Client(protocol);
 
-		if (TaloolUser.get().getAccessToken() != null)
-		{
-			tHttpClient.setCustomHeader(CustomerServiceConstants.CTOKEN_NAME,
-					TaloolUser.get().getAccessToken().getToken());
+		if (TaloolUser.get().getAccessToken() != null){
+			tHttpClient.setCustomHeader(CustomerServiceConstants.CTOKEN_NAME,TaloolUser.get().getAccessToken().getToken());
 		}
-		tHttpClient.setCustomHeader("User-Agent", AndroidUtils.getUserAgent());
+
+        setCustomHeaders();
+
 	}
 
 	public ThriftHelper(CTokenAccess_t accessToken) throws TTransportException
@@ -37,7 +42,23 @@ public class ThriftHelper
 		tHttpClient.setCustomHeader(CustomerServiceConstants.CTOKEN_NAME, accessToken.getToken());
 		tHttpClient.setCustomHeader("User-Agent", AndroidUtils.getUserAgent());
 
-	}
+        setCustomHeaders();
+
+    }
+
+    private void setCustomHeaders(){
+        if(TaloolUser.get().getGcmDeviceToken() != null){
+            tHttpClient.setCustomHeader(Constants.GCM_TOKEN_HEADER,Base64.encodeToString(TaloolUser.get().getGcmDeviceToken().getBytes(),Base64.NO_WRAP));
+        }
+
+        if(TaloolUser.get().getDeviceToken() != null){
+            tHttpClient.setCustomHeader(Constants.DEVICE_TOKEN_HEADER,TaloolUser.get().getDeviceToken());
+        }
+
+        tHttpClient.setCustomHeader("User-Agent", AndroidUtils.getUserAgent());
+
+
+    }
 
 	public TProtocol getProtocol()
 	{

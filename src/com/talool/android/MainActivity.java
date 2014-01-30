@@ -17,17 +17,16 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.talool.android.R;
 import com.talool.android.activity.LoginActivity;
 import com.talool.android.activity.SettingsActivity;
 import com.talool.android.fragment.DiscoverDealsFragment;
@@ -40,8 +39,6 @@ import com.talool.android.util.TaloolUser;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import javax.naming.NameNotFoundException;
 
 public class MainActivity extends Activity
 {
@@ -159,6 +156,15 @@ public class MainActivity extends Activity
 
             if (regid.isEmpty()) {
                 registerInBackground();
+            }else{
+                TaloolUser.get().setGcmDeviceToken(regid);
+            }
+
+            String deviceId = Settings.Secure.getString(this.getContentResolver(),
+                    Settings.Secure.ANDROID_ID);
+
+            if(deviceId != null){
+                TaloolUser.get().setDeviceToken(deviceId);
             }
         }
 

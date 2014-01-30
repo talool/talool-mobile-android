@@ -43,8 +43,18 @@ public final class TaloolUser
 	private boolean realLocation = false;
 
 	private CTokenAccess_t accessToken;
+    private String gcmDeviceToken;
+    private String deviceToken;
 
-	private TaloolUser()
+    public String getDeviceToken() {
+        return deviceToken;
+    }
+
+    public void setDeviceToken(String deviceToken) {
+        this.deviceToken = deviceToken;
+    }
+
+    private TaloolUser()
 	{
 		BOULDER_LOCATION = new Location("Boulder");
 		BOULDER_LOCATION.setLatitude(40.0176);
@@ -131,10 +141,18 @@ public final class TaloolUser
 		return total;
 	}
 
+    public String getGcmDeviceToken() {
+        return gcmDeviceToken;
+    }
+
+    public void setGcmDeviceToken(String gcmDeviceToken) {
+        this.gcmDeviceToken = gcmDeviceToken;
+    }
+
+
 	public void setAccessToken(final CTokenAccess_t accessToken)
 	{
-		try
-		{
+		try{
 			// persist to memory
 			this.accessToken = accessToken;
 			// persist to disk
