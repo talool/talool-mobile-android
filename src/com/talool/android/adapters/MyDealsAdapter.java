@@ -93,12 +93,18 @@ public class MyDealsAdapter extends ArrayAdapter<Merchant_t>
 			if (TaloolUser.get().getLocation() != null && TaloolUser.get().isRealLocation())
 			{
 				Location merchantLocation = new Location("Talool");
-				merchantLocation.setLatitude(merchant.getLocations().get(0).location.latitude);
-				merchantLocation.setLongitude(merchant.getLocations().get(0).location.longitude);
-				float distance = TaloolUser.get().getLocation().distanceTo(merchantLocation);
-				distance = (float) (distance * 0.00062137);
+                if (merchantLocation != null && merchant.getLocations() != null && merchant.getLocations().get(0) != null && merchant.getLocations().get(0).location != null){
+                    merchantLocation.setLatitude(merchant.getLocations().get(0).location.latitude);
+                    merchantLocation.setLongitude(merchant.getLocations().get(0).location.longitude);
+                    float distance = TaloolUser.get().getLocation().distanceTo(merchantLocation);
+                    distance = (float) (distance * 0.00062137);
 
-				holder.myDealsMerchantDistance.setText(String.valueOf(TaloolUtil.round(distance, 2)) + " miles");
+                    holder.myDealsMerchantDistance.setText(String.valueOf(TaloolUtil.round(distance, 2)) + " miles");
+                }
+                else{
+                    holder.myDealsMerchantDistance.setText("Unknown Location");
+                }
+
 
 			}
 		}

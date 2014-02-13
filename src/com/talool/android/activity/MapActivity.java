@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -26,6 +27,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.talool.android.R;
 import com.talool.android.adapters.MerchantLocationAdapter;
 import com.talool.android.util.TaloolUser;
+import com.talool.api.thrift.Location_t;
 import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.thrift.util.ThriftUtil;
@@ -84,9 +86,12 @@ public class MapActivity extends TaloolActivity
 	{
 		for (MerchantLocation_t loc : merchant.locations)
 		{
-			LatLng location = new LatLng(Double.valueOf(loc.location.latitude), Double.valueOf(loc.location.longitude));
-			MarkerOptions marker = new MarkerOptions().position(location).title(merchant.name);
-			mapView.getMap().addMarker(marker);
+            if(loc.location != null)
+            {
+			    LatLng location = new LatLng(Double.valueOf(loc.location.latitude), Double.valueOf(loc.location.longitude));
+			    MarkerOptions marker = new MarkerOptions().position(location).title(merchant.name);
+			    mapView.getMap().addMarker(marker);
+            }
 		}
 		mapView.getMap().setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener()
 		{
@@ -102,10 +107,18 @@ public class MapActivity extends TaloolActivity
 				return true;
 			}
 		});
-		LatLng location = new LatLng(Double.valueOf(merchant.locations.get(0).location.latitude),
-				Double.valueOf(merchant.locations.get(0).location.longitude));
-		CameraUpdate update = CameraUpdateFactory.newLatLngZoom(location, 13);
-		mapView.getMap().moveCamera(update);
+
+        for (MerchantLocation_t loc : merchant.locations)
+        {
+            if(loc.location != null)
+            {
+		        LatLng location = new LatLng(Double.valueOf(loc.location.latitude),
+				    Double.valueOf(loc.location.longitude));
+		        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(location, 13);
+		        mapView.getMap().moveCamera(update);
+                break;
+            }
+        }
 
 	}
 
@@ -189,9 +202,18 @@ public class MapActivity extends TaloolActivity
 				MerchantLocationAdapter merchantLocationAdapter = (MerchantLocationAdapter) arg0.getAdapter();
 				MerchantLocation_t merchantLocation = (MerchantLocation_t) merchantLocationAdapter.getItem(position);
 
-				LatLng location = new LatLng(Double.valueOf(merchantLocation.location.latitude), Double.valueOf(merchantLocation.location.longitude));
-				CameraUpdate update = CameraUpdateFactory.newLatLngZoom(location, 13);
-				mapView.getMap().moveCamera(update);
+                Location_t loc = merchantLocation.location;
+
+                if(loc != null)
+                {
+				    LatLng location = new LatLng(Double.valueOf(loc.latitude), Double.valueOf(loc.longitude));
+				    CameraUpdate update = CameraUpdateFactory.newLatLngZoom(location, 13);
+				    mapView.getMap().moveCamera(update);
+                }
+                else{
+                    Toast toast = Toast.makeText(getApplicationContext(),"Unable to find location on Map",4);
+                    toast.show();
+                }
 			}
 
 		}
