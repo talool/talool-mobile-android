@@ -23,4 +23,5 @@
 	<color name="teal_lowlight">#028d8a</color>
 	<color name="color_teal">#19BCB9</color>
     <color name="color_grey">#dad7c5</color>
+    <color name="black">#000000</color>
 </resources>
