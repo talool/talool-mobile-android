@@ -30,10 +30,10 @@ public class SettingsActivity extends Activity
 		userName.setText(TaloolUser.get().getAccessToken().getCustomer().getEmail());
 
 		final TextView accountLabel = (TextView) findViewById(R.id.settings_account);
-		accountLabel.setTypeface(TypefaceFactory.get().getMarkerFeltWide());
+		accountLabel.setTypeface(TypefaceFactory.get().getFontAwesome());
 
 		final TextView aboutLabel = (TextView) findViewById(R.id.settings_about);
-		aboutLabel.setTypeface(TypefaceFactory.get().getMarkerFeltWide());
+		aboutLabel.setTypeface(TypefaceFactory.get().getFontAwesome());
 
 		final Button button = (Button) findViewById(R.id.settings_logout_button);
 		button.setOnClickListener(new View.OnClickListener()

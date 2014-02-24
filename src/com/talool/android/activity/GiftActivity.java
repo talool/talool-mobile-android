@@ -269,9 +269,9 @@ public class GiftActivity extends TaloolActivity
 			fromFriend.setText(fromFriendLabel.append(fn).toString());
 
 			summary.setText(gift.getDeal().getSummary());
-			summary.setTypeface(TypefaceFactory.get().getMarkerFeltWide());
+			summary.setTypeface(TypefaceFactory.get().getFontAwesome());
 			details.setText(gift.getDeal().getDetails());
-			details.setTypeface(TypefaceFactory.get().getMarkerFelt());
+			details.setTypeface(TypefaceFactory.get().getFontAwesome());
 
 			dealImageView = (TaloolSmartImageView) findViewById(R.id.dealImage);
 			dealImageView.setImageUrl(gift.getDeal().getImageUrl());

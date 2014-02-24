@@ -424,7 +424,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	private void showHelp()
 	{
 		TextView help = (TextView) view.findViewById(R.id.myDealsHelp);
-		help.setTypeface(TypefaceFactory.get().getMarkerFelt());
+		help.setTypeface(TypefaceFactory.get().getFontAwesome());
 		help.setText(R.string.helpLoadingDeals);
 		Drawable arrowImage = getResources().getDrawable(R.drawable.help_arrow_brown);
 		ImageView arrow2 = (ImageView) view.findViewById(R.id.arrow2);

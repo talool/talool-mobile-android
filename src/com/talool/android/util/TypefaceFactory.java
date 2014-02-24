@@ -40,12 +40,12 @@ public class TypefaceFactory
 	{
 		return fontAwesomeTypeFace;
 	}
-	
+
 	public Typeface getMarkerFelt()
 	{
 		return markerFeltNormalTypeFace;
 	}
-	
+
 	public Typeface getMarkerFeltWide()
 	{
 		return markerFeltWideTypeFace;

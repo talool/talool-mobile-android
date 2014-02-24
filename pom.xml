@@ -127,24 +127,22 @@
             <version>3.5.2</version>
             <type>apklib</type>
         </dependency>
-
-
         <dependency>
             <groupId>com.braintree</groupId>
             <artifactId>braintree-android-encryption</artifactId>
-            <version>1.0.0-b4</version>
+            <version>1.0.0-b5</version>
             <type>apklib</type>
         </dependency>
 
         <dependency>
             <groupId>com.braintree.android</groupId>
             <artifactId>venmo-touch-lib</artifactId>
-            <version>1.0.0-b4</version>
+            <version>1.0.0-b5</version>
         </dependency>
         <dependency>
             <groupId>com.braintree.android</groupId>
             <artifactId>venmo-touch</artifactId>
-            <version>1.0.0-b4</version>
+            <version>1.0.0-b5</version>
             <type>apklib</type>
         </dependency>
         <dependency>

@@ -191,11 +191,11 @@ public class PaymentActivity extends TaloolActivity implements DialogPositiveCli
 		setContentView(R.layout.venmo_payment_activity_layout);
 		if (Constants.IS_DEVELOPMENT_MODE)
 		{
-			touchClient = VenmoTouchClient.forSandboxMerchant(this, Constants.getBTMerchantId(), Constants.getBTMerchantKey());
+			touchClient = VenmoTouchClient.forSandboxMerchant(this, Constants.getBTMerchantId(),null, Constants.getBTMerchantKey());
 		}
 		else
 		{
-			touchClient = VenmoTouchClient.forMerchant(this, Constants.getBTMerchantId(), Constants.getBTMerchantKey());
+			touchClient = VenmoTouchClient.forMerchant(this, Constants.getBTMerchantId(),null, Constants.getBTMerchantKey());
 		}
 
 		comboView = (VTComboCardView) findViewById(R.id.combo_view);

@@ -199,7 +199,9 @@
 	                android:layout_marginTop="30dp"
 	                android:gravity="center"
 	                android:text="Deal Summary"
-	                android:textSize="24sp" />
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif"
+	                android:textSize="22sp" />
 	
 	            <TextView
 	                android:id="@+id/dealValidText"
@@ -209,6 +211,7 @@
 	                android:layout_margin="10dp"
 	                android:gravity="center"
 	                android:text="Deal Valid"
+
 	                android:textSize="14sp" />
 	
 	            <LinearLayout

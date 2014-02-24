@@ -3,7 +3,6 @@ package com.talool.android.activity;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import org.apache.thrift.TException;
 
@@ -49,10 +48,8 @@ import com.talool.android.tasks.FacebookGiftIdTask;
 import com.talool.android.tasks.FacebookShareTask;
 import com.talool.android.util.AlertMessage;
 import com.talool.android.util.AndroidUtils;
-import com.talool.android.util.Constants;
 import com.talool.android.util.ErrorMessageCache;
 import com.talool.android.util.FacebookHelper;
-import com.talool.android.util.SafeSimpleDateFormat;
 import com.talool.android.util.TaloolSmartImageView;
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.TaloolUtil;
@@ -138,7 +135,7 @@ public class DealActivity extends TaloolActivity {
 
             setText();
             loadImages();
-            checkDealRedeemed();
+            checkDealStatus();
             setDealCreatorImage();
 
         } catch (TException e) {
@@ -152,9 +149,9 @@ public class DealActivity extends TaloolActivity {
         dealActivityButtonLayout.setBackgroundDrawable(null);
         TextView redemptionCodeTextView = new TextView(DealActivity.this);
         redemptionCodeTextView.setText("Gifted to " + name);
-        redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
-        redemptionCodeTextView.setTypeface(TypefaceFactory.get().getMarkerFelt(), Typeface.NORMAL);
+        redemptionCodeTextView.setTypeface(TypefaceFactory.get().getFontAwesome(), Typeface.BOLD);
         redemptionCodeTextView.setPadding(30, 0, 30, 0);
         dealActivityButtonLayout.addView(redemptionCodeTextView);
         dealActivityButtonLayout.setGravity(Gravity.CENTER);
@@ -162,39 +159,51 @@ public class DealActivity extends TaloolActivity {
         dealActivityButtonLayout.setPadding(0, 0, 0, 0);
     }
 
-    private void checkDealRedeemed() {
+    private void checkDealStatus() {
 
         if (deal.status == AcquireStatus_t.PENDING_ACCEPT_CUSTOMER_SHARE) {
             dealActivityButtonLayout.removeAllViewsInLayout();
             dealActivityButtonLayout.setBackgroundDrawable(null);
             TextView redemptionCodeTextView = new TextView(DealActivity.this);
             redemptionCodeTextView.setText(TaloolUtil.getGiftedText(deal.updated));
-            redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
-            redemptionCodeTextView.setTypeface(TypefaceFactory.get().getMarkerFelt(), Typeface.NORMAL);
+            redemptionCodeTextView.setTypeface(TypefaceFactory.get().getFontAwesome(), Typeface.BOLD);
             redemptionCodeTextView.setPadding(30, 0, 30, 0);
             dealActivityButtonLayout.addView(redemptionCodeTextView);
             dealActivityButtonLayout.setGravity(Gravity.CENTER);
             dealActivityButtonLayout.setBackgroundColor(getResources().getColor(R.color.orange));
             dealActivityButtonLayout.setPadding(0, 0, 0, 0);
             return;
-        } else if (deal.redeemed == 0) {
-            return;
-        } else {
+        } else if (deal.redeemed != 0) {
             dealActivityButtonLayout.removeAllViewsInLayout();
             dealActivityButtonLayout.setBackgroundDrawable(null);
             TextView redemptionCodeTextView = new TextView(DealActivity.this);
             redemptionCodeTextView.setText(TaloolUtil.getRedeemedText(deal.redemptionCode,deal.redeemed));
             redemptionCodeTextView.setGravity(Gravity.CENTER);
-            redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
-            redemptionCodeTextView.setTypeface(TypefaceFactory.get().getMarkerFelt(), Typeface.NORMAL);
+            redemptionCodeTextView.setTypeface(TypefaceFactory.get().getFontAwesome(), Typeface.BOLD);
             redemptionCodeTextView.setPadding(30, 0, 30, 0);
             dealActivityButtonLayout.addView(redemptionCodeTextView);
             dealActivityButtonLayout.setGravity(Gravity.CENTER);
             dealActivityButtonLayout.setBackgroundColor(getResources().getColor(R.color.orange));
             dealActivityButtonLayout.setPadding(0, 0, 0, 0);
             return;
+        }else if (TaloolUtil.isExpired(deal.deal.expires)){
+            dealActivityButtonLayout.removeAllViewsInLayout();
+            dealActivityButtonLayout.setBackgroundDrawable(null);
+            TextView redemptionCodeTextView = new TextView(DealActivity.this);
+            redemptionCodeTextView.setText(TaloolUtil.getExpiredText(deal.deal.expires));
+            redemptionCodeTextView.setGravity(Gravity.CENTER);
+            redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
+            redemptionCodeTextView.setTypeface(TypefaceFactory.get().getFontAwesome(), Typeface.BOLD);
+            redemptionCodeTextView.setPadding(30, 0, 30, 0);
+            dealActivityButtonLayout.addView(redemptionCodeTextView);
+            dealActivityButtonLayout.setGravity(Gravity.CENTER);
+            dealActivityButtonLayout.setBackgroundColor(getResources().getColor(R.color.orange));
+            dealActivityButtonLayout.setPadding(0, 0, 0, 0);
         }
 
     }
@@ -234,10 +243,13 @@ public class DealActivity extends TaloolActivity {
     private void setText() {
         setAddressText();
         dealSummaryText.setText(deal.deal.summary);
-        dealSummaryText.setTypeface(TypefaceFactory.get().getMarkerFeltWide());
         dealValidText.setText(deal.deal.details);
-        dealValidText.setTypeface(TypefaceFactory.get().getMarkerFelt());
-        dealExpirationText.setText(TaloolUtil.getExpirationText(deal.deal.expires));
+        dealValidText.setTypeface(TypefaceFactory.get().getFontAwesome(), Typeface.NORMAL);
+        if(TaloolUtil.isExpired(deal.deal.expires)){
+            dealExpirationText.setText(TaloolUtil.getExpiredText(deal.deal.expires));
+        }else{
+            dealExpirationText.setText(TaloolUtil.getExpirationText(deal.deal.expires));
+        }
         setTitle(merchant.name);
 
         final TextView useDealIcon = (TextView) findViewById(R.id.useDealIcon);
@@ -282,9 +294,9 @@ public class DealActivity extends TaloolActivity {
                         TextView redemptionCodeTextView = new TextView(DealActivity.this);
                         redemptionCodeTextView.setText(TaloolUtil.getRedeemedText(redemptionCode,new Date().getTime()));
                         redemptionCodeTextView.setGravity(Gravity.CENTER);
-                        redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                        redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                         redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
-                        redemptionCodeTextView.setTypeface(TypefaceFactory.get().getMarkerFelt(), Typeface.NORMAL);
+                        redemptionCodeTextView.setTypeface(TypefaceFactory.get().getFontAwesome(), Typeface.BOLD);
                         redemptionCodeTextView.setPadding(30, 0, 30, 0);
                         dealActivityButtonLayout.addView(redemptionCodeTextView);
                         dealActivityButtonLayout.setGravity(Gravity.CENTER);
@@ -687,9 +699,9 @@ public class DealActivity extends TaloolActivity {
                     dealActivityButtonLayout.setBackgroundDrawable(null);
                     TextView redemptionCodeTextView = new TextView(DealActivity.this);
                     redemptionCodeTextView.setText(TaloolUtil.getGiftedText(new Date().getTime()));
-                    redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+                    redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                     redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
-                    redemptionCodeTextView.setTypeface(TypefaceFactory.get().getMarkerFelt(), Typeface.NORMAL);
+                    redemptionCodeTextView.setTypeface(TypefaceFactory.get().getFontAwesome(), Typeface.BOLD);
                     redemptionCodeTextView.setPadding(30, 0, 30, 0);
                     dealActivityButtonLayout.addView(redemptionCodeTextView);
                     dealActivityButtonLayout.setGravity(Gravity.CENTER);
