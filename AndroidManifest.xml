@@ -40,8 +40,6 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.Talool" >
 
-        <activity android:name="com.venmo.touch.activity.PaymentFormActivity" />
-
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 
         <!-- Splash screen -->
@@ -162,16 +160,6 @@
             android:name="com.talool.android.activity.ForgotPasswordActivity"
             android:label="@string/forgot_password"
             android:windowSoftInputMode="stateVisible" />
-
-        <receiver
-            android:name="com.venmo.touch.service.VenmoTouchUpdateReceiver"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="com.venmo.touch.UPDATE" />
-            </intent-filter>
-        </receiver>
-
-        <service android:name="com.venmo.touch.service.VenmoTouchUpdateService" />
 
         <meta-data
             android:name="venmo_touch.enabled"
