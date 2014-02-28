@@ -7,6 +7,7 @@ import java.util.Observer;
 import org.apache.thrift.transport.TTransportException;
 
 import android.content.Context;
+import android.location.Location;
 import android.util.Log;
 
 import com.talool.android.persistence.ActivityDao;
@@ -15,6 +16,7 @@ import com.talool.android.util.ApiUtil;
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.ThriftHelper;
 import com.talool.api.thrift.Activity_t;
+import com.talool.api.thrift.Location_t;
 import com.talool.api.thrift.SearchOptions_t;
 
 /**
@@ -142,7 +144,13 @@ public final class ActivitySupervisor
 
 					if (hasNetworkConnection)
 					{
-						final List<Activity_t> acts = client.getClient().getActivities(searchOptions);
+                        Location_t location = null;
+                        Location taloolLocation = TaloolUser.get().getLocation();
+
+                        if(TaloolUser.get().isRealLocation() && taloolLocation != null){
+                            location = new Location_t(taloolLocation.getLongitude(),taloolLocation.getLatitude());
+                        }
+						final List<Activity_t> acts = client.getClient().getMessages(searchOptions,location);
 						handleActionsPending(acts, true);
 					}
 				}

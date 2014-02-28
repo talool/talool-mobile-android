@@ -11,6 +11,7 @@ import org.apache.thrift.transport.TTransportException;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
 import android.app.Fragment;
 import android.content.Intent;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.SparseArray;
@@ -30,6 +31,7 @@ import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.talool.api.thrift.ActivityEvent_t;
 import com.talool.api.thrift.Activity_t;
+import com.talool.api.thrift.Location_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.android.MainActivity;
@@ -237,7 +239,12 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 				client.setAccessToken(TaloolUser.get().getAccessToken());
 				SearchOptions_t searchOptions = new SearchOptions_t();
 				searchOptions.setSortProperty("activityDate").setAscending(false);
-				results = client.getClient().getActivities(searchOptions);
+                Location_t location = null;
+                Location taloolLocation = TaloolUser.get().getLocation();
+                if(TaloolUser.get().isRealLocation() && taloolLocation != null){
+                    location = new Location_t(taloolLocation.getLongitude(),taloolLocation.getLatitude());
+                }
+				results = client.getClient().getMessages(searchOptions,location);
 
 			}
 			catch (ServiceException_t e)
