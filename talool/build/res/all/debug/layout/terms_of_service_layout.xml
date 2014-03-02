@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <WebView 
+        android:id="@+id/termsOfService_webview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_vertical_margin" />
+    
+</RelativeLayout><!-- From: file:/Users/zachmanc/Documents/workspace/VenmoTouch/venmoTouch/src/main/res/layout/terms_of_service_layout.xml --><!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/layout/terms_of_service_layout.xml -->

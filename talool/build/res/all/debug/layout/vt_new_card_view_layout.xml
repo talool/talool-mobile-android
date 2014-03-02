@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <com.venmo.touch.view.SingleLineCardEntryView
+        android:id="@+id/addCardView_editor"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp" />
+
+    <com.venmo.touch.view.VTCheckBoxView
+        android:id="@+id/addCardView_saveToVenmoTouch"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addCardView_editor"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/addCardView_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addCardView_saveToVenmoTouch"
+        android:enabled="false"
+        android:text="@string/add_card_submit" />
+
+</RelativeLayout><!-- From: file:/Users/zachmanc/Documents/workspace/VenmoTouch/venmoTouch/src/main/res/layout/vt_new_card_view_layout.xml --><!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/layout/vt_new_card_view_layout.xml -->

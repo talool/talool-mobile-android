@@ -1,0 +1,3 @@
+<cycleInterpolator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:cycles="3" />
+<!-- From: file:/Users/zachmanc/Documents/workspace/VenmoTouch/venmoTouch/src/main/res/anim/shake_interpolator.xml --><!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/anim/shake_interpolator.xml -->

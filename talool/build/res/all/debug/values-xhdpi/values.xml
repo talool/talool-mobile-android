@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values-xhdpi/dimens.xml -->
+    <eat-comment />
+
+    <dimen name="action_bar_tab_font_size">12sp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComFacebookFacebookAndroidSdk352.aar/res/values-xhdpi/values.xml -->
+    <eat-comment />
+
+    <dimen name="com_facebook_picker_divider_width">2px</dimen>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values-xhdpi/dimens.xml -->
+    <eat-comment />
+
+    <dimen name="help_font_size_large">24sp</dimen>
+    <dimen name="login_edittext_text_size">18sp</dimen>
+    <dimen name="login_edittext_vertical_margin_bottom">20dp</dimen>
+    <dimen name="login_edittext_vertical_margin_top">5dp</dimen>
+    <dimen name="login_or_vertical_margin_bottom">30dp</dimen>
+    <dimen name="login_or_vertical_margin_top">30dp</dimen>
+    <dimen name="login_reglink_vertical_margin_top">40dp</dimen>
+    <dimen name="reg_button_vertical_margin_top">20dp</dimen>
+    <dimen name="reg_edittext_vertical_margin_bottom">20dp</dimen>
+    <dimen name="reg_edittext_vertical_margin_top">5dp</dimen>
+
+</resources>

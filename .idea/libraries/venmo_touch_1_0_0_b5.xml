@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="venmo-touch-1.0.0-b5">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res" />
+      <root url="jar://$PROJECT_DIR$/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+   
+    <TextView
+            android:id="@+id/activity_no_results_msg"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="top|center_horizontal"
+            android:textColor="@color/brown"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+        
+    <ListView
+        android:id="@+id/myDealsListView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false" >
+    </ListView>
+    <View
+    	android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
+    
+    <!-- Help Container -->
+    <ScrollView
+        android:layout_width="match_parent"
+    	android:layout_height="fill_parent">
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	    	android:layout_height="fill_parent"
+	    	android:orientation="vertical">
+	    	
+	        <LinearLayout
+		        android:layout_width="match_parent"
+		    	android:layout_height="wrap_content"
+		    	android:layout_marginBottom="20dp"
+		    	android:orientation="horizontal">
+		    	
+	            <ImageView 
+	                android:id="@+id/arrow1"
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
+		            android:contentDescription="@string/arrow_mydeals"/>
+	            <ImageView 
+	                android:id="@+id/arrow2"
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
+		            android:contentDescription="@string/arrow_finddeals"/>
+	            <ImageView 
+	                android:id="@+id/arrow3"
+		            android:layout_width="0dp"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
+		            android:contentDescription="@string/arrow_activity"/>
+	            
+	        </LinearLayout>
+	        
+	        <TextView
+		        android:id="@+id/myDealsHelp"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:gravity="bottom"
+		        android:padding="20dp"
+		        android:textColor="@color/brown" 
+		        android:textSize="@dimen/help_font_size_large" />
+	        
+	    </LinearLayout>
+    </ScrollView>
+
+</LinearLayout><!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/layout/my_deals_fragment.xml -->

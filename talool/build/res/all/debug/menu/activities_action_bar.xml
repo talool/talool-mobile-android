@@ -1,0 +1,46 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+        
+    <item
+        android:id="@+id/activity_filter_root"
+        android:icon="@drawable/fa_filter_white_4848"
+        android:showAsAction="always"
+        android:titleCondensed="Options">
+        <menu>
+            <group android:checkableBehavior="single" >
+                <item
+                    android:id="@+id/activity_filter_all"
+                    android:checked="true"
+                    android:title="@string/activity_filter_all"/>
+                <item
+                    android:id="@+id/activity_filter_gift"
+                    android:enabled="true"
+                    android:icon="@drawable/fa_gift_white_3232"
+                    android:showAsAction="always"
+                    android:title="@string/activity_filter_gifts"
+                    android:visible="true"/>
+                <item
+                    android:id="@+id/activity_filter_transactions"
+                    android:icon="@drawable/fa_money_white_3232"
+                    android:showAsAction="always"
+                    android:title="@string/activity_filter_transactions"
+                    android:visible="true"/>
+                  <item
+                    android:id="@+id/activity_filter_friends"
+                    android:enabled="true"
+                    android:icon="@drawable/fa_friends_white_3232"
+                    android:showAsAction="always"
+                    android:title="@string/activity_filter_friends"
+                    android:visible="true"/>
+                <item
+                    android:id="@+id/activity_filter_messages"
+                    android:enabled="true"
+                    android:icon="@drawable/fa_message_white_3232"
+                    android:showAsAction="always"
+                    android:title="@string/activity_filter_messages"
+                    android:visible="true"/>
+                
+            </group>
+        </menu>
+    </item>
+
+</menu><!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/menu/activities_action_bar.xml -->

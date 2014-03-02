@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/heart"
+          android:title="Heart"
+          android:visible="true"
+          android:enabled="true"
+          android:showAsAction="always" />
+</menu><!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/menu/heart_action_bar.xml -->

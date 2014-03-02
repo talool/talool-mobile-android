@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:id="@+id/cardImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:contentDescription=""
+        android:layout_marginRight="6dp"
+        android:src="@drawable/bt_generic_card" />
+
+    <ViewFlipper
+        android:id="@+id/paymentEntryFlipper"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/cardImage" >
+
+        <RelativeLayout
+            android:id="@+id/paymentEntryGroup1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <com.venmo.touch.view.AccountNumberEditText
+                android:id="@+id/accountNumber"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_account_number"
+                android:inputType="number" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/paymentEntryGroup2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <EditText
+                android:id="@+id/cardLastFour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:editable="false" />
+
+            <com.venmo.touch.view.ExpirationDateEditText
+                android:id="@+id/expiration"
+                android:layout_width="96sp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/cardLastFour" />
+
+            <EditText
+                android:id="@+id/securityCode"
+                android:layout_width="72sp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/expiration"
+                android:hint="@string/hint_cvv"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/zipCode"
+                android:layout_width="128sp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/securityCode"
+                android:hint="@string/hint_zip"
+                android:inputType="numberDecimal"
+                android:maxLength="5" /> <!-- i18n: usa specific length -->
+
+        </RelativeLayout>
+    </ViewFlipper>
+
+</RelativeLayout><!-- From: file:/Users/zachmanc/Documents/workspace/VenmoTouch/venmoTouch/src/main/res/layout/single_line_card_entry_view_layout.xml --><!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/layout/single_line_card_entry_view_layout.xml -->

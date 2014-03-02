@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="left"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/iconView"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/icon_food"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/teal"
+        android:textSize="35sp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight=".9"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:gravity="left"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/myDealsMerchantTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:gravity="top"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+		 <TextView
+		     android:id="@+id/myDealsMerchantLocation"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:layout_marginBottom="5dp"
+		     android:gravity="left"
+		     android:textColor="@color/gray_4"
+		     android:textSize="12sp" />
+		 
+		<TextView
+		    android:id="@+id/myDealsMerchantDistance"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginBottom="5dp"
+		    android:gravity="left"
+		    android:textColor="@color/gray_4"
+		    android:textSize="12sp" />
+        
+    </LinearLayout>
+
+    <com.loopj.android.image.SmartImageView
+        android:id="@+id/myDealsMerchantArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:contentDescription="ArrowIcon"
+        android:cropToPadding="false"
+        android:src="@drawable/navigation_next_item" />
+
+</LinearLayout><!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/layout/mydeals_item_row.xml -->

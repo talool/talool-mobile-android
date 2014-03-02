@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="talool-thrift-1.0.5">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.talool/talool-thrift/1.0.5/f7c93461b2e40115d8d75807fb96569256431b0d/talool-thrift-1.0.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.talool/talool-thrift/1.0.5/9ec693fee13bbec6660d264dabdab7185433acb0/talool-thrift-1.0.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+    	android:id="@+id/activity_no_results_msg"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="top|center_horizontal"
+        android:textColor="@color/brown"
+        android:textSize="14sp"
+        android:visibility="gone"/>
+    
+    <ListView
+        android:id="@+id/myActivityListView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false" >
+    </ListView>
+    <View
+    	android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
+
+</LinearLayout><!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/layout/my_activity_fragment.xml -->

@@ -1,0 +1,58 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:paddingBottom="7sp"
+    android:paddingLeft="9sp"
+    android:paddingRight="9sp"
+    android:paddingTop="7sp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_marginBottom="5dp" >
+
+        <TextView
+            android:id="@+id/payment_deal_offer_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/payment_title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp" />
+        
+        <TextView
+            android:id="@+id/payment_deal_offer_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/payment_price"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp" />
+        
+        <TextView
+            android:id="@+id/payment_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/payment_instructions"
+            android:textSize="17sp" />
+        
+        <com.venmo.touch.view.VTComboCardView
+	        android:id="@+id/combo_view"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:padding="10dp" />
+        
+    </LinearLayout>
+   
+ 
+        
+	    
+
+
+</ScrollView><!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/layout/venmo_payment_activity_layout.xml -->

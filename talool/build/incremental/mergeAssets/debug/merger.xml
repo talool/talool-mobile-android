@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/assets" >
+            <file
+                name="fontawesome-webfont.ttf"
+                path="/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/assets/fontawesome-webfont.ttf" />
+            <file
+                name="MarkerFelt_Normal.ttf"
+                path="/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/assets/MarkerFelt_Normal.ttf" />
+            <file
+                name="MarkerFeltWide_Regular.ttf"
+                path="/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/assets/MarkerFeltWide_Regular.ttf" />
+        </source>
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/debug/assets" />
+    </dataSet>
+
+</merger>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <ListView
+        android:id="@+id/vt_card_picker_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+</RelativeLayout><!-- From: file:/Users/zachmanc/Documents/workspace/VenmoTouch/venmoTouch/src/main/res/layout/vt_card_picker_layout.xml -->

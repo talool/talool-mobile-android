@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/comboCardView_savedCardTitle"
+        style="@style/vtTextHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:text="@string/vt_payment_form_select_card_title" />
+
+    <com.venmo.touch.view.VTSavedCardView
+        android:id="@+id/comboCardView_savedCard"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/comboCardView_savedCardTitle"
+        android:layout_marginBottom="32dp" />
+
+    <TextView
+        android:id="@+id/comboCardView_newCardTitle"
+        style="@style/vtTextHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/comboCardView_savedCard"
+        android:text="@string/vt_payment_form_add_new_card_title" />
+
+    <com.venmo.touch.view.VTNewCardView
+        android:id="@+id/comboCardView_newCard"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/comboCardView_newCardTitle" />
+
+</RelativeLayout><!-- From: file:/Users/zachmanc/Documents/workspace/VenmoTouch/venmoTouch/src/main/res/layout/vt_combo_card_view_layout.xml --><!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/layout/vt_combo_card_view_layout.xml -->

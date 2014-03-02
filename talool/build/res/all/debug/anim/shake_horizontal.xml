@@ -1,0 +1,6 @@
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="500"
+    android:fromXDelta="0"
+    android:interpolator="@anim/shake_interpolator"
+    android:toXDelta="10" />
+<!-- From: file:/Users/zachmanc/Documents/workspace/VenmoTouch/venmoTouch/src/main/res/anim/shake_horizontal.xml --><!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/anim/shake_horizontal.xml -->

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp" >
+
+    <Button
+        android:id="@+id/card_chooser_choose_card"
+        style="@style/vt_button.small.default"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="@string/select_card_button_text" />
+
+    <TextView
+        android:id="@+id/card_chooser_card_nickname"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/card_chooser_choose_card"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/default_text_color"
+        android:textSize="@dimen/primary_text_size"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/card_chooser_card_description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_chooser_card_nickname"
+        android:layout_toLeftOf="@id/card_chooser_choose_card"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/secondary_text_color"
+        android:textSize="@dimen/secondary_text_size"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/card_chooser_name_for_adapter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+</RelativeLayout><!-- From: file:/Users/zachmanc/Documents/workspace/VenmoTouch/venmoTouch/src/main/res/layout/payment_method_list_item.xml -->

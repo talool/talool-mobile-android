@@ -1,0 +1,59 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.8.+'
+    }
+}
+
+apply plugin: 'android'
+apply plugin: 'maven'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.0"
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 18
+    }
+
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+repositories {
+    maven {
+        url "http://maven.talool.com:8081/nexus/content/repositories/central/"
+        }
+    maven {
+        url "http://maven.talool.com:8081/nexus/content/repositories/releases/"
+    }
+    maven {
+        url "http://maven.talool.com:8081/nexus/content/repositories/snapshots/"
+    }
+    maven {
+        url "http://maven.talool.com:8081/nexus/content/repositories/thirdparty/"
+    }
+    maven {
+        url  "http://mente.github.io/facebook-api-android-aar"
+    }
+}
+
+dependencies {
+    compile 'com.github.chrisbanes.actionbarpulltorefresh:library:0.7@aar'
+    compile 'com.google.android.analytics:analytics:2.0'
+    compile 'com.talool:talool-thrift:1.0.5'
+    compile 'com.braintree.android:venmo-touch:1.0.0-b5@aar'
+    compile 'com.google.android.gms:play-services:4.0.30'
+    compile 'com.google.android.maps:maps:18_r3'
+    compile 'com.loopj.android:android-smart-image-view:1.0.0'
+    compile 'com.facebook:facebook-android-sdk:3.5.2+@aar'
+}

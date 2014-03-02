@@ -1,0 +1,716 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/analytics.xml -->
+    <eat-comment />
+
+    <bool name="ga_autoActivityTracking">true</bool>
+    <bool name="ga_reportUncaughtExceptions">true</bool>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/colors.xml -->
+    <eat-comment />
+
+    <color name="actionbar_text">#FFFFFFFF</color>
+    <color name="actionbartab_text">#CCDAD7C5</color>
+    <color name="black">#000000</color>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <color name="blue_link">#8888ff</color>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/colors.xml -->
+    <eat-comment />
+
+    <color name="brown">#ff4D4040</color>
+    <color name="color_grey">#dad7c5</color>
+    <color name="color_teal">#19BCB9</color>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComFacebookFacebookAndroidSdk352.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <color name="com_facebook_blue">#3B5998</color>
+    <color name="com_facebook_loginview_text_color">#FFFFFF</color>
+    <color name="com_facebook_picker_search_bar_background">#f5f5f7</color>
+    <color name="com_facebook_picker_search_bar_text">#bcbdc2</color>
+    <color name="com_facebook_usersettingsfragment_connected_shadow_color">#000000</color>
+    <color name="com_facebook_usersettingsfragment_connected_text_color">#FFFFFF</color>
+    <color name="com_facebook_usersettingsfragment_not_connected_text_color">#A6AED7</color>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComGoogleAndroidGmsPlayServices4030.aar/res/values/colors.xml -->
+    <eat-comment />
+
+    <color name="common_action_bar_splitter">#d2d2d2</color>
+    <color name="common_signin_btn_dark_text_default">@android:color/white</color>
+    <color name="common_signin_btn_dark_text_disabled">#FFAAAAAA</color>
+    <color name="common_signin_btn_dark_text_focused">@android:color/white</color>
+    <color name="common_signin_btn_dark_text_pressed">@android:color/white</color>
+    <color name="common_signin_btn_default_background">#FFDD4B39</color>
+    <color name="common_signin_btn_light_text_default">#FF737373</color>
+    <color name="common_signin_btn_light_text_disabled">#FFAAAAAA</color>
+    <color name="common_signin_btn_light_text_focused">#FF737373</color>
+    <color name="common_signin_btn_light_text_pressed">@android:color/white</color>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <color name="dark_gray">#777777</color>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/colors.xml -->
+    <eat-comment />
+
+    <color name="dark_tan">#ffccccb3</color>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <color name="default_text_color">#4a4a4a</color>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/colors.xml -->
+    <eat-comment />
+
+    <color name="gray">#C0C0C0</color>
+    <color name="gray_1">#dad7c5</color>
+    <color name="gray_2">#b9ac97</color>
+    <color name="gray_3">#998675</color>
+    <color name="gray_4">#837165</color>
+    <color name="gray_icon">#b9ac97</color>
+    <color name="green">#50b948</color>
+    <color name="locationBackground">#ffbfb399</color>
+    <color name="orange">#f15a24</color>
+    <color name="orange_dark">#ffcc5926</color>
+    <color name="pressed_talool">#CCDAD7C5</color>
+    <color name="red">#ed1c24</color>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <color name="secondary_text_color">#724a4a4a</color>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/colors.xml -->
+    <eat-comment />
+
+    <color name="tan">#fff2f2e6</color>
+    <color name="teal">#19BCB9</color>
+    <color name="teal_dark">#128d8b</color>
+    <color name="teal_highlight">#0af7f3</color>
+    <color name="teal_lowlight">#028d8a</color>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <color name="vt_black_25pct">#40000000</color>
+    <color name="vt_blue">#ff4094d1</color>
+    <color name="vt_blue_dark">#2D6892</color>
+    <color name="vt_button_underline">#224e6d</color>
+    <color name="vt_dark_gray">#888888</color>
+    <color name="vt_white_50pct">#80ffffff</color>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/colors.xml -->
+    <eat-comment />
+
+    <color name="white">#FFFFFFFF</color>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComGoogleAndroidGmsPlayServices4030.aar/res/values/ads_attrs.xml -->
+    <eat-comment />
+
+    <declare-styleable name="AdsAttrs">
+
+        <!--
+    The size of the ad. It must be one of BANNER, FULL_BANNER, LEADERBOARD,
+    MEDIUM_RECTANGLE, SMART_BANNER, WIDE_SKYSCRAPER, or
+    &lt;width&gt;x&lt;height&gt;.
+        -->
+        <attr name="adSize" format="string" />
+
+        <!-- The ad unit ID. -->
+        <attr name="adUnitId" format="string" />
+    </declare-styleable>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComGoogleAndroidGmsPlayServices4030.aar/res/values/maps_attrs.xml -->
+    <eat-comment />
+
+    <declare-styleable name="MapAttrs">
+        <attr name="mapType" format="enum">
+            <enum name="none" value="0" />
+            <enum name="normal" value="1" />
+            <enum name="satellite" value="2" />
+            <enum name="terrain" value="3" />
+            <enum name="hybrid" value="4" />
+        </attr>
+        <attr name="cameraBearing" format="float" />
+        <attr name="cameraTargetLat" format="float" />
+        <attr name="cameraTargetLng" format="float" />
+        <attr name="cameraTilt" format="float" />
+        <attr name="cameraZoom" format="float" />
+        <attr name="uiCompass" format="boolean" />
+        <attr name="uiRotateGestures" format="boolean" />
+        <attr name="uiScrollGestures" format="boolean" />
+        <attr name="uiTiltGestures" format="boolean" />
+        <attr name="uiZoomControls" format="boolean" />
+        <attr name="uiZoomGestures" format="boolean" />
+        <attr name="useViewLifecycle" format="boolean" />
+        <attr name="zOrderOnTop" format="boolean" />
+    </declare-styleable>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComFacebookFacebookAndroidSdk352.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <declare-styleable name="com_facebook_friend_picker_fragment">
+        <attr name="multi_select" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="com_facebook_login_view">
+        <attr name="confirm_logout" format="boolean" />
+        <attr name="fetch_user_info" format="boolean" />
+        <attr name="login_text" format="string" />
+        <attr name="logout_text" format="string" />
+    </declare-styleable>
+    <declare-styleable name="com_facebook_picker_fragment">
+        <attr name="show_pictures" format="boolean" />
+        <attr name="extra_fields" format="string" />
+        <attr name="show_title_bar" format="boolean" />
+        <attr name="title_text" format="string" />
+        <attr name="done_button_text" format="string" />
+        <attr name="title_bar_background" format="reference" />
+        <attr name="done_button_background" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="com_facebook_place_picker_fragment">
+        <attr name="radius_in_meters" format="integer" />
+        <attr name="results_limit" format="integer" />
+        <attr name="search_text" format="string" />
+        <attr name="show_search_box" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="com_facebook_profile_picture_view">
+        <attr name="preset_size">
+
+            <!-- Keep in sync with constants in ProfilePictureView -->
+            <enum name="small" value="-2" />
+            <enum name="normal" value="-3" />
+            <enum name="large" value="-4" />
+        </attr>
+        <attr name="is_cropped" format="boolean" />
+    </declare-styleable>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/dimens.xml -->
+    <eat-comment />
+
+    <dimen name="action_bar_tab_font_size">12sp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComFacebookFacebookAndroidSdk352.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <dimen name="com_facebook_loginview_compound_drawable_padding">12dp</dimen>
+    <dimen name="com_facebook_loginview_padding_bottom">12dp</dimen>
+    <dimen name="com_facebook_loginview_padding_left">12dip</dimen>
+    <dimen name="com_facebook_loginview_padding_right">16dp</dimen>
+    <dimen name="com_facebook_loginview_padding_top">12dp</dimen>
+    <dimen name="com_facebook_loginview_text_size">16.0sp</dimen>
+    <dimen name="com_facebook_picker_place_image_size">64dp</dimen>
+    <dimen name="com_facebook_profilepictureview_preset_size_large">180dp</dimen>
+    <dimen name="com_facebook_profilepictureview_preset_size_normal">100dp</dimen>
+    <dimen name="com_facebook_profilepictureview_preset_size_small">50dp</dimen>
+    <dimen name="com_facebook_usersettingsfragment_profile_picture_height">64dp</dimen>
+    <dimen name="com_facebook_usersettingsfragment_profile_picture_width">64dp</dimen>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/dimens.xml -->
+    <eat-comment />
+
+    <dimen name="help_font_size_large">42sp</dimen>
+    <dimen name="login_edittext_text_size">18sp</dimen>
+    <dimen name="login_edittext_vertical_margin_bottom">20dp</dimen>
+    <dimen name="login_edittext_vertical_margin_top">5dp</dimen>
+    <dimen name="login_or_vertical_margin_bottom">30dp</dimen>
+    <dimen name="login_or_vertical_margin_top">30dp</dimen>
+    <dimen name="login_reglink_vertical_margin_top">40dp</dimen>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <dimen name="primary_text_size">14sp</dimen>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/dimens.xml -->
+    <eat-comment />
+
+    <dimen name="reg_button_vertical_margin_top">20dp</dimen>
+    <dimen name="reg_edittext_vertical_margin_bottom">20dp</dimen>
+    <dimen name="reg_edittext_vertical_margin_top">5dp</dimen>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <dimen name="secondary_text_size">10sp</dimen>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComFacebookFacebookAndroidSdk352.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <drawable name="com_facebook_picker_default_separator_color">#33464c59</drawable>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComGithubChrisbanesActionbarpulltorefreshLibrary07.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <item name="ptr_content" type="id"/>
+    <item name="ptr_progress" type="id"/>
+    <item name="ptr_text" type="id"/>
+    <item name="ptr_text_opaque_bg" type="id"/>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/analytics.xml -->
+    <eat-comment />
+
+    <integer name="ga_dispatchPeriod">3</integer>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComGoogleAndroidGmsPlayServices4030.aar/res/values/version.xml -->
+    <eat-comment />
+
+    <integer name="google_play_services_version">4030500</integer>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="accept_gift">Accept Gift</string>
+    <string name="access_code">access code</string>
+    <string name="action_pw_reset">Change Password</string>
+    <string name="action_settings">Settings</string>
+    <string name="activity">Activity</string>
+    <string name="activity_filter_all">Show All</string>
+    <string name="activity_filter_friends">Friends</string>
+    <string name="activity_filter_gifts">Gifts</string>
+    <string name="activity_filter_messages">Messages</string>
+    <string name="activity_filter_transactions">Transactions</string>
+    <string name="activity_no_results_prefix">You have no activities of type</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <string name="add_card_submit">Submit</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="alert_new_deals_message">Would you like to see your new deals?</string>
+    <string name="alert_new_deals_title">You\'ve Got Deals!</string>
+    <string name="alert_sent_password_reset_message">You will receive an email with instructions.</string>
+    <string name="alert_sent_password_reset_title">Your reset request has been sent</string>
+    <string name="app_name">Talool</string>
+    <string name="arrow_activity">Arrow to My Activity</string>
+    <string name="arrow_content_desc">click link</string>
+    <string name="arrow_finddeals">Arrow to Find Deals</string>
+    <string name="arrow_mydeals">Arrow to My Deals</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComGoogleAndroidGmsPlayServices4030.aar/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="auth_client_needs_enabling_title">      An application requires Google Play Services to be enabled.</string>
+    <string name="auth_client_needs_installation_title">      An application requires installation of Google Play Services.</string>
+    <string name="auth_client_needs_update_title">      An application requires an update for Google Play Services.</string>
+    <string name="auth_client_play_services_err_notification_msg">Google Play services error</string>
+    <string name="auth_client_requested_by_msg">Requested by <ns1:g id="app_name">%1$s</ns1:g></string>
+    <string name="auth_client_using_bad_version_title">      An application attempted to use a bad version of Google Play Services.</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="buy_now">Buy Now</string>
+    <string name="cancel">Cancel</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/analytics.xml -->
+    <eat-comment />
+
+    <string name="com.talool.mobile.android.activity.DealAcquiresActivity">Deal Acquires</string>
+    <string name="com.talool.mobile.android.activity.DealActivity">Deal</string>
+    <string name="com.talool.mobile.android.activity.GiftActivity">Gift</string>
+    <string name="com.talool.mobile.android.activity.LoginActivity">Login</string>
+    <string name="com.talool.mobile.android.activity.MainActivity">Main</string>
+    <string name="com.talool.mobile.android.activity.MapActivity">Map</string>
+    <string name="com.talool.mobile.android.activity.RegistrationActivity">Registration</string>
+    <string name="com.talool.mobile.android.activity.SettingsActivity">Settings</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComFacebookFacebookAndroidSdk352.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <string name="com_facebook_choose_friends">Choose Friends</string>
+    <string name="com_facebook_dialogloginactivity_ok_button">OK</string>
+    <string name="com_facebook_internet_permission_error_message">WebView login requires INTERNET permission</string>
+    <string name="com_facebook_internet_permission_error_title">AndroidManifest Error</string>
+    <string name="com_facebook_loading">Loading...</string>
+    <string name="com_facebook_loginview_cancel_action">Cancel</string>
+    <string name="com_facebook_loginview_log_in_button">Log in with Facebook</string>
+    <string name="com_facebook_loginview_log_out_action">Log out</string>
+    <string name="com_facebook_loginview_log_out_button">Log out</string>
+    <string name="com_facebook_loginview_logged_in_as">Logged in as: %1$s</string>
+    <string name="com_facebook_loginview_logged_in_using_facebook">Logged in using Facebook</string>
+    <string name="com_facebook_logo_content_description">Facebook Logo</string>
+    <string name="com_facebook_nearby">Nearby</string>
+    <string name="com_facebook_picker_done_button_text">Done</string>
+    <string name="com_facebook_placepicker_subtitle_catetory_only_format">%1$s</string>
+    <string name="com_facebook_placepicker_subtitle_format">%1$s • %2$,d were here</string>
+    <string name="com_facebook_placepicker_subtitle_were_here_only_format">%1$,d were here</string>
+    <string name="com_facebook_requesterror_password_changed">Your Facebook password has changed. Please log into this app again to reconnect your Facebook account.</string>
+    <string name="com_facebook_requesterror_permissions">This app doesn’t have permission to do this. To change permissions, try logging into the app again.</string>
+    <string name="com_facebook_requesterror_reconnect">Please log into this app again to reconnect your Facebook account.</string>
+    <string name="com_facebook_requesterror_relogin">Please log into this app again to reconnect your Facebook account.</string>
+    <string name="com_facebook_requesterror_web_login">Your Facebook account is locked. Please log into www.facebook.com to continue.</string>
+    <string name="com_facebook_usersettingsfragment_log_in_button">Log in…</string>
+    <string name="com_facebook_usersettingsfragment_logged_in">Logged in</string>
+    <string name="com_facebook_usersettingsfragment_not_logged_in">Not logged in</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComGoogleAndroidGmsPlayServices4030.aar/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="common_google_play_services_enable_button" msgid="2523291102206661146">Enable Google Play services</string>
+    <string name="common_google_play_services_enable_text" msgid="227660514972886228">This app won\'t work unless you enable Google Play services.</string>
+    <string name="common_google_play_services_enable_title" msgid="5122002158466380389">Enable Google Play services</string>
+    <string name="common_google_play_services_install_button" msgid="7153882981874058840">Get Google Play services</string>
+    <string name="common_google_play_services_install_text_phone" msgid="2122112764540849864">This app won\'t run without Google Play services, which are missing from your phone.</string>
+    <string name="common_google_play_services_install_text_tablet" msgid="7351599665250191022">This app won\'t run without Google Play services, which are missing from your tablet.</string>
+    <string name="common_google_play_services_install_title" msgid="7215213145546190223">Get Google Play services</string>
+    <string name="common_google_play_services_invalid_account_text">The specified account does not exist on this device. Please choose a different account.</string>
+    <string name="common_google_play_services_invalid_account_title">Invalid Account</string>
+    <string name="common_google_play_services_network_error_text">A data connection is required to connect to Google Play services.</string>
+    <string name="common_google_play_services_network_error_title">Network Error</string>
+    <string name="common_google_play_services_unknown_issue">Unknown issue with Google Play services.</string>
+    <string name="common_google_play_services_unsupported_date_text">The date on the device appears to be incorrect. Please check the date on the device.</string>
+    <string name="common_google_play_services_unsupported_text">Google Play services, which some of your applications rely on, is not supported by your device. Please contact the manufacturer for assistance.</string>
+    <string name="common_google_play_services_unsupported_title">Google Play services</string>
+    <string name="common_google_play_services_update_button" msgid="6556509956452265614">Update</string>
+    <string name="common_google_play_services_update_text" msgid="9053896323427875356">This app won\'t run unless you update Google Play services.</string>
+    <string name="common_google_play_services_update_title" msgid="1788179980625863495">Update Google Play services</string>
+    <string name="common_signin_button_text">Sign in</string>
+    <string name="common_signin_button_text_long">Sign in with Google</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <string name="consent_text_how_it_works"><u>How it Works</u></string>
+    <string name="consent_text_preamble">Save card with Venmo for use in other apps.  By doing so you agree to the Terms of Service.</string>
+    <string name="consent_text_terms_of_service"><u>Terms of Service</u></string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="deal_activity_confirm_redeem_message">Would you like to redeem this deal?</string>
+    <string name="dealsString">If you purchased a paper copy of the PayBack Book, there is an access code inside for free access to these digital deals.</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <string name="dialog_how_it_works_next">Next</string>
+    <string name="dialog_how_it_works_prev">Previous</string>
+    <string name="dialog_how_it_works_title">How it Works</string>
+    <string name="dialog_tos_close">Close</string>
+    <string name="dialog_tos_title">Terms of Service</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="email">Email Address</string>
+    <string name="error_access_code_message">Please check your code and try again.</string>
+    <string name="error_access_code_title">Error Activating Code</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_loading_deals">Error Loading Deals</string>
+    <string name="error_loading_gifts">Error Loading Gift</string>
+    <string name="error_loading_maps">Error Loading Maps</string>
+    <string name="error_login">Error Logging In</string>
+    <string name="error_password_reset_auth_failed">Authentication after password reset failed</string>
+    <string name="error_passwords_dont_match">The passwords don\'t match</string>
+    <string name="error_reg">Error Registering</string>
+    <string name="facebook_app_id">342739092494152</string>
+    <string name="find_deal_buy_now">Buy Now For</string>
+    <string name="finddeals">Find Deals</string>
+    <string name="first_name">First Name</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/analytics.xml -->
+    <eat-comment />
+
+    <string name="ga_trackingId">UA-43245216-1</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="hello_world">Hello world!</string>
+    <string name="helpLoadingDeals">It looks like you haven\'t loaded any deals yet!\n\nNo problem.  If you have a Payback Book access code, you can take care of that on the Find Deals screen.\n\nIf you were sent a gift, you can accept that on the Activity screen.</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <string name="hint_account_number">1111 2222 3333 4444</string>
+    <string name="hint_cvv">CVV</string>
+    <string name="hint_expiration">MM/YY</string>
+    <string name="hint_zip">Zip Code</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="icon_envelope"></string>
+    <string name="icon_envelope_alt"></string>
+    <string name="icon_facebook"></string>
+    <string name="icon_food"></string>
+    <string name="icon_gift"></string>
+    <string name="icon_glass"></string>
+    <string name="icon_heart"></string>
+    <string name="icon_heart_empty"></string>
+    <string name="icon_info_sign"></string>
+    <string name="icon_lock"></string>
+    <string name="icon_map_marker"></string>
+    <string name="icon_money"></string>
+    <string name="icon_phone"></string>
+    <string name="icon_shopping_cart"></string>
+    <string name="icon_thumbs_down_alt"></string>
+    <string name="icon_thumbs_up_alt"></string>
+    <string name="icon_ticket"></string>
+    <string name="instruction_send_password_reset">Enter your email below and you will be sent password reset instructions.</string>
+    <string name="last_name">Last Name</string>
+    <string name="load_deals">Load Deals</string>
+    <string name="locationSelect">Can you please tell us which Payback Book you are interested in?</string>
+    <string name="login">Log in</string>
+    <string name="login_with_talool">Log in with Talool</string>
+    <string name="my_deals_filter_all">Show All</string>
+    <string name="my_deals_filter_favorites">Favorites</string>
+    <string name="my_deals_filter_food">Food</string>
+    <string name="my_deals_filter_fun">Fun</string>
+    <string name="my_deals_filter_shopping">Shopping</string>
+    <string name="my_deals_no_favorites_prefix">You have no favorite merchants</string>
+    <string name="my_deals_no_results_prefix">You have no deals with merchants of type</string>
+    <string name="mydeals">My Deals</string>
+    <string name="newToTalool">Register a New Account</string>
+    <string name="new_deal_received"></string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+    <string name="or">OR</string>
+    <string name="password">Password</string>
+    <string name="paybackText">this is managed by the admin</string>
+    <string name="payment">Payment</string>
+    <string name="payment_instructions">Please provide your method of payment below.</string>
+    <string name="payment_new_card">Pay with a New Card</string>
+    <string name="payment_price">Price: </string>
+    <string name="payment_saved_card">Pay with a Saved Card</string>
+    <string name="payment_title">Payment</string>
+    <string name="payment_trans_success_message">You have successfully purchased \'%1$s\'</string>
+    <string name="payment_trans_success_positive_label">View Your Deals</string>
+    <string name="payment_trans_success_title">Transaction Success</string>
+    <string name="please_confirm">Please Confirm</string>
+    <string name="prompt_confirm">Confirm New Password</string>
+    <string name="prompt_password">New Password</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComGithubChrisbanesActionbarpulltorefreshLibrary07.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <string name="pull_to_refresh_pull_label">Pull to refresh…</string>
+    <string name="pull_to_refresh_refreshing_label">Loading…</string>
+    <string name="pull_to_refresh_release_label">Release to refresh…</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="register">Register</string>
+    <string name="registration">Registration</string>
+    <string name="reject_gift">Reject Gift</string>
+    <string name="request_password_change">Request Password Change</string>
+    <string name="retry">Retry</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <string name="select_card_button_text">USE</string>
+    <string name="select_card_dialog_button_cancel">Cancel</string>
+    <string name="select_card_dialog_button_verify">Submit</string>
+    <string name="select_card_dialog_title_verify">Verify Card</string>
+    <string name="select_card_progress_text">Verifying...</string>
+    <string name="select_card_string_unknown_merchant">Unknown Merchant</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="settings">Settings</string>
+    <string name="settings_about">About Talool</string>
+    <string name="settings_account">Account</string>
+    <string name="settings_copyright">Copyright \u00A9 2013 Talool, Inc</string>
+    <string name="settings_logout_label">Sign Out</string>
+    <string name="settings_merchant_services">Merchant Services</string>
+    <string name="settings_merchant_services_url">http://www.talool.com/services/merchants</string>
+    <string name="settings_privacy_policy">Privacy Policy</string>
+    <string name="settings_privacy_policy_url">http://www.talool.com/privacy</string>
+    <string name="settings_publisher_services">Publisher Services</string>
+    <string name="settings_publisher_services_url">http://www.talool.com/services/publishers</string>
+    <string name="settings_send_feedback">Send Feedback</string>
+    <string name="settings_send_feedback_url">https://www.talool.com/feedback</string>
+    <string name="settings_terms_of_service">Terms of Service</string>
+    <string name="settings_terms_of_service_url">http://www.talool.com/termsofservice</string>
+    <string name="settings_username_label">Username</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <string name="title_activity_payment">PaymentActivity</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="title_activity_reset_password">Enter New Password</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="title_facebook_login">Authenticating with Facebook</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <string name="vt_card_picker_title">Available Cards</string>
+    <string name="vt_consent_text_email"><u>Email Usage</u></string>
+    <string name="vt_dialog_button_ok">Got it!</string>
+    <string name="vt_dialog_email_text">If you save your card with Venmo, the email _EMAIL_ will also be saved.</string>
+    <string name="vt_dialog_email_title">Email Address</string>
+    <string name="vt_logout_dialog_button_cancel">Cancel</string>
+    <string name="vt_logout_dialog_button_ok">Logout</string>
+    <string name="vt_logout_dialog_progress_title">Logging out...</string>
+    <string name="vt_logout_dialog_text">Your session with Venmo Touch will be ended, and previously-saved card information will be deleted.</string>
+    <string name="vt_logout_dialog_title">Confirm Logout</string>
+    <string name="vt_payment_form_add_new_card_title">Add New Card</string>
+    <string name="vt_payment_form_select_card_title">Select Existing Card</string>
+    <string name="vt_saved_card_learn_more">LEARN MORE</string>
+    <string name="vt_tutorial_download_venmo_button_text">Download Venmo</string>
+    <string name="vt_tutorial_download_venmo_text">To manage your cards and security settings for Venmo payments in apps like this one, download Venmo for free.</string>
+    <string name="vt_tutorial_download_venmo_title">Get Venmo</string>
+    <string name="vt_tutorial_existing_user_text">In a past purchase on this device, you stored this card with Venmo. Now you can use the same card without re-typing it.</string>
+    <string name="vt_tutorial_existing_user_title">Saved Card</string>
+    <string name="vt_tutorial_logout_text">To stop suggesting this card for purchases in apps on this device, <u>tap here</u>.</string>
+    <string name="vt_tutorial_new_user_text">When you securely store your card with Venmo, you can use it again in other apps on this device without re-typing it.</string>
+    <string name="vt_tutorial_new_user_title">Save Your Fingers Some Typing!</string>
+    <string name="vt_tutorial_saving_card_text">When you save a new card with Venmo, it is encrypted and stored securely on our servers.</string>
+    <string name="vt_tutorial_saving_card_title">Saving a Card</string>
+    <string name="vt_tutorial_title">How it Works</string>
+    <string name="vt_tutorial_using_card_text">Other apps will not receive your card info until you tap "Use Card" and answer a security question.</string>
+    <string name="vt_tutorial_using_card_title">Using a Card</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="welcome">Welcome</string>
+    <string name="yes">Yes</string>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/styles.xml -->
+    <eat-comment />
+
+    <style name="ActionBar.Solid.Talool" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:background">@drawable/ab_solid_talool</item>
+        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_talool</item>
+        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_talool</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Talool</item>
+        <item name="android:titleTextStyle">@style/TitleTextStyle.Talool</item>
+    </style>
+
+    <style name="ActionBar.Transparent.Talool" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@drawable/ab_transparent_talool</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Talool</item>
+    </style>
+
+    <style name="ActionBarTabStyle.Talool" parent="@android:style/Widget.Holo.Light.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_ab_talool</item>
+    </style>
+
+    <style name="ActionButton.CloseMode.Talool" parent="@android:style/Widget.Holo.Light.ActionButton.CloseMode">
+        <item name="android:background">@drawable/btn_cab_done_talool</item>
+    </style>
+
+    <style name="AlertButtonBarWithBackground" parent="@android:style/Holo.ButtonBar.AlertDialog">
+        <item name="android:background">@color/teal</item>
+    </style>
+
+    <style name="AlertDialogTheme.Talool" parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
+        <item name="android:buttonBarStyle">@style/AlertButtonBarWithBackground</item>
+    </style>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <style name="AppBaseTheme">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/values/styles.xml -->
+    <eat-comment />
+
+    <style name="DropDownListView.Talool" parent="@android:style/Widget.Holo.Light.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_talool</item>
+        <item name="android:textAppearance">@style/MenuTextStyle.Talool</item>
+    </style>
+
+    <style name="DropDownNav.Talool" parent="@android:style/Widget.Holo.Light.Spinner">
+        <item name="android:background">@drawable/spinner_background_ab_talool</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_talool</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_talool</item>
+        <item name="android:textAppearance">@style/MenuTextStyle.Talool</item>
+        <item name="android:textColor">@color/orange</item>
+    </style>
+
+    <style name="MenuTextStyle.Talool" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Menu">
+        <item name="android:textColor">@color/actionbar_text</item>
+    </style>
+
+    <style name="PasswordResetFormContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="PopupMenu.Talool" parent="@android:style/Widget.Holo.Light.ListPopupWindow">
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_talool</item>
+        <item name="android:textAppearance">@style/MenuTextStyle.Talool</item>
+    </style>
+
+    <style name="ProgressBar.Talool" parent="@android:style/Widget.Holo.Light.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_talool</item>
+    </style>
+
+    <style name="TabTextStyle.Talool" parent="@android:style/Widget.Holo.Light.ActionBar.TabText">
+        <item name="android:textColor">@color/actionbartab_text</item>
+        <item name="android:textSize">@dimen/action_bar_tab_font_size</item>
+    </style>
+
+    <style name="Theme.Talool" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_talool</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu.Talool</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Talool</item>
+        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Talool</item>
+        <item name="android:actionDropDownStyle">@style/DropDownNav.Talool</item>
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.Talool</item>
+        <item name="android:actionModeBackground">@drawable/cab_background_top_talool</item>
+        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_talool</item>
+        <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Talool</item>
+        <item name="android:actionBarTabTextStyle">@style/TabTextStyle.Talool</item>
+        <item name="android:itemTextAppearance">@style/MenuTextStyle.Talool</item>
+        <item name="android:actionButtonStyle">@style/MenuTextStyle.Talool</item>
+        <item name="android:alertDialogTheme">@style/AlertDialogTheme.Talool</item>
+    </style>
+
+    <style name="Theme.Talool.Widget" parent="@android:style/Theme.Holo">
+        <item name="android:popupMenuStyle">@style/PopupMenu.Talool</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Talool</item>
+    </style>
+
+    <style name="TitleTextStyle.Talool" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/actionbar_text</item>
+    </style>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComGithubChrisbanesActionbarpulltorefreshLibrary07.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <style name="Widget.PullToRefresh.ProgressBar.Horizontal.Center" parent="android:Widget.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/ptr_progress_horizontal_holo_center</item>
+        <item name="android:indeterminateDrawable">            @drawable/ptr_progress_indeterminate_horizontal_holo</item>
+        <item name="android:minHeight">4dip</item>
+        <item name="android:maxHeight">4dip</item>
+    </style>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComFacebookFacebookAndroidSdk352.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <style name="com_facebook_loginview_default_style" parent="@android:style/Widget.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/com_facebook_button_blue</item>
+        <item name="android:textColor">@color/com_facebook_loginview_text_color</item>
+        <item name="android:textSize">@dimen/com_facebook_loginview_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingLeft">@dimen/com_facebook_loginview_padding_left</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="com_facebook_loginview_silver_style" parent="@android:style/Widget.Button">
+        <item name="android:width">205dp</item>
+        <item name="android:height">44dp</item>
+        <item name="android:background">@drawable/com_facebook_loginbutton_silver</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#4B5164</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/values/values.xml -->
+    <eat-comment />
+
+    <style name="vtTextHeader">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/default_text_color</item>
+    </style>
+
+    <style name="vt_button">
+        <item name="android:textSize">@dimen/primary_text_size</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="vt_button.small">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+    </style>
+
+    <style name="vt_button.small.default">
+        <item name="android:background">@drawable/vt_blue_selector</item>
+    </style>
+
+</resources>
