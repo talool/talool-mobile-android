@@ -9,7 +9,7 @@
     <LinearLayout 
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:background="@color/brown"
+	    android:background="@color/deal_acquires_background"
 	    android:orientation="vertical">
 	    
     <LinearLayout
@@ -42,7 +42,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="0dp"
                 android:text="@string/icon_map_marker"
-                android:textColor="@color/tan"
+                android:textColor="@color/deal_acquires_button_text"
                 android:textSize="32sp" />
 
             <TextView
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="Open Map"
-                android:textColor="@color/tan"
+                android:textColor="@color/deal_acquires_button_text"
                 android:textSize="12sp" />
 
         </LinearLayout>
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:text="@string/icon_phone"
-                android:textColor="@color/tan"
+                android:textColor="@color/deal_acquires_button_text"
                 android:textSize="32sp" />
 
             <TextView
@@ -82,7 +82,7 @@
                 android:layout_gravity="bottom|center_horizontal"
                 android:layout_marginTop="5dp"
                 android:text="Call"
-                android:textColor="@color/tan"
+                android:textColor="@color/deal_acquires_button_text"
                 android:textSize="12sp" />
 
         </LinearLayout>
@@ -106,7 +106,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="0dp"
                 android:text="@string/icon_info_sign"
-                android:textColor="@color/tan"
+                android:textColor="@color/deal_acquires_button_text"
                 android:textSize="32sp" />
 
             <TextView
@@ -116,7 +116,7 @@
                 android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:text="Visit Website"
-                android:textColor="@color/tan"
+                android:textColor="@color/deal_acquires_button_text"
                 android:textSize="12sp" />
 
         </LinearLayout>
@@ -145,7 +145,7 @@
             android:id="@+id/dealsAcquiredList"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
+            android:background="@color/deal_acquires_listView_background"
             android:footerDividersEnabled="false"
             android:headerDividersEnabled="false"
             android:orientation="vertical" >

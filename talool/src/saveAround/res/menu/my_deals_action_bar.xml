@@ -1,0 +1,46 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+      <item
+        android:id="@+id/my_deals_filter_root"
+        android:icon="@drawable/fa_filter_white_4848"
+        android:showAsAction="always"
+        android:titleCondensed="Options">
+        <menu>
+
+            <group android:checkableBehavior="single" >
+                <item
+                    android:id="@+id/my_deals_filter_all"
+                    android:checked="true"
+                    android:title="@string/my_deals_filter_all"/>
+                <item
+                    android:id="@+id/my_deals_filter_favorites"
+                    android:enabled="true"
+                    android:icon="@drawable/fa_heart_white_3232"
+                    android:showAsAction="always"
+                    android:title="@string/my_deals_filter_favorites"
+                    android:visible="true"/>
+                <item
+                    android:id="@+id/my_deals_filter_food"
+                    android:icon="@drawable/fa_food_white_3232"
+                    android:showAsAction="always"
+                    android:title="@string/my_deals_filter_food"
+                    android:visible="true"/>
+                  <item
+                    android:id="@+id/my_deals_filter_shopping"
+                    android:enabled="true"
+                    android:icon="@drawable/fa_shopping_white_3232"
+                    android:showAsAction="always"
+                    android:title="@string/my_deals_filter_shopping"
+                    android:visible="true"/>
+                <item
+                    android:id="@+id/my_deals_filter_fun"
+                    android:enabled="true"
+                    android:icon="@drawable/fa_fun_white_3232"
+                    android:showAsAction="always"
+                    android:title="@string/my_deals_filter_fun"
+                    android:visible="true"/>   
+            </group>
+            </menu>
+        </item>
+
+</menu>

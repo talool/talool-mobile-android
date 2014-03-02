@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<clip xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:drawable="@drawable/edittext_teal"
-    android:clipOrientation="vertical"
-    android:gravity="bottom"/>
-<!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/src/main/res/drawable/clipped_edittext.xml -->

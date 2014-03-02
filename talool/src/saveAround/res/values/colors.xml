@@ -24,9 +24,4 @@
 	<color name="color_teal">#19BCB9</color>
     <color name="color_grey">#dad7c5</color>
     <color name="black">#000000</color>
-    <color name="alert_background">@color/white</color>
-    <color name="alert_textColor">@color/brown</color>
-    <color name="deal_acquires_background">@color/brown</color>
-    <color name="deal_acquires_button_text">@color/tan</color>
-    <color name="deal_acquires_listView_background">@color/white</color>
 </resources>

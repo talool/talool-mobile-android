@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:state_focused="true" android:state_pressed="false" android:drawable="@color/vt_blue_dark" />
-    <item android:state_focused="true" android:state_pressed="true" android:drawable="@color/vt_blue_dark" />
-    <item android:state_focused="false" android:state_pressed="true" android:drawable="@color/vt_blue_dark" />
-    <item android:drawable="@color/vt_blue" />
-
-</selector>
-<!-- From: file:/Users/zachmanc/Documents/workspace/VenmoTouch/venmoTouch/src/main/res/drawable/vt_blue_selector.xml --><!-- From: file:/Users/zachmanc/Documents/workspace/talool-mobile-android-gradle/talool/build/exploded-bundles/ComBraintreeAndroidVenmoTouch100B5.aar/res/drawable/vt_blue_selector.xml -->
