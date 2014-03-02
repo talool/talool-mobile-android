@@ -80,10 +80,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="build.gradle" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/talool/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="1" selection-start="1604" selection-end="1604" vertical-scroll-proportion="2.1695762" vertical-offset="0" max-vertical-offset="960">
+            <state line="35" column="11" selection-start="751" selection-end="751" vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="960">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Constants.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/util/Constants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="19" selection-start="87" selection-end="87" vertical-scroll-proportion="0.27061856" vertical-offset="0" max-vertical-offset="1470">
               <folding />
             </state>
           </provider>
@@ -1298,7 +1307,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5554" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="048cc379437f67db" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="IceCream" />
   </component>
   <component name="RunManager" selected="Android Application.talool">
@@ -1497,7 +1506,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="940" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1511,7 +1520,7 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49585798" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4923077" sideWeight="0.76484376" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4923077" sideWeight="0.76484376" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -1791,7 +1800,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="1" selection-start="1604" selection-end="1604" vertical-scroll-proportion="2.1695762" vertical-offset="0" max-vertical-offset="960">
+        <state line="35" column="11" selection-start="751" selection-end="751" vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="960">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/util/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="19" selection-start="87" selection-end="87" vertical-scroll-proportion="0.27061856" vertical-offset="0" max-vertical-offset="1470">
           <folding />
         </state>
       </provider>
