@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.talool.android.R;
 import com.talool.android.util.AndroidUtils;
+import com.talool.android.util.ApiUtil;
+import com.talool.android.util.Constants;
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.TypefaceFactory;
 
@@ -60,28 +62,28 @@ public class SettingsActivity extends Activity
 		switch (view.getId())
 		{
 			case R.id.settings_privacy_layout:
-				url = getResources().getString(R.string.settings_privacy_policy_url);
+				url = Constants.getPrivacyUrl();
 				title = getResources().getString(R.string.settings_privacy_policy);
 				break;
 
 			case R.id.settings_terms_of_use_layout:
-				url = getResources().getString(R.string.settings_terms_of_service_url);
+				url = Constants.getTermsUrl();
 				title = getResources().getString(R.string.settings_terms_of_service);
 				break;
 
 			case R.id.settings_merchant_services_layout:
-				url = getResources().getString(R.string.settings_merchant_services_url);
+				url = Constants.getMerchantsUrl();
 				title = getResources().getString(R.string.settings_merchant_services);
 				break;
 
 			case R.id.settings_publisher_services_layout:
-				url = getResources().getString(R.string.settings_publisher_services_url);
+				url = Constants.getPublishersUrl();
 				title = getResources().getString(R.string.settings_publisher_services);
 				break;
 
 			case R.id.settings_send_feedback_layout:
 				final StringBuilder sb = new StringBuilder();
-				sb.append(getResources().getString(R.string.settings_send_feedback_url));
+				sb.append(Constants.getFeedbackUrl());
 				sb.append("?fromEmail=" + TaloolUser.get().getAccessToken().getCustomer().getEmail());
 				sb.append("&feedbackSrc=");
 				sb.append(AndroidUtils.getReleaseInfo());

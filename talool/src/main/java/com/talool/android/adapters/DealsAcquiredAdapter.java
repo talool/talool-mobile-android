@@ -53,7 +53,7 @@ public class DealsAcquiredAdapter extends ArrayAdapter<DealAcquire_t>
 		final DealAcquire_t dealAcquire = data.get(position);
 
 		holder.dealsAcquiredIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
-		holder.dealsAcquiredIcon.setTextColor(this.context.getResources().getColor(R.color.teal));
+		holder.dealsAcquiredIcon.setTextColor(this.context.getResources().getColor(R.color.default_icon_color));
 
 		holder.dealsAcquiredTitle.setText(dealAcquire.deal.getTitle());
 		holder.dealsAcquiredExpires.setText(TaloolUtil.getExpirationText(dealAcquire.deal.expires));

@@ -101,13 +101,13 @@ public final class ApiUtil
 		switch (category.categoryId)
 		{
 			case Constants.FOOD_CATEGORY_ID:
-				return R.color.teal;
+				return R.color.food_icon_color;
 
 			case Constants.SHOPPING_CATEGORY_ID:
-				return R.color.orange;
+				return R.color.shopping_icon_color;
 
 			case Constants.FUN_CATEGORY_ID:
-				return R.color.green;
+				return R.color.fun_icon_color;
 
 			default:
 				return R.color.gray_icon;

@@ -96,6 +96,8 @@
         <item name="android:textSize">@dimen/action_bar_tab_font_size</item>
     </style>
 
+    <style name="tabStyle" parent="@style/TabTextStyle.Talool"></style>
+
     <style name="MenuTextStyle.Talool" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Menu">
         <item name="android:textColor">@color/actionbar_text</item>
     </style>

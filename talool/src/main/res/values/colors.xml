@@ -9,7 +9,7 @@
 	<color name="white">#FFFFFFFF</color>
 	<color name="pressed_talool">#CCDAD7C5</color>
 	<color name="actionbar_text">#FFFFFFFF</color>
-	<color name="actionbartab_text">#CCDAD7C5</color>
+	<color name="actionbartab_text">@color/pressed_talool</color>
 	<color name="locationBackground">#ffbfb399</color>
 	<color name="brown">#ff4D4040</color>
 	<color name="teal">#19BCB9</color>
@@ -29,4 +29,11 @@
     <color name="deal_acquires_background">@color/brown</color>
     <color name="deal_acquires_button_text">@color/tan</color>
     <color name="deal_acquires_listView_background">@color/white</color>
+    <color name="my_deals_icon_color">@color/teal</color>
+    <color name="default_icon_color">@color/teal</color>
+
+    <color name="food_icon_color">@color/teal</color>
+    <color name="shopping_icon_color">@color/orange</color>
+    <color name="fun_icon_color">@color/green</color>
+
 </resources>

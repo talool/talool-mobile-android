@@ -12,7 +12,7 @@
 	    android:layout_height="fill_parent"
 	    android:text="ACTIVITY"
 	    android:gravity="center_vertical|left"
-        android:textAppearance="@style/TabTextStyle.Talool"
+        android:textAppearance="@style/tabStyle"
 	    android:id="@+id/activity_text"/>
 	    		
 	<RelativeLayout android:layout_width="24dp"

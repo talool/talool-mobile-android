@@ -13,7 +13,7 @@
         android:layout_marginTop="10dp"
         android:text="@string/icon_food"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/teal"
+        android:textColor="@color/my_deals_icon_color"
         android:textSize="35sp" />
 
     <LinearLayout

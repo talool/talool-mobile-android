@@ -18,105 +18,67 @@
      limitations under the License.
 -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <style name="Theme.Talool" parent="@android:style/Theme.Holo.Light">
-        <item name="android:actionBarItemBackground">@drawable/selectable_background_talool</item>
-        <item name="android:popupMenuStyle">@style/PopupMenu.Talool</item>
-        <item name="android:dropDownListViewStyle">@style/DropDownListView.Talool</item>
-        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Talool</item>
-        <item name="android:actionDropDownStyle">@style/DropDownNav.Talool</item>
-        <item name="android:actionBarStyle">@style/ActionBar.Solid.Talool</item>
-        <item name="android:actionModeBackground">@drawable/cab_background_top_talool</item>
-        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_talool</item>
-        <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Talool</item>
-        <item name="android:actionBarTabTextStyle">@style/TabTextStyle.Talool</item>
-        <item name="android:itemTextAppearance">@style/MenuTextStyle.Talool</item>
-        <item name="android:actionButtonStyle">@style/MenuTextStyle.Talool</item>
-        <item name="android:alertDialogTheme">@style/AlertDialogTheme.Talool</item>
+<resources>
+    
+    <style name="Theme.Savearound" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_savearound</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu.Savearound</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Savearound</item>
+        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Savearound</item>
+        <item name="android:actionDropDownStyle">@style/DropDownNav.Savearound</item>
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.Savearound</item>
+        <item name="android:actionModeBackground">@drawable/cab_background_top_savearound</item>
+        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_savearound</item>
+        <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Savearound</item>
+    </style>
+    
+    <style name="ActionBar.Solid.Savearound" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:background">@drawable/ab_solid_savearound</item>
+        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_savearound</item>
+        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_savearound</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Savearound</item>
+    </style>
+    
+    <style name="ActionBar.Transparent.Savearound" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@drawable/ab_transparent_savearound</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Savearound</item>
+    </style>
+    
+    <style name="PopupMenu.Savearound" parent="@android:style/Widget.Holo.Light.ListPopupWindow">
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_savearound</item>
+    </style>
+    
+    <style name="DropDownListView.Savearound" parent="@android:style/Widget.Holo.Light.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_savearound</item>
+    </style>
+    
+    <style name="ActionBarTabStyle.Savearound" parent="@android:style/Widget.Holo.Light.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_ab_savearound</item>
     </style>
 
-    <style name="ActionBar.Solid.Talool" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
-        <item name="android:background">@drawable/ab_solid_talool</item>
-        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_talool</item>
-        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_talool</item>
-        <item name="android:progressBarStyle">@style/ProgressBar.Talool</item>
-        <item name="android:titleTextStyle">@style/TitleTextStyle.Talool</item>
-    </style>
-
-    <style name="ActionBar.Transparent.Talool" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">@drawable/ab_transparent_talool</item>
-        <item name="android:progressBarStyle">@style/ProgressBar.Talool</item>
-    </style>
-
-    <style name="PopupMenu.Talool" parent="@android:style/Widget.Holo.Light.ListPopupWindow">
-        <item name="android:popupBackground">@drawable/menu_dropdown_panel_talool</item>
-        <item name="android:textAppearance">@style/MenuTextStyle.Talool</item>
-    </style>
-
-    <style name="DropDownListView.Talool" parent="@android:style/Widget.Holo.Light.ListView.DropDown">
-        <item name="android:listSelector">@drawable/selectable_background_talool</item>
-        <item name="android:textAppearance">@style/MenuTextStyle.Talool</item>
-    </style>
-
-    <style name="ActionBarTabStyle.Talool" parent="@android:style/Widget.Holo.Light.ActionBar.TabView">
-        <item name="android:background">@drawable/tab_indicator_ab_talool</item>
-    </style>
-
-    <style name="DropDownNav.Talool" parent="@android:style/Widget.Holo.Light.Spinner">
-        <item name="android:background">@drawable/spinner_background_ab_talool</item>
-        <item name="android:popupBackground">@drawable/menu_dropdown_panel_talool</item>
-        <item name="android:dropDownSelector">@drawable/selectable_background_talool</item>
-        <item name="android:textAppearance">@style/MenuTextStyle.Talool</item>
-        <item name="android:textColor">@color/orange</item>
-    </style>
-
-    <style name="ProgressBar.Talool" parent="@android:style/Widget.Holo.Light.ProgressBar.Horizontal">
-        <item name="android:progressDrawable">@drawable/progress_horizontal_talool</item>
-    </style>
-
-    <style name="ActionButton.CloseMode.Talool" parent="@android:style/Widget.Holo.Light.ActionButton.CloseMode">
-        <item name="android:background">@drawable/btn_cab_done_talool</item>
-    </style>
-
-    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
-    <style name="Theme.Talool.Widget" parent="@android:style/Theme.Holo">
-        <item name="android:popupMenuStyle">@style/PopupMenu.Talool</item>
-        <item name="android:dropDownListViewStyle">@style/DropDownListView.Talool</item>
-    </style>
-
-    <!-- action bar title text -->
-    <style name="TitleTextStyle.Talool" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/actionbar_text</item>
-    </style>
-
-    <!-- action bar tab text -->
-    <style name="TabTextStyle.Talool" parent="@android:style/Widget.Holo.Light.ActionBar.TabText">
+    <style name="tabStyle" parent="@android:style/Widget.Holo.Light.ActionBar.TabText">
         <item name="android:textColor">@color/actionbartab_text</item>
         <item name="android:textSize">@dimen/action_bar_tab_font_size</item>
     </style>
 
-    <style name="MenuTextStyle.Talool" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Menu">
-        <item name="android:textColor">@color/actionbar_text</item>
+    <style name="DropDownNav.Savearound" parent="@android:style/Widget.Holo.Light.Spinner">
+        <item name="android:background">@drawable/spinner_background_ab_savearound</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_savearound</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_savearound</item>
     </style>
-
-    <!-- alert dialog -->
-    <style name="AlertDialogTheme.Talool" parent="@android:style/Theme.Holo.Light.Dialog">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
-        <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
-        <item name="android:buttonBarStyle">@style/AlertButtonBarWithBackground</item>
-	</style>
-
-    <style name="AlertButtonBarWithBackground" parent="@android:style/Holo.ButtonBar.AlertDialog">
-        <item name="android:background">@color/teal</item>
+    
+    <style name="ProgressBar.Savearound" parent="@android:style/Widget.Holo.Light.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_savearound</item>
     </style>
-
-    <style name="PasswordResetFormContainer">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">16dp</item>
+    
+    <style name="ActionButton.CloseMode.Savearound" parent="@android:style/Widget.Holo.Light.ActionButton.CloseMode">
+        <item name="android:background">@drawable/btn_cab_done_savearound</item>
+    </style>
+    
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="Theme.Savearound.Widget" parent="@android:style/Theme.Holo">
+        <item name="android:popupMenuStyle">@style/PopupMenu.Savearound</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Savearound</item>
     </style>
 
 </resources>
