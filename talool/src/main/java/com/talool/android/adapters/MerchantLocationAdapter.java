@@ -1,7 +1,5 @@
 package com.talool.android.adapters;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,9 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.android.R;
 import com.talool.android.util.TypefaceFactory;
+import com.talool.api.thrift.MerchantLocation_t;
+
+import java.util.List;
 
 public class MerchantLocationAdapter extends ArrayAdapter<MerchantLocation_t>{
 	Context context;

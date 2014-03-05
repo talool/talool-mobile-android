@@ -1,7 +1,5 @@
 package com.talool.android.adapters;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Paint;
@@ -12,11 +10,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.talool.api.thrift.AcquireStatus_t;
-import com.talool.api.thrift.DealAcquire_t;
 import com.talool.android.R;
 import com.talool.android.util.TaloolUtil;
 import com.talool.android.util.TypefaceFactory;
+import com.talool.api.thrift.AcquireStatus_t;
+import com.talool.api.thrift.DealAcquire_t;
+
+import java.util.List;
 
 public class DealsAcquiredAdapter extends ArrayAdapter<DealAcquire_t>
 {

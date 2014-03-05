@@ -1,12 +1,5 @@
 package com.talool.android.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.thrift.TException;
-import org.apache.thrift.transport.TTransportException;
-
-import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Intent;
@@ -46,6 +39,14 @@ import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.thrift.util.ThriftUtil;
+
+import org.apache.thrift.TException;
+import org.apache.thrift.transport.TTransportException;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
 
 /**
  * 

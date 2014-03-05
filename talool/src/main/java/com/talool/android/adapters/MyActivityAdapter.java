@@ -1,7 +1,5 @@
 package com.talool.android.adapters;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,12 +9,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.talool.api.thrift.Activity_t;
 import com.talool.android.R;
 import com.talool.android.util.ApiUtil;
 import com.talool.android.util.Constants;
 import com.talool.android.util.SafeSimpleDateFormat;
 import com.talool.android.util.TypefaceFactory;
+import com.talool.api.thrift.Activity_t;
+
+import java.util.List;
 
 /**
  * 

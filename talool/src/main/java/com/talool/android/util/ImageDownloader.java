@@ -1,8 +1,13 @@
 package com.talool.android.util;
 
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
+import com.google.analytics.tracking.android.Log;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -10,14 +15,9 @@ import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import com.google.analytics.tracking.android.Log;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.os.AsyncTask;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
 	private ImageView imageView;

@@ -1,12 +1,12 @@
 package com.talool.android.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.facebook.model.GraphUser;
 import com.talool.api.thrift.Customer_t;
 import com.talool.api.thrift.SocialAccount_t;
 import com.talool.api.thrift.SocialNetwork_t;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.

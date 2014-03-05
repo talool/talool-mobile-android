@@ -1,17 +1,5 @@
 package com.talool.android.util;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
-import org.apache.thrift.TException;
-
 import android.content.Context;
 import android.location.Location;
 
@@ -22,6 +10,18 @@ import com.talool.android.tasks.ActivitySupervisor;
 import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.SocialNetwork_t;
 import com.talool.thrift.util.ThriftUtil;
+
+import org.apache.thrift.TException;
+
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * 

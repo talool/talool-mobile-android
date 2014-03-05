@@ -1,9 +1,9 @@
 package com.talool.android.util;
 
+import com.talool.android.R;
 import com.talool.api.thrift.ActivityEvent_t;
 import com.talool.api.thrift.Activity_t;
 import com.talool.api.thrift.Category_t;
-import com.talool.android.R;
 
 /**
  * Convenience methods for the API

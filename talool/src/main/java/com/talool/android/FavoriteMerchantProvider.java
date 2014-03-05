@@ -1,15 +1,10 @@
 package com.talool.android;
 
-import org.apache.thrift.TApplicationException;
-import org.apache.thrift.transport.TTransportException;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.ActionProvider;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
@@ -17,12 +12,13 @@ import android.widget.TextView;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
-import com.talool.android.R;
 import com.talool.android.cache.FavoriteMerchantCache;
 import com.talool.android.util.ThriftHelper;
 import com.talool.android.util.TypefaceFactory;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.ServiceException_t;
+
+import org.apache.thrift.transport.TTransportException;
 
 /*
  * Optimistically sets the heart icon on the Action bar with user input onclicks.  If the service side persistence fails the UI will be undone. 

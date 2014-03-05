@@ -1,9 +1,9 @@
 package com.talool.android.adapters;
 
-import com.talool.android.util.TaloolSmartImageView;
-
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.talool.android.util.TaloolSmartImageView;
 
 public class DiscoverDealsRow {
 	public LinearLayout dealLayout;

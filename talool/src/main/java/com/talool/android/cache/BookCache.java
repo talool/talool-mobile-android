@@ -1,10 +1,10 @@
 package com.talool.android.cache;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.Deal_t;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BookCache {
 	private DealOffer_t closestBook = null;

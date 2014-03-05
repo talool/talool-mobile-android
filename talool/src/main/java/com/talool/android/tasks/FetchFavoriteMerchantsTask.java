@@ -1,9 +1,5 @@
 package com.talool.android.tasks;
 
-import java.util.List;
-
-import org.apache.thrift.TException;
-
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -12,6 +8,10 @@ import com.talool.android.util.TaloolUtil;
 import com.talool.android.util.ThriftHelper;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.ServiceException_t;
+
+import org.apache.thrift.TException;
+
+import java.util.List;
 
 /**
  * 

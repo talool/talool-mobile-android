@@ -1,6 +1,5 @@
 package com.talool.android;
 
-import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
@@ -39,6 +38,8 @@ import com.talool.android.util.TaloolUser;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
 
 public class MainActivity extends Activity
 {

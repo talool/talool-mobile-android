@@ -1,14 +1,5 @@
 package com.talool.android.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
-
-import org.apache.thrift.TException;
-import org.apache.thrift.transport.TTransportException;
-
-import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
 import android.app.Fragment;
 import android.content.Intent;
 import android.location.Location;
@@ -29,11 +20,6 @@ import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.Fields;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
-import com.talool.api.thrift.ActivityEvent_t;
-import com.talool.api.thrift.Activity_t;
-import com.talool.api.thrift.Location_t;
-import com.talool.api.thrift.SearchOptions_t;
-import com.talool.api.thrift.ServiceException_t;
 import com.talool.android.MainActivity;
 import com.talool.android.R;
 import com.talool.android.TaloolApplication;
@@ -48,7 +34,22 @@ import com.talool.android.tasks.ActivitySupervisor.ActivityUpdateSummary;
 import com.talool.android.util.ApiUtil;
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.ThriftHelper;
+import com.talool.api.thrift.ActivityEvent_t;
+import com.talool.api.thrift.Activity_t;
+import com.talool.api.thrift.Location_t;
+import com.talool.api.thrift.SearchOptions_t;
+import com.talool.api.thrift.ServiceException_t;
 import com.talool.thrift.util.ThriftUtil;
+
+import org.apache.thrift.TException;
+import org.apache.thrift.transport.TTransportException;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+
+import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
 
 /**
  * 

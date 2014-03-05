@@ -1,10 +1,5 @@
 package com.talool.android.persistence;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.thrift.TException;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -14,6 +9,11 @@ import com.talool.android.persistence.TaloolDbHelper.ActivityColumn;
 import com.talool.api.thrift.ActivityEvent_t;
 import com.talool.api.thrift.Activity_t;
 import com.talool.thrift.util.ThriftUtil;
+
+import org.apache.thrift.TException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 

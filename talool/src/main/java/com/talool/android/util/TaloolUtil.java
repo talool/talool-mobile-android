@@ -1,15 +1,14 @@
 package com.talool.android.util;
 
-import java.math.BigDecimal;
-import java.text.NumberFormat;
-import java.util.Date;
-import java.util.TimeZone;
-
 import android.content.Context;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
+
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.Date;
 
 public class TaloolUtil {
     public static BigDecimal round(float d, int decimalPlace) {

@@ -1,10 +1,8 @@
 package com.talool.android.tasks;
 
-import android.app.DialogFragment;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.talool.android.dialog.DialogFactory;
 import com.talool.android.persistence.MerchantDao;
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.TaloolUtil;

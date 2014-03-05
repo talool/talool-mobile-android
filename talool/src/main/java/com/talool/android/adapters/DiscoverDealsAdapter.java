@@ -1,7 +1,5 @@
 package com.talool.android.adapters;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -18,6 +16,8 @@ import com.talool.android.util.TaloolSmartImageView;
 import com.talool.android.util.TaloolUtil;
 import com.talool.api.thrift.CoreConstants;
 import com.talool.api.thrift.DealOfferGeoSummary_t;
+
+import java.util.List;
 
 public class DiscoverDealsAdapter extends ArrayAdapter<DealOfferGeoSummary_t> {
 

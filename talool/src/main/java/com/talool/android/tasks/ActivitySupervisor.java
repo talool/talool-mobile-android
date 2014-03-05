@@ -1,11 +1,5 @@
 package com.talool.android.tasks;
 
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
-
-import org.apache.thrift.transport.TTransportException;
-
 import android.content.Context;
 import android.location.Location;
 import android.util.Log;
@@ -18,6 +12,12 @@ import com.talool.android.util.ThriftHelper;
 import com.talool.api.thrift.Activity_t;
 import com.talool.api.thrift.Location_t;
 import com.talool.api.thrift.SearchOptions_t;
+
+import org.apache.thrift.transport.TTransportException;
+
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * A polling thread that simply fetches the latest activity from the server and

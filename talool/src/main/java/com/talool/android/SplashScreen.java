@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
-import com.talool.android.R;
 import com.talool.android.activity.GiftActivity;
 import com.talool.android.activity.WelcomeActivity;
 import com.talool.android.util.TaloolUser;

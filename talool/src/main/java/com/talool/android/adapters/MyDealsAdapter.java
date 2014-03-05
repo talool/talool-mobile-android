@@ -1,7 +1,5 @@
 package com.talool.android.adapters;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
@@ -12,12 +10,14 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.loopj.android.image.SmartImageView;
-import com.talool.api.thrift.Merchant_t;
 import com.talool.android.R;
 import com.talool.android.util.ApiUtil;
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.TaloolUtil;
 import com.talool.android.util.TypefaceFactory;
+import com.talool.api.thrift.Merchant_t;
+
+import java.util.List;
 
 public class MyDealsAdapter extends ArrayAdapter<Merchant_t>
 {

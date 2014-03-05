@@ -1,9 +1,9 @@
 package com.talool.android.cache;
 
+import com.talool.api.thrift.DealOffer_t;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import com.talool.api.thrift.DealOffer_t;
 
 /**
  * 

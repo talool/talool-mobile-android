@@ -1,8 +1,5 @@
 package com.talool.android.util;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,6 +9,9 @@ import android.net.NetworkInfo;
 import android.os.Build;
 
 import com.talool.android.TaloolApplication;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 /**
  * 

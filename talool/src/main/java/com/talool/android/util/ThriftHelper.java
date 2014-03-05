@@ -1,18 +1,15 @@
 package com.talool.android.util;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Base64;
-import android.util.Log;
+
+import com.talool.api.thrift.CTokenAccess_t;
+import com.talool.api.thrift.CustomerServiceConstants;
+import com.talool.api.thrift.CustomerService_t;
 
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.THttpClient;
 import org.apache.thrift.transport.TTransportException;
-
-import com.talool.api.thrift.CTokenAccess_t;
-import com.talool.api.thrift.CustomerServiceConstants;
-import com.talool.api.thrift.CustomerService_t;
 
 public class ThriftHelper {
     public THttpClient tHttpClient;
