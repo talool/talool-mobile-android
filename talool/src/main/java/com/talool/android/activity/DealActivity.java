@@ -179,7 +179,7 @@ public class DealActivity extends TaloolActivity {
             dealActivityButtonLayout.removeAllViewsInLayout();
             dealActivityButtonLayout.setBackgroundDrawable(null);
             TextView redemptionCodeTextView = new TextView(DealActivity.this);
-            redemptionCodeTextView.setText(TaloolUtil.getRedeemedText(deal.redemptionCode,deal.redeemed));
+            redemptionCodeTextView.setText(TaloolUtil.getRedeemedText(deal.redemptionCode, deal.redeemed));
             redemptionCodeTextView.setGravity(Gravity.CENTER);
             redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
@@ -190,7 +190,7 @@ public class DealActivity extends TaloolActivity {
             dealActivityButtonLayout.setBackgroundColor(getResources().getColor(R.color.orange));
             dealActivityButtonLayout.setPadding(0, 0, 0, 0);
             return;
-        }else if (TaloolUtil.isExpired(deal.deal.expires)){
+        } else if (TaloolUtil.isExpired(deal.deal.expires)) {
             dealActivityButtonLayout.removeAllViewsInLayout();
             dealActivityButtonLayout.setBackgroundDrawable(null);
             TextView redemptionCodeTextView = new TextView(DealActivity.this);
@@ -245,9 +245,9 @@ public class DealActivity extends TaloolActivity {
         dealSummaryText.setText(deal.deal.summary);
         dealValidText.setText(deal.deal.details);
         dealValidText.setTypeface(TypefaceFactory.get().getFontAwesome(), Typeface.NORMAL);
-        if(TaloolUtil.isExpired(deal.deal.expires)){
+        if (TaloolUtil.isExpired(deal.deal.expires)) {
             dealExpirationText.setText(TaloolUtil.getExpiredText(deal.deal.expires));
-        }else{
+        } else {
             dealExpirationText.setText(TaloolUtil.getExpirationText(deal.deal.expires));
         }
         setTitle(merchant.name);
@@ -292,7 +292,7 @@ public class DealActivity extends TaloolActivity {
                         dealActivityButtonLayout.removeAllViewsInLayout();
                         dealActivityButtonLayout.setBackgroundDrawable(null);
                         TextView redemptionCodeTextView = new TextView(DealActivity.this);
-                        redemptionCodeTextView.setText(TaloolUtil.getRedeemedText(redemptionCode,new Date().getTime()));
+                        redemptionCodeTextView.setText(TaloolUtil.getRedeemedText(redemptionCode, new Date().getTime()));
                         redemptionCodeTextView.setGravity(Gravity.CENTER);
                         redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                         redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
