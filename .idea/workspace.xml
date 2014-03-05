@@ -159,7 +159,7 @@
       <file leaf-file-name="local.properties" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/local.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="8" selection-start="226" selection-end="226" vertical-scroll-proportion="0.17892644" vertical-offset="0" max-vertical-offset="503">
+            <state line="7" column="0" selection-start="263" selection-end="263" vertical-scroll-proportion="0.20874752" vertical-offset="0" max-vertical-offset="503">
               <folding />
             </state>
           </provider>
@@ -2305,7 +2305,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/local.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="8" selection-start="226" selection-end="226" vertical-scroll-proportion="0.17892644" vertical-offset="0" max-vertical-offset="503">
+        <state line="7" column="0" selection-start="263" selection-end="263" vertical-scroll-proportion="0.20874752" vertical-offset="0" max-vertical-offset="503">
           <folding />
         </state>
       </provider>
