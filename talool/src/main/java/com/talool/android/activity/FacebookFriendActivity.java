@@ -10,7 +10,6 @@ import android.support.v4.app.FragmentManager;
 import android.widget.ListView;
 
 import com.facebook.FacebookException;
-import com.facebook.Session;
 import com.facebook.widget.FriendPickerFragment;
 import com.facebook.widget.PickerFragment;
 import com.talool.android.R;

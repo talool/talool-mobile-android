@@ -1,7 +1,5 @@
 package com.talool.android.activity;
 
-import org.apache.thrift.TException;
-
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
@@ -24,6 +22,8 @@ import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.TNotFoundException_t;
 import com.talool.api.thrift.TServiceException_t;
 import com.talool.api.thrift.TUserException_t;
+
+import org.apache.thrift.TException;
 
 /**
  * Activity which displays a login screen to the user, offering registration as

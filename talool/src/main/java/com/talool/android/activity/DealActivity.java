@@ -1,11 +1,5 @@
 package com.talool.android.activity;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
-import org.apache.thrift.TException;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
@@ -61,6 +55,12 @@ import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.thrift.util.ThriftUtil;
+
+import org.apache.thrift.TException;
+
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 public class DealActivity extends TaloolActivity {
     private static final int REAUTH_ACTIVITY_CODE = 300;

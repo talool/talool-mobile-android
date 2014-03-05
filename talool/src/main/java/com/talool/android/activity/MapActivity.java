@@ -1,9 +1,5 @@
 package com.talool.android.activity;
 
-import java.util.List;
-
-import org.apache.thrift.TException;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,6 +27,10 @@ import com.talool.api.thrift.Location_t;
 import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.thrift.util.ThriftUtil;
+
+import org.apache.thrift.TException;
+
+import java.util.List;
 
 public class MapActivity extends TaloolActivity
 {

@@ -1,8 +1,5 @@
 package com.talool.android.activity;
 
-import org.apache.thrift.TException;
-import org.apache.thrift.transport.TTransportException;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ClipDrawable;
@@ -25,6 +22,9 @@ import com.talool.android.tasks.FetchFavoriteMerchantsTask;
 import com.talool.android.util.TaloolUser;
 import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.ServiceException_t;
+
+import org.apache.thrift.TException;
+import org.apache.thrift.transport.TTransportException;
 
 public class LoginActivity extends TaloolActivity
 {

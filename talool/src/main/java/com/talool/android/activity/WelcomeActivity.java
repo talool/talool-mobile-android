@@ -1,10 +1,5 @@
 package com.talool.android.activity;
 
-import java.util.Arrays;
-
-import org.apache.thrift.TException;
-import org.apache.thrift.transport.TTransportException;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,6 +26,11 @@ import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.Customer_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.api.thrift.SocialNetwork_t;
+
+import org.apache.thrift.TException;
+import org.apache.thrift.transport.TTransportException;
+
+import java.util.Arrays;
 
 public class WelcomeActivity extends TaloolActivity {
 	

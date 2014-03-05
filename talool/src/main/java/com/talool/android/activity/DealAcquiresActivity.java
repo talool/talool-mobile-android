@@ -1,11 +1,5 @@
 package com.talool.android.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.thrift.TException;
-import org.apache.thrift.transport.TTransportException;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -33,6 +27,12 @@ import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.thrift.util.ThriftUtil;
+
+import org.apache.thrift.TException;
+import org.apache.thrift.transport.TTransportException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
@@ -182,7 +182,7 @@ public class DealAcquiresActivity extends TaloolActivity
 				long arg3)
 		{
 			DealsAcquiredAdapter dealAcquiredAdapter = (DealsAcquiredAdapter) arg0.getAdapter();
-			DealAcquire_t deal = (DealAcquire_t) dealAcquiredAdapter.getItem(position);
+			DealAcquire_t deal =  dealAcquiredAdapter.getItem(position);
 
 			Intent myIntent = new Intent(arg1.getContext(), DealActivity.class);
 			myIntent.putExtra("deal", ThriftUtil.serialize(deal));

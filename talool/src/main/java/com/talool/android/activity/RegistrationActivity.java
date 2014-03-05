@@ -1,7 +1,5 @@
 package com.talool.android.activity;
 
-import org.apache.thrift.TException;
-
 import android.content.Intent;
 import android.graphics.drawable.ClipDrawable;
 import android.os.AsyncTask;
@@ -22,6 +20,8 @@ import com.talool.android.util.TaloolUser;
 import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.Customer_t;
 import com.talool.api.thrift.ServiceException_t;
+
+import org.apache.thrift.TException;
 
 public class RegistrationActivity extends TaloolActivity
 {

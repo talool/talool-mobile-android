@@ -1,8 +1,5 @@
 package com.talool.android.activity;
 
-import org.apache.thrift.TException;
-import org.apache.thrift.transport.TTransportException;
-
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.net.Uri;
@@ -40,6 +37,9 @@ import com.talool.api.thrift.Gift_t;
 import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.thrift.util.ThriftUtil;
+
+import org.apache.thrift.TException;
+import org.apache.thrift.transport.TTransportException;
 
 /**
  * 

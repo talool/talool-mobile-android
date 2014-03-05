@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.talool.android.R;
 import com.talool.android.util.AndroidUtils;
-import com.talool.android.util.ApiUtil;
 import com.talool.android.util.Constants;
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.TypefaceFactory;

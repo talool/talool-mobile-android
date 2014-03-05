@@ -1,13 +1,5 @@
 package com.talool.android.activity;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.thrift.TException;
-import org.apache.thrift.transport.TTransportException;
-
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
@@ -49,6 +41,14 @@ import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.SearchOptions_t;
 import com.talool.api.thrift.ServiceException_t;
 import com.talool.thrift.util.ThriftUtil;
+
+import org.apache.thrift.TException;
+import org.apache.thrift.transport.TTransportException;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FindDealsActivity extends TaloolActivity implements DialogClickListener {
     private List<Deal_t> dealOffers;

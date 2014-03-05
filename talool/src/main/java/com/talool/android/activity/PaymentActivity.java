@@ -1,13 +1,5 @@
 package com.talool.android.activity;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.thrift.TException;
-import org.apache.thrift.transport.TTransportException;
-
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
@@ -46,6 +38,13 @@ import com.venmo.touch.controller.VTComboCardViewController;
 import com.venmo.touch.model.CardDetails;
 import com.venmo.touch.model.CardStub;
 import com.venmo.touch.view.VTComboCardView;
+
+import org.apache.thrift.TException;
+import org.apache.thrift.transport.TTransportException;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 

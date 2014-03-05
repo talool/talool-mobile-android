@@ -1,13 +1,13 @@
 package com.talool.android.activity;
 
-import com.google.analytics.tracking.android.EasyTracker;
-import com.talool.android.R;
-import com.talool.android.util.TaloolUser;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.google.analytics.tracking.android.EasyTracker;
+import com.talool.android.R;
+import com.talool.android.util.TaloolUser;
 
 public class LocationSelectActivity extends Activity {
 

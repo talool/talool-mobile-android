@@ -1,7 +1,5 @@
 package com.talool.android.activity;
 
-import org.apache.thrift.transport.TTransportException;
-
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.os.Bundle;
@@ -13,6 +11,8 @@ import com.talool.android.R;
 import com.talool.android.dialog.DialogFactory;
 import com.talool.android.util.ThriftHelper;
 import com.talool.api.thrift.DealOffer_t;
+
+import org.apache.thrift.transport.TTransportException;
 
 public class TaloolActivity extends Activity {
 	protected static ThriftHelper client;
