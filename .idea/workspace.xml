@@ -35,7 +35,7 @@
     </layouts>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.savearound.android" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.talool.android" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1cd7174b-c6af-47b3-807a-4845ccc162f9" name="Default" comment="" />
@@ -108,6 +108,141 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/TaloolDbHelper.java" line="73" class="com.talool.android.persistence.TaloolDbHelper" package="com.talool.android.persistence">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/FavoritesDao.java" line="41" class="com.talool.android.persistence.FavoritesDao" package="com.talool.android.persistence">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/cache/FavoriteMerchantCache.java" line="67" class="com.talool.android.cache.FavoriteMerchantCache" package="com.talool.android.cache">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/cache/FavoriteMerchantCache.java" line="45" class="com.talool.android.cache.FavoriteMerchantCache" package="com.talool.android.cache">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/cache/FavoriteMerchantCache.java" line="100" class="com.talool.android.cache.FavoriteMerchantCache" package="com.talool.android.cache">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/cache/FavoriteMerchantCache.java" line="94" class="com.talool.android.cache.FavoriteMerchantCache" package="com.talool.android.cache">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/cache/FavoriteMerchantCache.java" line="85" class="com.talool.android.cache.FavoriteMerchantCache" package="com.talool.android.cache">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/cache/FavoriteMerchantCache.java" line="79" class="com.talool.android.cache.FavoriteMerchantCache" package="com.talool.android.cache">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/FavoritesDao.java" line="76" class="com.talool.android.persistence.FavoritesDao" package="com.talool.android.persistence">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
     </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
@@ -118,100 +253,138 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="local.properties" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/local.properties">
+      <file leaf-file-name="FavoritesDao.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/FavoritesDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="29" selection-start="421" selection-end="421" vertical-scroll-proportion="-5.4" vertical-offset="0" max-vertical-offset="255">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BasicWebViewActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/BasicWebViewActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="29" selection-start="692" selection-end="692" vertical-scroll-proportion="16.2" vertical-offset="660" max-vertical-offset="1275">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DealAcquiresActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/DealAcquiresActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="184" column="33" selection-start="5237" selection-end="5237" vertical-scroll-proportion="0.0" vertical-offset="3652" max-vertical-offset="4155">
+            <state line="39" column="35" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.0" vertical-offset="395" max-vertical-offset="2055">
               <folding>
-                <element signature="e#6124#6139#0" expanded="true" />
+                <element signature="e#1321#1333#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DealActivity.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/DealActivity.java">
+      <file leaf-file-name="FavoriteMerchantCache.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/cache/FavoriteMerchantCache.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="747" column="5" selection-start="0" selection-end="32833" vertical-scroll-proportion="0.74552685" vertical-offset="9690" max-vertical-offset="10200">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AbstractDbAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/AbstractDbAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="22" selection-start="436" selection-end="436" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="1725">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ActivityDao.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/ActivityDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="19" selection-start="511" selection-end="511" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1845">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DealOfferCache.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/cache/DealOfferCache.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="19" selection-start="204" selection-end="204" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GiftActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/GiftActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="102" column="70" selection-start="3973" selection-end="3973" vertical-scroll-proportion="0.0" vertical-offset="5002" max-vertical-offset="5505">
+            <state line="45" column="0" selection-start="1040" selection-end="1040" vertical-scroll-proportion="0.0" vertical-offset="500" max-vertical-offset="1650">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#11841#11895#0" expanded="true" />
-                <element signature="e#11920#11957#0" expanded="true" />
-                <element signature="e#12024#12236#0" expanded="true" />
-                <element signature="e#12225#12226#0" expanded="true" />
+                <element signature="e#493#513#0" expanded="true" />
+                <element signature="e#758#925#0" expanded="true" />
+                <element signature="e#920#921#0" expanded="true" />
+                <element signature="e#1161#1173#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TaloolActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/TaloolActivity.java">
+      <file leaf-file-name="FetchFavoriteMerchantsTask.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/tasks/FetchFavoriteMerchantsTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="13" selection-start="549" selection-end="549" vertical-scroll-proportion="0.0" vertical-offset="712" max-vertical-offset="1215">
+            <state line="20" column="30" selection-start="457" selection-end="457" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="945">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WelcomeActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="WelcomeActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/WelcomeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="13" selection-start="1133" selection-end="1133" vertical-scroll-proportion="0.0" vertical-offset="3172" max-vertical-offset="3675">
+            <state line="78" column="18" selection-start="2264" selection-end="2264" vertical-scroll-proportion="0.33269963" vertical-offset="545" max-vertical-offset="3675">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/LoginActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="85" column="18" selection-start="2314" selection-end="2314" vertical-scroll-proportion="0.0" vertical-offset="740" max-vertical-offset="3090">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Fragment.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$ANDROID_HOME$/sources/android-19/android/app/Fragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1805" column="0" selection-start="69913" selection-end="69913" vertical-scroll-proportion="0.0" vertical-offset="25745" max-vertical-offset="27720">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FragmentManager.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$ANDROID_HOME$/sources/android-19/android/app/FragmentManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1971" column="0" selection-start="76036" selection-end="76036" vertical-scroll-proportion="0.0" vertical-offset="28505" max-vertical-offset="30000">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PhoneWindow.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$ANDROID_HOME$/sources/android-19/com/android/internal/policy/impl/PhoneWindow.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1011" column="0" selection-start="35934" selection-end="35934" vertical-scroll-proportion="0.0" vertical-offset="13430" max-vertical-offset="56760">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MyDealsFragment.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/fragment/MyDealsFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="209" column="13" selection-start="5737" selection-end="5737" vertical-scroll-proportion="0.0" vertical-offset="2120" max-vertical-offset="5805">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Activity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$ANDROID_HOME$/sources/android-19/android/app/Activity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2602" column="0" selection-start="111704" selection-end="111704" vertical-scroll-proportion="0.0" vertical-offset="37325" max-vertical-offset="80130">
+              <folding>
+                <element signature="e#0#228949#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#35398#35551#0" expanded="false" />
+                <element signature="e#35544#35545#0" expanded="false" />
+                <element signature="e#36044#36059#0" expanded="false" />
+                <element signature="e#36819#36820#0" expanded="false" />
+                <element signature="e#36849#36850#0" expanded="false" />
+                <element signature="e#37245#37246#0" expanded="false" />
+                <element signature="e#37280#37281#0" expanded="false" />
+                <element signature="e#37388#37389#0" expanded="false" />
+                <element signature="e#37423#37424#0" expanded="false" />
+                <element signature="e#37682#37683#0" expanded="false" />
+                <element signature="e#37712#37713#0" expanded="false" />
+                <element signature="e#37826#37827#0" expanded="false" />
+                <element signature="e#37863#37864#0" expanded="false" />
+                <element signature="e#38212#38213#0" expanded="false" />
+                <element signature="e#38242#38243#0" expanded="false" />
+                <element signature="e#68462#68463#0" expanded="false" />
+                <element signature="e#68503#68504#0" expanded="false" />
+                <element signature="e#76490#76491#0" expanded="false" />
+                <element signature="e#76523#76524#0" expanded="false" />
+                <element signature="e#177739#177740#0" expanded="false" />
+                <element signature="e#177771#177772#0" expanded="false" />
+                <element signature="e#177950#177951#0" expanded="false" />
+                <element signature="e#177983#177984#0" expanded="false" />
+                <element signature="e#178548#178549#0" expanded="false" />
+                <element signature="e#178594#178595#0" expanded="false" />
+                <element signature="e#191039#191040#0" expanded="false" />
+                <element signature="e#191072#191073#0" expanded="false" />
+                <element signature="e#193520#193521#0" expanded="false" />
+                <element signature="e#193549#193550#0" expanded="false" />
+                <element signature="e#193589#193590#0" expanded="false" />
+                <element signature="e#193623#193624#0" expanded="false" />
+                <element signature="e#218614#218615#0" expanded="false" />
+                <element signature="e#218646#218647#0" expanded="false" />
+                <element signature="e#227110#227111#0" expanded="false" />
+                <element signature="e#227141#227142#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1590,7 +1763,6 @@
         <option value="$PROJECT_DIR$/settings.gradle" />
         <option value="$PROJECT_DIR$/talool/src/main/res/values/analytics.xml" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/talool/build.gradle" />
         <option value="$PROJECT_DIR$/talool/src/main/res/layout/alert_dialog_layout.xml" />
         <option value="$PROJECT_DIR$/talool/src/main/res/layout/deal_acquires_activity_layout.xml" />
         <option value="$PROJECT_DIR$/talool/src/main/res/layout/deal_activity_layout.xml" />
@@ -1601,7 +1773,6 @@
         <option value="$PROJECT_DIR$/talool/src/main/java/com/talool/android/adapters/DealsAcquiredAdapter.java" />
         <option value="$PROJECT_DIR$/talool/src/saveAround/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/talool/src/main/java/com/talool/android/util/ApiUtil.java" />
-        <option value="$PROJECT_DIR$/talool/src/saveAround/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/talool/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/talool/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/talool/src/saveAround/res/values/strings.xml" />
@@ -1612,6 +1783,13 @@
         <option value="$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/DealAcquiresActivity.java" />
         <option value="$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/GiftActivity.java" />
         <option value="$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/DealActivity.java" />
+        <option value="$PROJECT_DIR$/talool/build.gradle" />
+        <option value="$PROJECT_DIR$/talool/src/saveAround/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/talool/src/main/java/com/talool/android/fragment/MyDealsFragment.java" />
+        <option value="$PROJECT_DIR$/talool/src/main/java/com/talool/android/cache/FavoriteMerchantCache.java" />
+        <option value="$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/TaloolDbHelper.java" />
+        <option value="$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/AbstractDbAdapter.java" />
+        <option value="$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/FavoritesDao.java" />
       </list>
     </option>
   </component>
@@ -1718,6 +1896,62 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="saveAround" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="talool-mobile-android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="talool-mobile-android-gradle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="talool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="saveAround" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="talool-mobile-android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="talool-mobile-android-gradle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="talool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -1783,6 +2017,44 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="talool-mobile-android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="talool-mobile-android-gradle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="talool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="talool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tasks" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1858,7 +2130,83 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="dialog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="talool-mobile-android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="talool-mobile-android-gradle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="talool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="talool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="cache" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="talool-mobile-android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="talool-mobile-android-gradle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="talool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="talool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adapters" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2125,31 +2473,31 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1680" height="940" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288835" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3276699" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288835" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35558254" sideWeight="0.23565324" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49635923" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35558254" sideWeight="0.23565324" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2814408" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25030527" sideWeight="0.50180507" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49514562" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35558254" sideWeight="0.7643468" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49635923" sideWeight="0.76373625" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2814408" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25030527" sideWeight="0.49819493" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2050971" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297491" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -2169,123 +2517,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/talool/src/main/res/drawable-hdpi/ab_stacked_solid_talool.9.png">
-      <provider editor-type-id="ninepatcheditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/main/res/drawable-hdpi/ab_texture_tile_talool.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/main/res/drawable-hdpi/ab_transparent_talool.9.png">
-      <provider editor-type-id="ninepatcheditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/main/res/drawable-mdpi/ab_bottom_solid_talool.9.png">
-      <provider editor-type-id="ninepatcheditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/main/res/layout/discover_deal_row.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1200" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/main/res/layout/discover_deals_fragment.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="769" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/main/res/layout/facebook_friends_layout.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="769" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/main/res/layout/my_deals_fragment.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1245" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/main/res/drawable/selectable_background_talool.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="61" selection-start="1111" selection-end="1111" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/main/res/drawable/pressed_background_talool.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="59" selection-start="64" selection-end="98" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/saveAround/res/menu/activities_action_bar.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="796" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/saveAround/res/values-large/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="796" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="1811" selection-end="1811" vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="2940">
-          <folding>
-            <element signature="e#1789#1808#0" expanded="true" />
-            <element signature="e#2069#2087#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/main/res/layout/mydeals_item_row.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="47" selection-start="616" selection-end="616" vertical-scroll-proportion="-7.7777777" vertical-offset="15" max-vertical-offset="1170" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/saveAround/res/menu/main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="503" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/main/res/layout/main_activity_layout.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="210" selection-end="210" vertical-scroll-proportion="-3.8888888" vertical-offset="0" max-vertical-offset="195" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/fragment/MyActivityFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="386" column="24" selection-start="11708" selection-end="11708" vertical-scroll-proportion="-8.807693" vertical-offset="4631" max-vertical-offset="5445" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/util/TaloolUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="13" selection-start="377" selection-end="377" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1245" />
@@ -2362,11 +2593,6 @@
         <state line="109" column="40" selection-start="2100" selection-end="2100" vertical-scroll-proportion="0.0" vertical-offset="1258" max-vertical-offset="1830" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/saveAround/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="0" selection-start="1547" selection-end="1724" vertical-scroll-proportion="0.0" vertical-offset="112" max-vertical-offset="690" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="111" column="0" selection-start="5779" selection-end="6248" vertical-scroll-proportion="0.0" vertical-offset="1350" max-vertical-offset="2415" />
@@ -2387,13 +2613,6 @@
         <state line="74" column="75" selection-start="4467" selection-end="4467" vertical-scroll-proportion="0.7413793" vertical-offset="766" max-vertical-offset="1800" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/talool/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="990">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/SettingsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="89" column="0" selection-start="2833" selection-end="2833" vertical-scroll-proportion="0.0" vertical-offset="1335" max-vertical-offset="1785">
@@ -2403,30 +2622,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/util/ThriftHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="27" selection-start="1001" selection-end="1001" vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="1335">
-          <folding />
-        </state>
+        <state line="27" column="27" selection-start="1001" selection-end="1001" vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="1335" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="503">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="503" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/settings.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="503">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="503" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/local.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="29" selection-start="421" selection-end="421" vertical-scroll-proportion="-5.4" vertical-offset="0" max-vertical-offset="255">
-          <folding />
-        </state>
+        <state line="9" column="29" selection-start="421" selection-end="421" vertical-scroll-proportion="-5.4" vertical-offset="0" max-vertical-offset="255" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/BasicWebViewActivity.java">
@@ -2436,45 +2647,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/DealAcquiresActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="184" column="33" selection-start="5237" selection-end="5237" vertical-scroll-proportion="0.0" vertical-offset="3652" max-vertical-offset="4155">
-          <folding>
-            <element signature="e#6124#6139#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/AbstractDbAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="22" selection-start="436" selection-end="436" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="1725">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/ActivityDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="19" selection-start="511" selection-end="511" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1845">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/cache/DealOfferCache.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="19" selection-start="204" selection-end="204" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/GiftActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="102" column="70" selection-start="3973" selection-end="3973" vertical-scroll-proportion="0.0" vertical-offset="5002" max-vertical-offset="5505">
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#11841#11895#0" expanded="true" />
-            <element signature="e#11920#11957#0" expanded="true" />
-            <element signature="e#12024#12236#0" expanded="true" />
-            <element signature="e#12225#12226#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#11841#11895#0" expanded="false" />
+            <element signature="e#11920#11957#0" expanded="false" />
+            <element signature="e#12024#12236#0" expanded="false" />
+            <element signature="e#12225#12226#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2482,20 +2663,232 @@
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/TaloolActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="13" selection-start="549" selection-end="549" vertical-scroll-proportion="0.0" vertical-offset="712" max-vertical-offset="1215">
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1665#1725#0" expanded="false" />
+            <element signature="e#1748#1802#0" expanded="false" />
+            <element signature="e#1821#1858#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="0" selection-start="445" selection-end="623" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="975" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/src/saveAround/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="40" selection-start="237" selection-end="237" vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="720" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/DealActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="738" column="13" selection-start="32705" selection-end="32705" vertical-scroll-proportion="0.0" vertical-offset="3270" max-vertical-offset="10200">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/DealAcquiresActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="238" column="13" selection-start="6705" selection-end="6705" vertical-scroll-proportion="0.0" vertical-offset="1672" max-vertical-offset="4155">
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#6124#6139#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$ANDROID_HOME$/sources/android-19/android/database/sqlite/SQLiteOpenHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="161" column="26" selection-start="7367" selection-end="7367" vertical-scroll-proportion="0.0" vertical-offset="1693" max-vertical-offset="5475" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/cache/BookCache.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="13" selection-start="180" selection-end="180" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/FavoriteMerchantProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="95" column="25" selection-start="2743" selection-end="2743" vertical-scroll-proportion="0.0" vertical-offset="992" max-vertical-offset="2400">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/cache/DealOfferCache.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="19" selection-start="204" selection-end="204" vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="570">
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#279#300#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/FindDealsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="321" column="44" selection-start="12291" selection-end="12291" vertical-scroll-proportion="0.0" vertical-offset="3767" max-vertical-offset="5325">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/util/TaloolUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="195" column="36" selection-start="4456" selection-end="4456" vertical-scroll-proportion="0.0" vertical-offset="2237" max-vertical-offset="2745">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/ActivityDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="0" selection-start="551" selection-end="603" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1845">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/TaloolDbHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="31" selection-start="425" selection-end="425" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1740">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/MerchantDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="17" selection-start="513" selection-end="524" vertical-scroll-proportion="0.0" vertical-offset="88" max-vertical-offset="1665">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/AbstractDbAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="50" selection-start="2960" selection-end="2960" vertical-scroll-proportion="0.0" vertical-offset="935" max-vertical-offset="1890">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$ANDROID_HOME$/sources/android-19/com/android/internal/policy/impl/PhoneWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1011" column="0" selection-start="35934" selection-end="35934" vertical-scroll-proportion="0.0" vertical-offset="13430" max-vertical-offset="56760">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$ANDROID_HOME$/sources/android-19/android/app/Activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2602" column="0" selection-start="111704" selection-end="111704" vertical-scroll-proportion="0.0" vertical-offset="37325" max-vertical-offset="80130">
+          <folding>
+            <element signature="e#0#228949#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#35398#35551#0" expanded="false" />
+            <element signature="e#35544#35545#0" expanded="false" />
+            <element signature="e#36044#36059#0" expanded="false" />
+            <element signature="e#36819#36820#0" expanded="false" />
+            <element signature="e#36849#36850#0" expanded="false" />
+            <element signature="e#37245#37246#0" expanded="false" />
+            <element signature="e#37280#37281#0" expanded="false" />
+            <element signature="e#37388#37389#0" expanded="false" />
+            <element signature="e#37423#37424#0" expanded="false" />
+            <element signature="e#37682#37683#0" expanded="false" />
+            <element signature="e#37712#37713#0" expanded="false" />
+            <element signature="e#37826#37827#0" expanded="false" />
+            <element signature="e#37863#37864#0" expanded="false" />
+            <element signature="e#38212#38213#0" expanded="false" />
+            <element signature="e#38242#38243#0" expanded="false" />
+            <element signature="e#68462#68463#0" expanded="false" />
+            <element signature="e#68503#68504#0" expanded="false" />
+            <element signature="e#76490#76491#0" expanded="false" />
+            <element signature="e#76523#76524#0" expanded="false" />
+            <element signature="e#177739#177740#0" expanded="false" />
+            <element signature="e#177771#177772#0" expanded="false" />
+            <element signature="e#177950#177951#0" expanded="false" />
+            <element signature="e#177983#177984#0" expanded="false" />
+            <element signature="e#178548#178549#0" expanded="false" />
+            <element signature="e#178594#178595#0" expanded="false" />
+            <element signature="e#191039#191040#0" expanded="false" />
+            <element signature="e#191072#191073#0" expanded="false" />
+            <element signature="e#193520#193521#0" expanded="false" />
+            <element signature="e#193549#193550#0" expanded="false" />
+            <element signature="e#193589#193590#0" expanded="false" />
+            <element signature="e#193623#193624#0" expanded="false" />
+            <element signature="e#218614#218615#0" expanded="false" />
+            <element signature="e#218646#218647#0" expanded="false" />
+            <element signature="e#227110#227111#0" expanded="false" />
+            <element signature="e#227141#227142#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$ANDROID_HOME$/sources/android-19/android/app/FragmentManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1971" column="0" selection-start="76036" selection-end="76036" vertical-scroll-proportion="0.0" vertical-offset="28505" max-vertical-offset="30000">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$ANDROID_HOME$/sources/android-19/android/app/Fragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1805" column="0" selection-start="69913" selection-end="69913" vertical-scroll-proportion="0.0" vertical-offset="25745" max-vertical-offset="27720">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$ANDROID_HOME$/sources/android-19/android/database/sqlite/SQLiteDatabase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="414" column="16" selection-start="16282" selection-end="16282" vertical-scroll-proportion="0.7619048" vertical-offset="5180" max-vertical-offset="32310">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/FavoritesDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="35" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.0" vertical-offset="395" max-vertical-offset="2055">
+          <folding>
+            <element signature="e#1321#1333#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/fragment/MyDealsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="209" column="13" selection-start="5737" selection-end="5737" vertical-scroll-proportion="0.0" vertical-offset="2120" max-vertical-offset="5805">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/cache/FavoriteMerchantCache.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="0" selection-start="1040" selection-end="1040" vertical-scroll-proportion="0.0" vertical-offset="500" max-vertical-offset="1650">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#493#513#0" expanded="true" />
+            <element signature="e#758#925#0" expanded="true" />
+            <element signature="e#920#921#0" expanded="true" />
+            <element signature="e#1161#1173#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/tasks/FetchFavoriteMerchantsTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="30" selection-start="457" selection-end="457" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="945">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="18" selection-start="2314" selection-end="2314" vertical-scroll-proportion="0.0" vertical-offset="740" max-vertical-offset="3090">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/WelcomeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="13" selection-start="1133" selection-end="1133" vertical-scroll-proportion="0.0" vertical-offset="3172" max-vertical-offset="3675">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/DealActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="747" column="5" selection-start="0" selection-end="32833" vertical-scroll-proportion="0.74552685" vertical-offset="9690" max-vertical-offset="10200">
+        <state line="78" column="18" selection-start="2264" selection-end="2264" vertical-scroll-proportion="0.33269963" vertical-offset="545" max-vertical-offset="3675">
           <folding />
         </state>
       </provider>

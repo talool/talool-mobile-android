@@ -28,7 +28,6 @@ android {
         saveAround {
             packageName "com.savearound.android"
         }
-
     }
     buildTypes {
         release {

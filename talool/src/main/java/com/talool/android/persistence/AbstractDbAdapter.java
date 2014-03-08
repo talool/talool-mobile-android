@@ -65,6 +65,15 @@ public abstract class AbstractDbAdapter
 			db.execSQL(query.toString());
 			query.setLength(0);
 
+            query.append("CREATE TABLE favorite (");
+            query.append(MerchantColumn._id + " string primary key,");
+            query.append(MerchantColumn.name + " string not null,");
+            query.append(MerchantColumn.category + " int not null,");
+            query.append(MerchantColumn.merchant_obj + " blob not null);");
+
+            db.execSQL(query.toString());
+            query.setLength(0);
+
 		}
 
 		@Override
@@ -80,8 +89,10 @@ public abstract class AbstractDbAdapter
 		public void dropTables()
 		{
 			mDb.execSQL("DROP TABLE IF EXISTS merchant");
-			mDb.execSQL("DROP TABLE IF EXISTS merchant");
-		}
+			mDb.execSQL("DROP TABLE IF EXISTS activity");
+            mDb.execSQL("DROP TABLE IF EXISTS favorite");
+
+        }
 	}
 
 	/**

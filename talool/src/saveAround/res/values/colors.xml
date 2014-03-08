@@ -12,6 +12,7 @@
 	<color name="actionbartab_text">@color/black</color>
 	<color name="locationBackground">#ffbfb399</color>
     <color name="saveAroundBlue">#000099</color>
+
 	<color name="brown">#ff4D4040</color>
 	<color name="teal">#19BCB9</color>
 	<color name="teal_dark">#128d8b</color>
@@ -25,6 +26,7 @@
 	<color name="color_teal">#19BCB9</color>
     <color name="color_grey">#dad7c5</color>
     <color name="black">#000000</color>
+
     <color name="alert_background">@color/white</color>
     <color name="alert_textColor">@color/brown</color>
     <color name="deal_acquires_background">@color/brown</color>

@@ -14,6 +14,7 @@ public class TaloolDbHelper extends SQLiteOpenHelper
 {
 	public static final String ACTIVITY_TBL = "activity";
 	public static final String MERCHANT_TBL = "merchant";
+    public static final String FAVORITE_TBL = "favorite";
 
 	private static final String DATABASE_NAME = "talool.db";
 	private static final int DATABASE_VERSION = 6;
@@ -92,6 +93,12 @@ public class TaloolDbHelper extends SQLiteOpenHelper
 		query.append("CREATE INDEX category_idx ON ").append(MERCHANT_TBL).append("(").
 				append(MerchantColumn.category).append(");");
 
+        query.append("CREATE TABLE " + FAVORITE_TBL + " (");
+        query.append(MerchantColumn._id + " string primary key,");
+        query.append(MerchantColumn.name + " string not null,");
+        query.append(MerchantColumn.category + " int not null,");
+        query.append(MerchantColumn.merchant_obj + " blob not null);");
+
 		database.execSQL(query.toString());
 
 	}
@@ -105,6 +112,7 @@ public class TaloolDbHelper extends SQLiteOpenHelper
 
 		db.execSQL("DROP TABLE IF EXISTS " + ACTIVITY_TBL);
 		db.execSQL("DROP TABLE IF EXISTS " + MERCHANT_TBL);
+        db.execSQL("DROP TABLE IF EXISTS " + FAVORITE_TBL);
 
 		onCreate(db);
 	}
