@@ -256,10 +256,9 @@
       <file leaf-file-name="FavoritesDao.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/FavoritesDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="35" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.0" vertical-offset="395" max-vertical-offset="2055">
-              <folding>
-                <element signature="e#1321#1333#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="2220">
+              <caret line="39" column="35" selection-start="1227" selection-end="1227" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -267,14 +266,9 @@
       <file leaf-file-name="FavoriteMerchantCache.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/cache/FavoriteMerchantCache.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="0" selection-start="1040" selection-end="1040" vertical-scroll-proportion="0.0" vertical-offset="500" max-vertical-offset="1650">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#493#513#0" expanded="true" />
-                <element signature="e#758#925#0" expanded="true" />
-                <element signature="e#920#921#0" expanded="true" />
-                <element signature="e#1161#1173#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="500" max-vertical-offset="1650">
+              <caret line="45" column="0" selection-start="1040" selection-end="1040" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -282,16 +276,28 @@
       <file leaf-file-name="FetchFavoriteMerchantsTask.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/tasks/FetchFavoriteMerchantsTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="30" selection-start="457" selection-end="457" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="945">
+            <state vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="1110">
+              <caret line="20" column="30" selection-start="457" selection-end="457" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WelcomeActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="WelcomeActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/WelcomeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="18" selection-start="2264" selection-end="2264" vertical-scroll-proportion="0.33269963" vertical-offset="545" max-vertical-offset="3675">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="720" max-vertical-offset="3780">
+              <caret line="78" column="18" selection-start="2264" selection-end="2264" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/talool/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.486631" vertical-offset="373" max-vertical-offset="1140">
+              <caret line="37" column="36" selection-start="802" selection-end="802" />
               <folding />
             </state>
           </provider>
@@ -300,7 +306,8 @@
       <file leaf-file-name="LoginActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="18" selection-start="2314" selection-end="2314" vertical-scroll-proportion="0.0" vertical-offset="740" max-vertical-offset="3090">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1275" max-vertical-offset="3450">
+              <caret line="85" column="18" selection-start="2314" selection-end="2314" />
               <folding />
             </state>
           </provider>
@@ -309,7 +316,8 @@
       <file leaf-file-name="Fragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$ANDROID_HOME$/sources/android-19/android/app/Fragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1805" column="0" selection-start="69913" selection-end="69913" vertical-scroll-proportion="0.0" vertical-offset="25745" max-vertical-offset="27720">
+            <state vertical-scroll-proportion="0.0" vertical-offset="27075" max-vertical-offset="28875">
+              <caret line="1805" column="0" selection-start="69913" selection-end="69913" />
               <folding />
             </state>
           </provider>
@@ -318,16 +326,8 @@
       <file leaf-file-name="FragmentManager.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$ANDROID_HOME$/sources/android-19/android/app/FragmentManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1971" column="0" selection-start="76036" selection-end="76036" vertical-scroll-proportion="0.0" vertical-offset="28505" max-vertical-offset="30000">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PhoneWindow.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$ANDROID_HOME$/sources/android-19/com/android/internal/policy/impl/PhoneWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1011" column="0" selection-start="35934" selection-end="35934" vertical-scroll-proportion="0.0" vertical-offset="13430" max-vertical-offset="56760">
+            <state vertical-scroll-proportion="0.0" vertical-offset="29565" max-vertical-offset="30885">
+              <caret line="1971" column="0" selection-start="76036" selection-end="76036" />
               <folding />
             </state>
           </provider>
@@ -336,7 +336,8 @@
       <file leaf-file-name="MyDealsFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/fragment/MyDealsFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="209" column="13" selection-start="5737" selection-end="5737" vertical-scroll-proportion="0.0" vertical-offset="2120" max-vertical-offset="5805">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3135" max-vertical-offset="6645">
+              <caret line="209" column="13" selection-start="5737" selection-end="5737" />
               <folding />
             </state>
           </provider>
@@ -345,46 +346,9 @@
       <file leaf-file-name="Activity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$ANDROID_HOME$/sources/android-19/android/app/Activity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2602" column="0" selection-start="111704" selection-end="111704" vertical-scroll-proportion="0.0" vertical-offset="37325" max-vertical-offset="80130">
-              <folding>
-                <element signature="e#0#228949#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#35398#35551#0" expanded="false" />
-                <element signature="e#35544#35545#0" expanded="false" />
-                <element signature="e#36044#36059#0" expanded="false" />
-                <element signature="e#36819#36820#0" expanded="false" />
-                <element signature="e#36849#36850#0" expanded="false" />
-                <element signature="e#37245#37246#0" expanded="false" />
-                <element signature="e#37280#37281#0" expanded="false" />
-                <element signature="e#37388#37389#0" expanded="false" />
-                <element signature="e#37423#37424#0" expanded="false" />
-                <element signature="e#37682#37683#0" expanded="false" />
-                <element signature="e#37712#37713#0" expanded="false" />
-                <element signature="e#37826#37827#0" expanded="false" />
-                <element signature="e#37863#37864#0" expanded="false" />
-                <element signature="e#38212#38213#0" expanded="false" />
-                <element signature="e#38242#38243#0" expanded="false" />
-                <element signature="e#68462#68463#0" expanded="false" />
-                <element signature="e#68503#68504#0" expanded="false" />
-                <element signature="e#76490#76491#0" expanded="false" />
-                <element signature="e#76523#76524#0" expanded="false" />
-                <element signature="e#177739#177740#0" expanded="false" />
-                <element signature="e#177771#177772#0" expanded="false" />
-                <element signature="e#177950#177951#0" expanded="false" />
-                <element signature="e#177983#177984#0" expanded="false" />
-                <element signature="e#178548#178549#0" expanded="false" />
-                <element signature="e#178594#178595#0" expanded="false" />
-                <element signature="e#191039#191040#0" expanded="false" />
-                <element signature="e#191072#191073#0" expanded="false" />
-                <element signature="e#193520#193521#0" expanded="false" />
-                <element signature="e#193549#193550#0" expanded="false" />
-                <element signature="e#193589#193590#0" expanded="false" />
-                <element signature="e#193623#193624#0" expanded="false" />
-                <element signature="e#218614#218615#0" expanded="false" />
-                <element signature="e#218646#218647#0" expanded="false" />
-                <element signature="e#227110#227111#0" expanded="false" />
-                <element signature="e#227141#227142#0" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="39030" max-vertical-offset="81915">
+              <caret line="2602" column="0" selection-start="111704" selection-end="111704" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -814,7 +778,7 @@
                 <option name="name" value="assembleRelease" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Assembles all builds for flavor SaveAround" />
+                <option name="description" value="Assembles all SaveAround builds" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
                 <option name="name" value="assembleSaveAround" />
               </ExternalTaskPojo>
@@ -834,7 +798,7 @@
                 <option name="name" value="assembleSaveAroundRelease" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Assembles all builds for flavor Talool" />
+                <option name="description" value="Assembles all Talool builds" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
                 <option name="name" value="assembleTalool" />
               </ExternalTaskPojo>
@@ -1000,34 +964,34 @@
                 <option name="name" value="compileTaloolReleaseRenderscript" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Installs and runs instrumentation tests for all flavors on connected devices." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
+                <option name="name" value="connectedAndroidTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Installs and runs the tests for Build 'saveAroundDebug' on connected devices." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
+                <option name="name" value="connectedAndroidTestSaveAroundDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Installs and runs the tests for Build 'taloolDebug' on connected devices." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
+                <option name="name" value="connectedAndroidTestTaloolDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Runs all device checks on currently connected devices." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
                 <option name="name" value="connectedCheck" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Installs and runs instrumentation tests for all flavors on connected devices." />
+                <option name="description" value="Installs and runs instrumentation tests using all Device Providers." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
-                <option name="name" value="connectedInstrumentTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Installs and runs the tests for Build 'saveAroundDebug' on connected devices." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
-                <option name="name" value="connectedInstrumentTestSaveAroundDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Installs and runs the tests for Build 'taloolDebug' on connected devices." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
-                <option name="name" value="connectedInstrumentTestTaloolDebug" />
+                <option name="name" value="deviceAndroidTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Runs all device checks using Device Providers and Test Servers." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
                 <option name="name" value="deviceCheck" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Installs and runs instrumentation tests using all Device Providers." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
-                <option name="name" value="deviceInstrumentTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
@@ -1160,6 +1124,11 @@
                 <option name="name" value="installSaveAroundDebugTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Installs the Release build for flavor SaveAround" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
+                <option name="name" value="installSaveAroundRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Installs the Debug build for flavor Talool" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
                 <option name="name" value="installTaloolDebug" />
@@ -1168,6 +1137,11 @@
                 <option name="description" value="Installs the Test build for the TaloolDebug build" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
                 <option name="name" value="installTaloolDebugTest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Installs the Release build for flavor Talool" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
+                <option name="name" value="installTaloolRelease" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Runs lint on all variants." />
@@ -1488,6 +1462,18 @@
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
                 <option name="name" value="validateDebugSigning" />
               </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
+                <option name="name" value="validateReleaseSigning" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
+                <option name="name" value="zipalignSaveAroundRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/talool" />
+                <option name="name" value="zipalignTaloolRelease" />
+              </ExternalTaskPojo>
             </list>
           </value>
         </entry>
@@ -1495,7 +1481,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="1393688136000" />
+        <entry key="$PROJECT_DIR$" value="4181800647000" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1592,16 +1578,8 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle/0.8.3/5a6c951316966332ccde24900fb08bb8be47a407/gradle-0.8.3-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle/0.8.3/6ec4ee59a1de83749cfd3d112e9d987982cc3754/gradle-0.8.3.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/15.0/36b6a585c0f0c63bd85fb04db0dcb7b217298956/guava-15.0-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/15.0/ed727a8d9f247e2050281cb083f1c77b09dcb5cd/guava-15.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/common/22.5.3/3a7c6f0f932c8b3a129e04e8dbf6ad3755765aff/common-22.5.3-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/common/22.5.3/53a1de01737be1d06586dcd18ce2215815431a5f/common-22.5.3.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-model/0.8.3/d90043494d8e2b308a64a0852c7f26dd83747e99/builder-model-0.8.3-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-model/0.8.3/c84f71c379a7f56f3842806875329ea793164b6e/builder-model-0.8.3.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/dvlib/22.5.3/8d69a3d0b76b4cb1bed4f3e22ad3c7c5faf1973a/dvlib-22.5.3-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/dvlib/22.5.3/3e1fe8f13d18ac50f062f4dea84b25d7ee83d8e/dvlib-22.5.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle/0.9.0/2fae78d5558e0ba606d28a08d309bcbd75421dba/gradle-0.9.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle/0.9.0/ea9da6d56751eb1b742bd2e491598b312e5bfd0f/gradle-0.9.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.1/1fdf61e5ba87e0e4676c22677e0b2fe3a05c2fd8/httpcore-4.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.1/33fc26c02f8043ab0ede19eadc8c9885386b255c/httpcore-4.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.1/f3f156cbff0e0fb0d64bfce31a352cce4a33bc19/commons-logging-1.1.1-sources.jar" />
@@ -1612,46 +1590,54 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.1.1/3d1d918f32709e33ba7ddb2c4e8d1c543ebe713e/httpclient-4.1.1.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpmime/4.1/3ac83213baeab2b21fde6c0bf47ed68ea3e6a8da/httpmime-4.1-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpmime/4.1/9ba2dcdf94ce35c8a8e9bff242db0618ca932e92/httpmime-4.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/15.0/36b6a585c0f0c63bd85fb04db0dcb7b217298956/guava-15.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/15.0/ed727a8d9f247e2050281cb083f1c77b09dcb5cd/guava-15.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/common/22.7.0/1adb76100c32fa02be7b151a23be68c0ee9bf5cf/common-22.7.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/common/22.7.0/b58414163169320682431ce16822345ee46b300c/common-22.7.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.kxml/kxml2/2.3.0/309cd2cff7260e465792fda3dcbb063b730d8050/kxml2-2.3.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.kxml/kxml2/2.3.0/ccbc77a5fd907ef863c29f3596c6f54ffa4e9442/kxml2-2.3.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.layoutlib/layoutlib-api/22.5.3/64c7e50ba4e96d2fddc58cdb43ea345ba27de6f/layoutlib-api-22.5.3-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.layoutlib/layoutlib-api/22.5.3/f62adac92d02b5e3d09b3cc859031bb1ec24197a/layoutlib-api-22.5.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.layoutlib/layoutlib-api/22.7.0/c6dbae6fe2a0016003926ea3588916c95bc26932/layoutlib-api-22.7.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.layoutlib/layoutlib-api/22.7.0/7f12dcc1cd5541743d6009a5fb1cab2577da52b1/layoutlib-api-22.7.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/dvlib/22.7.0/f747f69923d045c9855f2cadee4aa4e57f17db8b/dvlib-22.7.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/dvlib/22.7.0/aa5205b1cd1da94bb17ff1d8c9e582a87b7dd6d7/dvlib-22.7.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.0/913e9963c558d36bdfdc19bab739a282999d08eb/commons-compress-1.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.0/995ae384a0b1e2c66269e6bc5198db8561fb45a2/commons-compress-1.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdklib/22.5.3/bd15bbd26bd4fd93db1e04a430cdc9401b5757b/sdklib-22.5.3-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdklib/22.5.3/ef717702bae70741d0fe5182d38299935d6babde/sdklib-22.5.3.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdk-common/22.5.3/7e58d1c88c532bdb70d80ac1a411b31a00715ece/sdk-common-22.5.3-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdk-common/22.5.3/4834f73524a3510330dd3e48a01cfad8fbdc3c7f/sdk-common-22.5.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdklib/22.7.0/23001f07a6e9d9739a1df2671f68626911535f4e/sdklib-22.7.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdklib/22.7.0/9c446bec0bad3341c2519b68148dfd89804d4fda/sdklib-22.7.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdk-common/22.7.0/ccc74b2e37872fb03f5ba5173bd01c9571fd8ff4/sdk-common-22.7.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools/sdk-common/22.7.0/c7a21ff9cc49baae34988a5f4a7aafc521c04e83/sdk-common-22.7.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/manifest-merger/22.7.0/83fe2ef2a968eb5e7e8269ca03a9378929958afd/manifest-merger-22.7.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/manifest-merger/22.7.0/c871c3ca77a4b61b06d028a33289c21b9fc36764/manifest-merger-22.7.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.ddms/ddmlib/22.7.0/83447fea4fe18ff938f7664c1f619cada17ea828/ddmlib-22.7.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.ddms/ddmlib/22.7.0/9d56101b42f1184b55d4c7166e1d13bfe6d1592d/ddmlib-22.7.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javawriter/2.2.1/9476a897088c64437ddba17bedbbdb2272499d63/javawriter-2.2.1-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javawriter/2.2.1/d6dac1da0b24ab9ea9a6b5d49c2586d85f17e597/javawriter-2.2.1.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-test-api/0.9.0/66fa32e63c865b66b03310d375b3d73b7d7112f4/builder-test-api-0.9.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-test-api/0.9.0/9fce59f3741d61133ee95bcd352cc8ee2be2aa6a/builder-test-api-0.9.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-model/0.9.0/5fb438f407c614318a6adb7cc3eed8c8ccdafc35/builder-model-0.9.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-model/0.9.0/d62494d730dc558c461083a6f70b21c2f3c11bc7/builder-model-0.9.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcprov-jdk15on/1.48/3824866f059053c43b118eb5a067ea1800d8c913/bcprov-jdk15on-1.48-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcprov-jdk15on/1.48/960dea7c9181ba0b17e8bab0c06a43f0a5f04e65/bcprov-jdk15on-1.48.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcpkix-jdk15on/1.48/8cff777fce5ef53cc35fa569faa8d12faaf34a78/bcpkix-jdk15on-1.48-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcpkix-jdk15on/1.48/28b7614b908a47844bb27e3c94b45b6893656265/bcpkix-jdk15on-1.48.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder/0.9.0/89ffc6250a64c1193afbfab65083094bd8309f7f/builder-0.9.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder/0.9.0/528c29a6feff3b066363e6be07206eefc7020511/builder-0.9.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.jdt.core.compiler/ecj/4.2.2/fb9dc21349d06dd00b395af5c42f299df828f9da/ecj-4.2.2-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.jdt.core.compiler/ecj/4.2.2/d9fd79499c664bccaf24dbe04be417de6c6af64a/ecj-4.2.2.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm/4.0/4a33d6206d6d442446a8edbd2b0798ecfaebc229/asm-4.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm/4.0/659add6efc75a4715d738e73f07505246edf4d66/asm-4.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.external.lombok/lombok-ast/0.2.2/47ebe619db7def288aad08bd65d26eea6d67f8ee/lombok-ast-0.2.2-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.external.lombok/lombok-ast/0.2.2/57e560b535ceaa14fb6f15422d74594acd6c5b64/lombok-ast-0.2.2.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/4.0/4a33d6206d6d442446a8edbd2b0798ecfaebc229/asm-tree-4.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/4.0/67bd266cd17adcee486b76952ece4cc85fe248b8/asm-tree-4.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-api/22.5.3/e8440eefd7f90732613442b574f81ca60b776728/lint-api-22.5.3-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-api/22.5.3/68319bca3727671d57545d86bb5ffc230212b06e/lint-api-22.5.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-api/22.7.0/4f8e64de0822110d530686ef67019fe458a6409a/lint-api-22.7.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-api/22.7.0/2d87f384743c5cf28d88df78e89f695867c3926e/lint-api-22.7.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/4.0/4a33d6206d6d442446a8edbd2b0798ecfaebc229/asm-analysis-4.0-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/4.0/1c45d52b6f6c638db13cf3ac12adeb56b254cdd7/asm-analysis-4.0.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-checks/22.5.3/9bcb41221a64f938bec0f87c61e6054dbda84943/lint-checks-22.5.3-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-checks/22.5.3/8af45f7eae848bb02dd763ae7e5d53856d2e1b98/lint-checks-22.5.3.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.jdt.core.compiler/ecj/4.2.2/fb9dc21349d06dd00b395af5c42f299df828f9da/ecj-4.2.2-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.jdt.core.compiler/ecj/4.2.2/d9fd79499c664bccaf24dbe04be417de6c6af64a/ecj-4.2.2.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint/22.5.3/3dd2f99c55620b697d6997c9b702f7d3c6ea26e0/lint-22.5.3-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint/22.5.3/bb9d94887e3ec31fa00bcb3c4e5bfd8e8e4245ff/lint-22.5.3.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.ddms/ddmlib/22.5.3/7696f046c23e6226e7bbcc904195df6130c416d3/ddmlib-22.5.3-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.ddms/ddmlib/22.5.3/7559548b8626c7362c7a14888f27e93965036d18/ddmlib-22.5.3.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javawriter/2.2.1/9476a897088c64437ddba17bedbbdb2272499d63/javawriter-2.2.1-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup/javawriter/2.2.1/d6dac1da0b24ab9ea9a6b5d49c2586d85f17e597/javawriter-2.2.1.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/manifest-merger/22.5.3/dbf6b89cca2e25c7e3dbeb615420a959db906411/manifest-merger-22.5.3-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/manifest-merger/22.5.3/d2054b63f44498f1d6b2166f3d318ae99e4cdaa5/manifest-merger-22.5.3.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-test-api/0.8.3/6262ae8a1aa041298b3d58dfdf7e297ba08ccc88/builder-test-api-0.8.3-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder-test-api/0.8.3/cf2f2637027455eba88f718e7ab7cd5ef2d85a9f/builder-test-api-0.8.3.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcprov-jdk15on/1.48/3824866f059053c43b118eb5a067ea1800d8c913/bcprov-jdk15on-1.48-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcprov-jdk15on/1.48/960dea7c9181ba0b17e8bab0c06a43f0a5f04e65/bcprov-jdk15on-1.48.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcpkix-jdk15on/1.48/8cff777fce5ef53cc35fa569faa8d12faaf34a78/bcpkix-jdk15on-1.48-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.bouncycastle/bcpkix-jdk15on/1.48/28b7614b908a47844bb27e3c94b45b6893656265/bcpkix-jdk15on-1.48.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder/0.8.3/2eca3955b9b54deb5bf3a1b3837b424acd174d6b/builder-0.8.3-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder/0.8.3/738346f40d4f2ec963d88b826ee54fce7975b219/builder-0.8.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-checks/22.7.0/29a91f1685088ce1070926b539f0cc7908b3f7c/lint-checks-22.7.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint-checks/22.7.0/f57c2075d59fa99944ba2e7ff9239d49fdb013e3/lint-checks-22.7.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint/22.7.0/22e03b468f9dc64ff36f1fcbb4b1043fb16b4910/lint-22.7.0-sources.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.lint/lint/22.7.0/4ed955d40d0478015bec12e969d23bb0ac6875e3/lint-22.7.0.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.proguard/proguard-base/4.10/2e69a382547b042b3d2d03440687fb1e2ac06af2/proguard-base-4.10-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.proguard/proguard-base/4.10/46e891272ae0338af3f5de5e14d8d2641edefc2c/proguard-base-4.10.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.proguard/proguard-gradle/4.10/9ed4b7b34d522f36aa61b5142576fa5e8cc733b8/proguard-gradle-4.10-sources.jar" />
@@ -1667,86 +1653,86 @@
               <option name="name" value="app" />
               <option name="projectBuildClasspath">
                 <list>
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/scala" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/gradle-cli-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/ant-antlr-1.9.2.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/tooling-api" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/base-services-groovy" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-sonar-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/internal-integ-testing" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-ivy-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-ear-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/publish" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-diagnostics-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/jetty" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/osgi" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-osgi-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/core-impl" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/language-base" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/language-jvm" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-plugins-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-ide-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/groovy-all-1.8.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/diagnostics" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-scala-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/jacoco" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/gradle-resources-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/gradle-tooling-api-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-build-comparison-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-signing-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/internal-testing" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-language-jvm-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-reporting-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-code-quality-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/ide" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-antlr-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/ui" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/cli" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-jacoco-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/reporting" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/gradle-ui-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-core-impl-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-jetty-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/gradle-open-api-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/ivy" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/signing" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/cpp" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/ear" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/native" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/javascript" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/gradle-base-services-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-javascript-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/core" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/ant-launcher-1.9.2.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/plugins" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-announce-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/gradle-launcher-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/launcher" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/wrapper" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/build-init" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/antlr" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/sonar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/base-services" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-language-base-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/ivy-2.2.0.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/gradle-base-services-groovy-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/gradle-core-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-cpp-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/build-comparison" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/maven" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/gradle-wrapper-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/open-api" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/code-quality" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/messaging" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/gradle-messaging-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-maven-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-build-init-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/announce" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/gradle-docs-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/plugins/gradle-publish-1.10.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/ant-1.9.2.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/src/resources" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.10-all/6vpvhqu0efs1fqmqr2decq1v12/gradle-1.10/lib/gradle-native-1.10.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/announce" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/antlr" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/base-services" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/base-services-groovy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/build-comparison" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/build-init" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/cli" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/code-quality" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/core" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/core-impl" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/cpp" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/diagnostics" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/ear" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/ide" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/internal-integ-testing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/internal-testing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/ivy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/jacoco" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/javascript" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/jetty" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/language-base" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/language-jvm" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/launcher" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/maven" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/messaging" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/open-api" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/osgi" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/plugins" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/publish" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/reporting" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/resources" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/scala" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/signing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/sonar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/tooling-api" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/ui" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/src/wrapper" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/ant-1.9.2.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/ant-launcher-1.9.2.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/gradle-base-services-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/gradle-base-services-groovy-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/gradle-cli-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/gradle-core-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/gradle-docs-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/gradle-launcher-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/gradle-messaging-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/gradle-native-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/gradle-open-api-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/gradle-resources-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/gradle-tooling-api-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/gradle-ui-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/gradle-wrapper-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/groovy-all-1.8.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/ivy-2.2.0.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/ant-antlr-1.9.2.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-announce-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-antlr-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-build-comparison-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-build-init-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-code-quality-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-core-impl-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-cpp-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-diagnostics-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-ear-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-ide-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-ivy-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-jacoco-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-javascript-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-jetty-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-language-base-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-language-jvm-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-maven-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-osgi-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-plugins-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-publish-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-reporting-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-scala-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-signing-1.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-1.11-all/7qd8qq8te5j4f5q9aaei3gh3lj/gradle-1.11/lib/plugins/gradle-sonar-1.11.jar" />
                   <option value="$PROJECT_DIR$/buildSrc/src/main/java" />
                   <option value="$PROJECT_DIR$/buildSrc/src/main/groovy" />
                 </list>
@@ -1783,19 +1769,20 @@
         <option value="$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/DealAcquiresActivity.java" />
         <option value="$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/GiftActivity.java" />
         <option value="$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/DealActivity.java" />
-        <option value="$PROJECT_DIR$/talool/build.gradle" />
         <option value="$PROJECT_DIR$/talool/src/saveAround/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/talool/src/main/java/com/talool/android/fragment/MyDealsFragment.java" />
         <option value="$PROJECT_DIR$/talool/src/main/java/com/talool/android/cache/FavoriteMerchantCache.java" />
         <option value="$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/TaloolDbHelper.java" />
         <option value="$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/AbstractDbAdapter.java" />
         <option value="$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/FavoritesDao.java" />
+        <option value="$PROJECT_DIR$/talool/build.gradle" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="840" />
     <option name="y" value="22" />
-    <option name="width" value="1680" />
+    <option name="width" value="840" />
     <option name="height" value="940" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -1843,7 +1830,7 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="talool-mobile-android-gradle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1853,11 +1840,11 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="talool-mobile-android-gradle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1867,391 +1854,17 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="talool-mobile-android-gradle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android-gradle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="saveAround" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android-gradle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="saveAround" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android-gradle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android-gradle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android-gradle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android-gradle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tasks" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android-gradle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="persistence" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android-gradle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dialog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android-gradle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cache" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android-gradle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="adapters" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool-mobile-android-gradle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="talool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="keys" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2329,6 +1942,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -2354,19 +1980,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2463,6 +2076,9 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="1cd7174b-c6af-47b3-807a-4845ccc162f9" name="Default" comment="" />
@@ -2472,21 +2088,20 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1680" height="940" extended-state="6" />
-    <editor active="false" />
+    <frame x="840" y="22" width="840" height="940" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288835" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3276699" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288835" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49635923" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.49635923" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35558254" sideWeight="0.23565324" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25030527" sideWeight="0.50180507" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25015068" sideWeight="0.50180507" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49514562" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49635923" sideWeight="0.76373625" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2495,9 +2110,10 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25030527" sideWeight="0.49819493" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.51378447" sideWeight="0.49819493" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2050971" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3276699" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -2519,137 +2135,184 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/util/TaloolUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="13" selection-start="377" selection-end="377" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1245" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1245">
+          <caret line="13" column="13" selection-start="377" selection-end="377" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/adapters/DealAcquiredRow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="117" selection-end="117" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+          <caret line="5" column="13" selection-start="117" selection-end="117" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/saveAround/res/drawable/tab_indicator_ab_savearound.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.30612245" vertical-offset="150" max-vertical-offset="645" />
+        <state vertical-scroll-proportion="-0.30612245" vertical-offset="150" max-vertical-offset="645">
+          <caret line="0" column="0" selection-start="0" selection-end="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/res/layout/activity_layout.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="240">
+          <caret line="0" column="0" selection-start="0" selection-end="0" />
+        </state>
+      </provider>
       <provider editor-type-id="android-designer">
         <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="240" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="49" selection-start="4221" selection-end="4221" vertical-scroll-proportion="0.0" vertical-offset="1275" max-vertical-offset="7305" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1275" max-vertical-offset="7305">
+          <caret line="135" column="49" selection-start="4221" selection-end="4221" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/res/layout/activity_tab_layout.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.3333333" vertical-offset="120" max-vertical-offset="750">
+          <caret line="14" column="43" selection-start="482" selection-end="482" />
+        </state>
+      </provider>
       <provider editor-type-id="android-designer">
         <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="43" selection-start="482" selection-end="482" vertical-scroll-proportion="-3.3333333" vertical-offset="120" max-vertical-offset="750" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/saveAround/res/values-hdpi/dimens.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="47" selection-start="836" selection-end="892" vertical-scroll-proportion="0.53677934" vertical-offset="0" max-vertical-offset="503" />
+        <state vertical-scroll-proportion="0.53677934" vertical-offset="0" max-vertical-offset="503">
+          <caret line="18" column="47" selection-start="836" selection-end="892" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/res/values-hdpi/dimens.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="17" selection-start="853" selection-end="853" vertical-scroll-proportion="0.53677934" vertical-offset="0" max-vertical-offset="503" />
+        <state vertical-scroll-proportion="0.53677934" vertical-offset="0" max-vertical-offset="503">
+          <caret line="18" column="17" selection-start="853" selection-end="853" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="0" selection-start="5247" selection-end="5394" vertical-scroll-proportion="-7.1538463" vertical-offset="1412" max-vertical-offset="2193" />
+        <state vertical-scroll-proportion="-7.1538463" vertical-offset="1412" max-vertical-offset="2193">
+          <caret line="94" column="0" selection-start="5247" selection-end="5394" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/adapters/DealsAcquiredAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="89" selection-start="1919" selection-end="1919" vertical-scroll-proportion="0.0" vertical-offset="427" max-vertical-offset="1470" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="427" max-vertical-offset="1470">
+          <caret line="55" column="89" selection-start="1919" selection-end="1919" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/saveAround/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="12" selection-start="3979" selection-end="3979" vertical-scroll-proportion="-19.23077" vertical-offset="565" max-vertical-offset="1335" />
+        <state vertical-scroll-proportion="-19.23077" vertical-offset="565" max-vertical-offset="1335">
+          <caret line="71" column="12" selection-start="3979" selection-end="3979" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/adapters/MyDealsRow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="13" selection-start="159" selection-end="159" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+          <caret line="7" column="13" selection-start="159" selection-end="159" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/adapters/MyDealsAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="91" selection-start="2343" selection-end="2343" vertical-scroll-proportion="0.0" vertical-offset="825" max-vertical-offset="1560" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="825" max-vertical-offset="1560">
+          <caret line="78" column="91" selection-start="2343" selection-end="2343" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/util/ApiUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="40" selection-start="2100" selection-end="2100" vertical-scroll-proportion="0.0" vertical-offset="1258" max-vertical-offset="1830" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1258" max-vertical-offset="1830">
+          <caret line="109" column="40" selection-start="2100" selection-end="2100" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="0" selection-start="5779" selection-end="6248" vertical-scroll-proportion="0.0" vertical-offset="1350" max-vertical-offset="2415" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1350" max-vertical-offset="2415">
+          <caret line="111" column="0" selection-start="5779" selection-end="6248" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="40" selection-start="724" selection-end="724" vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="675" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="675">
+          <caret line="17" column="40" selection-start="724" selection-end="724" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/saveAround/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="63" selection-start="5728" selection-end="5728" vertical-scroll-proportion="3.3061225" vertical-offset="0" max-vertical-offset="2325" />
+        <state vertical-scroll-proportion="3.3061225" vertical-offset="0" max-vertical-offset="2325">
+          <caret line="108" column="63" selection-start="5728" selection-end="5728" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/util/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="75" selection-start="4467" selection-end="4467" vertical-scroll-proportion="0.7413793" vertical-offset="766" max-vertical-offset="1800" />
+        <state vertical-scroll-proportion="0.7413793" vertical-offset="766" max-vertical-offset="1800">
+          <caret line="74" column="75" selection-start="4467" selection-end="4467" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/SettingsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="0" selection-start="2833" selection-end="2833" vertical-scroll-proportion="0.0" vertical-offset="1335" max-vertical-offset="1785">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1335" max-vertical-offset="1785">
+          <caret line="89" column="0" selection-start="2833" selection-end="2833" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/util/ThriftHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="27" selection-start="1001" selection-end="1001" vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="1335" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="1335">
+          <caret line="27" column="27" selection-start="1001" selection-end="1001" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="503" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="503">
+          <caret line="0" column="0" selection-start="0" selection-end="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/settings.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="503" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="503">
+          <caret line="0" column="0" selection-start="0" selection-end="0" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/local.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="29" selection-start="421" selection-end="421" vertical-scroll-proportion="-5.4" vertical-offset="0" max-vertical-offset="255" />
+        <state vertical-scroll-proportion="-5.4" vertical-offset="0" max-vertical-offset="255">
+          <caret line="9" column="29" selection-start="421" selection-end="421" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/BasicWebViewActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="29" selection-start="692" selection-end="692" vertical-scroll-proportion="16.2" vertical-offset="660" max-vertical-offset="1275">
+        <state vertical-scroll-proportion="16.2" vertical-offset="660" max-vertical-offset="1275">
+          <caret line="27" column="29" selection-start="692" selection-end="692" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/GiftActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="70" selection-start="3973" selection-end="3973" vertical-scroll-proportion="0.0" vertical-offset="5002" max-vertical-offset="5505">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5002" max-vertical-offset="5505">
+          <caret line="102" column="70" selection-start="3973" selection-end="3973" />
           <folding>
             <element signature="imports" expanded="false" />
             <element signature="e#11841#11895#0" expanded="false" />
@@ -2662,7 +2325,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/TaloolActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="13" selection-start="549" selection-end="549" vertical-scroll-proportion="0.0" vertical-offset="712" max-vertical-offset="1215">
+        <state vertical-scroll-proportion="0.0" vertical-offset="712" max-vertical-offset="1215">
+          <caret line="16" column="13" selection-start="549" selection-end="549" />
           <folding>
             <element signature="imports" expanded="false" />
             <element signature="e#1665#1725#0" expanded="false" />
@@ -2672,26 +2336,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/talool/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="445" selection-end="623" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="975" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/saveAround/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="40" selection-start="237" selection-end="237" vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="720" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="720">
+          <caret line="6" column="40" selection-start="237" selection-end="237" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/DealActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="738" column="13" selection-start="32705" selection-end="32705" vertical-scroll-proportion="0.0" vertical-offset="3270" max-vertical-offset="10200">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3270" max-vertical-offset="10200">
+          <caret line="738" column="13" selection-start="32705" selection-end="32705" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/DealAcquiresActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="238" column="13" selection-start="6705" selection-end="6705" vertical-scroll-proportion="0.0" vertical-offset="1672" max-vertical-offset="4155">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1672" max-vertical-offset="4155">
+          <caret line="238" column="13" selection-start="6705" selection-end="6705" />
           <folding>
             <element signature="imports" expanded="false" />
             <element signature="e#6124#6139#0" expanded="false" />
@@ -2701,26 +2364,31 @@
     </entry>
     <entry file="file://$ANDROID_HOME$/sources/android-19/android/database/sqlite/SQLiteOpenHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="161" column="26" selection-start="7367" selection-end="7367" vertical-scroll-proportion="0.0" vertical-offset="1693" max-vertical-offset="5475" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1693" max-vertical-offset="5475">
+          <caret line="161" column="26" selection-start="7367" selection-end="7367" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/cache/BookCache.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="13" selection-start="180" selection-end="180" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
+          <caret line="8" column="13" selection-start="180" selection-end="180" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/FavoriteMerchantProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="25" selection-start="2743" selection-end="2743" vertical-scroll-proportion="0.0" vertical-offset="992" max-vertical-offset="2400">
+        <state vertical-scroll-proportion="0.0" vertical-offset="992" max-vertical-offset="2400">
+          <caret line="95" column="25" selection-start="2743" selection-end="2743" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/cache/DealOfferCache.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="19" selection-start="204" selection-end="204" vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="570">
+        <state vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="570">
+          <caret line="14" column="19" selection-start="204" selection-end="204" />
           <folding>
             <element signature="imports" expanded="false" />
             <element signature="e#279#300#0" expanded="false" />
@@ -2730,165 +2398,143 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/FindDealsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="321" column="44" selection-start="12291" selection-end="12291" vertical-scroll-proportion="0.0" vertical-offset="3767" max-vertical-offset="5325">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3767" max-vertical-offset="5325">
+          <caret line="321" column="44" selection-start="12291" selection-end="12291" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/util/TaloolUser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="195" column="36" selection-start="4456" selection-end="4456" vertical-scroll-proportion="0.0" vertical-offset="2237" max-vertical-offset="2745">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2237" max-vertical-offset="2745">
+          <caret line="195" column="36" selection-start="4456" selection-end="4456" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/ActivityDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="551" selection-end="603" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1845">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1845">
+          <caret line="24" column="0" selection-start="551" selection-end="603" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/TaloolDbHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="31" selection-start="425" selection-end="425" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1740">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1740">
+          <caret line="16" column="31" selection-start="425" selection-end="425" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/MerchantDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="17" selection-start="513" selection-end="524" vertical-scroll-proportion="0.0" vertical-offset="88" max-vertical-offset="1665">
+        <state vertical-scroll-proportion="0.0" vertical-offset="88" max-vertical-offset="1665">
+          <caret line="23" column="17" selection-start="513" selection-end="524" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/AbstractDbAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="50" selection-start="2960" selection-end="2960" vertical-scroll-proportion="0.0" vertical-offset="935" max-vertical-offset="1890">
+        <state vertical-scroll-proportion="0.0" vertical-offset="935" max-vertical-offset="1890">
+          <caret line="92" column="50" selection-start="2960" selection-end="2960" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$ANDROID_HOME$/sources/android-19/com/android/internal/policy/impl/PhoneWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1011" column="0" selection-start="35934" selection-end="35934" vertical-scroll-proportion="0.0" vertical-offset="13430" max-vertical-offset="56760">
+        <state vertical-scroll-proportion="0.0" vertical-offset="13430" max-vertical-offset="56760">
+          <caret line="1011" column="0" selection-start="35934" selection-end="35934" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$ANDROID_HOME$/sources/android-19/android/app/Activity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2602" column="0" selection-start="111704" selection-end="111704" vertical-scroll-proportion="0.0" vertical-offset="37325" max-vertical-offset="80130">
-          <folding>
-            <element signature="e#0#228949#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#35398#35551#0" expanded="false" />
-            <element signature="e#35544#35545#0" expanded="false" />
-            <element signature="e#36044#36059#0" expanded="false" />
-            <element signature="e#36819#36820#0" expanded="false" />
-            <element signature="e#36849#36850#0" expanded="false" />
-            <element signature="e#37245#37246#0" expanded="false" />
-            <element signature="e#37280#37281#0" expanded="false" />
-            <element signature="e#37388#37389#0" expanded="false" />
-            <element signature="e#37423#37424#0" expanded="false" />
-            <element signature="e#37682#37683#0" expanded="false" />
-            <element signature="e#37712#37713#0" expanded="false" />
-            <element signature="e#37826#37827#0" expanded="false" />
-            <element signature="e#37863#37864#0" expanded="false" />
-            <element signature="e#38212#38213#0" expanded="false" />
-            <element signature="e#38242#38243#0" expanded="false" />
-            <element signature="e#68462#68463#0" expanded="false" />
-            <element signature="e#68503#68504#0" expanded="false" />
-            <element signature="e#76490#76491#0" expanded="false" />
-            <element signature="e#76523#76524#0" expanded="false" />
-            <element signature="e#177739#177740#0" expanded="false" />
-            <element signature="e#177771#177772#0" expanded="false" />
-            <element signature="e#177950#177951#0" expanded="false" />
-            <element signature="e#177983#177984#0" expanded="false" />
-            <element signature="e#178548#178549#0" expanded="false" />
-            <element signature="e#178594#178595#0" expanded="false" />
-            <element signature="e#191039#191040#0" expanded="false" />
-            <element signature="e#191072#191073#0" expanded="false" />
-            <element signature="e#193520#193521#0" expanded="false" />
-            <element signature="e#193549#193550#0" expanded="false" />
-            <element signature="e#193589#193590#0" expanded="false" />
-            <element signature="e#193623#193624#0" expanded="false" />
-            <element signature="e#218614#218615#0" expanded="false" />
-            <element signature="e#218646#218647#0" expanded="false" />
-            <element signature="e#227110#227111#0" expanded="false" />
-            <element signature="e#227141#227142#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="37325" max-vertical-offset="80130">
+          <caret line="2602" column="0" selection-start="111704" selection-end="111704" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$ANDROID_HOME$/sources/android-19/android/app/FragmentManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1971" column="0" selection-start="76036" selection-end="76036" vertical-scroll-proportion="0.0" vertical-offset="28505" max-vertical-offset="30000">
+        <state vertical-scroll-proportion="0.0" vertical-offset="28505" max-vertical-offset="30000">
+          <caret line="1971" column="0" selection-start="76036" selection-end="76036" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$ANDROID_HOME$/sources/android-19/android/app/Fragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1805" column="0" selection-start="69913" selection-end="69913" vertical-scroll-proportion="0.0" vertical-offset="25745" max-vertical-offset="27720">
+        <state vertical-scroll-proportion="0.0" vertical-offset="25745" max-vertical-offset="27720">
+          <caret line="1805" column="0" selection-start="69913" selection-end="69913" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$ANDROID_HOME$/sources/android-19/android/database/sqlite/SQLiteDatabase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="414" column="16" selection-start="16282" selection-end="16282" vertical-scroll-proportion="0.7619048" vertical-offset="5180" max-vertical-offset="32310">
-          <folding />
+        <state vertical-scroll-proportion="0.7619048" vertical-offset="5180" max-vertical-offset="32310">
+          <caret line="414" column="16" selection-start="16282" selection-end="16282" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/persistence/FavoritesDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="35" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.0" vertical-offset="395" max-vertical-offset="2055">
-          <folding>
-            <element signature="e#1321#1333#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="395" max-vertical-offset="2055">
+          <caret line="39" column="35" selection-start="1227" selection-end="1227" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/fragment/MyDealsFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="209" column="13" selection-start="5737" selection-end="5737" vertical-scroll-proportion="0.0" vertical-offset="2120" max-vertical-offset="5805">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2120" max-vertical-offset="5805">
+          <caret line="209" column="13" selection-start="5737" selection-end="5737" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/cache/FavoriteMerchantCache.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="0" selection-start="1040" selection-end="1040" vertical-scroll-proportion="0.0" vertical-offset="500" max-vertical-offset="1650">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#493#513#0" expanded="true" />
-            <element signature="e#758#925#0" expanded="true" />
-            <element signature="e#920#921#0" expanded="true" />
-            <element signature="e#1161#1173#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="500" max-vertical-offset="1650">
+          <caret line="45" column="0" selection-start="1040" selection-end="1040" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/tasks/FetchFavoriteMerchantsTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="30" selection-start="457" selection-end="457" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="945">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="945">
+          <caret line="20" column="30" selection-start="457" selection-end="457" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="18" selection-start="2314" selection-end="2314" vertical-scroll-proportion="0.0" vertical-offset="740" max-vertical-offset="3090">
+        <state vertical-scroll-proportion="0.0" vertical-offset="740" max-vertical-offset="3090">
+          <caret line="85" column="18" selection-start="2314" selection-end="2314" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/talool/src/main/java/com/talool/android/activity/WelcomeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="18" selection-start="2264" selection-end="2264" vertical-scroll-proportion="0.33269963" vertical-offset="545" max-vertical-offset="3675">
+        <state vertical-scroll-proportion="0.0" vertical-offset="720" max-vertical-offset="3780">
+          <caret line="78" column="18" selection-start="2264" selection-end="2264" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/talool/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.486631" vertical-offset="373" max-vertical-offset="1140">
+          <caret line="37" column="36" selection-start="802" selection-end="802" />
           <folding />
         </state>
       </provider>

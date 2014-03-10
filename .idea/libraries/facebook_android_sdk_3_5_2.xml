@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="facebook-android-sdk-3.5.2">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/talool/build/exploded-bundles/ComFacebookFacebookAndroidSdk352.aar/res" />
-      <root url="jar://$PROJECT_DIR$/talool/build/exploded-bundles/ComFacebookFacebookAndroidSdk352.aar/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/talool/build/exploded-aar/com.facebook/facebook-android-sdk/3.5.2/res" />
+      <root url="jar://$PROJECT_DIR$/talool/build/exploded-aar/com.facebook/facebook-android-sdk/3.5.2/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
