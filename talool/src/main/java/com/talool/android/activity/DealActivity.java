@@ -65,8 +65,6 @@ import java.util.List;
 public class DealActivity extends TaloolActivity {
     private static final int REAUTH_ACTIVITY_CODE = 300;
     private static final int FACEBOOK_REQUEST_CODE = 666;
-    private boolean pendingAnnounce;
-    private static final String PENDING_ANNOUNCE_KEY = "pendingAnnounce";
     private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
     private static final Uri M_FACEBOOK_URL = Uri.parse("http://m.facebook.com");
 
@@ -174,7 +172,6 @@ public class DealActivity extends TaloolActivity {
             dealActivityButtonLayout.setGravity(Gravity.CENTER);
             dealActivityButtonLayout.setBackgroundColor(getResources().getColor(R.color.orange));
             dealActivityButtonLayout.setPadding(0, 0, 0, 0);
-            return;
         } else if (deal.redeemed != 0) {
             dealActivityButtonLayout.removeAllViewsInLayout();
             dealActivityButtonLayout.setBackgroundDrawable(null);
@@ -189,7 +186,6 @@ public class DealActivity extends TaloolActivity {
             dealActivityButtonLayout.setGravity(Gravity.CENTER);
             dealActivityButtonLayout.setBackgroundColor(getResources().getColor(R.color.orange));
             dealActivityButtonLayout.setPadding(0, 0, 0, 0);
-            return;
         } else if (TaloolUtil.isExpired(deal.deal.expires)) {
             dealActivityButtonLayout.removeAllViewsInLayout();
             dealActivityButtonLayout.setBackgroundDrawable(null);
@@ -222,7 +218,7 @@ public class DealActivity extends TaloolActivity {
 
         };
 
-        dealOfferFetchTask.execute(new String[]{});
+        dealOfferFetchTask.execute();
     }
 
     private void setDealCreatorImageView(DealOffer_t dealOffer) {
@@ -273,52 +269,53 @@ public class DealActivity extends TaloolActivity {
         df = DialogFactory.getConfirmDialog(getResources().getString(R.string.please_confirm),
                 getResources().getString(R.string.deal_activity_confirm_redeem_message), new DialogClickListener() {
 
-            @Override
-            public void onDialogPositiveClick(DialogFragment dialog) {
-                DealRedemptionTask dealAcceptanceTask = new DealRedemptionTask(client, deal.dealAcquireId, view.getContext()) {
                     @Override
-                    protected void onPreExecute() {
-                        df = DialogFactory.getProgressDialog();
-                        df.show(getFragmentManager(), "dialog");
+                    public void onDialogPositiveClick(DialogFragment dialog) {
+                        DealRedemptionTask dealAcceptanceTask = new DealRedemptionTask(client, deal.dealAcquireId, view.getContext()) {
+                            @Override
+                            protected void onPreExecute() {
+                                df = DialogFactory.getProgressDialog();
+                                df.show(getFragmentManager(), "dialog");
+                            }
+
+                            @Override
+                            protected void onPostExecute(String result) {
+                                if (df != null && !df.isHidden()) {
+                                    df.dismiss();
+                                }
+
+                                redemptionCode = result;
+                                dealActivityButtonLayout.removeAllViewsInLayout();
+                                dealActivityButtonLayout.setBackgroundDrawable(null);
+                                TextView redemptionCodeTextView = new TextView(DealActivity.this);
+                                redemptionCodeTextView.setText(TaloolUtil.getRedeemedText(redemptionCode, new Date().getTime()));
+                                redemptionCodeTextView.setGravity(Gravity.CENTER);
+                                redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+                                redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
+                                redemptionCodeTextView.setTypeface(TypefaceFactory.get().getFontAwesome(), Typeface.BOLD);
+                                redemptionCodeTextView.setPadding(30, 0, 30, 0);
+                                dealActivityButtonLayout.addView(redemptionCodeTextView);
+                                dealActivityButtonLayout.setGravity(Gravity.CENTER);
+                                dealActivityButtonLayout.setBackgroundColor(getResources().getColor(R.color.orange));
+                                dealActivityButtonLayout.setPadding(0, 0, 0, 0);
+
+                                EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
+                                easyTracker.send(MapBuilder
+                                        .createEvent("redeem", "selected", deal.dealAcquireId, null)
+                                        .build());
+                            }
+
+                        };
+                        dealAcceptanceTask.execute();
+
                     }
 
                     @Override
-                    protected void onPostExecute(String result) {
-                        if (df != null && !df.isHidden()) {
-                            df.dismiss();
-                        }
-
-                        redemptionCode = result;
-                        dealActivityButtonLayout.removeAllViewsInLayout();
-                        dealActivityButtonLayout.setBackgroundDrawable(null);
-                        TextView redemptionCodeTextView = new TextView(DealActivity.this);
-                        redemptionCodeTextView.setText(TaloolUtil.getRedeemedText(redemptionCode, new Date().getTime()));
-                        redemptionCodeTextView.setGravity(Gravity.CENTER);
-                        redemptionCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-                        redemptionCodeTextView.setTextColor(getResources().getColor(R.color.white));
-                        redemptionCodeTextView.setTypeface(TypefaceFactory.get().getFontAwesome(), Typeface.BOLD);
-                        redemptionCodeTextView.setPadding(30, 0, 30, 0);
-                        dealActivityButtonLayout.addView(redemptionCodeTextView);
-                        dealActivityButtonLayout.setGravity(Gravity.CENTER);
-                        dealActivityButtonLayout.setBackgroundColor(getResources().getColor(R.color.orange));
-                        dealActivityButtonLayout.setPadding(0, 0, 0, 0);
-
-                        EasyTracker easyTracker = EasyTracker.getInstance(view.getContext());
-                        easyTracker.send(MapBuilder
-                                .createEvent("redeem", "selected", deal.dealAcquireId, null)
-                                .build());
+                    public void onDialogNegativeClick(DialogFragment dialog) {
+                        // do nothing
                     }
-
-                };
-                dealAcceptanceTask.execute(new String[]{});
-
-            }
-
-            @Override
-            public void onDialogNegativeClick(DialogFragment dialog) {
-                // do nothing
-            }
-        });
+                }
+        );
 
         df.show(getFragmentManager(), "dialog");
 
@@ -405,7 +402,7 @@ public class DealActivity extends TaloolActivity {
                 FacebookGiftIdTask task = new FacebookGiftIdTask(client, deal.dealAcquireId, facebookId, name, this) {
                     @Override
                     protected void onPostExecute(String result) {
-                        if (result != null && result != "") {
+                        if (result != null && !result.equals("")) {
                             giftId = result;
                             executeFacebookShareTask(result);
                         } else {
@@ -417,8 +414,6 @@ public class DealActivity extends TaloolActivity {
                             AndroidUtils.popupMessageWithOk(alertMessage, DealActivity.this);
                         }
                     }
-
-                    ;
                 };
                 task.execute();
             }
@@ -456,7 +451,7 @@ public class DealActivity extends TaloolActivity {
 
     protected void handleError(FacebookRequestError error) {
         DialogInterface.OnClickListener listener = null;
-        String dialogBody = null;
+        String dialogBody;
 
         if (error == null) {
             // There was no response from the server.
@@ -504,7 +499,6 @@ public class DealActivity extends TaloolActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface,
                                             int i) {
-                            pendingAnnounce = true;
                             // Request publish permission
                             requestPublishPermissions(Session.getActiveSession());
                         }
@@ -635,7 +629,7 @@ public class DealActivity extends TaloolActivity {
             Toast.makeText(DealActivity.this, "Please select a contact with an email address", Toast.LENGTH_LONG).show();
         } else {
             GiftTask giftTask = new GiftTask();
-            giftTask.execute(new String[]{});
+            giftTask.execute();
         }
     }
 
@@ -649,8 +643,8 @@ public class DealActivity extends TaloolActivity {
         // MapBuilder.createEvent().build() returns a Map of event fields and values
         // that are set and sent with the hit.
         easyTracker.send(MapBuilder
-                .createEvent("deal_activity", "selected", deal.deal.dealId, null)
-                .build()
+                        .createEvent("deal_activity", "selected", deal.deal.dealId, null)
+                        .build()
         );
     }
 

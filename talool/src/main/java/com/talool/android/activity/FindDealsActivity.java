@@ -33,8 +33,6 @@ import com.talool.android.util.Constants;
 import com.talool.android.util.ErrorMessageCache;
 import com.talool.android.util.SafeSimpleDecimalFormat;
 import com.talool.android.util.TaloolSmartImageView;
-import com.talool.android.util.TaloolUser;
-import com.talool.android.util.ThriftHelper;
 import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.Deal_t;
 import com.talool.api.thrift.Merchant_t;
@@ -43,7 +41,6 @@ import com.talool.api.thrift.ServiceException_t;
 import com.talool.thrift.util.ThriftUtil;
 
 import org.apache.thrift.TException;
-import org.apache.thrift.transport.TTransportException;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -54,14 +51,11 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
     private List<Deal_t> dealOffers;
     private ListView dealOffersListView;
     private LinearLayout purchaseClickLayout;
-    private FindDealsAdapter dealOffersAdapter;
     private TaloolSmartImageView bookImage;
     private TextView bookDescription;
     private DealOffer_t closestBook;
     private LinearLayout listViewLinearLayout;
     private TextView enterCodeTextView;
-    private TextView buyBookTextView;
-    private Button loadDealsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,11 +75,10 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
             closestBook = new DealOffer_t();
             ThriftUtil.deserialize(dealOfferBytes, closestBook);
         } catch (TException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
-        loadDealsButton = (Button) findViewById(R.id.loadDealsButton);
+        Button loadDealsButton = (Button) findViewById(R.id.loadDealsButton);
         loadDealsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EditText editText = (EditText) findViewById(R.id.accessCode);
@@ -110,16 +103,18 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
         listViewLinearLayout = (LinearLayout) findViewById(R.id.listViewLinearLayout);
         listViewLinearLayout.setVisibility(View.INVISIBLE);
 
+        TextView buyBookTextView = (TextView) findViewById(R.id.buy_now_text);
+
         purchaseClickLayout = (LinearLayout) findViewById(R.id.purchaseClickLayout);
 
-        purchaseClickLayout.setOnClickListener(new View.OnClickListener() {
+        buyBookTextView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 final Intent myIntent = new Intent(view.getContext(), PaymentActivity.class);
 
                 myIntent.putExtra("dealOffer", ThriftUtil.serialize(closestBook));
-                myIntent.putExtra("accessCode",getAccessCode());
+                myIntent.putExtra("accessCode", getAccessCode());
                 startActivity(myIntent);
             }
         });
@@ -127,10 +122,14 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
         purchaseClickLayout.setVisibility(View.GONE);
     }
 
-    private String getAccessCode()
-    {
-        EditText editText = (EditText) findViewById(R.id.accessCode);
-        return editText.getText().toString();
+    private String getAccessCode() {
+        EditText editText;
+        editText = (EditText) findViewById(R.id.accessCode);
+        if ((editText != null) && (editText.getText() != null)) {
+            return editText.getText().toString();
+        } else {
+            return null;
+        }
     }
 
     protected void handleRedeemBookResponse(Void results) {
@@ -151,9 +150,9 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
 
                 easyTracker
                         .send(MapBuilder
-                                .createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception),
-                                        true)
-                                .build()
+                                        .createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception),
+                                                true)
+                                        .build()
                         );
                 popupErrorMessage(exception.getMessage());
 
@@ -161,8 +160,8 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
         } else {
             EasyTracker easyTracker = EasyTracker.getInstance(this);
             easyTracker.send(MapBuilder
-                    .createEvent("redeem_book", "selected", closestBook.dealOfferId, null)
-                    .build()
+                            .createEvent("redeem_book", "selected", closestBook.dealOfferId, null)
+                            .build()
             );
 
             String title = getResources().getString(R.string.alert_new_deals_title);
@@ -175,7 +174,6 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
 
     @Override
     public void onResume() {
-        // TODO Auto-generated method stub
         super.onResume();
 
         if (df != null && !df.isHidden()) {
@@ -195,20 +193,6 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
     @Override
     public void onStop() {
         super.onStop();
-    }
-
-    public void createThriftClient() {
-        try {
-            client = new ThriftHelper();
-            client.setAccessToken(TaloolUser.get().getAccessToken());
-        } catch (TTransportException e) {
-            EasyTracker easyTracker = EasyTracker.getInstance(this);
-
-            easyTracker.send(MapBuilder
-                    .createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), e), true)
-                    .build()
-            );
-        }
     }
 
     private void reloadData() {
@@ -232,7 +216,7 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
     }
 
     private int getNumberOfMerchants() {
-        int numberOfMerchants = 0;
+        int numberOfMerchants;
         Map<String, String> map = new HashMap<String, String>();
         for (Deal_t deal : dealOffers) {
             if (map.get(deal.merchant.merchantId) == null) {
@@ -261,7 +245,7 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
     private void loadListView(int numMerchants) {
         FindDealsAdapter adapter = new FindDealsAdapter(this,
                 R.layout.find_deal_row, dealOffers);
-        dealOffersAdapter = adapter;
+        FindDealsAdapter dealOffersAdapter = adapter;
         dealOffersListView.setAdapter(dealOffersAdapter);
         //dealOffersListView.setOnItemClickListener(listener);
         setListViewHeightBasedOnChildren(dealOffersListView);
@@ -353,7 +337,7 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
                 }
             }
         };
-        task.execute(new String[]{});
+        task.execute();
 
 
     }
@@ -392,19 +376,22 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
         int totalHeight = 0;
 
         if (listAdapter == null) {
-            // pre-condition
             return;
         }
         for (int i = 0; i < listAdapter.getCount(); i++) {
             View listItem = listAdapter.getView(i, null, listView);
-            listItem.measure(0, 0);
-            totalHeight += listItem.getMeasuredHeight();
+            if (listItem != null) {
+                listItem.measure(0, 0);
+                totalHeight += listItem.getMeasuredHeight();
+            }
         }
 
         ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        listView.setLayoutParams(params);
-        listView.setBackgroundColor(this.getResources().getColor(R.color.dark_tan));
+        if (params != null) {
+            params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+            listView.setLayoutParams(params);
+            listView.setBackgroundColor(this.getResources().getColor(R.color.dark_tan));
+        }
 
     }
 
