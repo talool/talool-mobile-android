@@ -59,7 +59,8 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
     private TextView bookDescription;
     private DealOffer_t closestBook;
     private LinearLayout listViewLinearLayout;
-    private String accessCode;
+    private TextView enterCodeTextView;
+    private TextView buyBookTextView;
     private Button loadDealsButton;
 
     @Override
@@ -88,7 +89,7 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
         loadDealsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EditText editText = (EditText) findViewById(R.id.accessCode);
-                accessCode = editText.getText().toString();
+                String accessCode = getAccessCode();
                 if (accessCode == null || accessCode == "" || accessCode.isEmpty()) {
                     popupErrorMessage("Access Code Must Not Be Empty");
                 } else {
@@ -116,12 +117,20 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
             @Override
             public void onClick(View view) {
                 final Intent myIntent = new Intent(view.getContext(), PaymentActivity.class);
+
                 myIntent.putExtra("dealOffer", ThriftUtil.serialize(closestBook));
+                myIntent.putExtra("accessCode",getAccessCode());
                 startActivity(myIntent);
             }
         });
 
         purchaseClickLayout.setVisibility(View.GONE);
+    }
+
+    private String getAccessCode()
+    {
+        EditText editText = (EditText) findViewById(R.id.accessCode);
+        return editText.getText().toString();
     }
 
     protected void handleRedeemBookResponse(Void results) {
@@ -366,7 +375,7 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
         protected Void doInBackground(Void... arg0) {
             try {
                 exception = null;
-                client.getClient().activateCode(closestBook.dealOfferId, accessCode);
+                client.getClient().activateCode(closestBook.dealOfferId, getAccessCode());
             } catch (ServiceException_t e) {
                 exception = e;
             } catch (TException e) {

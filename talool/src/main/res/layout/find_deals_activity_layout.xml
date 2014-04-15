@@ -9,9 +9,9 @@
  	    android:id="@+id/purchaseClickLayout"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:background="@drawable/button_bar1"
+        android:background="@drawable/button_bar2_brown"
         android:gravity="center|center_vertical"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:onClick="purchaseClick"
         android:padding="10dp" 
         android:layout_marginBottom="5dp">
@@ -25,7 +25,20 @@
             android:text="@string/buy_now"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ffffff"
-            android:textSize="26sp" />
+            android:textSize="18sp"
+            android:layout_weight=".5"/>
+
+        <TextView
+            android:id="@+id/enter_code_Text"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center|center_vertical"
+            android:gravity="center"
+            android:text="@string/enter_code"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:layout_weight=".5"/>
     </LinearLayout>
     
     <ScrollView
