@@ -7,18 +7,16 @@
 
  	<LinearLayout
  	    android:id="@+id/purchaseClickLayout"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="70dp"
         android:background="@drawable/button_bar2_brown"
         android:gravity="center|center_vertical"
         android:orientation="horizontal"
-        android:onClick="purchaseClick"
-        android:padding="10dp" 
         android:layout_marginBottom="5dp">
 
         <TextView
             android:id="@+id/buy_now_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_gravity="center|center_vertical"
             android:gravity="center"
@@ -29,8 +27,8 @@
             android:layout_weight=".5"/>
 
         <TextView
-            android:id="@+id/enter_code_Text"
-            android:layout_width="wrap_content"
+            android:id="@+id/enter_code_text"
+            android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_gravity="center|center_vertical"
             android:gravity="center"
@@ -54,42 +52,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:focusable="true" android:focusableInTouchMode="true">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp" >
-
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dealsString" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp" >
-
-                    <EditText
-                        android:id="@+id/accessCode"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:hint="@string/access_code"
-                        android:background="@drawable/clipped_edittext"
-                        android:inputType="textCapCharacters" />
-
-                    <Button
-                        android:id="@+id/loadDealsButton"
-                        style="?android:attr/buttonStyleSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/load_deals" />
-                </LinearLayout>
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

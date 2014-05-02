@@ -44,8 +44,8 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     
-    <string name="access_code">access code</string>
-    <string name="buy_now">Buy Now</string>
+    <string name="access_code">enter access code</string>
+    <string name="buy_now">Buy Now: $9.99</string>
     <string name="enter_code">Enter Code</string>
     <string name="load_deals">Load Deals</string>
     
@@ -66,7 +66,8 @@
     <string name="icon_heart_empty">&#xf08a;</string>
     <string name="icon_thumbs_up_alt">&#xf087;</string>
     <string name="icon_thumbs_down_alt">&#xf088;</string>
-    <string name="dealsString">If you are purchasing this book to support a fundraiser, please enter the fundraisers tracking code below. If you have already paid for the book and have an access code, you can also enter it below.</string>
+    <string name="dealsString">If you are purchasing this book to support a fundraiser, please enter the fundraisers tracking code below.</string>
+    <string name="dealsString2">If you have already paid for the book and have an access code, you can also enter it here.</string>
     <string name="paybackText">this is managed by the admin</string>
     <string name="locationSelect">Can you please tell us which Payback Book you are interested in?</string>
     <string name="helpLoadingDeals">It looks like you haven\'t loaded any deals yet!\n\nNo problem.  If you have a Payback Book access code, you can take care of that on the Find Deals screen.\n\nIf you were sent a gift, you can accept that on the Activity screen.</string>
@@ -92,7 +93,7 @@
    <string name="facebook_app_id">342739092494152</string>
    <string name="title_facebook_login">Authenticating with Facebook</string>
 
-    <string name="find_deal_buy_now">Buy Now For</string>
+    <string name="find_deal_buy_now">Buy Now: </string>
     
    <string name="my_deals_filter_all">Show All</string>
    <string name="my_deals_filter_favorites">Favorites</string>

@@ -94,7 +94,7 @@ public class GiftActivity extends TaloolActivity {
 
         linearLayout = (LinearLayout) findViewById(R.id.giftLinearLayout);
         final GiftActivityTask dealsTask = new GiftActivityTask();
-        dealsTask.execute(new String[]{});
+        dealsTask.execute();
 
         final TextView thumbsDownIcon = (TextView) findViewById(R.id.thumbsUpIcon);
         thumbsDownIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
@@ -137,7 +137,7 @@ public class GiftActivity extends TaloolActivity {
 
             };
 
-            task.execute(new String[]{});
+            task.execute();
         }
     }
 
@@ -152,7 +152,7 @@ public class GiftActivity extends TaloolActivity {
 
             };
 
-            task.execute(new String[]{});
+            task.execute();
         } else {
             // Deep Link Rejection
             // reject the gift and redirect to "My Deals"
@@ -164,7 +164,7 @@ public class GiftActivity extends TaloolActivity {
 
             };
 
-            task.execute(new String[]{});
+            task.execute();
         }
     }
 
@@ -205,7 +205,7 @@ public class GiftActivity extends TaloolActivity {
 
                 };
 
-                dealOfferFetchTask.execute(new String[]{});
+                dealOfferFetchTask.execute();
             } else {
                 setDealCreatorImageView(dealOffer);
             }

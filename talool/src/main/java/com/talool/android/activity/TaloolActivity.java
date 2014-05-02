@@ -3,6 +3,10 @@ package com.talool.android.activity;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
@@ -84,4 +88,28 @@ public class TaloolActivity extends Activity {
 			df.dismiss();
 		}
 	}
+
+    public void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        int totalHeight = 0;
+
+        if (listAdapter == null) {
+            return;
+        }
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            if (listItem != null) {
+                listItem.measure(0, 0);
+                totalHeight += listItem.getMeasuredHeight();
+            }
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        if (params != null) {
+            params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+            listView.setLayoutParams(params);
+            listView.setBackgroundColor(this.getResources().getColor(R.color.dark_tan));
+        }
+
+    }
 }

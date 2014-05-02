@@ -39,6 +39,7 @@ import com.venmo.touch.model.CardDetails;
 import com.venmo.touch.model.CardStub;
 import com.venmo.touch.view.VTComboCardView;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
@@ -61,6 +62,7 @@ public class PaymentActivity extends TaloolActivity implements DialogPositiveCli
 
 	private DealOffer_t dealOffer;
 	private String errorMessage;
+    private String accessCode;
 
 	private class PaymentTask extends AsyncTask<String, Void, TransactionResult_t>
 	{
@@ -116,6 +118,15 @@ public class PaymentActivity extends TaloolActivity implements DialogPositiveCli
 		{
 			ThriftHelper thriftHelper = null;
 			TransactionResult_t transactionResult = null;
+            Map<String,String> paymentProperties = null;
+
+            if(StringUtils.isNotEmpty( accessCode ) )
+            {
+                paymentProperties=new HashMap<String,String>(1);
+                paymentProperties.put("merchant_code",accessCode);
+
+            }
+
 
 			try
 			{
@@ -132,11 +143,13 @@ public class PaymentActivity extends TaloolActivity implements DialogPositiveCli
 			{
 				if (paymentDetail != null)
 				{
-					transactionResult = thriftHelper.getClient().purchaseByCard(dealOffer.getDealOfferId(), paymentDetail);
+
+					transactionResult = thriftHelper.getClient().purchaseWithCard(dealOffer.getDealOfferId(), paymentDetail, paymentProperties);
 				}
 				else
 				{
-					transactionResult = thriftHelper.getClient().purchaseByCode(dealOffer.getDealOfferId(), paymentCode);
+
+					transactionResult = thriftHelper.getClient().purchaseWithCode(dealOffer.getDealOfferId(), paymentCode,paymentProperties);
 				}
 
 			}
@@ -225,8 +238,9 @@ public class PaymentActivity extends TaloolActivity implements DialogPositiveCli
 		});
 
 		final byte[] dealOfferBytes = (byte[]) getIntent().getSerializableExtra("dealOffer");
-		dealOffer = new DealOffer_t();
+        final byte[] accessCodeBytes = (byte[]) getIntent().getSerializableExtra("accessCode");
 
+        dealOffer = new DealOffer_t();
 		try
 		{
 			ThriftUtil.deserialize(dealOfferBytes, dealOffer);
@@ -237,6 +251,10 @@ public class PaymentActivity extends TaloolActivity implements DialogPositiveCli
 			TextView priceView = (TextView) findViewById(R.id.payment_deal_offer_price);
 			priceView.setText(formatDealPrice());
 
+            if (accessCodeBytes != null && accessCodeBytes.length > 0)
+            {
+                accessCode = new String(accessCodeBytes);
+            }
 			// holder.myDealsMerchantIcon.setText(ApiUtil.getIcon(merchant.category));
 		}
 		catch (TException e)

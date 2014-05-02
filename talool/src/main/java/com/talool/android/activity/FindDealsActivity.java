@@ -3,14 +3,11 @@ package com.talool.android.activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ClipDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -20,7 +17,6 @@ import android.widget.TextView;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.Fields;
 import com.google.analytics.tracking.android.MapBuilder;
-import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.talool.android.MainActivity;
 import com.talool.android.R;
 import com.talool.android.TaloolApplication;
@@ -30,7 +26,6 @@ import com.talool.android.dialog.DialogFactory.DialogClickListener;
 import com.talool.android.persistence.MerchantDao;
 import com.talool.android.tasks.MyDealsTask;
 import com.talool.android.util.Constants;
-import com.talool.android.util.ErrorMessageCache;
 import com.talool.android.util.SafeSimpleDecimalFormat;
 import com.talool.android.util.TaloolSmartImageView;
 import com.talool.api.thrift.DealOffer_t;
@@ -47,7 +42,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FindDealsActivity extends TaloolActivity implements DialogClickListener {
+public class FindDealsActivity extends TaloolActivity{
     private List<Deal_t> dealOffers;
     private ListView dealOffersListView;
     private LinearLayout purchaseClickLayout;
@@ -55,7 +50,6 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
     private TextView bookDescription;
     private DealOffer_t closestBook;
     private LinearLayout listViewLinearLayout;
-    private TextView enterCodeTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +59,9 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
         bookImage = (TaloolSmartImageView) findViewById(R.id.bookImageView);
         dealOffersListView = (ListView) findViewById(R.id.dealOffersListView);
         bookDescription = (TextView) findViewById(R.id.dealOfferDescription);
-        final EditText accessCodeEditText = (EditText) findViewById(R.id.accessCode);
-        ClipDrawable accessCode_bg = (ClipDrawable) accessCodeEditText.getBackground();
-        accessCode_bg.setLevel(1500);
+//        final EditText accessCodeEditText = (EditText) findViewById(R.id.accessCode);
+//        ClipDrawable accessCode_bg = (ClipDrawable) accessCodeEditText.getBackground();
+//        accessCode_bg.setLevel(1500);
 
 
         try {
@@ -77,100 +71,99 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
         } catch (TException e) {
             e.printStackTrace();
         }
-
-        Button loadDealsButton = (Button) findViewById(R.id.loadDealsButton);
-        loadDealsButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                EditText editText = (EditText) findViewById(R.id.accessCode);
-                String accessCode = getAccessCode();
-                if (accessCode == null || accessCode == "" || accessCode.isEmpty()) {
-                    popupErrorMessage("Access Code Must Not Be Empty");
-                } else {
-
-                    RedeemBook redeemBookTask = new RedeemBook() {
-                        @Override
-                        protected void onPostExecute(Void results) {
-                            super.onPostExecute(results);
-                            handleRedeemBookResponse(results);
-                        }
-                    };
-                    redeemBookTask.execute(new Void[]{});
-                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(accessCodeEditText.getWindowToken(), 0);
-                }
-            }
-        });
+//
+//        Button loadDealsButton = (Button) findViewById(R.id.loadDealsButton);
+//        loadDealsButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                EditText editText = (EditText) findViewById(R.id.accessCode);
+//                String accessCode = getAccessCode();
+//                if (accessCode == null || accessCode == "" || accessCode.isEmpty()) {
+//                    popupErrorMessage("Access Code Must Not Be Empty");
+//                } else {
+//
+//                    RedeemBook redeemBookTask = new RedeemBook() {
+//                        @Override
+//                        protected void onPostExecute(Void results) {
+//                            super.onPostExecute(results);
+//                            handleRedeemBookResponse(results);
+//                        }
+//                    };
+//                    redeemBookTask.execute(new Void[]{});
+//                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                    imm.hideSoftInputFromWindow(accessCodeEditText.getWindowToken(), 0);
+//                }
+//            }
+//        });
         listViewLinearLayout = (LinearLayout) findViewById(R.id.listViewLinearLayout);
         listViewLinearLayout.setVisibility(View.INVISIBLE);
 
-        TextView buyBookTextView = (TextView) findViewById(R.id.buy_now_text);
 
         purchaseClickLayout = (LinearLayout) findViewById(R.id.purchaseClickLayout);
-
+        TextView buyBookTextView = (TextView) findViewById(R.id.buy_now_text);
         buyBookTextView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                final Intent myIntent = new Intent(view.getContext(), PaymentActivity.class);
+                final Intent myIntent = new Intent(view.getContext(), EnterCodeActivity.class);
 
                 myIntent.putExtra("dealOffer", ThriftUtil.serialize(closestBook));
-                myIntent.putExtra("accessCode", getAccessCode());
                 startActivity(myIntent);
             }
         });
 
+        TextView enterCodeTextView = (TextView) findViewById(R.id.enter_code_text);
+        enterCodeTextView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                final Intent myIntent = new Intent(view.getContext(), EnterCodeActivity.class);
+
+                myIntent.putExtra("dealOffer", ThriftUtil.serialize(closestBook));
+                startActivity(myIntent);
+            }
+        });
         purchaseClickLayout.setVisibility(View.GONE);
     }
 
-    private String getAccessCode() {
-        EditText editText;
-        editText = (EditText) findViewById(R.id.accessCode);
-        if ((editText != null) && (editText.getText() != null)) {
-            return editText.getText().toString();
-        } else {
-            return null;
-        }
-    }
-
-    protected void handleRedeemBookResponse(Void results) {
-        if (df != null && !df.isHidden()) {
-            df.dismiss();
-        }
-        if (exception != null) {
-            if (exception instanceof ServiceException_t) {
-                EasyTracker easyTracker = EasyTracker.getInstance(this);
-                easyTracker.send(MapBuilder
-                        .createEvent("redeemBook", "failure", ((ServiceException_t) exception).getErrorDesc(), null)
-                        .build());
-
-                popupErrorMessage(ErrorMessageCache.getMessage(((ServiceException_t) exception).getErrorCode()));
-
-            } else {
-                EasyTracker easyTracker = EasyTracker.getInstance(this);
-
-                easyTracker
-                        .send(MapBuilder
-                                        .createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception),
-                                                true)
-                                        .build()
-                        );
-                popupErrorMessage(exception.getMessage());
-
-            }
-        } else {
-            EasyTracker easyTracker = EasyTracker.getInstance(this);
-            easyTracker.send(MapBuilder
-                            .createEvent("redeem_book", "selected", closestBook.dealOfferId, null)
-                            .build()
-            );
-
-            String title = getResources().getString(R.string.alert_new_deals_title);
-            String message = getResources().getString(R.string.alert_new_deals_message);
-            df = DialogFactory.getConfirmDialog(title, message, FindDealsActivity.this);
-            df.show(getFragmentManager(), "dialog");
-
-        }
-    }
+//    protected void handleRedeemBookResponse(Void results) {
+//        if (df != null && !df.isHidden()) {
+//            df.dismiss();
+//        }
+//        if (exception != null) {
+//            if (exception instanceof ServiceException_t) {
+//                EasyTracker easyTracker = EasyTracker.getInstance(this);
+//                easyTracker.send(MapBuilder
+//                        .createEvent("redeemBook", "failure", ((ServiceException_t) exception).getErrorDesc(), null)
+//                        .build());
+//
+//                popupErrorMessage(ErrorMessageCache.getMessage(((ServiceException_t) exception).getErrorCode()));
+//
+//            } else {
+//                EasyTracker easyTracker = EasyTracker.getInstance(this);
+//
+//                easyTracker
+//                        .send(MapBuilder
+//                                        .createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception),
+//                                                true)
+//                                        .build()
+//                        );
+//                popupErrorMessage(exception.getMessage());
+//
+//            }
+//        } else {
+//            EasyTracker easyTracker = EasyTracker.getInstance(this);
+//            easyTracker.send(MapBuilder
+//                            .createEvent("redeem_book", "selected", closestBook.dealOfferId, null)
+//                            .build()
+//            );
+//
+//            String title = getResources().getString(R.string.alert_new_deals_title);
+//            String message = getResources().getString(R.string.alert_new_deals_message);
+//            df = DialogFactory.getConfirmDialog(title, message, FindDealsActivity.this);
+//            df.show(getFragmentManager(), "dialog");
+//
+//        }
+//    }
 
     @Override
     public void onResume() {
@@ -252,13 +245,9 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
         listViewLinearLayout.setVisibility(View.VISIBLE);
 
         Date now = new Date();
-        if (closestBook.expires > now.getTime()) {
-            purchaseClickLayout.setVisibility(View.VISIBLE);
-            final TextView buyNowView = (TextView) findViewById(R.id.buy_now_text);
-            buyNowView.setText(getBuyNowText());
-        } else {
-            purchaseClickLayout.setVisibility(View.GONE);
-        }
+        purchaseClickLayout.setVisibility(View.VISIBLE);
+        final TextView buyNowView = (TextView) findViewById(R.id.buy_now_text);
+        buyNowView.setText(getBuyNowText());
 
         final TextView textView = (TextView) findViewById(R.id.summaryText);
         textView.setText(dealOffers.size() + " Deals from " + numMerchants + " Merchants");
@@ -311,97 +300,5 @@ public class FindDealsActivity extends TaloolActivity implements DialogClickList
         }
     }
 
-    private void redirectToMyDeals() {
-        final MerchantDao merchantDao = new MerchantDao(TaloolApplication.getAppContext());
-        final Context context = this;
-        MyDealsTask task = new MyDealsTask(client, this, merchantDao) {
-
-            @Override
-            protected void onPreExecute() {
-                df = DialogFactory.getProgressDialog();
-                df.show(getFragmentManager(), "dialog");
-            }
-
-            @Override
-            protected void onPostExecute(final List<Merchant_t> results) {
-                if (df != null && !df.isHidden()) {
-                    df.dismiss();
-                }
-                if (results != null) {
-                    merchantDao.saveMerchants(results);
-                    final Intent myIntent = new Intent(context, MainActivity.class);
-                    Bundle b = new Bundle();
-                    b.putInt(Constants.TAB_SELECTED_KEY, 0);
-                    myIntent.putExtras(b);
-                    startActivity(myIntent);
-                }
-            }
-        };
-        task.execute();
-
-
-    }
-
-    private class RedeemBook extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            df = DialogFactory.getProgressDialog();
-            df.show(getFragmentManager(), "dialog");
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-        }
-
-        @Override
-        protected Void doInBackground(Void... arg0) {
-            try {
-                exception = null;
-                client.getClient().activateCode(closestBook.dealOfferId, getAccessCode());
-            } catch (ServiceException_t e) {
-                exception = e;
-            } catch (TException e) {
-                exception = e;
-            } catch (Exception e) {
-                exception = e;
-            }
-            return null;
-        }
-    }
-
-    public void setListViewHeightBasedOnChildren(ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
-        int totalHeight = 0;
-
-        if (listAdapter == null) {
-            return;
-        }
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            View listItem = listAdapter.getView(i, null, listView);
-            if (listItem != null) {
-                listItem.measure(0, 0);
-                totalHeight += listItem.getMeasuredHeight();
-            }
-        }
-
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        if (params != null) {
-            params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-            listView.setLayoutParams(params);
-            listView.setBackgroundColor(this.getResources().getColor(R.color.dark_tan));
-        }
-
-    }
-
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-        redirectToMyDeals();
-    }
-
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-    }
 
 }
