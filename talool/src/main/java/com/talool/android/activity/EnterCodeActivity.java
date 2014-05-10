@@ -68,10 +68,10 @@ public class EnterCodeActivity extends TaloolActivity  implements DialogFactory.
                             {
                                 if (result.isValid())
                                 {
-                                    if(result.codeType == "merchant_code")
+                                    if(result.codeType.equals("merchant_code"))
                                     {
                                         launchPaymentScreen();
-                                    }else if (result.codeType == "activation_code"){
+                                    }else if (result.codeType.equals("activation_code")){
                                         redeemBook();
                                     }
                                 }else{
