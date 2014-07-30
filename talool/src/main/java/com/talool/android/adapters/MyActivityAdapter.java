@@ -53,6 +53,7 @@ public class MyActivityAdapter extends ArrayAdapter<Activity_t>
 
 		final Activity_t activity = data.get(position);
 
+
 		final LayoutInflater inflater = ((Activity) context).getLayoutInflater();
 		row = inflater.inflate(layoutResourceId, parent, false);
 		holder = new ActivityHolder();

@@ -37,6 +37,7 @@ public final class ApiUtil
 			case TALOOL_REACH:
 			case MERCHANT_REACH:
 			case WELCOME:
+            case FUNDRAISER_SUPPORT:
 				return true;
 
 			default:

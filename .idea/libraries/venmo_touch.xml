@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="venmo-touch">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/talool/build/exploded-aar/com.braintree.android/venmo-touch/1.0.0-b5/libs/venmo-touch.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
