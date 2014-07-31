@@ -44,11 +44,12 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     
-    <string name="access_code">enter access code</string>
+    <string name="access_code">enter code</string>
     <string name="buy_now">Buy Now: $9.99</string>
     <string name="enter_code">Enter Code</string>
     <string name="load_deals">Load Deals</string>
-    
+    <string name="submit">Submit</string>
+
     <string name="icon_gift">&#xf06b;</string>
     <string name="icon_envelope_alt">&#xf003;</string>
     <string name="icon_facebook">&#xf09a;</string>
