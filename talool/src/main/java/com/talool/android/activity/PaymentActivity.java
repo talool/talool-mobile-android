@@ -12,6 +12,8 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.braintreepayments.api.dropin.BraintreePaymentActivity;
+import com.braintreepayments.api.dropin.Customization;
 import com.talool.android.MainActivity;
 import com.talool.android.R;
 import com.talool.android.TaloolApplication;
@@ -33,11 +35,7 @@ import com.talool.api.thrift.TServiceException_t;
 import com.talool.api.thrift.TUserException_t;
 import com.talool.api.thrift.TransactionResult_t;
 import com.talool.thrift.util.ThriftUtil;
-import com.venmo.touch.client.VenmoTouchClient;
-import com.venmo.touch.controller.VTComboCardViewController;
-import com.venmo.touch.model.CardDetails;
-import com.venmo.touch.model.CardStub;
-import com.venmo.touch.view.VTComboCardView;
+
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.thrift.TException;
@@ -55,28 +53,72 @@ import java.util.Map;
 public class PaymentActivity extends TaloolActivity implements DialogPositiveClickListener
 {
 	private static final String LOG_TAG = PaymentActivity.class.getSimpleName();
-
-	private VenmoTouchClient touchClient;
-	private VTComboCardView comboView;
-	private VTComboCardViewController mComboController;
+    private static final int REQUEST_CODE = 1;
 
 	private DealOffer_t dealOffer;
 	private String errorMessage;
     private String accessCode;
 
+    private class ClientTokenTask extends AsyncTask<String, Void, String>
+    {
+        @Override
+        protected void onPreExecute()
+        {
+            df = DialogFactory.getProgressDialog();
+            df.show(getFragmentManager(), "dialog");
+        }
+
+        protected void onPostExecute(final String token)
+        {
+            showPaymentActivity(token);
+        }
+
+        @Override
+        protected String doInBackground(final String... params)
+        {
+            String token = null;
+            try
+            {
+                token = client.getClient().generateBraintreeClientToken();
+            }
+            catch (Exception e)
+            {
+                // TODO do something
+                exception = e;
+            }
+            return token;
+        }
+    }
+
+    private void showPaymentActivity(String token)
+    {
+        Intent intent = new Intent(this, BraintreePaymentActivity.class);
+
+        // add the client token
+        intent.putExtra(BraintreePaymentActivity.EXTRA_CLIENT_TOKEN, token);
+
+        // customize the view
+        Customization customization = new Customization.CustomizationBuilder()
+                .primaryDescription(dealOffer.getTitle())
+                .secondaryDescription(formatDealPrice())
+                .submitButtonText("Buy Now")
+                .build();
+        intent.putExtra(BraintreePaymentActivity.EXTRA_CUSTOMIZATION, customization);
+
+        // add our extra bits...
+        intent.putExtra("dealOffer", ThriftUtil.serialize(dealOffer));
+        intent.putExtra("accessCode",accessCode);
+
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+
 	private class PaymentTask extends AsyncTask<String, Void, TransactionResult_t>
 	{
-		private PaymentDetail_t paymentDetail;
-		private String paymentCode;
+		private String nonce;
 
-		public PaymentTask(final PaymentDetail_t paymentDetail)
+		public PaymentTask(final String nonce)
 		{
-			this.paymentDetail = paymentDetail;
-		}
-
-		public PaymentTask(final String paymentCode)
-		{
-			this.paymentCode = paymentCode;
+			this.nonce = nonce;
 		}
 
 		@Override
@@ -116,42 +158,17 @@ public class PaymentActivity extends TaloolActivity implements DialogPositiveCli
 		@Override
 		protected TransactionResult_t doInBackground(final String... params)
 		{
-			ThriftHelper thriftHelper = null;
 			TransactionResult_t transactionResult = null;
-            Map<String,String> paymentProperties = null;
-            paymentProperties=new HashMap<String,String>(1);
+            Map<String,String> paymentProperties = new HashMap<String,String>(1);
 
             if(StringUtils.isNotEmpty( accessCode ) )
             {
                 paymentProperties.put("merchant_code",accessCode);
-
             }
 
-
 			try
 			{
-				thriftHelper = new ThriftHelper();
-			}
-			catch (TTransportException e)
-			{
-				errorMessage = ErrorMessageCache.getServiceErrorMessage();
-				Log.e(LOG_TAG, e.getMessage(), e);
-				return null;
-			}
-
-			try
-			{
-				if (paymentDetail != null)
-				{
-
-					transactionResult = thriftHelper.getClient().purchaseWithCard(dealOffer.getDealOfferId(), paymentDetail, paymentProperties);
-				}
-				else
-				{
-
-					transactionResult = thriftHelper.getClient().purchaseWithCode(dealOffer.getDealOfferId(), paymentCode,paymentProperties);
-				}
-
+				transactionResult = client.getClient().purchaseWithNonce(dealOffer.getDealOfferId(), nonce, paymentProperties);
 			}
 			catch (TServiceException_t e)
 			{
@@ -200,7 +217,27 @@ public class PaymentActivity extends TaloolActivity implements DialogPositiveCli
 	{
 		super.onCreate(savedInstanceState);
 
+        final ClientTokenTask task = new ClientTokenTask();
+        task.execute(new String[] {});
+
+        final byte[] dealOfferBytes = (byte[]) getIntent().getSerializableExtra("dealOffer");
+
+        dealOffer = new DealOffer_t();
+        try
+        {
+            accessCode = getIntent().getExtras().getString("accessCode");
+            ThriftUtil.deserialize(dealOfferBytes, dealOffer);
+        }
+        catch (TException e)
+        {
+            e.printStackTrace();
+        }
+
+
+
+        /*
 		setContentView(R.layout.venmo_payment_activity_layout);
+
 		if (Constants.IS_DEVELOPMENT_MODE)
 		{
 			touchClient = VenmoTouchClient.forSandboxMerchant(this, Constants.getBTMerchantId(),null, Constants.getBTMerchantKey());
@@ -236,28 +273,15 @@ public class PaymentActivity extends TaloolActivity implements DialogPositiveCli
 			public void onCardListUpdated(List<CardStub> cards)
 			{}
 		});
+		TextView titleView = (TextView) findViewById(R.id.payment_deal_offer_detail);
+	    titleView.setText(dealOffer.getTitle());
 
-		final byte[] dealOfferBytes = (byte[]) getIntent().getSerializableExtra("dealOffer");
+		TextView priceView = (TextView) findViewById(R.id.payment_deal_offer_price);
+		priceView.setText(formatDealPrice());
 
-        dealOffer = new DealOffer_t();
-		try
-		{
-            accessCode = getIntent().getExtras().getString("accessCode");
+		holder.myDealsMerchantIcon.setText(ApiUtil.getIcon(merchant.category));
+        */
 
-            ThriftUtil.deserialize(dealOfferBytes, dealOffer);
-
-			TextView titleView = (TextView) findViewById(R.id.payment_deal_offer_detail);
-			titleView.setText(dealOffer.getTitle());
-
-			TextView priceView = (TextView) findViewById(R.id.payment_deal_offer_price);
-			priceView.setText(formatDealPrice());
-
-			// holder.myDealsMerchantIcon.setText(ApiUtil.getIcon(merchant.category));
-		}
-		catch (TException e)
-		{
-			e.printStackTrace();
-		}
 
 	}
 
@@ -268,34 +292,6 @@ public class PaymentActivity extends TaloolActivity implements DialogPositiveCli
 				.append(" ")
 				.append(new SafeSimpleDecimalFormat(Constants.FORMAT_DECIMAL_MONEY).format(dealOffer.getPrice()));
 		return sb.toString();
-	}
-
-	public void processVenmoTouchCard(final CardStub stub)
-	{
-		final PaymentTask task = new PaymentTask(stub.getPaymentMethodCode());
-		task.execute(new String[] {});
-	}
-
-	public void processNewCard(final CardDetails details, final boolean saveToTouch,
-			final Map<String, String> encryptedCardDetails)
-	{
-		final PaymentDetail_t paymentDetail = new PaymentDetail_t();
-		paymentDetail.setSaveCard(saveToTouch);
-		paymentDetail.setEncryptedFields(true);
-
-		final Card_t card = new Card_t().setAccountNumber(encryptedCardDetails.get(CardDetails.KEY_ACCOUNT_NUMBER));
-		card.setExpirationMonth(encryptedCardDetails.get(CardDetails.KEY_EXPIRATION_MONTH));
-		card.setExpirationYear(encryptedCardDetails.get(CardDetails.KEY_EXPIRATION_YEAR));
-		card.setSecurityCode(encryptedCardDetails.get(CardDetails.KEY_CVV));
-		card.setZipCode(encryptedCardDetails.get(CardDetails.KEY_ZIPCODE));
-		paymentDetail.setCard(card);
-
-		final Map<String, String> paymentMetadata = new HashMap<String, String>();
-		paymentMetadata.put(Constants.VENMO_SDK_SESSION, encryptedCardDetails.get(Constants.VENMO_SDK_SESSION));
-		paymentDetail.setPaymentMetadata(paymentMetadata);
-
-		final PaymentTask task = new PaymentTask(paymentDetail);
-		task.execute(new String[] {});
 	}
 
 	public void popupErrorMessage(String message)
@@ -345,16 +341,25 @@ public class PaymentActivity extends TaloolActivity implements DialogPositiveCli
 	protected void onStart()
 	{
 		super.onStart();
-		touchClient.start();
-		mComboController.onStart();
 	}
 
 	@Override
 	protected void onStop()
 	{
 		super.onStop();
-		mComboController.onStop();
-		touchClient.stop();
 	}
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == BraintreePaymentActivity.RESULT_OK) {
+                final String paymentMethodNonce = data.getStringExtra(BraintreePaymentActivity.EXTRA_PAYMENT_METHOD_NONCE);
+
+                final PaymentTask task = new PaymentTask(paymentMethodNonce);
+                task.execute(new String[] {});
+
+            }
+        }
+    }
 
 }

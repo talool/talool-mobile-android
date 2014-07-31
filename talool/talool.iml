@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="talool-mobile-android-gradle" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+<module external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$/.." external.system.id="GRADLE" external.system.module.group="talool-mobile-android" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
@@ -77,40 +77,29 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/build/apk" />
-      <excludeFolder url="file://$MODULE_DIR$/build/assets" />
-      <excludeFolder url="file://$MODULE_DIR$/build/classes" />
-      <excludeFolder url="file://$MODULE_DIR$/build/dependency-cache" />
-      <excludeFolder url="file://$MODULE_DIR$/build/dex" />
-      <excludeFolder url="file://$MODULE_DIR$/build/exploded-aar" />
-      <excludeFolder url="file://$MODULE_DIR$/build/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates" />
-      <excludeFolder url="file://$MODULE_DIR$/build/libs" />
-      <excludeFolder url="file://$MODULE_DIR$/build/manifests" />
-      <excludeFolder url="file://$MODULE_DIR$/build/ndk" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
-      <excludeFolder url="file://$MODULE_DIR$/build/pre-dexed" />
-      <excludeFolder url="file://$MODULE_DIR$/build/res" />
-      <excludeFolder url="file://$MODULE_DIR$/build/rs" />
-      <excludeFolder url="file://$MODULE_DIR$/build/source" />
-      <excludeFolder url="file://$MODULE_DIR$/build/symbols" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 19 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="slf4j-log4j12-1.6.6" level="project" />
+    <orderEntry type="library" exported="" name="braintree-api-1.0.3" level="project" />
     <orderEntry type="library" exported="" name="maps-18_r3" level="project" />
+    <orderEntry type="library" exported="" name="slf4j-log4j12-1.6.6" level="project" />
     <orderEntry type="library" exported="" name="slf4j-api-1.6.6" level="project" />
+    <orderEntry type="library" exported="" name="gson-2.2.4" level="project" />
     <orderEntry type="library" exported="" name="android-smart-image-view-1.0.0" level="project" />
-    <orderEntry type="library" exported="" name="talool-thrift-1.0.7" level="project" />
+    <orderEntry type="library" exported="" name="talool-thrift-1.0.8" level="project" />
+    <orderEntry type="library" exported="" name="okhttp-1.6.0" level="project" />
     <orderEntry type="library" exported="" name="commons-lang-2.6" level="project" />
     <orderEntry type="library" exported="" name="httpcore-4.1.4" level="project" />
     <orderEntry type="library" exported="" name="analytics-2.0" level="project" />
     <orderEntry type="library" exported="" name="log4j-1.2.17" level="project" />
     <orderEntry type="library" exported="" name="libthrift-0.9.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-13.0.0" level="project" />
-    <orderEntry type="library" exported="" name="venmo-touch-1.0.0-b5" level="project" />
+    <orderEntry type="library" exported="" name="braintree-1.0.3" level="project" />
     <orderEntry type="library" exported="" name="library-0.7" level="project" />
     <orderEntry type="library" exported="" name="facebook-android-sdk-3.5.2" level="project" />
+    <orderEntry type="library" exported="" name="data-1.0.3" level="project" />
     <orderEntry type="library" exported="" name="play-services-4.0.30" level="project" />
   </component>
 </module>
