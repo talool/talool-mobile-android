@@ -50,125 +50,43 @@ public class FindDealsActivity extends TaloolActivity{
     private TextView bookDescription;
     private DealOffer_t closestBook;
     private LinearLayout listViewLinearLayout;
-
-    // TODO why is there a huge delay to load this activity
-    // TODO sort the list of deals by category and merchant name
+    private String dealOfferSummaryText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.find_deals_activity_layout);
+
         bookImage = (TaloolSmartImageView) findViewById(R.id.bookImageView);
         dealOffersListView = (ListView) findViewById(R.id.dealOffersListView);
         bookDescription = (TextView) findViewById(R.id.dealOfferDescription);
-//        final EditText accessCodeEditText = (EditText) findViewById(R.id.accessCode);
-//        ClipDrawable accessCode_bg = (ClipDrawable) accessCodeEditText.getBackground();
-//        accessCode_bg.setLevel(1500);
-
+        listViewLinearLayout = (LinearLayout) findViewById(R.id.listViewLinearLayout);
+        purchaseClickLayout = (LinearLayout) findViewById(R.id.purchaseClickLayout);
+        purchaseClickLayout.setVisibility(View.GONE);
 
         try {
+
+            dealOfferSummaryText = (String) getIntent().getSerializableExtra("dealOfferSummaryText");
+
             byte[] dealOfferBytes = (byte[]) getIntent().getSerializableExtra("dealOffer");
             closestBook = new DealOffer_t();
             ThriftUtil.deserialize(dealOfferBytes, closestBook);
+            setTitle(closestBook.getTitle());
+            loadBookDetails();
         } catch (TException e) {
             e.printStackTrace();
         }
-//
-//        Button loadDealsButton = (Button) findViewById(R.id.loadDealsButton);
-//        loadDealsButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                EditText editText = (EditText) findViewById(R.id.accessCode);
-//                String accessCode = getAccessCode();
-//                if (accessCode == null || accessCode == "" || accessCode.isEmpty()) {
-//                    popupErrorMessage("Access Code Must Not Be Empty");
-//                } else {
-//
-//                    RedeemBook redeemBookTask = new RedeemBook() {
-//                        @Override
-//                        protected void onPostExecute(Void results) {
-//                            super.onPostExecute(results);
-//                            handleRedeemBookResponse(results);
-//                        }
-//                    };
-//                    redeemBookTask.execute(new Void[]{});
-//                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//                    imm.hideSoftInputFromWindow(accessCodeEditText.getWindowToken(), 0);
-//                }
-//            }
-//        });
-        listViewLinearLayout = (LinearLayout) findViewById(R.id.listViewLinearLayout);
-        listViewLinearLayout.setVisibility(View.INVISIBLE);
 
-
-        purchaseClickLayout = (LinearLayout) findViewById(R.id.purchaseClickLayout);
-        TextView buyBookTextView = (TextView) findViewById(R.id.buy_now_text);
-        buyBookTextView.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                final Intent myIntent = new Intent(view.getContext(), EnterCodeActivity.class);
-
-                myIntent.putExtra("dealOffer", ThriftUtil.serialize(closestBook));
-                startActivity(myIntent);
-            }
-        });
-
-        TextView enterCodeTextView = (TextView) findViewById(R.id.enter_code_text);
-        enterCodeTextView.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                final Intent myIntent = new Intent(view.getContext(), EnterCodeActivity.class);
-
-                myIntent.putExtra("dealOffer", ThriftUtil.serialize(closestBook));
-                startActivity(myIntent);
-            }
-        });
-        purchaseClickLayout.setVisibility(View.GONE);
-
-        setTitle(closestBook.getTitle());
     }
 
-//    protected void handleRedeemBookResponse(Void results) {
-//        if (df != null && !df.isHidden()) {
-//            df.dismiss();
-//        }
-//        if (exception != null) {
-//            if (exception instanceof ServiceException_t) {
-//                EasyTracker easyTracker = EasyTracker.getInstance(this);
-//                easyTracker.send(MapBuilder
-//                        .createEvent("redeemBook", "failure", ((ServiceException_t) exception).getErrorDesc(), null)
-//                        .build());
-//
-//                popupErrorMessage(ErrorMessageCache.getMessage(((ServiceException_t) exception).getErrorCode()));
-//
-//            } else {
-//                EasyTracker easyTracker = EasyTracker.getInstance(this);
-//
-//                easyTracker
-//                        .send(MapBuilder
-//                                        .createException(new StandardExceptionParser(this, null).getDescription(Thread.currentThread().getName(), exception),
-//                                                true)
-//                                        .build()
-//                        );
-//                popupErrorMessage(exception.getMessage());
-//
-//            }
-//        } else {
-//            EasyTracker easyTracker = EasyTracker.getInstance(this);
-//            easyTracker.send(MapBuilder
-//                            .createEvent("redeem_book", "selected", closestBook.dealOfferId, null)
-//                            .build()
-//            );
-//
-//            String title = getResources().getString(R.string.alert_new_deals_title);
-//            String message = getResources().getString(R.string.alert_new_deals_message);
-//            df = DialogFactory.getConfirmDialog(title, message, FindDealsActivity.this);
-//            df.show(getFragmentManager(), "dialog");
-//
-//        }
-//    }
+    public void onPurchaseClick(View view)
+    {
+        final Intent myIntent = new Intent(view.getContext(), EnterCodeActivity.class);
+
+        myIntent.putExtra("dealOffer", ThriftUtil.serialize(closestBook));
+        startActivity(myIntent);
+    }
 
     @Override
     public void onResume() {
@@ -206,24 +124,21 @@ public class FindDealsActivity extends TaloolActivity{
         if (closestBook.summary != null) {
             bookDescription.setText(closestBook.summary);
         }
+
+        if (dealOfferSummaryText != null)
+        {
+            final TextView textView = (TextView) findViewById(R.id.summaryText);
+            textView.setText(dealOfferSummaryText);
+        }
+
+        purchaseClickLayout.setVisibility(View.VISIBLE);
+        final TextView buyNowView = (TextView) findViewById(R.id.buy_now_text);
+        buyNowView.setText(getBuyNowText());
     }
 
     private void loadBookDeals() {
         FindDealsTask dealsTask = new FindDealsTask();
         dealsTask.execute(new String[]{});
-    }
-
-    private int getNumberOfMerchants() {
-        int numberOfMerchants;
-        Map<String, String> map = new HashMap<String, String>();
-        for (Deal_t deal : dealOffers) {
-            if (map.get(deal.merchant.merchantId) == null) {
-                map.put(deal.merchant.merchantId, deal.dealOfferId);
-            }
-        }
-        numberOfMerchants = map.size();
-
-        return numberOfMerchants;
     }
 
     protected AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener() {
@@ -240,22 +155,12 @@ public class FindDealsActivity extends TaloolActivity{
         }
     };
 
-    private void loadListView(int numMerchants) {
+    private void loadListView() {
         FindDealsAdapter adapter = new FindDealsAdapter(this,
                 R.layout.find_deal_row, dealOffers);
         FindDealsAdapter dealOffersAdapter = adapter;
         dealOffersListView.setAdapter(dealOffersAdapter);
-        //dealOffersListView.setOnItemClickListener(listener);
         setListViewHeightBasedOnChildren(dealOffersListView);
-        listViewLinearLayout.setVisibility(View.VISIBLE);
-
-        Date now = new Date();
-        purchaseClickLayout.setVisibility(View.VISIBLE);
-        final TextView buyNowView = (TextView) findViewById(R.id.buy_now_text);
-        buyNowView.setText(getBuyNowText());
-
-        final TextView textView = (TextView) findViewById(R.id.summaryText);
-        textView.setText(dealOffers.size() + " Deals from " + numMerchants + " Merchants");
     }
 
     private String getBuyNowText() {
@@ -268,23 +173,15 @@ public class FindDealsActivity extends TaloolActivity{
     private class FindDealsTask extends AsyncTask<String, Void, List<Deal_t>> {
 
         @Override
-        protected void onPreExecute() {
-            if (dealOffers == null || dealOffers.isEmpty()) {
-                df = DialogFactory.getProgressDialog();
-                df.show(getFragmentManager(), "dialog");
-            }
-        }
+        protected void onPreExecute() {}
 
         @Override
         protected void onPostExecute(final List<Deal_t> results) {
-            if (df != null && !df.isHidden()) {
-                df.dismiss();
-            }
             if (exception != null) {
                 popupErrorMessage(exception.getMessage());
             } else {
                 dealOffers = results;
-                loadListView(getNumberOfMerchants());
+                loadListView();
             }
         }
 

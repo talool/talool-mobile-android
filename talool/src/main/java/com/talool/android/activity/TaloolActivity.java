@@ -89,6 +89,7 @@ public class TaloolActivity extends Activity {
 		}
 	}
 
+    // TODO this method is crazy slow!!!
     public void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         int totalHeight = 0;

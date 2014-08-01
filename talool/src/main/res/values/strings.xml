@@ -69,7 +69,7 @@
     <string name="icon_thumbs_down_alt">&#xf088;</string>
     <string name="dealsString">If you are purchasing this book to support a fundraiser, please enter the fundraisers tracking code below.</string>
     <string name="dealsString2">If you have already paid for the book and have an access code, you can also enter it here.</string>
-    <string name="paybackText">this is managed by the admin</string>
+    <string name="paybackText"></string>
     <string name="locationSelect">Can you please tell us which Payback Book you are interested in?</string>
     <string name="helpLoadingDeals">It looks like you haven\'t loaded any deals yet!\n\nNo problem.  If you have a Payback Book access code, you can take care of that on the Find Deals screen.\n\nIf you were sent a gift, you can accept that on the Activity screen.</string>
 

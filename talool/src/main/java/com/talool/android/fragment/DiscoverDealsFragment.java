@@ -24,6 +24,7 @@ import com.talool.android.dialog.DialogFactory;
 import com.talool.android.util.Constants;
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.ThriftHelper;
+import com.talool.api.thrift.CoreConstants;
 import com.talool.api.thrift.CustomerService_t;
 import com.talool.api.thrift.DealOfferGeoSummariesResponse_t;
 import com.talool.api.thrift.DealOfferGeoSummary_t;
@@ -237,9 +238,17 @@ public class DiscoverDealsFragment extends Fragment implements PullToRefreshAtta
 
 			Intent myIntent = new Intent(arg1.getContext(), FindDealsActivity.class);
 			myIntent.putExtra("dealOffer", ThriftUtil.serialize(dealOfferSummary.dealOffer));
+            myIntent.putExtra("dealOfferSummaryText", getSummaryText(dealOfferSummary));
 			startActivity(myIntent);
 		}
 	};
+
+    public String getSummaryText(DealOfferGeoSummary_t dealOffer)
+    {
+        String summaryString = String.valueOf(dealOffer.getLongMetrics().get(CoreConstants.METRIC_TOTAL_DEALS));
+        summaryString = summaryString + " deals from " + String.valueOf(dealOffer.getLongMetrics().get(CoreConstants.METRIC_TOTAL_MERCHANTS)) +" merchants";
+        return summaryString;
+    }
 
 
 }

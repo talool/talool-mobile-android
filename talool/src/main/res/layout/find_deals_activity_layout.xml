@@ -24,7 +24,9 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ffffff"
             android:textSize="18sp"
-            android:layout_weight=".5"/>
+            android:layout_weight=".5"
+            android:clickable="true"
+            android:onClick="onPurchaseClick"/>
 
         <TextView
             android:id="@+id/enter_code_text"
@@ -36,7 +38,9 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ffffff"
             android:textSize="18sp"
-            android:layout_weight=".5"/>
+            android:layout_weight=".5"
+            android:clickable="true"
+            android:onClick="onPurchaseClick"/>
     </LinearLayout>
     
     <ScrollView
@@ -68,6 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/paybackText"
+                    android:textSize="18sp"
                     android:layout_weight=".6"
                     />
 

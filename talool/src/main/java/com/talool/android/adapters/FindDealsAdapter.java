@@ -13,6 +13,8 @@ import com.talool.android.util.ApiUtil;
 import com.talool.android.util.TypefaceFactory;
 import com.talool.api.thrift.Deal_t;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class FindDealsAdapter extends ArrayAdapter<Deal_t> {
@@ -26,6 +28,9 @@ public class FindDealsAdapter extends ArrayAdapter<Deal_t> {
 		super(context, layoutResourceId, data);
 		this.layoutResourceId = layoutResourceId;
 		this.context = context;
+
+        // sort the data by category, name
+        Collections.sort(data, DealComparator);
 		this.data = data;
 	}
 
@@ -64,5 +69,29 @@ public class FindDealsAdapter extends ArrayAdapter<Deal_t> {
 
 		return row;
 	}
+
+    public static Comparator<Deal_t> DealComparator
+            = new Comparator<Deal_t>() {
+
+        public int compare(Deal_t d1, Deal_t d2) {
+
+            String categoryName1 = d1.getMerchant().category.getName().toUpperCase();
+            String categoryName2 = d2.getMerchant().category.getName().toUpperCase();
+
+            String merchantName1 = d1.getMerchant().getName().toUpperCase();
+            String merchantName2 = d2.getMerchant().getName().toUpperCase();
+
+            if (categoryName1.equals(categoryName2))
+            {
+                // compare merchant name
+                return merchantName1.compareTo(merchantName2);
+            }
+            else
+            {
+                return categoryName1.compareTo(categoryName2);
+            }
+        }
+
+    };
 
 }
