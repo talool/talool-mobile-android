@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.braintreepayments.api.dropin.BraintreePaymentActivity;
+import com.braintreepayments.api.dropin.Customization;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
@@ -19,12 +21,16 @@ import com.talool.android.R;
 import com.talool.android.TaloolApplication;
 import com.talool.android.dialog.DialogFactory;
 import com.talool.android.persistence.MerchantDao;
+import com.talool.android.tasks.ClientTokenTask;
 import com.talool.android.tasks.MyDealsTask;
+import com.talool.android.tasks.PaymentTask;
 import com.talool.android.util.Constants;
 import com.talool.android.util.ErrorMessageCache;
+import com.talool.android.util.SafeSimpleDecimalFormat;
 import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.ServiceException_t;
+import com.talool.api.thrift.TransactionResult_t;
 import com.talool.api.thrift.ValidateCodeResponse_t;
 import com.talool.thrift.util.ThriftUtil;
 
@@ -35,10 +41,12 @@ import java.util.List;
 /**
  * Created by zachmanc on 4/16/14.
  */
-public class EnterCodeActivity extends TaloolActivity  implements DialogFactory.DialogClickListener {
+public class EnterCodeActivity extends TaloolActivity  implements DialogFactory.DialogClickListener, DialogFactory.DialogPositiveClickListener {
 
     private DealOffer_t closestBook;
     private Button loadDealsButton;
+
+    private static final int BRAINTREE_ACTIVITY_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +76,7 @@ public class EnterCodeActivity extends TaloolActivity  implements DialogFactory.
                                 {
                                     if(result.codeType.equals("merchant_code"))
                                     {
-                                        launchPaymentScreen();
+                                        preparePaymentActivity();
                                     }else if (result.codeType.equals("activation_code")){
                                         redeemBook();
                                     }
@@ -90,7 +98,7 @@ public class EnterCodeActivity extends TaloolActivity  implements DialogFactory.
             noAccessCodeTextView.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v)
                 {
-                    launchPaymentScreen();
+                    preparePaymentActivity();
                 }
             });
         } catch (TException e) {
@@ -156,11 +164,111 @@ public class EnterCodeActivity extends TaloolActivity  implements DialogFactory.
 
     }
 
-    private void launchPaymentScreen(){
-        final Intent myIntent = new Intent(this, PaymentActivity.class);
-        myIntent.putExtra("dealOffer", ThriftUtil.serialize(closestBook));
-        myIntent.putExtra("accessCode",getAccessCode());
-        startActivity(myIntent);
+    private void preparePaymentActivity()
+    {
+        final ClientTokenTask tokenTask = new ClientTokenTask(EnterCodeActivity.this, client) {
+
+            @Override
+            protected void onPreExecute() {
+                df = DialogFactory.getProgressDialog();
+                df.show(getFragmentManager(), "dialog");
+            }
+
+            @Override
+            protected void onPostExecute(final String token) {
+                if (df != null && !df.isHidden()) {
+                    df.dismiss();
+                }
+                if (this.errorMessage == null) {
+                    launchPaymentActivity(token);
+                }
+                else
+                {
+                    popupErrorMessage(this.errorMessage);
+                    return;
+                }
+            }
+
+        };
+        tokenTask.execute();
+    }
+
+    private void launchPaymentActivity(String token)
+    {
+        // show the payment ui
+        Intent intent = new Intent(EnterCodeActivity.this, BraintreePaymentActivity.class);
+
+        // add the client token
+        intent.putExtra(BraintreePaymentActivity.EXTRA_CLIENT_TOKEN, token);
+
+        // customize the view
+        Customization customization = new Customization.CustomizationBuilder()
+                .primaryDescription(closestBook.getTitle())
+                .secondaryDescription(formatDealPrice())
+                .submitButtonText("Buy Now")
+                .build();
+        intent.putExtra(BraintreePaymentActivity.EXTRA_CUSTOMIZATION, customization);
+
+        startActivityForResult(intent, BRAINTREE_ACTIVITY_CODE);
+
+    }
+
+    private void processBraintreePaymentActivityResponse(int resultCode, Intent data)
+    {
+        if (resultCode == BraintreePaymentActivity.RESULT_OK) {
+            final String paymentMethodNonce = data.getStringExtra(BraintreePaymentActivity.EXTRA_PAYMENT_METHOD_NONCE);
+            final PaymentTask task = new PaymentTask(closestBook, paymentMethodNonce, getAccessCode(), this, client) {
+
+                @Override
+                protected void onPreExecute() {
+                    df = DialogFactory.getProgressDialog();
+                    df.show(getFragmentManager(), "dialog");
+                }
+
+                @Override
+                protected void onPostExecute(final TransactionResult_t transactionResult) {
+
+                    if (df != null && !df.isHidden())
+                    {
+                        df.dismiss();
+                    }
+
+                    if (this.errorMessage == null)
+                    {
+                        if (transactionResult.isSuccess()) {
+                            String title = getResources().getString(R.string.payment_trans_success_title);
+                            String message = String.format(getResources().getString(R.string.payment_trans_success_message), closestBook.getTitle());
+                            String label = getResources().getString(R.string.payment_trans_success_positive_label);
+                            df = DialogFactory.getAlertDialog(title, message, label, EnterCodeActivity.this);
+                            df.show(getFragmentManager(), "dialog");
+                        }
+                        else
+                        {
+                            popupErrorMessage(transactionResult.getMessage());
+                        }
+                    }
+                    else
+                    {
+                        popupErrorMessage(this.errorMessage);
+                    }
+                }
+            };
+            task.execute();
+
+        }
+        else
+        {
+            // handle error from Braintree
+            //      BraintreePaymentActivity.RESULT_CANCELED
+            //      BraintreePaymentActivity.BRAINTREE_RESULT_DEVELOPER_ERROR
+            //      BraintreePaymentActivity.BRAINTREE_RESULT_SERVER_ERROR
+            //      BraintreePaymentActivity.BRAINTREE_RESULT_SERVER_UNAVAILABLE
+            if (resultCode != BraintreePaymentActivity.RESULT_CANCELED)
+            {
+                popupErrorMessage("We are unable to process your transaction at this time.  Please try again later.");
+            }
+
+        }
     }
 
     private void redirectToMyDeals() {
@@ -190,7 +298,6 @@ public class EnterCodeActivity extends TaloolActivity  implements DialogFactory.
             }
         };
         task.execute();
-
 
     }
 
@@ -266,6 +373,14 @@ public class EnterCodeActivity extends TaloolActivity  implements DialogFactory.
         }
     }
 
+    private String formatDealPrice()
+    {
+        final StringBuilder sb = new StringBuilder();
+        sb.append(getResources().getString(R.string.payment_price))
+                .append(" ")
+                .append(new SafeSimpleDecimalFormat(Constants.FORMAT_DECIMAL_MONEY).format(closestBook.getPrice()));
+        return sb.toString();
+    }
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
@@ -275,4 +390,12 @@ public class EnterCodeActivity extends TaloolActivity  implements DialogFactory.
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == BRAINTREE_ACTIVITY_CODE) {
+            processBraintreePaymentActivityResponse(resultCode, data);
+        }
+    }
+
 }

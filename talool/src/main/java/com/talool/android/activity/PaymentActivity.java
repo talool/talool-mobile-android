@@ -233,56 +233,6 @@ public class PaymentActivity extends TaloolActivity implements DialogPositiveCli
             e.printStackTrace();
         }
 
-
-
-        /*
-		setContentView(R.layout.venmo_payment_activity_layout);
-
-		if (Constants.IS_DEVELOPMENT_MODE)
-		{
-			touchClient = VenmoTouchClient.forSandboxMerchant(this, Constants.getBTMerchantId(),null, Constants.getBTMerchantKey());
-		}
-		else
-		{
-			touchClient = VenmoTouchClient.forMerchant(this, Constants.getBTMerchantId(),null, Constants.getBTMerchantKey());
-		}
-
-		comboView = (VTComboCardView) findViewById(R.id.combo_view);
-		comboView.getNewCardTitle().setText(getResources().getString(R.string.payment_new_card));
-
-		comboView.getSavedCardTitle().setText(getResources().getString(R.string.payment_saved_card));
-
-		mComboController = new VTComboCardViewController(this, touchClient, comboView);
-
-		mComboController.setListener(new VTComboCardViewController.Listener()
-		{
-			@Override
-			public void onCardSelected(CardStub card)
-			{
-				processVenmoTouchCard(card);
-			}
-
-			@Override
-			public void onCardDetailsSubmitted(CardDetails details, boolean addToTouch,
-					Map<String, String> encryptedCardDetails)
-			{
-				processNewCard(details, addToTouch, encryptedCardDetails);
-			}
-
-			@Override
-			public void onCardListUpdated(List<CardStub> cards)
-			{}
-		});
-		TextView titleView = (TextView) findViewById(R.id.payment_deal_offer_detail);
-	    titleView.setText(dealOffer.getTitle());
-
-		TextView priceView = (TextView) findViewById(R.id.payment_deal_offer_price);
-		priceView.setText(formatDealPrice());
-
-		holder.myDealsMerchantIcon.setText(ApiUtil.getIcon(merchant.category));
-        */
-
-
 	}
 
 	private String formatDealPrice()
