@@ -3,6 +3,7 @@ package com.talool.android.activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ClipDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -53,6 +54,11 @@ public class EnterCodeActivity extends TaloolActivity  implements DialogFactory.
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.enter_code_activity);
+
+        EditText codeEditText = (EditText) findViewById(R.id.accessCode);
+        ClipDrawable code_bg = (ClipDrawable) codeEditText.getBackground();
+        code_bg.setLevel(1500);
+
         try {
             byte[] dealOfferBytes = (byte[]) getIntent().getSerializableExtra("dealOffer");
             closestBook = new DealOffer_t();
@@ -101,6 +107,9 @@ public class EnterCodeActivity extends TaloolActivity  implements DialogFactory.
                     preparePaymentActivity();
                 }
             });
+
+            setTitle(closestBook.getTitle());
+
         } catch (TException e) {
             e.printStackTrace();
         }
@@ -202,6 +211,7 @@ public class EnterCodeActivity extends TaloolActivity  implements DialogFactory.
         intent.putExtra(BraintreePaymentActivity.EXTRA_CLIENT_TOKEN, token);
 
         // customize the view
+        // TODO put the kid's name in the secondayDescription if it's a fundraiser
         Customization customization = new Customization.CustomizationBuilder()
                 .primaryDescription(closestBook.getTitle())
                 .secondaryDescription(formatDealPrice())

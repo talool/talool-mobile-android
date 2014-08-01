@@ -57,35 +57,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:orientation="vertical"
                 android:padding="10dp" >
-
-                <com.talool.android.util.TaloolSmartImageView
-                    android:id="@+id/bookImageView"
-                    android:layout_width="150dp"
-                    android:layout_height="62dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:scaleType="fitXY"
-                    android:layout_weight=".3" />
 
                 <TextView
                     android:id="@+id/dealOfferDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/paybackText"
-                    android:layout_weight=".6" />
+                    android:layout_weight=".6"
+                    />
+
+                <com.talool.android.util.TaloolSmartImageView
+                    android:id="@+id/bookImageView"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="0dp"
+                    android:scaleType="fitXY"
+                    android:layout_weight=".3" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/listViewLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="0dp"
                 android:orientation="vertical"
-                android:padding="10dp" >
+                android:padding="10dp"
+                android:background="@drawable/list_header">
 
                 <TextView
                     android:id="@+id/summaryText"

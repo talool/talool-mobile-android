@@ -51,6 +51,9 @@ public class FindDealsActivity extends TaloolActivity{
     private DealOffer_t closestBook;
     private LinearLayout listViewLinearLayout;
 
+    // TODO why is there a huge delay to load this activity
+    // TODO sort the list of deals by category and merchant name
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,6 +126,8 @@ public class FindDealsActivity extends TaloolActivity{
             }
         });
         purchaseClickLayout.setVisibility(View.GONE);
+
+        setTitle(closestBook.getTitle());
     }
 
 //    protected void handleRedeemBookResponse(Void results) {

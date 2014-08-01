@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
-    android:background="@color/tan"
+    android:background="@drawable/hero_android_large"
     android:orientation="vertical"
-    android:paddingTop="40dp"
+    android:paddingTop="20dp"
     android:paddingLeft="20dp"
     android:paddingRight="20dp">
 
@@ -29,33 +29,48 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_marginTop="20dp" >
     <EditText
         android:id="@+id/accessCode"
-        android:layout_width="0dip"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
         android:hint="@string/access_code"
         android:background="@drawable/clipped_edittext"
+        android:textColor="@color/brown"
+        android:textSize="@dimen/login_edittext_text_size"
         android:inputType="textCapCharacters"
-        android:layout_margin="3dp"/>
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp"/>
     <Button
         android:id="@+id/loadDealsButton"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/btn_teal"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:shadowColor="@color/teal_dark"
+        android:shadowDx="1.5"
+        android:shadowDy="1.5"
+        android:shadowRadius="3.0"
         android:text="@string/submit" />
     </LinearLayout>
 
-    <TextView
-        android:layout_marginTop="40dp"
-        android:layout_width="match_parent"
+    <TextView android:id="@+id/noAccessCodeText"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/noAccessCodeText"
-        android:layout_gravity="center_horizontal"
+        android:text="I don't have a code"
+        android:layout_marginTop="25dp"
         android:gravity="center"
-        android:textColor="@color/brown"
         android:textSize="18sp"
-        android:text="I don't have a code" />
+        android:clickable="true"
+        android:textColor="@color/teal_dark"
+        android:textStyle="bold"
+
+        android:shadowColor="@color/white"
+        android:shadowDx="1.5"
+        android:shadowDy="1.5"
+        android:shadowRadius="3.0"/>
 </LinearLayout>
