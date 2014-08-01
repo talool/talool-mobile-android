@@ -44,6 +44,8 @@ import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransportException;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
@@ -202,7 +204,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 
 		if (merchants.size() > 0)
 		{
-			updateMerchantsList(merchants);
+			updateMerchantsList();
 		}
 		else
 		{
@@ -239,11 +241,18 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		dealsTask.execute(new String[] {});
 	}
 
-	private void updateMerchantsList(final List<Merchant_t> results)
+	private void updateMerchantsList()
 	{
 
 		try
 		{
+            Collections.sort(merchants,new Comparator<Merchant_t>() {
+                @Override
+                public int compare(Merchant_t lhs, Merchant_t rhs) {
+                    return (lhs.name.compareToIgnoreCase(rhs.name));
+                }
+            });
+
 			MyDealsAdapter adapter = new MyDealsAdapter(view.getContext(),
 					R.layout.mydeals_item_row, merchants);
 			myDealsAdapter = adapter;
@@ -267,11 +276,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 			}
 			else
 			{
-				MyDealsAdapter adapter = new MyDealsAdapter(view.getContext(),
-						R.layout.mydeals_item_row, merchants);
-				myDealsAdapter = adapter;
-				myDealsListView.setAdapter(myDealsAdapter);
-				myDealsListView.setOnItemClickListener(onClickListener);
+				updateMerchantsList();
 			}
 		}
 		else
