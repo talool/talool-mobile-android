@@ -191,18 +191,17 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
                             emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, result.subject);
                             emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(result.body));
                             startActivity(Intent.createChooser(emailIntent, "Email:"));
+
                         }
                     }
 
 
                 };
                 task.execute(new String[] {});
-//                final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-//
-//                emailIntent.setType("text/html");
-//                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "My Allergy Journal");
-//                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml("<small>"+sb.toString()+"</small>"));
-//                startActivity(Intent.createChooser(emailIntent, "Email:"));
+
+                final ActivityActionTakenTask actionTakenTask = new ActivityActionTakenTask(client, activity.getActivityId(),
+                        view.getContext(), activityDao, activity);
+                actionTakenTask.execute();
             }
             else if (activity.getActivityLink() != null)
             {
