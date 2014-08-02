@@ -43,6 +43,9 @@
     
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="bday_hint">Birthday</string>
     
     <string name="access_code">enter code</string>
     <string name="buy_now">Buy Now: $9.99</string>
@@ -71,7 +74,7 @@
     <string name="dealsString2">If you have already paid for the book and have an access code, you can also enter it here.</string>
     <string name="paybackText"></string>
     <string name="locationSelect">Can you please tell us which Payback Book you are interested in?</string>
-    <string name="helpLoadingDeals">It looks like you haven\'t loaded any deals yet!\n\nNo problem.  If you have a Payback Book access code, you can take care of that on the Find Deals screen.\n\nIf you were sent a gift, you can accept that on the Activity screen.</string>
+    <string name="helpLoadingDeals">It looks like you haven\'t loaded any deals yet!\n\nNo problem.  You can purchase a collection of deals on the Find Deals screen.\n\nIf you were sent a gift, you can accept that on the Activity screen.</string>
 
     
     <string name="arrow_content_desc">click link</string>

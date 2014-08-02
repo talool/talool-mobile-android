@@ -87,10 +87,10 @@ public class EnterCodeActivity extends TaloolActivity  implements DialogFactory.
                                         redeemBook();
                                     }
                                 }else{
-                                    popupErrorMessage("Please check your code and try again. If you do not have a code, click the text at the bottom of the page");
+                                    popupErrorMessage("Please check your code and try again. If you do not have a code, touch the text below the button");
                                 }
                             }else{
-                                popupErrorMessage("Please check your code and try again. If you do not have a code, click the text at the bottom of the page");
+                                popupErrorMessage("Please check your code and try again. If you do not have a code, touch the text below the button");
                             }
 
                         }

@@ -18,6 +18,27 @@
           android:layout_height="wrap_content"
           android:padding="10dip">
 
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/radio_sex"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/clipped_edittext"
+            android:layout_marginBottom="20dp">
+            <RadioButton android:id="@+id/radio_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female"
+                android:onClick="onSexClicked"
+                android:checked="true"/>
+            <RadioButton android:id="@+id/radio_male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/male"
+                android:onClick="onSexClicked"
+                android:layout_marginLeft="50dp"/>
+        </RadioGroup>
+
           <EditText 
                 android:id="@+id/firstName"
                 android:layout_width="fill_parent"
@@ -65,8 +86,22 @@
                 android:background="@drawable/clipped_edittext"
                 android:textColor="@color/brown"
                 android:hint="@string/password"/>
+
+        <EditText
+            android:id="@+id/registrationBDay"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/reg_edittext_vertical_margin_top"
+            android:layout_marginBottom="@dimen/reg_edittext_vertical_margin_bottom"
+            android:singleLine="true"
+            android:inputType="none"
+            android:editable="false"
+            android:background="@drawable/clipped_edittext"
+            android:textColor="@color/brown"
+            android:hint="@string/bday_hint"
+            android:onClick="onBdayClick"/>
           
-          <!-- Login button -->
+          <!-- Register button -->
           <Button android:id="@+id/btnRegister"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
