@@ -2,6 +2,7 @@
 	<color name="red">#ed1c24</color> 
 	<color name="green">#50b948</color>
 	<color name="gray">#C0C0C0</color>
+    <color name="light_gray">#efefef</color>
 	<color name="tan">#fff2f2e6</color>
 	<color name="dark_tan">#ffccccb3</color>
 	<color name="orange">#f15a24</color>
