@@ -30,7 +30,8 @@ public class DialogFactory
 
 	static public DialogFragment getAlertDialog(String title, String message, String confirmLabel, DialogPositiveClickListener listener)
 	{
-		TaloolAlertDialogFragment frag = new TaloolAlertDialogFragment(listener);
+		TaloolAlertDialogFragment frag = new TaloolAlertDialogFragment();
+        frag.listener = listener;
 		frag.setTitle(title);
 		frag.setMessage(message);
 		frag.setPositiveLabel(confirmLabel);
