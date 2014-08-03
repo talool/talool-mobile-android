@@ -73,4 +73,7 @@ public class TaloolAlertDialogFragment extends DialogFragment
 		return builder.create();
 	}
 
+    public void setListener(DialogPositiveClickListener listener) {
+        this.listener = listener;
+    }
 }
