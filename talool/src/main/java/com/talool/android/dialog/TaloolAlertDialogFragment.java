@@ -27,11 +27,6 @@ public class TaloolAlertDialogFragment extends DialogFragment
 	public TaloolAlertDialogFragment()
 	{}
 
-	public TaloolAlertDialogFragment(final DialogPositiveClickListener dialogClickListener)
-	{
-		this.listener = dialogClickListener;
-	}
-
 	public void setPositiveLabel(String positiveLabel)
 	{
 		this.positiveLabel = positiveLabel;
@@ -78,4 +73,7 @@ public class TaloolAlertDialogFragment extends DialogFragment
 		return builder.create();
 	}
 
+    public void setListener(DialogPositiveClickListener listener) {
+        this.listener = listener;
+    }
 }

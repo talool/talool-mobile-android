@@ -60,7 +60,6 @@ public class DiscoverDealsFragment extends Fragment implements PullToRefreshAtta
 
         getActivity().setTitle(FIND_DEALS_TITLE);
 
-
         mPullToRefreshAttacher = ((MainActivity) getActivity())
 				.getPullToRefreshAttacher();
 		mPullToRefreshAttacher.addRefreshableView(discoverDealsListView, this);
