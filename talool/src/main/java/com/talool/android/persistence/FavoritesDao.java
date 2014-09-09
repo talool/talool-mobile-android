@@ -3,6 +3,7 @@ package com.talool.android.persistence;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
 import com.talool.api.thrift.Merchant_t;
@@ -39,33 +40,35 @@ public class FavoritesDao extends AbstractDbAdapter {
 
     public List<Merchant_t> getMerchants(final Integer categoryId)
     {
-        final List<Merchant_t> merchants = new ArrayList<Merchant_t>();
-        Cursor cursor = null;
+        try {
+            final List<Merchant_t> merchants = new ArrayList<Merchant_t>();
+            Cursor cursor = null;
 
-        if (categoryId == null)
-        {
-            // return all
-            cursor = mDb.query(TaloolDbHelper.FAVORITE_TBL,
-                    TaloolDbHelper.MerchantColumn.getColumnArray(), null, null, null, null, TaloolDbHelper.MerchantColumn.name + " ASC");
-        }
-        else
-        {
-            cursor = mDb.query(TaloolDbHelper.FAVORITE_TBL,
-                    TaloolDbHelper.MerchantColumn.getColumnArray(), TaloolDbHelper.MerchantColumn.category + "=" +
-                    categoryId, null, null, null, TaloolDbHelper.MerchantColumn.name + " ASC");
-        }
+            if (categoryId == null) {
+                // return all
+                cursor = mDb.query(TaloolDbHelper.FAVORITE_TBL,
+                        TaloolDbHelper.MerchantColumn.getColumnArray(), null, null, null, null, TaloolDbHelper.MerchantColumn.name + " ASC");
+            } else {
+                cursor = mDb.query(TaloolDbHelper.FAVORITE_TBL,
+                        TaloolDbHelper.MerchantColumn.getColumnArray(), TaloolDbHelper.MerchantColumn.category + "=" +
+                                categoryId, null, null, null, TaloolDbHelper.MerchantColumn.name + " ASC");
+            }
 
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast())
-        {
-            Merchant_t activity = cursorToMerchant(cursor);
-            merchants.add(activity);
-            cursor.moveToNext();
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                Merchant_t activity = cursorToMerchant(cursor);
+                merchants.add(activity);
+                cursor.moveToNext();
+            }
+            // Make sure to close the cursor
+            cursor.close();
+            Log.i(this.getClass().getSimpleName(), "Get Merchants called");
+            return merchants;
         }
-        // Make sure to close the cursor
-        cursor.close();
-        Log.i(this.getClass().getSimpleName(),"Get Merchants called");
-        return merchants;
+        catch (SQLiteException e)
+        {
+            return new ArrayList<Merchant_t>();
+        }
     }
 
     public void deleteRows(String merchantId)
