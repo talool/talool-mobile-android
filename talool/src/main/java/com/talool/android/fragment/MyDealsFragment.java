@@ -74,6 +74,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	{
 		All(null, R.id.my_deals_filter_all), Food(1, R.id.my_deals_filter_food),
 		Shopping(2, R.id.my_deals_filter_shopping), Fun(3, R.id.my_deals_filter_fun),
+        Nightlife(4, R.id.my_deals_filter_nightlife), Services(5, R.id.my_deals_filter_services),
 		Favorites(null, R.id.my_deals_filter_favorites);
 
 		private Integer categoryId;

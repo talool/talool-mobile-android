@@ -4,6 +4,7 @@
         android:id="@+id/my_deals_filter_root"
         android:icon="@drawable/fa_filter_white_4848"
         android:showAsAction="always"
+        android:title="Options"
         android:titleCondensed="Options">
         <menu>
 
@@ -25,7 +26,7 @@
                     android:showAsAction="always"
                     android:title="@string/my_deals_filter_food"
                     android:visible="true"/>
-                  <item
+                <item
                     android:id="@+id/my_deals_filter_shopping"
                     android:enabled="true"
                     android:icon="@drawable/fa_shopping_white_3232"
@@ -33,12 +34,27 @@
                     android:title="@string/my_deals_filter_shopping"
                     android:visible="true"/>
                 <item
+                    android:id="@+id/my_deals_filter_services"
+                    android:enabled="true"
+                    android:icon="@drawable/fa_cogs_white_3232"
+                    android:showAsAction="always"
+                    android:title="@string/my_deals_filter_services"
+                    android:visible="true"/>
+                <item
                     android:id="@+id/my_deals_filter_fun"
                     android:enabled="true"
                     android:icon="@drawable/fa_fun_white_3232"
                     android:showAsAction="always"
                     android:title="@string/my_deals_filter_fun"
-                    android:visible="true"/>   
+                    android:visible="true"/>
+                <item
+                    android:id="@+id/my_deals_filter_nightlife"
+                    android:enabled="true"
+                    android:icon="@drawable/fa_glass_white_3232"
+                    android:showAsAction="always"
+                    android:title="@string/my_deals_filter_nightlife"
+                    android:visible="true"/>
+
             </group>
             </menu>
         </item>

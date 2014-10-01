@@ -90,6 +90,12 @@ public final class ApiUtil
 			case Constants.FUN_CATEGORY_ID:
 				return R.string.icon_ticket;
 
+            case Constants.NIGHTLIFE_CATEGORY_ID:
+                return R.string.icon_glass;
+
+            case Constants.SERVICES_CATEGORY_ID:
+                return R.string.icon_cogs;
+
 			default:
 				return R.string.icon_food;
 
@@ -109,6 +115,12 @@ public final class ApiUtil
 
 			case Constants.FUN_CATEGORY_ID:
 				return R.color.fun_icon_color;
+
+            case Constants.NIGHTLIFE_CATEGORY_ID:
+                return R.color.nightlife_icon_color;
+
+            case Constants.SERVICES_CATEGORY_ID:
+                return R.color.services_icon_color;
 
 			default:
 				return R.color.gray_icon;
