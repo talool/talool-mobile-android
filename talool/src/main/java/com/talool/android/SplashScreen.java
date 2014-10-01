@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.talool.android.activity.GiftActivity;
 import com.talool.android.activity.WelcomeActivity;
 import com.talool.android.util.TaloolUser;
@@ -25,6 +26,7 @@ public class SplashScreen extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		Crashlytics.start(this);
 
 		final boolean hasToken = TaloolUser.get().getAccessToken() != null;
 
