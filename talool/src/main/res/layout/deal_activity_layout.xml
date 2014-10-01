@@ -140,54 +140,6 @@
 	            android:orientation="vertical"
 	            android:padding="10dp" >
 	
-	            <LinearLayout
-	                android:layout_width="match_parent"
-	                android:layout_height="wrap_content"
-	                android:orientation="horizontal"
-	                android:baselineAligned="false" >
-	
-	                <LinearLayout
-	                    android:layout_width="0dp"
-	                    android:layout_height="wrap_content"
-	                    android:layout_weight=".6"
-	                    android:orientation="vertical" >
-	
-	                    <TextView
-	                        android:id="@+id/offValidAtText"
-	                        android:layout_width="wrap_content"
-	                        android:layout_height="wrap_content"
-	                        android:text="Offer valid at"
-	                        android:textSize="12sp"
-	                        android:textStyle="bold" />
-	
-	                    <TextView
-	                        android:id="@+id/dealAddressText"
-	                        android:layout_width="wrap_content"
-	                        android:layout_height="wrap_content"
-	                        android:maxLines="3"
-	                        android:textSize="12sp"
-	                        android:text="123 Main St \nDenver, CO 80205" />
-	
-	                </LinearLayout>
-	
-	                <LinearLayout
-	                    android:layout_width="wrap_content"
-	                    android:layout_height="40dp"
-	                    android:layout_weight=".4"
-	                    android:gravity="right"
-	                    android:orientation="vertical" >
-	
-	                    <com.loopj.android.image.SmartImageView
-	                        android:id="@+id/dealLogoImage"
-	                        android:layout_width="match_parent"
-	                        android:layout_height="match_parent"
-	                        android:layout_gravity="right"
-	                        android:layout_marginLeft="15dp"
-	                        android:scaleType="fitEnd" />
-	
-	                </LinearLayout>
-	            </LinearLayout>
-	
 	            <TextView
 	                android:id="@+id/dealSummaryText"
 	                android:layout_width="wrap_content"
@@ -213,7 +165,55 @@
 	                android:text="Deal Valid"
 
 	                android:textSize="14sp" />
-	
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:baselineAligned="false" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".6"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/offValidAtText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Offer valid at"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/dealAddressText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="3"
+                            android:textSize="12sp"
+                            android:text="123 Main St \nDenver, CO 80205" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_weight=".4"
+                        android:gravity="right"
+                        android:orientation="vertical" >
+
+                        <com.loopj.android.image.SmartImageView
+                            android:id="@+id/dealLogoImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="right"
+                            android:layout_marginLeft="15dp"
+                            android:scaleType="fitEnd" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
 	            <LinearLayout
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
