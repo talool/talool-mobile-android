@@ -230,7 +230,8 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 
         inflater.inflate(R.menu.activities_action_bar, menu);
 
-        menu.getItem(0).setIcon(ApiUtil.getFontAwesomeDrawable(getActivity().getApplicationContext(),
+        final MenuItem filter = menu.findItem(R.id.activity_filter_root);
+        filter.setIcon(ApiUtil.getFontAwesomeDrawable(getActivity().getApplicationContext(),
                 R.string.icon_filter, R.color.teal_dark, 24));
 
         final MenuItem menuItem = menu.findItem(selectedEventFilter);

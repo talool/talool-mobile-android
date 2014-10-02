@@ -111,23 +111,31 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		// menu.clear();
 
 		this.menu = menu;
-        inflater.inflate(R.menu.sort_action_bar, menu);
+
+        // Set up Sort Menu
+        // only show if distance is available
+        if (TaloolUser.get().isRealLocation())
+        {
+            inflater.inflate(R.menu.sort_action_bar, menu);
+
+            final MenuItem sort = menu.findItem(R.id.sort);
+            sort.setActionProvider(new SortProvider(getActivity().getApplicationContext(), selectedSort) {
+
+                public void setSort(final Sort sort)
+                {
+                    selectedSort = sort;
+                    updateMerchantsList();
+                }
+
+            });
+        }
+
+        // Set up Filter Menu
 		inflater.inflate(R.menu.my_deals_action_bar, menu);
 
-        menu.getItem(0).setActionProvider(new SortProvider(getActivity().getApplicationContext(), selectedSort) {
-
-            public void setSort(final Sort sort)
-            {
-                selectedSort = sort;
-                updateMerchantsList();
-            }
-
-        });
-
-
-        menu.getItem(1).setIcon(ApiUtil.getFontAwesomeDrawable(getActivity().getApplicationContext(),
+        final MenuItem filter = menu.findItem(R.id.my_deals_filter_root);
+        filter.setIcon(ApiUtil.getFontAwesomeDrawable(getActivity().getApplicationContext(),
                 R.string.icon_filter, R.color.teal_dark, 24));
-
 
         final MenuItem menuItem = menu.findItem(R.id.my_deals_filter_all);
 		menuItem.setChecked(true);
@@ -142,7 +150,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 			return true;
 		}
 
-		noResultsMessage.setVisibility(View.GONE);  // TODO this is how to hide the sort icon
+		noResultsMessage.setVisibility(View.GONE);
 		selectedFilter = FilterBy.filterByMap.get(item.getItemId());
 
 		item.setChecked(item.isChecked() ? false : true);
