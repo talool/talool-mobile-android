@@ -15,6 +15,7 @@ import com.talool.android.util.ApiUtil;
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.TaloolUtil;
 import com.talool.android.util.TypefaceFactory;
+import com.talool.api.thrift.MerchantLocation_t;
 import com.talool.api.thrift.Merchant_t;
 
 import java.util.List;
@@ -79,6 +80,9 @@ public class MyDealsAdapter extends ArrayAdapter<Merchant_t>
 		holder.myDealsMerchantIcon.setTextColor(row.getResources().getColor(ApiUtil.getIconColor(merchant.category)));
 
 		holder.myDealsMerchantTitle.setText(merchant.getName());
+
+        MerchantLocation_t closestLocation = ApiUtil.getClosestLocation(merchant);
+
 		if (merchant.getLocations() != null && merchant.getLocations().size() > 0)
 		{
 			if(merchant.locations.size() > 1)
@@ -87,15 +91,15 @@ public class MyDealsAdapter extends ArrayAdapter<Merchant_t>
 			}
 			else
 			{
-				holder.myDealsMerchantLocation.setText(merchant.getLocations().get(0).address.address1 + ", " + merchant.getLocations().get(0).address.city);
+				holder.myDealsMerchantLocation.setText(closestLocation.address.address1 + ", " + closestLocation.address.city);
 			}
 
 			if (TaloolUser.get().getLocation() != null && TaloolUser.get().isRealLocation())
 			{
 				Location merchantLocation = new Location("Talool");
-                if (merchantLocation != null && merchant.getLocations() != null && merchant.getLocations().get(0) != null && merchant.getLocations().get(0).location != null){
-                    merchantLocation.setLatitude(merchant.getLocations().get(0).location.latitude);
-                    merchantLocation.setLongitude(merchant.getLocations().get(0).location.longitude);
+                if (merchantLocation != null && closestLocation != null && closestLocation.location != null){
+                    merchantLocation.setLatitude(closestLocation.location.latitude);
+                    merchantLocation.setLongitude(closestLocation.location.longitude);
                     float distance = TaloolUser.get().getLocation().distanceTo(merchantLocation);
                     distance = (float) (distance * 0.00062137);
 

@@ -24,12 +24,14 @@ import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.talool.android.MainActivity;
 import com.talool.android.R;
+import com.talool.android.SortProvider;
 import com.talool.android.TaloolApplication;
 import com.talool.android.activity.DealAcquiresActivity;
 import com.talool.android.adapters.MyDealsAdapter;
 import com.talool.android.cache.FavoriteMerchantCache;
 import com.talool.android.dialog.DialogFactory;
 import com.talool.android.persistence.MerchantDao;
+import com.talool.android.util.ApiUtil;
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.ThriftHelper;
 import com.talool.android.util.TypefaceFactory;
@@ -69,6 +71,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 	private MerchantDao merchantDao;
 	private DialogFragment df;
 	private FilterBy selectedFilter = FilterBy.All;
+    private SortProvider.Sort selectedSort = SortProvider.Sort.ALPHA;
 
 	private enum FilterBy
 	{
@@ -108,10 +111,25 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		// menu.clear();
 
 		this.menu = menu;
-
+        inflater.inflate(R.menu.sort_action_bar, menu);
 		inflater.inflate(R.menu.my_deals_action_bar, menu);
 
-		final MenuItem menuItem = menu.findItem(R.id.my_deals_filter_all);
+        menu.getItem(0).setActionProvider(new SortProvider(getActivity().getApplicationContext(), selectedSort) {
+
+            public void setSort(final Sort sort)
+            {
+                selectedSort = sort;
+                updateMerchantsList();
+            }
+
+        });
+
+
+        menu.getItem(1).setIcon(ApiUtil.getFontAwesomeDrawable(getActivity().getApplicationContext(),
+                R.string.icon_filter, R.color.teal_dark, 24));
+
+
+        final MenuItem menuItem = menu.findItem(R.id.my_deals_filter_all);
 		menuItem.setChecked(true);
 
 	}
@@ -124,7 +142,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 			return true;
 		}
 
-		noResultsMessage.setVisibility(View.GONE);
+		noResultsMessage.setVisibility(View.GONE);  // TODO this is how to hide the sort icon
 		selectedFilter = FilterBy.filterByMap.get(item.getItemId());
 
 		item.setChecked(item.isChecked() ? false : true);
@@ -183,25 +201,30 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 		}
 	}
 
+    private void setMerchantsWithFilter()
+    {
+        switch (selectedFilter)
+        {
+            case All:
+                merchants = merchantDao.getMerchants(null);
+                break;
+            case Favorites:
+                merchants = new ArrayList<Merchant_t>(FavoriteMerchantCache.get().getMerchants());
+                break;
+            default:
+                merchants = merchantDao.getMerchants(selectedFilter.getCategoryId());
+                break;
+
+        }
+        if (merchants == null)
+        {
+            merchants = new ArrayList<Merchant_t>();
+        }
+    }
+
 	private void reloadData()
 	{
-		switch (selectedFilter)
-		{
-		case All:
-			merchants = merchantDao.getMerchants(null);
-			break;
-		case Favorites:
-			merchants = new ArrayList<Merchant_t>(FavoriteMerchantCache.get().getMerchants());
-			break;
-		default:
-			merchants = merchantDao.getMerchants(selectedFilter.getCategoryId());
-			break;
-
-		}
-		if (merchants == null)
-		{
-			merchants = new ArrayList<Merchant_t>();
-		}
+        setMerchantsWithFilter();
 
 		if (merchants.size() > 0)
 		{
@@ -213,6 +236,7 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 			{
 				final StringBuilder sb = new StringBuilder();
 
+                // TODO make this message look nice
 				noResultsMessage.setVisibility(View.VISIBLE);
 				if (selectedFilter.androidId == R.id.my_deals_filter_favorites)
 				{
@@ -247,12 +271,26 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 
 		try
 		{
-            Collections.sort(merchants,new Comparator<Merchant_t>() {
-                @Override
-                public int compare(Merchant_t lhs, Merchant_t rhs) {
-                    return (lhs.name.compareToIgnoreCase(rhs.name));
-                }
-            });
+            if (selectedSort == SortProvider.Sort.ALPHA)
+            {
+                Collections.sort(merchants,new Comparator<Merchant_t>() {
+                    @Override
+                    public int compare(Merchant_t lhs, Merchant_t rhs) {
+                        return (lhs.name.compareToIgnoreCase(rhs.name));
+                    }
+                });
+            }
+            else
+            {
+                Collections.sort(merchants,new Comparator<Merchant_t>() {
+                    @Override
+                    public int compare(Merchant_t lhs, Merchant_t rhs) {
+                        Double lhsDistance = ApiUtil.getClosestLocation(lhs).distanceInMeters;
+                        Double rhsDistance = ApiUtil.getClosestLocation(rhs).distanceInMeters;
+                        return (lhsDistance.compareTo(rhsDistance));
+                    }
+                });
+            }
 
 			MyDealsAdapter adapter = new MyDealsAdapter(view.getContext(),
 					R.layout.mydeals_item_row, merchants);
@@ -326,15 +364,14 @@ public class MyDealsFragment extends Fragment implements PullToRefreshAttacher.O
 
 			if(results != null)
 			{
-				merchants = results;
+                merchantDao.saveMerchants(results);
 			}
+
+            setMerchantsWithFilter();
 			loadListView();
+
 			mPullToRefreshAttacher.setRefreshComplete();
 
-			if(results != null)
-			{
-				merchantDao.saveMerchants(results);
-			}
 		}
 
 		@Override

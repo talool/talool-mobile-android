@@ -7,7 +7,7 @@
     android:clickable="true">
 
     <TextView
-        android:id="@+id/heart_text"
+        android:id="@+id/sort_text"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_gravity="center"

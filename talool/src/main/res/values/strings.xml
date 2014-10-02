@@ -73,6 +73,7 @@
     <string name="icon_heart_empty">&#xf08a;</string>
     <string name="icon_thumbs_up_alt">&#xf087;</string>
     <string name="icon_thumbs_down_alt">&#xf088;</string>
+    <string name="icon_filter">&#xf0b0;</string>
     <string name="dealsString">If you are purchasing this digital coupon book to support a fundraiser, please enter the fundraiser tracking code below.</string>
     <string name="dealsString2">If you have a prepaid access code for this digital coupon book, you can enter that in the field below too.</string>
     <string name="paybackText"></string>

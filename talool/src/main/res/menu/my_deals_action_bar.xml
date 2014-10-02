@@ -2,11 +2,12 @@
 
       <item
         android:id="@+id/my_deals_filter_root"
-        android:icon="@drawable/fa_filter_white_4848"
         android:showAsAction="always"
-        android:title="Options"
-        android:titleCondensed="Options">
-        <menu>
+        android:visible="true"
+        android:enabled="true"
+        android:title="@string/icon_filter">
+        <menu
+            android:id="@+id/my_deals_filter_menu">
 
             <group android:checkableBehavior="single" >
                 <item
