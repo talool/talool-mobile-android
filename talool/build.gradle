@@ -59,18 +59,18 @@ repositories {
     maven { url 'http://maven.talool.com:8081/nexus/content/repositories/releases/' }
     maven { url 'http://maven.talool.com:8081/nexus/content/repositories/snapshots/' }
     maven { url 'http://maven.talool.com:8081/nexus/content/repositories/thirdparty/' }
-    maven { url 'http://mente.github.io/facebook-api-android-aar' }
     maven { url 'http://download.crashlytics.com/maven' }
+//    maven { url 'http://mente.github.io/facebook-api-android-aar' }
 }
 
 dependencies {
     compile 'com.github.chrisbanes.actionbarpulltorefresh:library:0.7@aar'
     compile 'com.google.android.analytics:analytics:2.0'
-    compile 'com.talool:talool-thrift:1.0.8'
+    compile 'com.talool:talool-thrift:1.0.10'
     compile 'com.braintreepayments.api:braintree:1.0.3'
     compile 'com.google.android.gms:play-services:4.0.30'
     compile 'com.google.android.maps:maps:18_r3'
     compile 'com.loopj.android:android-smart-image-view:1.0.0'
-    compile 'com.facebook:facebook-android-sdk:3.5.2+@aar'
     compile 'com.crashlytics.android:crashlytics:1.+'
+    compile 'fr.avianey:facebook-android-api:3.18.0@aar'
 }
