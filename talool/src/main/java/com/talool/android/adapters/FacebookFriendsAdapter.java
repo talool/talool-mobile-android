@@ -25,6 +25,7 @@ public class FacebookFriendsAdapter extends ArrayAdapter<FacebookFriend> {
 		this.context = context;
 		this.data = data;
 	}
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 		View row = convertView;
