@@ -1,13 +1,16 @@
 buildscript {
     repositories {
         mavenCentral()
+        maven { url 'http://download.crashlytics.com/maven' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:0.12.+'
+        classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
     }
 }
 
 apply plugin: 'android'
+apply plugin: 'crashlytics'
 apply plugin: 'maven'
 
 android {
@@ -57,6 +60,7 @@ repositories {
     maven { url 'http://maven.talool.com:8081/nexus/content/repositories/snapshots/' }
     maven { url 'http://maven.talool.com:8081/nexus/content/repositories/thirdparty/' }
     maven { url 'http://mente.github.io/facebook-api-android-aar' }
+    maven { url 'http://download.crashlytics.com/maven' }
 }
 
 dependencies {
@@ -68,4 +72,5 @@ dependencies {
     compile 'com.google.android.maps:maps:18_r3'
     compile 'com.loopj.android:android-smart-image-view:1.0.0'
     compile 'com.facebook:facebook-android-sdk:3.5.2+@aar'
+    compile 'com.crashlytics.android:crashlytics:1.+'
 }

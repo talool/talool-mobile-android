@@ -191,6 +191,7 @@
                     android:scheme="talool" />
             </intent-filter>
         </activity>
+        <meta-data android:name="com.crashlytics.ApiKey" android:value="621dd92cb7c068e9486411b53478071c2c3f5357"/>
     </application>
 
 </manifest>

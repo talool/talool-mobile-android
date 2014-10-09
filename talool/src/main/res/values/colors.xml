@@ -13,6 +13,7 @@
 	<color name="actionbartab_text">@color/pressed_talool</color>
 	<color name="locationBackground">#ffbfb399</color>
 	<color name="brown">#ff4D4040</color>
+    <color name="blue">#23719F</color>
 	<color name="teal">#19BCB9</color>
 	<color name="teal_dark">#128d8b</color>
 	<color name="gray_1">#dad7c5</color>
@@ -36,5 +37,7 @@
     <color name="food_icon_color">@color/teal</color>
     <color name="shopping_icon_color">@color/orange</color>
     <color name="fun_icon_color">@color/green</color>
+    <color name="nightlife_icon_color">@color/red</color>
+    <color name="services_icon_color">@color/blue</color>
 
 </resources>
