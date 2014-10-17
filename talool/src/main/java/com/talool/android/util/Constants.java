@@ -5,7 +5,7 @@ package com.talool.android.util;
  */
 public final class Constants {
     // TODO: MAKE SURE THIS IS FALSE FOR PRODUCTION DEPLOYS
-    public static boolean IS_DEVELOPMENT_MODE = true;
+    public static boolean IS_DEVELOPMENT_MODE = false;
 
     public static final int MAX_DISCOVER_MILES = 2000;
 
