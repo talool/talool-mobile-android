@@ -155,6 +155,9 @@ public class DealActivity extends TaloolActivity {
         dealActivityButtonLayout.setGravity(Gravity.CENTER);
         dealActivityButtonLayout.setBackgroundColor(getResources().getColor(R.color.orange));
         dealActivityButtonLayout.setPadding(0, 0, 0, 0);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)dealActivityButtonLayout.getLayoutParams();
+        params.setMargins(0, 0, 0, 0);
+        dealActivityButtonLayout.setLayoutParams(params);
     }
 
     private void checkDealStatus() {
@@ -172,6 +175,9 @@ public class DealActivity extends TaloolActivity {
             dealActivityButtonLayout.setGravity(Gravity.CENTER);
             dealActivityButtonLayout.setBackgroundColor(getResources().getColor(R.color.orange));
             dealActivityButtonLayout.setPadding(0, 0, 0, 0);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)dealActivityButtonLayout.getLayoutParams();
+            params.setMargins(0, 0, 0, 0);
+            dealActivityButtonLayout.setLayoutParams(params);
         } else if (deal.redeemed != 0) {
             dealActivityButtonLayout.removeAllViewsInLayout();
             dealActivityButtonLayout.setBackgroundDrawable(null);
@@ -186,6 +192,9 @@ public class DealActivity extends TaloolActivity {
             dealActivityButtonLayout.setGravity(Gravity.CENTER);
             dealActivityButtonLayout.setBackgroundColor(getResources().getColor(R.color.orange));
             dealActivityButtonLayout.setPadding(0, 0, 0, 0);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)dealActivityButtonLayout.getLayoutParams();
+            params.setMargins(0, 0, 0, 0);
+            dealActivityButtonLayout.setLayoutParams(params);
         } else if (TaloolUtil.isExpired(deal.deal.expires)) {
             dealActivityButtonLayout.removeAllViewsInLayout();
             dealActivityButtonLayout.setBackgroundDrawable(null);
@@ -200,6 +209,9 @@ public class DealActivity extends TaloolActivity {
             dealActivityButtonLayout.setGravity(Gravity.CENTER);
             dealActivityButtonLayout.setBackgroundColor(getResources().getColor(R.color.orange));
             dealActivityButtonLayout.setPadding(0, 0, 0, 0);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)dealActivityButtonLayout.getLayoutParams();
+            params.setMargins(0, 0, 0, 0);
+            dealActivityButtonLayout.setLayoutParams(params);
         }
 
     }
@@ -251,11 +263,6 @@ public class DealActivity extends TaloolActivity {
         final TextView useDealIcon = (TextView) findViewById(R.id.useDealIcon);
         if (useDealIcon != null) {
             useDealIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
-        }
-
-        final TextView facebookIcon = (TextView) findViewById(R.id.facebookIcon);
-        if (facebookIcon != null) {
-            facebookIcon.setTypeface(TypefaceFactory.get().getFontAwesome());
         }
 
         final TextView giftIcon = (TextView) findViewById(R.id.giftIcon);
