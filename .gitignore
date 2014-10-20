@@ -38,3 +38,7 @@ Thumbs.db
 #.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
 .gradle
 build/
+
+# Crashlytics
+talool/src/main/assets/crashlytics-build.properties
+talool/src/main/res/values/com_crashlytics_export_strings.xml
