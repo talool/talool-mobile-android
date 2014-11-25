@@ -237,6 +237,8 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
         final MenuItem menuItem = menu.findItem(selectedEventFilter);
         menuItem.setChecked(true);
 
+        reloadData();
+
     }
 
     @Override
@@ -357,6 +359,7 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
         }
         else
         {
+            refreshViaService();
             final StringBuilder sb = new StringBuilder();
 
             noResultsMessage.setVisibility(View.VISIBLE);
@@ -422,7 +425,6 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
             ActivitySupervisor.get().addActivityObserver(activityObserver);
         }
 
-        reloadData();
 
     }
 
