@@ -102,8 +102,9 @@
    <string name="title_facebook_login">Authenticating with Facebook</string>
 
     <string name="find_deal_buy_now">Buy Now: </string>
-    
-   <string name="my_deals_filter_all">Show All</string>
+    <string name="free_deal_get_now">Free! Get Yours Now!</string>
+
+    <string name="my_deals_filter_all">Show All</string>
    <string name="my_deals_filter_favorites">Favorites</string>
    <string name="my_deals_filter_food">Food</string>
    <string name="my_deals_filter_shopping">Shopping</string>
@@ -149,6 +150,8 @@
    
     <string name="payment_trans_success_title">Transaction Success</string>
     <string name="payment_trans_success_message">You have successfully purchased \'%1$s\'</string>
+    <string name="free_book_trans_success_message">You have successfully acquired \'%1$s\'</string>
+
     <string name="payment_trans_success_positive_label">View Your Deals</string>
     
     <!-- Strings related to payment -->

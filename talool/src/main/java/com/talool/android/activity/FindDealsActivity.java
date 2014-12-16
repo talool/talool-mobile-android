@@ -6,11 +6,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,9 +19,9 @@ import com.talool.android.R;
 import com.talool.android.TaloolApplication;
 import com.talool.android.adapters.FindDealsAdapter;
 import com.talool.android.dialog.DialogFactory;
-import com.talool.android.dialog.DialogFactory.DialogClickListener;
 import com.talool.android.persistence.MerchantDao;
 import com.talool.android.tasks.MyDealsTask;
+import com.talool.android.tasks.PaymentTask;
 import com.talool.android.util.Constants;
 import com.talool.android.util.SafeSimpleDecimalFormat;
 import com.talool.android.util.TaloolSmartImageView;
@@ -32,17 +29,27 @@ import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.Deal_t;
 import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.SearchOptions_t;
-import com.talool.api.thrift.ServiceException_t;
+import com.talool.api.thrift.TransactionResult_t;
 import com.talool.thrift.util.ThriftUtil;
 
 import org.apache.thrift.TException;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class FindDealsActivity extends TaloolActivity{
+public class FindDealsActivity extends TaloolActivity implements DialogFactory.DialogClickListener, DialogFactory.DialogPositiveClickListener {
+    protected AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener() {
+
+        @Override
+        public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+                                long arg3) {
+            FindDealsAdapter findDealsAdapter = (FindDealsAdapter) arg0.getAdapter();
+            Deal_t deal = (Deal_t) findDealsAdapter.getItem(position);
+
+            Intent myIntent = new Intent(arg1.getContext(), DealSampleActivity.class);
+            myIntent.putExtra("deal", ThriftUtil.serialize(deal));
+            startActivity(myIntent);
+        }
+    };
     private List<Deal_t> dealOffers;
     private ListView dealOffersListView;
     private LinearLayout purchaseClickLayout;
@@ -80,12 +87,45 @@ public class FindDealsActivity extends TaloolActivity{
 
     }
 
-    public void onPurchaseClick(View view)
-    {
-        final Intent myIntent = new Intent(view.getContext(), EnterCodeActivity.class);
+    public void onPurchaseClick(View view) {
+        if (closestBook.getPrice() > 0) {
+            final Intent myIntent = new Intent(view.getContext(), EnterCodeActivity.class);
+            myIntent.putExtra("dealOffer", ThriftUtil.serialize(closestBook));
+            startActivity(myIntent);
+        } else {
+            final PaymentTask task = new PaymentTask(closestBook, "", "", this, client) {
 
-        myIntent.putExtra("dealOffer", ThriftUtil.serialize(closestBook));
-        startActivity(myIntent);
+                @Override
+                protected void onPreExecute() {
+                    df = DialogFactory.getProgressDialog();
+                    df.show(getFragmentManager(), "dialog");
+                    this.errorMessage = null;
+                }
+
+                @Override
+                protected void onPostExecute(final TransactionResult_t transactionResult) {
+                    if (df != null && !df.isHidden()) {
+                        df.dismiss();
+                    }
+
+                    if (this.errorMessage == null) {
+                        if (transactionResult.isSuccess()) {
+                            String title = getResources().getString(R.string.payment_trans_success_title);
+                            String message = String.format(getResources().getString(R.string.free_book_trans_success_message), closestBook.getTitle());
+                            String label = getResources().getString(R.string.payment_trans_success_positive_label);
+                            df = DialogFactory.getAlertDialog(title, message, label, FindDealsActivity.this);
+                            df.show(getFragmentManager(), "dialog");
+                        } else {
+                            popupErrorMessage(transactionResult.getMessage());
+                        }
+                    } else {
+                        popupErrorMessage(this.errorMessage);
+                    }
+                }
+            };
+            task.execute();
+        }
+
     }
 
     @Override
@@ -125,8 +165,7 @@ public class FindDealsActivity extends TaloolActivity{
             bookDescription.setText(closestBook.summary);
         }
 
-        if (dealOfferSummaryText != null)
-        {
+        if (dealOfferSummaryText != null) {
             final TextView textView = (TextView) findViewById(R.id.summaryText);
             textView.setText(dealOfferSummaryText);
         }
@@ -141,20 +180,6 @@ public class FindDealsActivity extends TaloolActivity{
         dealsTask.execute(new String[]{});
     }
 
-    protected AdapterView.OnItemClickListener onClickListener = new AdapterView.OnItemClickListener() {
-
-        @Override
-        public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-                                long arg3) {
-            FindDealsAdapter findDealsAdapter = (FindDealsAdapter) arg0.getAdapter();
-            Deal_t deal = (Deal_t) findDealsAdapter.getItem(position);
-
-            Intent myIntent = new Intent(arg1.getContext(), DealSampleActivity.class);
-            myIntent.putExtra("deal", ThriftUtil.serialize(deal));
-            startActivity(myIntent);
-        }
-    };
-
     private void loadListView() {
         FindDealsAdapter adapter = new FindDealsAdapter(this,
                 R.layout.find_deal_row, dealOffers);
@@ -164,16 +189,59 @@ public class FindDealsActivity extends TaloolActivity{
     }
 
     private String getBuyNowText() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append(getResources().getString(R.string.find_deal_buy_now)).append(" ").
-                append(new SafeSimpleDecimalFormat(Constants.FORMAT_DECIMAL_MONEY).format(closestBook.getPrice()));
-        return sb.toString();
+        if (closestBook.getPrice() > 0) {
+            final StringBuilder sb = new StringBuilder();
+            sb.append(getResources().getString(R.string.find_deal_buy_now)).append(" ").
+                    append(new SafeSimpleDecimalFormat(Constants.FORMAT_DECIMAL_MONEY).format(closestBook.getPrice()));
+            return sb.toString();
+        }
+        return getResources().getString(R.string.free_deal_get_now);
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        redirectToMyDeals();
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+    }
+
+    private void redirectToMyDeals() {
+        final MerchantDao merchantDao = new MerchantDao(TaloolApplication.getAppContext());
+        final Context context = this;
+        MyDealsTask task = new MyDealsTask(client, this, merchantDao) {
+
+            @Override
+            protected void onPreExecute() {
+                df = DialogFactory.getProgressDialog();
+                df.show(getFragmentManager(), "dialog");
+            }
+
+            @Override
+            protected void onPostExecute(final List<Merchant_t> results) {
+                if (df != null && !df.isHidden()) {
+                    df.dismiss();
+                }
+                if (results != null) {
+                    merchantDao.saveMerchants(results);
+                    final Intent myIntent = new Intent(context, MainActivity.class);
+                    Bundle b = new Bundle();
+                    b.putInt(Constants.TAB_SELECTED_KEY, 0);
+                    myIntent.putExtras(b);
+                    startActivity(myIntent);
+                }
+            }
+        };
+        task.execute();
+
     }
 
     private class FindDealsTask extends AsyncTask<String, Void, List<Deal_t>> {
 
         @Override
-        protected void onPreExecute() {}
+        protected void onPreExecute() {
+        }
 
         @Override
         protected void onPostExecute(final List<Deal_t> results) {

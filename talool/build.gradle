@@ -4,7 +4,7 @@ buildscript {
         maven { url 'http://download.crashlytics.com/maven' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.12.+'
+        classpath 'com.android.tools.build:gradle:1.0.0'
         classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
     }
 }
@@ -27,10 +27,10 @@ android {
     }
     productFlavors {
         talool {
-            packageName "com.talool.android"
+            applicationId "com.talool.android"
         }
         saveAround {
-            packageName "com.savearound.android"
+            applicationId "com.savearound.android"
         }
     }
 
@@ -45,10 +45,10 @@ android {
 
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             signingConfig signingConfigs.release
-            zipAlign true
+            zipAlignEnabled true
         }
     }
 
