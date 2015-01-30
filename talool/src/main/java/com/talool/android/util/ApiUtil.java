@@ -1,9 +1,15 @@
 package com.talool.android.util;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.text.Layout;
+
 import com.talool.android.R;
 import com.talool.api.thrift.ActivityEvent_t;
 import com.talool.api.thrift.Activity_t;
 import com.talool.api.thrift.Category_t;
+import com.talool.api.thrift.MerchantLocation_t;
+import com.talool.api.thrift.Merchant_t;
 
 /**
  * Convenience methods for the API
@@ -90,6 +96,12 @@ public final class ApiUtil
 			case Constants.FUN_CATEGORY_ID:
 				return R.string.icon_ticket;
 
+            case Constants.NIGHTLIFE_CATEGORY_ID:
+                return R.string.icon_glass;
+
+            case Constants.SERVICES_CATEGORY_ID:
+                return R.string.icon_cogs;
+
 			default:
 				return R.string.icon_food;
 
@@ -110,11 +122,44 @@ public final class ApiUtil
 			case Constants.FUN_CATEGORY_ID:
 				return R.color.fun_icon_color;
 
+            case Constants.NIGHTLIFE_CATEGORY_ID:
+                return R.color.nightlife_icon_color;
+
+            case Constants.SERVICES_CATEGORY_ID:
+                return R.color.services_icon_color;
+
 			default:
 				return R.color.gray_icon;
 
 		}
 
 	}
+
+    public static Drawable getFontAwesomeDrawable(final Context context, final int icon,
+                                                  final int color, final int size)
+    {
+        TextDrawable d = new TextDrawable(context);
+
+        d.setTextAlign(Layout.Alignment.ALIGN_CENTER);
+        d.setTypeface(TypefaceFactory.get().getFontAwesome());
+        d.setText(context.getResources().getString(icon));
+        d.setTextColor(context.getResources().getColor(color));
+        d.setTextSize(size);
+
+        return d;
+    }
+
+    public static MerchantLocation_t getClosestLocation(Merchant_t merchant)
+    {
+        MerchantLocation_t closestLocation = null;
+        for (MerchantLocation_t l : merchant.getLocations())
+        {
+            if (closestLocation==null || l.distanceInMeters<closestLocation.distanceInMeters)
+            {
+                closestLocation = l;
+            }
+        }
+        return closestLocation;
+    }
 
 }

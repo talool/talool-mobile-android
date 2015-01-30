@@ -76,9 +76,14 @@ public class TaloolUtil {
     }
 
     public static String moneyFormattedString(double price) {
-        NumberFormat formatter = NumberFormat.getCurrencyInstance();
-        String moneyString = formatter.format(price);
-        moneyString = "Price: " + moneyString;
+        String moneyString;
+        if(price > 0) {
+            NumberFormat formatter = NumberFormat.getCurrencyInstance();
+            moneyString = formatter.format(price);
+            moneyString = "Price: " + moneyString;
+        }else{
+            moneyString = "Price: Free!";
+        }
         return moneyString;
     }
 

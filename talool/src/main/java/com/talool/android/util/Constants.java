@@ -22,6 +22,8 @@ public final class Constants {
     public static final int FOOD_CATEGORY_ID = 1;
     public static final int SHOPPING_CATEGORY_ID = 2;
     public static final int FUN_CATEGORY_ID = 3;
+    public static final int NIGHTLIFE_CATEGORY_ID = 4;
+    public static final int SERVICES_CATEGORY_ID = 5;
 
     public static final String DATABASE_NAME = "talool";
     public static final int DATABASE_VERSION = 1;

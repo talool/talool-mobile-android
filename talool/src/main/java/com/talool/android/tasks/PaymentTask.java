@@ -65,7 +65,7 @@ public class PaymentTask extends AsyncTask<String, Void, TransactionResult_t>
         catch (TServiceException_t e)
         {
             TaloolUtil.sendException(e, context);
-            errorMessage = ErrorMessageCache.getServiceErrorMessage();
+            errorMessage = ErrorMessageCache.getMessage(e.getErrorCode());
         }
         catch (TUserException_t e)
         {

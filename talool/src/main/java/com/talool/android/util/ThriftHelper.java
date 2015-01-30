@@ -34,7 +34,6 @@ public class ThriftHelper {
         client = new CustomerService_t.Client(protocol);
         tHttpClient.setCustomHeader(CustomerServiceConstants.CTOKEN_NAME, accessToken.getToken());
         tHttpClient.setCustomHeader("User-Agent", AndroidUtils.getUserAgent());
-
         setCustomHeaders();
 
     }
@@ -49,7 +48,7 @@ public class ThriftHelper {
         }
 
         tHttpClient.setCustomHeader("User-Agent", AndroidUtils.getUserAgent());
-
+        tHttpClient.setCustomHeader("X-Supports-Free-Books","");
 
     }
 

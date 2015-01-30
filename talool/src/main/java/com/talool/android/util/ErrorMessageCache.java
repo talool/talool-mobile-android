@@ -55,6 +55,7 @@ public final class ErrorMessageCache
 		ERR_MAP.put(1004, "Gifting is not allowed");
 		ERR_MAP.put(1005, "Account not found");
 		ERR_MAP.put(1006, "Email is required");
+        ERR_MAP.put(1010, "Limit one acquire per customer has been reached");
 
 	}
 

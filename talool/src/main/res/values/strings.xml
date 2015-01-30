@@ -67,11 +67,15 @@
     <string name="icon_glass">&#xf000;</string>
     <string name="icon_heart">&#xf004;</string>
     <string name="icon_lock">&#xf023;</string>
+    <string name="icon_cogs">&#xf085;</string>
+    <string name="icon_sort_alpha">&#xf15d;</string>
+    <string name="icon_sort_number">&#xf162;</string>
     <string name="icon_heart_empty">&#xf08a;</string>
     <string name="icon_thumbs_up_alt">&#xf087;</string>
     <string name="icon_thumbs_down_alt">&#xf088;</string>
-    <string name="dealsString">If you are purchasing this book to support a fundraiser, please enter the fundraisers tracking code below.</string>
-    <string name="dealsString2">If you have already paid for the book and have an access code, you can also enter it here.</string>
+    <string name="icon_filter">&#xf0b0;</string>
+    <string name="dealsString">If you are purchasing this digital coupon book to support a fundraiser, please enter the fundraiser tracking code below.</string>
+    <string name="dealsString2">If you have a prepaid access code for this digital coupon book, you can enter that in the field below too.</string>
     <string name="paybackText"></string>
     <string name="locationSelect">Can you please tell us which Payback Book you are interested in?</string>
     <string name="helpLoadingDeals">It looks like you haven\'t loaded any deals yet!\n\nNo problem.  You can purchase a collection of deals on the Find Deals screen.\n\nIf you were sent a gift, you can accept that on the Activity screen.</string>
@@ -98,12 +102,15 @@
    <string name="title_facebook_login">Authenticating with Facebook</string>
 
     <string name="find_deal_buy_now">Buy Now: </string>
-    
-   <string name="my_deals_filter_all">Show All</string>
+    <string name="free_deal_get_now">Free! Get Yours Now!</string>
+
+    <string name="my_deals_filter_all">Show All</string>
    <string name="my_deals_filter_favorites">Favorites</string>
    <string name="my_deals_filter_food">Food</string>
    <string name="my_deals_filter_shopping">Shopping</string>
    <string name="my_deals_filter_fun">Fun</string>
+   <string name="my_deals_filter_nightlife">Nightlife</string>
+   <string name="my_deals_filter_services">Services</string>
    <string name="new_deal_received"/>
    
    <!--  settings strings -->
@@ -143,6 +150,8 @@
    
     <string name="payment_trans_success_title">Transaction Success</string>
     <string name="payment_trans_success_message">You have successfully purchased \'%1$s\'</string>
+    <string name="free_book_trans_success_message">You have successfully acquired \'%1$s\'</string>
+
     <string name="payment_trans_success_positive_label">View Your Deals</string>
     
     <!-- Strings related to payment -->

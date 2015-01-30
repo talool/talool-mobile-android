@@ -9,7 +9,7 @@
  	    android:id="@+id/purchaseClickLayout"
         android:layout_width="fill_parent"
         android:layout_height="70dp"
-        android:background="@drawable/button_bar2_brown"
+        android:background="@drawable/button_bar1"
         android:gravity="center|center_vertical"
         android:orientation="horizontal"
         android:layout_marginBottom="5dp">
@@ -24,21 +24,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ffffff"
             android:textSize="18sp"
-            android:layout_weight=".5"
-            android:clickable="true"
-            android:onClick="onPurchaseClick"/>
-
-        <TextView
-            android:id="@+id/enter_code_text"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center|center_vertical"
-            android:gravity="center"
-            android:text="@string/enter_code"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#ffffff"
-            android:textSize="18sp"
-            android:layout_weight=".5"
+            android:layout_weight="1"
             android:clickable="true"
             android:onClick="onPurchaseClick"/>
     </LinearLayout>

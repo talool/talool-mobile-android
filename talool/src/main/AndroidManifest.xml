@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.talool.android"
-    android:versionCode="8"
-    android:versionName="1.1.8" >
+    android:versionCode="10"
+    android:versionName="1.1.10" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -191,6 +191,7 @@
                     android:scheme="talool" />
             </intent-filter>
         </activity>
+        <meta-data android:name="com.crashlytics.ApiKey" android:value="621dd92cb7c068e9486411b53478071c2c3f5357"/>
     </application>
 
 </manifest>

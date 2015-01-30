@@ -7,11 +7,12 @@
     android:clickable="true">
 
     <TextView
-        android:id="@+id/heart_text"
+        android:id="@+id/sort_text"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_gravity="center"
         android:gravity="center"
+        android:layout_marginRight="12dp"
         android:text="@string/icon_heart_empty"
         android:textSize="24sp"
         android:textColor="@color/teal_dark"></TextView>

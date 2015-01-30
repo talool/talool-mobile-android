@@ -37,7 +37,6 @@ import com.talool.android.util.ApiUtil;
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.ThriftHelper;
 import com.talool.api.thrift.ActivityEvent_t;
-import com.talool.api.thrift.ActivityLink_t;
 import com.talool.api.thrift.Activity_t;
 import com.talool.api.thrift.EmailMessageResponse_t;
 import com.talool.api.thrift.LinkType;
@@ -231,8 +230,14 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
 
         inflater.inflate(R.menu.activities_action_bar, menu);
 
+        final MenuItem filter = menu.findItem(R.id.activity_filter_root);
+        filter.setIcon(ApiUtil.getFontAwesomeDrawable(getActivity().getApplicationContext(),
+                R.string.icon_filter, R.color.teal_dark, 24));
+
         final MenuItem menuItem = menu.findItem(selectedEventFilter);
         menuItem.setChecked(true);
+
+        reloadData();
 
     }
 
@@ -354,6 +359,7 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
         }
         else
         {
+            refreshViaService();
             final StringBuilder sb = new StringBuilder();
 
             noResultsMessage.setVisibility(View.VISIBLE);
@@ -419,7 +425,6 @@ public class MyActivityFragment extends Fragment implements PullToRefreshAttache
             ActivitySupervisor.get().addActivityObserver(activityObserver);
         }
 
-        reloadData();
 
     }
 
