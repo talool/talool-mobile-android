@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<string name="app_theme">@style/Theme.Talool</string>-->
+    <string name="app_name">Chamber</string>
+    <string name="action_settings">Settings</string>
+    <string name="password">Password</string>
+    <string name="newToTalool">Register a New Account</string>
+    <string name="forgot_password">Forgot Password?</string>
+    
+    <string name="email">Email Address</string>
+    <string name="login">Log in</string>
+    <string name="login_with_talool">Log in with Chamber</string>
+    <string name="welcome">Welcome</string>
+    <string name="register">Register</string>
+    <string name="registration">Registration</string>
+    <string name="settings">Settings</string>
+    <string name="mydeals">My Deals</string>
+    <string name="activity">Activity</string>
+    <string name="payment">Payment</string>
+    <string name="finddeals">Find Deals</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="retry">Retry</string>
+    
+    <string name="error_login">Error Logging In</string>
+    <string name="error_reg">Error Registering</string>
+    <string name="error_loading_deals">Error Loading Deals</string>
+    <string name="error_loading_gifts">Error Loading Gift</string>
+    <string name="error_loading_maps">Error Loading Maps</string>
+    <string name="error_access_code_title">Error Activating Code</string>
+    <string name="error_access_code_message">Please check your code and try again.</string>
+    <string name="alert_new_deals_title">You\'ve Got Deals!</string>
+    <string name="alert_new_deals_message">Would you like to see your new deals?</string>
+    
+    <string name="alert_sent_password_reset_title">Your reset request has been sent</string>
+    <string name="alert_sent_password_reset_message">You will receive an email with instructions.</string>
+    
+    <string name="instruction_send_password_reset">Enter your email below and you will be sent password reset instructions.</string>
+    <string name="request_password_change">Request Password Change</string>
+    
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    
+    <string name="access_code">access code</string>
+    <string name="buy_now">Buy Now</string>
+    <string name="load_deals">Load Deals</string>
+    
+    <string name="icon_gift">&#xf06b;</string>
+    <string name="icon_envelope_alt">&#xf003;</string>
+    <string name="icon_facebook">&#xf09a;</string>
+    <string name="icon_envelope">&#xf0e0;</string>
+    <string name="icon_money">&#xf0d6;</string>
+    <string name="icon_phone">&#xf098;</string>
+    <string name="icon_map_marker">&#xf041;</string>
+    <string name="icon_info_sign">&#xf05a;</string>
+    <string name="icon_food">&#xf0f5;</string>
+    <string name="icon_shopping_cart">&#xf07a;</string>
+    <string name="icon_ticket">&#xf145;</string>
+    <string name="icon_glass">&#xf000;</string>
+    <string name="icon_heart">&#xf004;</string>
+    <string name="icon_lock">&#xf023;</string>
+    <string name="icon_heart_empty">&#xf08a;</string>
+    <string name="icon_thumbs_up_alt">&#xf087;</string>
+    <string name="icon_thumbs_down_alt">&#xf088;</string>
+    <string name="dealsString">If you purchased a paper copy of the PayBack Book, there is an access code inside for free access to these digital deals.</string>
+    <string name="paybackText">this is managed by the admin</string>
+    <string name="locationSelect">Can you please tell us which Payback Book you are interested in?</string>
+    <string name="helpLoadingDeals">It looks like you haven\'t loaded any deals yet!\n\nNo problem.  If you have a Book access code, you can take care of that on the Find Deals screen.\n\nIf you were sent a gift, you can accept that on the Activity screen.</string>
+
+    
+    <string name="arrow_content_desc">click link</string>
+    <!-- activity strings -->
+    <string name="accept_gift">Accept Gift</string>
+    <string name="reject_gift">Reject Gift</string>
+    
+   <string name="activity_filter_all">Show All</string>
+   <string name="activity_filter_gifts">Gifts</string>
+   <string name="activity_filter_messages">Messages</string>
+   <string name="activity_filter_transactions">Transactions</string>
+   <string name="activity_filter_friends">Friends</string>
+   
+   <string name="activity_no_results_prefix">You have no activities of type</string>
+   <string name="my_deals_no_results_prefix">You have no deals with merchants of type</string>
+   <string name="my_deals_no_favorites_prefix">You have no favorite merchants</string>
+
+   <!-- facebook sdk strings -->
+   <string name="or">OR</string>
+   <string name="facebook_app_id">342739092494152</string>
+   <string name="title_facebook_login">Authenticating with Facebook</string>
+
+    <string name="find_deal_buy_now">Buy Now For</string>
+    
+   <string name="my_deals_filter_all">Show All</string>
+   <string name="my_deals_filter_favorites">Favorites</string>
+   <string name="my_deals_filter_food">Food</string>
+   <string name="my_deals_filter_shopping">Shopping</string>
+   <string name="my_deals_filter_fun">Fun</string>
+   <string name="new_deal_received"/>
+   
+   <!--  settings strings -->
+   
+   <string name="settings_copyright">Copyright \u00A9 2013 Talool, Inc</string>
+   <string name="settings_publisher_services">Publisher Services</string>
+   <string name="settings_merchant_services">Merchant Services</string>
+   <string name="settings_terms_of_service">Terms of Service</string>
+   <string name="settings_privacy_policy">Privacy Policy</string>
+   <string name="settings_send_feedback">Send Feedback</string>
+   
+   
+   <string name="settings_about">About Chamber</string>
+   <string name="settings_account">Account</string>
+   <string name="settings_username_label">Username</string>
+   <string name="settings_logout_label">Sign Out</string>
+   
+
+    <string name="please_confirm">Please Confirm</string> <!-- generic message -->
+  
+    <string name="deal_activity_confirm_redeem_message">Would you like to redeem this deal?</string>
+  
+    <!-- Strings related to password reset -->
+    <string name="title_activity_reset_password">Enter New Password</string>
+    <string name="prompt_confirm">Confirm New Password</string>
+    <string name="prompt_password">New Password</string>
+    <string name="action_pw_reset">Change Password</string>
+    <string name="error_passwords_dont_match">The passwords don\'t match</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_password_reset_auth_failed">Authentication after password reset failed</string>
+   
+    <string name="payment_trans_success_title">Transaction Success</string>
+    <string name="payment_trans_success_message">You have successfully purchased \'%1$s\'</string>
+    <string name="payment_trans_success_positive_label">View Your Deals</string>
+    
+    <!-- Strings related to payment -->
+    <string name="payment_title">Payment</string>
+    <string name="payment_price">Price: </string>
+    <string name="payment_instructions">Please provide your method of payment below.</string>
+    <string name="payment_saved_card">Pay with a Saved Card</string>
+    <string name="payment_new_card">Pay with a New Card</string>
+    
+	<string name="title_activity_welcome">WelcomeActivity</string>
+	
+	<string name="arrow_mydeals">Arrow to My Deals</string>
+	<string name="arrow_finddeals">Arrow to Find Deals</string>
+	<string name="arrow_activity">Arrow to My Activity</string>
+
+</resources>
