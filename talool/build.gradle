@@ -1,3 +1,25 @@
+apply plugin: 'android'
+apply plugin: 'crashlytics'
+apply plugin: 'maven'
+
+
+loadConfiguration()
+
+task printProps << {
+  //  println project.ext.config.get("serverName")
+    println config.serverName
+}
+
+def loadConfiguration() {
+    def environment = hasProperty('env') ? env : 'dev_talool'
+    project.ext.environment=environment
+    println "Environment is set to $environment"
+
+    def configFile = file('config.groovy')
+    def config = new ConfigSlurper("$environment").parse(configFile.toURL())
+    project.ext.config=config
+}
+
 buildscript {
     repositories {
         mavenCentral()
@@ -8,10 +30,6 @@ buildscript {
         classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
     }
 }
-
-apply plugin: 'android'
-apply plugin: 'crashlytics'
-apply plugin: 'maven'
 
 android {
     compileSdkVersion 19
@@ -29,8 +47,8 @@ android {
         talool {
             applicationId "com.talool.android"
         }
-        saveAround {
-            applicationId "com.savearound.android"
+        chamber {
+            applicationId "com.chamber.android"
         }
     }
 
