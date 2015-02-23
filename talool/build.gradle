@@ -5,19 +5,10 @@ apply plugin: 'maven'
 
 loadConfiguration()
 
-task printProps << {
-  //  println project.ext.config.get("serverName")
-    println config.serverName
-}
-
 def loadConfiguration() {
-    def environment = hasProperty('env') ? env : 'dev_talool'
+    def environment = hasProperty('env') ? env : 'dev'
     project.ext.environment=environment
     println "Environment is set to $environment"
-
-    def configFile = file('config.groovy')
-    def config = new ConfigSlurper("$environment").parse(configFile.toURL())
-    project.ext.config=config
 }
 
 buildscript {
@@ -44,7 +35,13 @@ android {
         targetSdkVersion 18
     }
     productFlavors {
+
         talool {
+            if( project.ext.environment=='prod') {
+                buildConfigField "boolean", "IS_PRODUCTION_RELEASE", "true"
+            } else {
+                buildConfigField "boolean", "IS_PRODUCTION_RELEASE", "false"
+            }
             applicationId "com.talool.android"
         }
         chamber {

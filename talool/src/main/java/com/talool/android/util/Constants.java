@@ -1,12 +1,11 @@
 package com.talool.android.util;
 
+import com.talool.android.BuildConfig;
+
 /**
  * @author clintz
  */
 public final class Constants {
-    // TODO: MAKE SURE THIS IS FALSE FOR PRODUCTION DEPLOYS
-    public static boolean IS_DEVELOPMENT_MODE = false;
-
     public static final int MAX_DISCOVER_MILES = 2000;
 
     public static final String FORMAT_GENERAL_DATE_TIME = "MM/dd/yyyy hh:mm:ss a";
@@ -65,52 +64,54 @@ public final class Constants {
     private static final String PRIVACY_URL_DEV = "http://dev-www.talool.com/privacy";
     private static final String FEEDBACK_URL_DEV = "http://dev-www.talool.com/feedback";
 
+
     public static String getApiUrl() {
-        return (IS_DEVELOPMENT_MODE) ? API_URL_DEV : API_URL_PROD;
+        return BuildConfig.IS_PRODUCTION_RELEASE ?   API_URL_PROD : API_URL_DEV;
     }
 
     public static String getPublishersUrl() {
-        return (IS_DEVELOPMENT_MODE) ? PUBLISHERS_URL_DEV : PUBLISHERS_URL_PROD;
+        return BuildConfig.IS_PRODUCTION_RELEASE ?  PUBLISHERS_URL_PROD : PUBLISHERS_URL_DEV;
     }
 
     public static String getMerchantsUrl() {
-        return (IS_DEVELOPMENT_MODE) ? MERCHANT_URL_DEV : MERCHANT_URL_PROD;
+        return  BuildConfig.IS_PRODUCTION_RELEASE  ? MERCHANT_URL_PROD : MERCHANT_URL_DEV;
     }
 
     public static String getTermsUrl() {
-        return (IS_DEVELOPMENT_MODE) ? TERMS_URL_DEV : TERMS_URL_PROD;
+
+        return BuildConfig.IS_PRODUCTION_RELEASE  ? TERMS_URL_PROD : TERMS_URL_DEV;
     }
 
     public static String getPrivacyUrl() {
-        return (IS_DEVELOPMENT_MODE) ? PRIVACY_URL_DEV : PRIVACY_URL_PROD;
+        return BuildConfig.IS_PRODUCTION_RELEASE  ? PRIVACY_URL_PROD : PRIVACY_URL_DEV;
     }
 
     public static String getFeedbackUrl() {
-        return (IS_DEVELOPMENT_MODE) ? FEEDBACK_URL_DEV : FEEDBACK_URL_PROD;
+        return BuildConfig.IS_PRODUCTION_RELEASE ? FEEDBACK_URL_PROD : FEEDBACK_URL_DEV;
     }
 
     public static String getOGGiftPage() {
-        return (IS_DEVELOPMENT_MODE) ? OG_GIFT_PAGE_DEV : OG_GIFT_PAGE_PROD;
+        return BuildConfig.IS_PRODUCTION_RELEASE ?  OG_GIFT_PAGE_PROD : OG_GIFT_PAGE_DEV;
     }
 
     public static String getOGDealPage() {
-        return (IS_DEVELOPMENT_MODE) ? OG_DEAL_PAGE_DEV : OG_DEAL_PAGE_PROD;
+        return  BuildConfig.IS_PRODUCTION_RELEASE  ?  OG_DEAL_PAGE_PROD : OG_DEAL_PAGE_DEV;
     }
 
     public static String getOGOfferPage() {
-        return (IS_DEVELOPMENT_MODE) ? OG_OFFER_PAGE_DEV : OG_OFFER_PAGE_PROD;
+        return BuildConfig.IS_PRODUCTION_RELEASE  ?  OG_OFFER_PAGE_PROD : OG_OFFER_PAGE_DEV;
     }
 
     public static String getOGMerchantPage() {
-        return (IS_DEVELOPMENT_MODE) ? MERCHANT_PAGE_DEV : MERCHANT_PAGE_PROD;
+        return BuildConfig.IS_PRODUCTION_RELEASE  ?  MERCHANT_PAGE_PROD : MERCHANT_PAGE_DEV;
     }
 
     public static String getBTMerchantId() {
-        return (IS_DEVELOPMENT_MODE) ? BRAINTREE_MERCHANT_ID_DEV : BRAINTREE_MERCHANT_ID_PROD;
+        return BuildConfig.IS_PRODUCTION_RELEASE?   BRAINTREE_MERCHANT_ID_PROD : BRAINTREE_MERCHANT_ID_DEV;
     }
 
     public static String getBTMerchantKey() {
-        return (IS_DEVELOPMENT_MODE) ? BRAINTREE_MERCHANT_KEY_DEV : BRAINTREE_MERCHANT_KEY_PROD;
+        return BuildConfig.IS_PRODUCTION_RELEASE?  BRAINTREE_MERCHANT_KEY_PROD : BRAINTREE_MERCHANT_KEY_DEV;
     }
 
 }
