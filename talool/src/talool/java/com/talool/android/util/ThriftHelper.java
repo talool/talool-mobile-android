@@ -5,6 +5,7 @@ import android.util.Base64;
 import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.CustomerServiceConstants;
 import com.talool.api.thrift.CustomerService_t;
+import com.talool.android.util.Constants;
 
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;

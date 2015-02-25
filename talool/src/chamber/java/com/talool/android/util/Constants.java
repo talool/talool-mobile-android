@@ -6,7 +6,7 @@ import com.talool.android.BuildConfig;
  * @author clintz
  */
 public final class Constants {
-    public static final int MAX_DISCOVER_MILES = 2000;
+    public static final int MAX_DISCOVER_MILES = 5000;
 
     public static final String FORMAT_GENERAL_DATE_TIME = "MM/dd/yyyy hh:mm:ss a";
     public static final String FORMAT_DECIMAL_MONEY = "$#,###.00";
@@ -64,6 +64,8 @@ public final class Constants {
     private static final String PRIVACY_URL_DEV = "http://dev-www.talool.com/privacy";
     private static final String FEEDBACK_URL_DEV = "http://dev-www.talool.com/feedback";
 
+    private static final String WHITELABEL_ID_PROD = "d8b03445-63e7-4376-8a8b-8b43c659cada";
+    private static final String WHITELABEL_ID_DEV = "d027abd8-4181-4cf1-a847-ae05bcf240da";
 
     public static String getApiUrl() {
         return !BuildConfig.DEBUG ? API_URL_PROD : API_URL_DEV;
@@ -114,4 +116,7 @@ public final class Constants {
         return !BuildConfig.DEBUG ?  BRAINTREE_MERCHANT_KEY_PROD : BRAINTREE_MERCHANT_KEY_DEV;
     }
 
+    public static String getWhiteLabelId() {
+        return !BuildConfig.DEBUG ?  WHITELABEL_ID_PROD : WHITELABEL_ID_DEV;
+    }
 }
