@@ -66,52 +66,52 @@ public final class Constants {
 
 
     public static String getApiUrl() {
-        return BuildConfig.IS_PRODUCTION_RELEASE ?   API_URL_PROD : API_URL_DEV;
+        return !BuildConfig.DEBUG ? API_URL_PROD : API_URL_DEV;
     }
 
     public static String getPublishersUrl() {
-        return BuildConfig.IS_PRODUCTION_RELEASE ?  PUBLISHERS_URL_PROD : PUBLISHERS_URL_DEV;
+        return !BuildConfig.DEBUG ? PUBLISHERS_URL_PROD : PUBLISHERS_URL_DEV;
     }
 
     public static String getMerchantsUrl() {
-        return  BuildConfig.IS_PRODUCTION_RELEASE  ? MERCHANT_URL_PROD : MERCHANT_URL_DEV;
+        return  !BuildConfig.DEBUG ? MERCHANT_URL_PROD : MERCHANT_URL_DEV;
     }
 
     public static String getTermsUrl() {
 
-        return BuildConfig.IS_PRODUCTION_RELEASE  ? TERMS_URL_PROD : TERMS_URL_DEV;
+        return !BuildConfig.DEBUG ? TERMS_URL_PROD : TERMS_URL_DEV;
     }
 
     public static String getPrivacyUrl() {
-        return BuildConfig.IS_PRODUCTION_RELEASE  ? PRIVACY_URL_PROD : PRIVACY_URL_DEV;
+        return !BuildConfig.DEBUG ? PRIVACY_URL_PROD : PRIVACY_URL_DEV;
     }
 
     public static String getFeedbackUrl() {
-        return BuildConfig.IS_PRODUCTION_RELEASE ? FEEDBACK_URL_PROD : FEEDBACK_URL_DEV;
+        return !BuildConfig.DEBUG ? FEEDBACK_URL_PROD : FEEDBACK_URL_DEV;
     }
 
     public static String getOGGiftPage() {
-        return BuildConfig.IS_PRODUCTION_RELEASE ?  OG_GIFT_PAGE_PROD : OG_GIFT_PAGE_DEV;
+        return !BuildConfig.DEBUG ?  OG_GIFT_PAGE_PROD : OG_GIFT_PAGE_DEV;
     }
 
     public static String getOGDealPage() {
-        return  BuildConfig.IS_PRODUCTION_RELEASE  ?  OG_DEAL_PAGE_PROD : OG_DEAL_PAGE_DEV;
+        return !BuildConfig.DEBUG ?  OG_DEAL_PAGE_PROD : OG_DEAL_PAGE_DEV;
     }
 
     public static String getOGOfferPage() {
-        return BuildConfig.IS_PRODUCTION_RELEASE  ?  OG_OFFER_PAGE_PROD : OG_OFFER_PAGE_DEV;
+        return !BuildConfig.DEBUG ?  OG_OFFER_PAGE_PROD : OG_OFFER_PAGE_DEV;
     }
 
     public static String getOGMerchantPage() {
-        return BuildConfig.IS_PRODUCTION_RELEASE  ?  MERCHANT_PAGE_PROD : MERCHANT_PAGE_DEV;
+        return !BuildConfig.DEBUG ?  MERCHANT_PAGE_PROD : MERCHANT_PAGE_DEV;
     }
 
     public static String getBTMerchantId() {
-        return BuildConfig.IS_PRODUCTION_RELEASE?   BRAINTREE_MERCHANT_ID_PROD : BRAINTREE_MERCHANT_ID_DEV;
+        return !BuildConfig.DEBUG ?   BRAINTREE_MERCHANT_ID_PROD : BRAINTREE_MERCHANT_ID_DEV;
     }
 
     public static String getBTMerchantKey() {
-        return BuildConfig.IS_PRODUCTION_RELEASE?  BRAINTREE_MERCHANT_KEY_PROD : BRAINTREE_MERCHANT_KEY_DEV;
+        return !BuildConfig.DEBUG ?  BRAINTREE_MERCHANT_KEY_PROD : BRAINTREE_MERCHANT_KEY_DEV;
     }
 
 }

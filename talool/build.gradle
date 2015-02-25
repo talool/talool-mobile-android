@@ -2,15 +2,6 @@ apply plugin: 'android'
 apply plugin: 'crashlytics'
 apply plugin: 'maven'
 
-
-loadConfiguration()
-
-def loadConfiguration() {
-    def environment = hasProperty('env') ? env : 'dev'
-    project.ext.environment=environment
-    println "Environment is set to $environment"
-}
-
 buildscript {
     repositories {
         mavenCentral()
@@ -37,11 +28,6 @@ android {
     productFlavors {
 
         talool {
-            if( project.ext.environment=='prod') {
-                buildConfigField "boolean", "IS_PRODUCTION_RELEASE", "true"
-            } else {
-                buildConfigField "boolean", "IS_PRODUCTION_RELEASE", "false"
-            }
             applicationId "com.talool.android"
         }
         chamber {
@@ -56,6 +42,13 @@ android {
             keyAlias "talool_release"
             keyPassword "talool"
         }
+
+        releaseChamber {
+            storeFile file("../keys/talool-release-key.keystore")
+            storePassword "talool"
+            keyAlias "talool_release"
+            keyPassword "talool"
+        }
     }
 
     buildTypes {
@@ -65,6 +58,12 @@ android {
             signingConfig signingConfigs.release
             zipAlignEnabled true
         }
+
+        releaseChamber {
+            initWith release
+            signingConfig signingConfigs.releaseChamber
+        }
+
     }
 
 
