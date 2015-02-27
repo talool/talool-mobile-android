@@ -130,6 +130,7 @@ public class MainActivity extends Activity
 		subscribeForLocationUpdates();
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+                actionBar.setIcon( android.R.color.transparent);
 
 		Tab tab = actionBar.newTab().setText("My Deals").setTabListener(
 				new MyTabListener(this, MyDealsFragment.class.getName()));
