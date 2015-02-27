@@ -65,7 +65,7 @@ public final class Constants {
     private static final String FEEDBACK_URL_DEV = "http://dev-www.talool.com/feedback";
 
     private static final String WHITELABEL_ID_PROD = "d8b03445-63e7-4376-8a8b-8b43c659cada";
-    private static final String WHITELABEL_ID_DEV = "d027abd8-4181-4cf1-a847-ae05bcf240da";
+    private static final String WHITELABEL_ID_DEV = "c6679895-7fc7-499c-a063-2aa9b2bbde4c";
 
     public static String getApiUrl() {
         return !BuildConfig.DEBUG ? API_URL_PROD : API_URL_DEV;
