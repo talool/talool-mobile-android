@@ -49,7 +49,7 @@ public class ThriftHelper {
         }
 
         tHttpClient.setCustomHeader("User-Agent", AndroidUtils.getUserAgent());
-//        tHttpClient.setCustomHeader("X-Supports-Free-Books","");
+        tHttpClient.setCustomHeader("X-Supports-Free-Books","");
         tHttpClient.setCustomHeader("x-white-label-id",Constants.getWhiteLabelId());
     }
 
