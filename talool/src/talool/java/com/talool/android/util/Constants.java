@@ -1,6 +1,10 @@
 package com.talool.android.util;
 
+import android.util.Base64;
+
 import com.talool.android.BuildConfig;
+
+import java.util.Map;
 
 /**
  * @author clintz
@@ -64,54 +68,57 @@ public final class Constants {
     private static final String PRIVACY_URL_DEV = "http://dev-www.talool.com/privacy";
     private static final String FEEDBACK_URL_DEV = "http://dev-www.talool.com/feedback";
 
-
     public static String getApiUrl() {
-        return !BuildConfig.DEBUG ? API_URL_PROD : API_URL_DEV;
+        return BuildConfig.DEBUG ? API_URL_DEV : API_URL_PROD;
     }
 
     public static String getPublishersUrl() {
-        return !BuildConfig.DEBUG ? PUBLISHERS_URL_PROD : PUBLISHERS_URL_DEV;
+        return BuildConfig.DEBUG ? PUBLISHERS_URL_DEV : PUBLISHERS_URL_PROD;
     }
 
     public static String getMerchantsUrl() {
-        return  !BuildConfig.DEBUG ? MERCHANT_URL_PROD : MERCHANT_URL_DEV;
+        return  BuildConfig.DEBUG ? MERCHANT_URL_DEV : MERCHANT_URL_PROD;
     }
 
     public static String getTermsUrl() {
 
-        return !BuildConfig.DEBUG ? TERMS_URL_PROD : TERMS_URL_DEV;
+        return BuildConfig.DEBUG ? TERMS_URL_DEV : TERMS_URL_PROD;
     }
 
     public static String getPrivacyUrl() {
-        return !BuildConfig.DEBUG ? PRIVACY_URL_PROD : PRIVACY_URL_DEV;
+        return BuildConfig.DEBUG ? PRIVACY_URL_DEV : PRIVACY_URL_PROD;
     }
 
     public static String getFeedbackUrl() {
-        return !BuildConfig.DEBUG ? FEEDBACK_URL_PROD : FEEDBACK_URL_DEV;
+        return BuildConfig.DEBUG ? FEEDBACK_URL_DEV : FEEDBACK_URL_PROD;
     }
 
     public static String getOGGiftPage() {
-        return !BuildConfig.DEBUG ?  OG_GIFT_PAGE_PROD : OG_GIFT_PAGE_DEV;
+        return BuildConfig.DEBUG ?  OG_GIFT_PAGE_DEV : OG_GIFT_PAGE_PROD;
     }
 
     public static String getOGDealPage() {
-        return !BuildConfig.DEBUG ?  OG_DEAL_PAGE_PROD : OG_DEAL_PAGE_DEV;
+        return BuildConfig.DEBUG ?  OG_DEAL_PAGE_DEV: OG_DEAL_PAGE_PROD;
     }
 
     public static String getOGOfferPage() {
-        return !BuildConfig.DEBUG ?  OG_OFFER_PAGE_PROD : OG_OFFER_PAGE_DEV;
+        return BuildConfig.DEBUG ?  OG_OFFER_PAGE_DEV: OG_OFFER_PAGE_PROD;
     }
 
     public static String getOGMerchantPage() {
-        return !BuildConfig.DEBUG ?  MERCHANT_PAGE_PROD : MERCHANT_PAGE_DEV;
+        return BuildConfig.DEBUG ?  MERCHANT_PAGE_DEV : MERCHANT_PAGE_PROD;
     }
 
     public static String getBTMerchantId() {
-        return !BuildConfig.DEBUG ?   BRAINTREE_MERCHANT_ID_PROD : BRAINTREE_MERCHANT_ID_DEV;
+        return BuildConfig.DEBUG ? BRAINTREE_MERCHANT_ID_DEV : BRAINTREE_MERCHANT_ID_PROD;
     }
 
     public static String getBTMerchantKey() {
-        return !BuildConfig.DEBUG ?  BRAINTREE_MERCHANT_KEY_PROD : BRAINTREE_MERCHANT_KEY_DEV;
+        return BuildConfig.DEBUG ?  BRAINTREE_MERCHANT_KEY_DEV: BRAINTREE_MERCHANT_KEY_PROD;
+    }
+
+    public static Map<String,String> getCustomHeaders() {
+      return null;
     }
 
 }
