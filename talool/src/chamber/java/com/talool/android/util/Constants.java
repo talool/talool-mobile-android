@@ -148,4 +148,8 @@ public final class Constants {
   public static Map<String, String> getCustomHeaders() {
     return CUSTOM_HEADERS;
   }
+
+  public static boolean showPublisherLink(){
+      return false;
+  }
 }

@@ -121,4 +121,9 @@ public final class Constants {
       return null;
     }
 
+    public static boolean showPublisherLink(){
+        return true;
+    }
+
+
 }

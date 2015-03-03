@@ -34,7 +34,9 @@ public class ThriftHelper {
    * Headers that are set for ever flavor
    */
   private void setBaseHeaders() {
-    tHttpClient.setCustomHeader(CustomerServiceConstants.CTOKEN_NAME, TaloolUser.get().getAccessToken().getToken() );
+    if ((TaloolUser.get() != null) && (TaloolUser.get().getAccessToken() != null)) {
+          tHttpClient.setCustomHeader(CustomerServiceConstants.CTOKEN_NAME, TaloolUser.get().getAccessToken().getToken());
+      }
     tHttpClient.setCustomHeader("User-Agent", AndroidUtils.getUserAgent());
     if (TaloolUser.get().getGcmDeviceToken() != null) {
       tHttpClient.setCustomHeader(Constants.GCM_TOKEN_HEADER, Base64

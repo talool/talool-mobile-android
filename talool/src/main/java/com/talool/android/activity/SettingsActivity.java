@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.analytics.tracking.android.EasyTracker;
@@ -48,6 +49,11 @@ public class SettingsActivity extends Activity
 				finish();
 			}
 		});
+
+        if (!Constants.showPublisherLink()){
+            final LinearLayout publisherLayout = (LinearLayout) findViewById(R.id.settings_publisher_services_layout);
+            publisherLayout.setVisibility(LinearLayout.GONE);
+        }
 
 	}
 
