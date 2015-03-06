@@ -87,8 +87,9 @@
 
    <!-- facebook sdk strings -->
    <string name="or">OR</string>
-   <string name="facebook_app_id">342739092494152</string>
-   <string name="title_facebook_login">Authenticating with Facebook</string>
+    <string name="facebook_app_id">342739092494152</string>
+    <string name="map_api_key">AIzaSyCm8yhOzw2S5fi-lAd17LhQpipkkracvXs</string>
+    <string name="title_facebook_login">Authenticating with Facebook</string>
 
     <string name="find_deal_buy_now">Buy Now For</string>
     

@@ -99,6 +99,7 @@
    <!-- facebook sdk strings -->
    <string name="or">OR</string>
    <string name="facebook_app_id">342739092494152</string>
+   <string name="map_api_key">AIzaSyBzk6qFSqAgy8w4VVNDKEoEdTVhZGE1uIw</string>
    <string name="title_facebook_login">Authenticating with Facebook</string>
 
     <string name="find_deal_buy_now">Buy Now: </string>

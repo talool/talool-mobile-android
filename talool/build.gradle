@@ -44,9 +44,9 @@ android {
         }
 
         releaseChamber {
-            storeFile file("../keys/talool-release-key.keystore")
+            storeFile file("../keys/chamber-release-key.keystore")
             storePassword "talool"
-            keyAlias "talool_release"
+            keyAlias "chamber"
             keyPassword "talool"
         }
     }
