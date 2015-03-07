@@ -1,0 +1,72 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/hero_android_large"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".WelcomeActivity" >
+
+    <com.facebook.widget.LoginButton
+        xmlns:fb="http://schemas.android.com/apk/res-auto"
+	    android:id="@+id/login_button"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center_horizontal"
+	    android:layout_marginTop="20dp" />
+    
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_width="174dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/login_or_vertical_margin_top"
+        android:layout_marginBottom="@dimen/login_or_vertical_margin_bottom"
+        android:lines="1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/or"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/brown" 
+        android:gravity="center_horizontal"/>
+    
+    <!-- Login button -->
+    <Button android:id="@+id/btnLogin"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:text="@string/login_with_talool"
+          android:drawablePadding="5dp"
+          android:onClick="onLoginClick"
+          android:background="@drawable/btn_teal" 
+          android:textColor="@color/white"
+          android:textStyle="bold"
+          android:textSize="17sp"
+          android:paddingRight="15dp"
+          android:paddingLeft="15dp"
+          android:shadowColor="@color/teal_dark"
+		  android:shadowDx="1.5"
+		  android:shadowDy="1.5"
+		  android:shadowRadius="3.0"/>
+    
+    <!-- Link to Registration Screen -->
+    <TextView android:id="@+id/link_to_register"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/login_reglink_vertical_margin_top"
+          android:text="@string/newToTalool"
+          android:gravity="center"
+          android:textSize="18sp"
+          android:textStyle="bold"
+          android:onClick="onRegistrationClicked"
+          android:clickable="true"
+          android:textColor="@color/teal_dark"
+          
+          android:shadowColor="@color/white"
+          android:shadowDx="1.5"
+          android:shadowDy="1.5"
+          android:shadowRadius="3.0"/>
+
+</LinearLayout>
