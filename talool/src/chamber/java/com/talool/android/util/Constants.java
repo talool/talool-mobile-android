@@ -73,14 +73,15 @@ public final class Constants {
   private static final String MERCHANT_URL_PROD = "http://www.talool.com/services/merchants?wlid="+WHITELABEL_ID_PROD;
   private static final String TERMS_URL_PROD = "http://www.talool.com/termsofservice?wlid="+WHITELABEL_ID_PROD;
   private static final String PRIVACY_URL_PROD = "http://www.talool.com/privacy?wlid="+WHITELABEL_ID_PROD;
-  private static final String FEEDBACK_URL_PROD = "http://www.talool.com/feedback?wlid="+WHITELABEL_ID_PROD;
+
+  // the white label id is dynamically added to the feedback url
+  private static final String FEEDBACK_URL_PROD = "http://www.talool.com/feedback";
+  private static final String FEEDBACK_URL_DEV = "http://dev-www.talool.com/feedback";
 
   private static final String PUBLISHERS_URL_DEV = "http://dev-www.talool.com/services/publishers?wlid="+WHITELABEL_ID_DEV;
   private static final String MERCHANT_URL_DEV = "http://dev-www.talool.com/services/merchants?wlid="+WHITELABEL_ID_DEV;
   private static final String TERMS_URL_DEV = "http://dev-www.talool.com/termsofservice?wlid="+WHITELABEL_ID_DEV;
   private static final String PRIVACY_URL_DEV = "http://dev-www.talool.com/privacy?wlid="+WHITELABEL_ID_DEV;
-  private static final String FEEDBACK_URL_DEV = "http://dev-www.talool.com/feedback?wlid="+WHITELABEL_ID_DEV;
-
 
   private static final Map<String,String> CUSTOM_HEADERS=new HashMap<String, String>();
 
