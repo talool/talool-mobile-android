@@ -69,7 +69,9 @@
     <string name="locationSelect">Can you please tell us which Payback Book you are interested in?</string>
     <string name="helpLoadingDeals">It looks like you haven\'t loaded any deals yet!\n\nNo problem.  If you have a Book access code, you can take care of that on the Find Deals screen.\n\nIf you were sent a gift, you can accept that on the Activity screen.</string>
 
-    
+    <string name="c2d_message">com.chamber.android.permission.C2D_MESSAGE</string>
+
+
     <string name="arrow_content_desc">click link</string>
     <!-- activity strings -->
     <string name="accept_gift">Accept Gift</string>
