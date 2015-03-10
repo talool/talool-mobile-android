@@ -15,6 +15,8 @@ import com.talool.android.util.Constants;
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.TypefaceFactory;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * 
  * @author clintz
@@ -89,9 +91,12 @@ public class SettingsActivity extends Activity
 			case R.id.settings_send_feedback_layout:
 				final StringBuilder sb = new StringBuilder();
 				sb.append(Constants.getFeedbackUrl());
-				sb.append("?fromEmail=" + TaloolUser.get().getAccessToken().getCustomer().getEmail());
-				sb.append("&feedbackSrc=");
-				sb.append(AndroidUtils.getReleaseInfo());
+				sb.append("?fromEmail=").append(
+                                    TaloolUser.get().getAccessToken().getCustomer().getEmail());
+				sb.append("&feedbackSrc=").append(AndroidUtils.getReleaseInfo());
+                                if(StringUtils.isNotEmpty( Constants.getWhiteLabelId() ) ) {
+                                  sb.append("&wlid=").append( Constants.getWhiteLabelId() );
+                                }
 				url = sb.toString();
 				title = getResources().getString(R.string.settings_send_feedback);
 				break;
