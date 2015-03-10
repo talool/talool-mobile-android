@@ -17,10 +17,6 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
-    <permission android:name="@string/c2d_message"
-        android:protectionLevel="signature" />
-    <uses-permission android:name="@string/c2d_message" />
-
     <!--
      The following two permissions are not required to use
      Google Maps Android API v2, but are recommended
