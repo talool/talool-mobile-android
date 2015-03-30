@@ -96,9 +96,12 @@
    <string name="my_deals_no_results_prefix">You have no deals with merchants of type</string>
    <string name="my_deals_no_favorites_prefix">You have no favorite merchants</string>
 
+    <string name="c2d_message">com.talool.android.permission.C2D_MESSAGE</string>
+
    <!-- facebook sdk strings -->
    <string name="or">OR</string>
    <string name="facebook_app_id">342739092494152</string>
+   <string name="map_api_key">AIzaSyBzk6qFSqAgy8w4VVNDKEoEdTVhZGE1uIw</string>
    <string name="title_facebook_login">Authenticating with Facebook</string>
 
     <string name="find_deal_buy_now">Buy Now: </string>

@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/secure_lock"
+          android:visible="true"
+          android:title="secure"
+          android:enabled="true"
+          android:showAsAction="always" />
+</menu>

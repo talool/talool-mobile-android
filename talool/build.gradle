@@ -1,3 +1,7 @@
+apply plugin: 'android'
+apply plugin: 'crashlytics'
+apply plugin: 'maven'
+
 buildscript {
     repositories {
         mavenCentral()
@@ -8,10 +12,6 @@ buildscript {
         classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
     }
 }
-
-apply plugin: 'android'
-apply plugin: 'crashlytics'
-apply plugin: 'maven'
 
 android {
     compileSdkVersion 19
@@ -26,11 +26,12 @@ android {
         targetSdkVersion 18
     }
     productFlavors {
+
         talool {
             applicationId "com.talool.android"
         }
-        saveAround {
-            applicationId "com.savearound.android"
+        chamber {
+            applicationId "com.chamber.android"
         }
     }
 
@@ -39,6 +40,13 @@ android {
             storeFile file("../keys/talool-release-key.keystore")
             storePassword "talool"
             keyAlias "talool_release"
+            keyPassword "talool"
+        }
+
+        releaseChamber {
+            storeFile file("../keys/chamber-release-key.keystore")
+            storePassword "talool"
+            keyAlias "chamber"
             keyPassword "talool"
         }
     }
@@ -50,6 +58,12 @@ android {
             signingConfig signingConfigs.release
             zipAlignEnabled true
         }
+
+        releaseChamber {
+            initWith release
+            signingConfig signingConfigs.releaseChamber
+        }
+
     }
 
 

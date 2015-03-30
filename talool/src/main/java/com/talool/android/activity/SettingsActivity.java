@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.analytics.tracking.android.EasyTracker;
@@ -13,6 +14,8 @@ import com.talool.android.util.AndroidUtils;
 import com.talool.android.util.Constants;
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.TypefaceFactory;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 
@@ -49,6 +52,11 @@ public class SettingsActivity extends Activity
 			}
 		});
 
+        if (!Constants.showPublisherLink()){
+            final LinearLayout publisherLayout = (LinearLayout) findViewById(R.id.settings_publisher_services_layout);
+            publisherLayout.setVisibility(LinearLayout.GONE);
+        }
+
 	}
 
 	public void openUrl(final View view)
@@ -83,9 +91,12 @@ public class SettingsActivity extends Activity
 			case R.id.settings_send_feedback_layout:
 				final StringBuilder sb = new StringBuilder();
 				sb.append(Constants.getFeedbackUrl());
-				sb.append("?fromEmail=" + TaloolUser.get().getAccessToken().getCustomer().getEmail());
-				sb.append("&feedbackSrc=");
-				sb.append(AndroidUtils.getReleaseInfo());
+				sb.append("?fromEmail=").append(
+                                    TaloolUser.get().getAccessToken().getCustomer().getEmail());
+				sb.append("&feedbackSrc=").append(AndroidUtils.getReleaseInfo());
+                                if(StringUtils.isNotEmpty( Constants.getWhiteLabelId() ) ) {
+                                  sb.append("&wlid=").append( Constants.getWhiteLabelId() );
+                                }
 				url = sb.toString();
 				title = getResources().getString(R.string.settings_send_feedback);
 				break;
