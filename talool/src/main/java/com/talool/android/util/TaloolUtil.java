@@ -5,6 +5,7 @@ import android.content.Context;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
+import com.talool.android.util.Constants;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;

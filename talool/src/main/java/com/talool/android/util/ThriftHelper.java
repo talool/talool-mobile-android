@@ -11,72 +11,82 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.THttpClient;
 import org.apache.thrift.transport.TTransportException;
 
+import java.util.Map;
+
+/**
+* Created by clintz on 3/1/15.
+*/
 public class ThriftHelper {
-    public THttpClient tHttpClient;
-    public TProtocol protocol;
-    public CustomerService_t.Client client;
 
-    public ThriftHelper() throws TTransportException {
-        tHttpClient = new THttpClient(Constants.getApiUrl());
-        protocol = new TBinaryProtocol(tHttpClient);
-        client = new CustomerService_t.Client(protocol);
+  public THttpClient tHttpClient;
+  public TProtocol protocol;
+  public CustomerService_t.Client client;
 
-        if (TaloolUser.get().getAccessToken() != null) {
-            tHttpClient.setCustomHeader(CustomerServiceConstants.CTOKEN_NAME, TaloolUser.get().getAccessToken().getToken());
-        }
+  public ThriftHelper() throws TTransportException {
+    tHttpClient = new THttpClient(Constants.getApiUrl());
+    protocol = new TBinaryProtocol(tHttpClient);
+    client = new CustomerService_t.Client(protocol);
+    setBaseHeaders();
+    setCustomHeaders();
+  }
 
-        setCustomHeaders();
+  /**
+   * Headers that are set for ever flavor
+   */
+  private void setBaseHeaders() {
+    if ((TaloolUser.get() != null) && (TaloolUser.get().getAccessToken() != null)) {
+          tHttpClient.setCustomHeader(CustomerServiceConstants.CTOKEN_NAME, TaloolUser.get().getAccessToken().getToken());
+      }
+    tHttpClient.setCustomHeader("User-Agent", AndroidUtils.getUserAgent());
+    if (TaloolUser.get().getGcmDeviceToken() != null) {
+      tHttpClient.setCustomHeader(Constants.GCM_TOKEN_HEADER, Base64
+          .encodeToString(TaloolUser.get().getGcmDeviceToken().getBytes(), Base64.NO_WRAP));
     }
 
-    public ThriftHelper(CTokenAccess_t accessToken) throws TTransportException {
-        tHttpClient = new THttpClient(Constants.getApiUrl());
-        protocol = new TBinaryProtocol(tHttpClient);
-        client = new CustomerService_t.Client(protocol);
-        tHttpClient.setCustomHeader(CustomerServiceConstants.CTOKEN_NAME, accessToken.getToken());
-        tHttpClient.setCustomHeader("User-Agent", AndroidUtils.getUserAgent());
-        setCustomHeaders();
-
+    if (TaloolUser.get().getDeviceToken() != null) {
+      tHttpClient.setCustomHeader(Constants.DEVICE_TOKEN_HEADER, TaloolUser.get().getDeviceToken());
     }
 
-    private void setCustomHeaders() {
-        if (TaloolUser.get().getGcmDeviceToken() != null) {
-            tHttpClient.setCustomHeader(Constants.GCM_TOKEN_HEADER, Base64.encodeToString(TaloolUser.get().getGcmDeviceToken().getBytes(), Base64.NO_WRAP));
-        }
+    tHttpClient.setCustomHeader("User-Agent", AndroidUtils.getUserAgent());
+    tHttpClient.setCustomHeader("X-Supports-Free-Books", "");
+  }
 
-        if (TaloolUser.get().getDeviceToken() != null) {
-            tHttpClient.setCustomHeader(Constants.DEVICE_TOKEN_HEADER, TaloolUser.get().getDeviceToken());
-        }
-
-        tHttpClient.setCustomHeader("User-Agent", AndroidUtils.getUserAgent());
-        tHttpClient.setCustomHeader("X-Supports-Free-Books","");
-
+  protected void setCustomHeaders() {
+    if (Constants.getCustomHeaders() == null) {
+      return;
     }
 
-    public TProtocol getProtocol() {
-        return this.protocol;
+    for (Map.Entry<String, String> entrySet : Constants.getCustomHeaders().entrySet()) {
+      tHttpClient.setCustomHeader(entrySet.getKey(), entrySet.getValue());
     }
 
-    public THttpClient gettHttpClient() {
-        return tHttpClient;
-    }
+  }
 
-    public void settHttpClient(THttpClient tHttpClient) {
-        this.tHttpClient = tHttpClient;
-    }
+  public TProtocol getProtocol() {
+    return this.protocol;
+  }
 
-    public CustomerService_t.Client getClient() {
-        return client;
-    }
+  public THttpClient gettHttpClient() {
+    return tHttpClient;
+  }
 
-    public void setClient(CustomerService_t.Client client) {
-        this.client = client;
-    }
+  public void settHttpClient(THttpClient tHttpClient) {
+    this.tHttpClient = tHttpClient;
+  }
 
-    public void setProtocol(TProtocol protocol) {
-        this.protocol = protocol;
-    }
+  public CustomerService_t.Client getClient() {
+    return client;
+  }
 
-    public void setAccessToken(final CTokenAccess_t tokenAccess) {
-        tHttpClient.setCustomHeader(CustomerServiceConstants.CTOKEN_NAME, tokenAccess.getToken());
-    }
+  public void setClient(CustomerService_t.Client client) {
+    this.client = client;
+  }
+
+  public void setProtocol(TProtocol protocol) {
+    this.protocol = protocol;
+  }
+
+  public void setAccessToken(final CTokenAccess_t tokenAccess) {
+    tHttpClient.setCustomHeader(CustomerServiceConstants.CTOKEN_NAME, tokenAccess.getToken());
+  }
 }

@@ -10,6 +10,7 @@ import com.talool.android.tasks.ActivitySupervisor;
 import com.talool.api.thrift.CTokenAccess_t;
 import com.talool.api.thrift.SocialNetwork_t;
 import com.talool.thrift.util.ThriftUtil;
+import com.talool.android.util.Constants;
 
 import org.apache.thrift.TException;
 
