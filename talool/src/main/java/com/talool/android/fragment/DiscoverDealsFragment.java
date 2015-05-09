@@ -2,6 +2,7 @@ package com.talool.android.fragment;
 
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -18,9 +19,13 @@ import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
 import com.talool.android.MainActivity;
 import com.talool.android.R;
+import com.talool.android.TaloolApplication;
 import com.talool.android.activity.FindDealsActivity;
 import com.talool.android.adapters.DiscoverDealsAdapter;
 import com.talool.android.dialog.DialogFactory;
+import com.talool.android.persistence.MerchantDao;
+import com.talool.android.tasks.MyDealsTask;
+import com.talool.android.tasks.PaymentTask;
 import com.talool.android.util.Constants;
 import com.talool.android.util.TaloolUser;
 import com.talool.android.util.ThriftHelper;
@@ -28,8 +33,11 @@ import com.talool.api.thrift.CoreConstants;
 import com.talool.api.thrift.CustomerService_t;
 import com.talool.api.thrift.DealOfferGeoSummariesResponse_t;
 import com.talool.api.thrift.DealOfferGeoSummary_t;
+import com.talool.api.thrift.DealOffer_t;
 import com.talool.api.thrift.Location_t;
+import com.talool.api.thrift.Merchant_t;
 import com.talool.api.thrift.SearchOptions_t;
+import com.talool.api.thrift.TransactionResult_t;
 import com.talool.thrift.util.ThriftUtil;
 
 import org.apache.thrift.TException;
@@ -39,7 +47,8 @@ import java.util.List;
 
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
 
-public class DiscoverDealsFragment extends Fragment implements PullToRefreshAttacher.OnRefreshListener {	
+public class DiscoverDealsFragment extends Fragment implements PullToRefreshAttacher.OnRefreshListener,
+        DialogFactory.DialogClickListener, DialogFactory.DialogPositiveClickListener {
 	private ThriftHelper client;
 	private View view;
 	private ListView discoverDealsListView;
@@ -128,8 +137,48 @@ public class DiscoverDealsFragment extends Fragment implements PullToRefreshAtta
 		discoverDealsListView.setAdapter(discoverDealsAdapter);
 		discoverDealsListView.setOnItemClickListener(onClickListener);
 	}
-	
-	private class DiscoverDealsTask extends AsyncTask<String, Void, List<DealOfferGeoSummary_t>>
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        redirectToMyDeals();
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
+    }
+
+    private void redirectToMyDeals() {
+        final MerchantDao merchantDao = new MerchantDao(TaloolApplication.getAppContext());
+        final Context context = view.getContext();
+        MyDealsTask task = new MyDealsTask(client, view.getContext(), merchantDao) {
+
+            @Override
+            protected void onPreExecute() {
+                df = DialogFactory.getProgressDialog();
+                df.show(getFragmentManager(), "dialog");
+            }
+
+            @Override
+            protected void onPostExecute(final List<Merchant_t> results) {
+                if (df != null && !df.isHidden()) {
+                    df.dismiss();
+                }
+                if (results != null) {
+                    merchantDao.saveMerchants(results);
+                    final Intent myIntent = new Intent(context, MainActivity.class);
+                    Bundle b = new Bundle();
+                    b.putInt(Constants.TAB_SELECTED_KEY, 0);
+                    myIntent.putExtras(b);
+                    startActivity(myIntent);
+                }
+            }
+        };
+        task.execute();
+
+    }
+
+    private class DiscoverDealsTask extends AsyncTask<String, Void, List<DealOfferGeoSummary_t>>
 	{
 
 		@Override
@@ -235,10 +284,50 @@ public class DiscoverDealsFragment extends Fragment implements PullToRefreshAtta
 			DiscoverDealsAdapter discoverDealsAdapter = (DiscoverDealsAdapter) arg0.getAdapter();
 			DealOfferGeoSummary_t dealOfferSummary = (DealOfferGeoSummary_t) discoverDealsAdapter.getItem(position);
 
-			Intent myIntent = new Intent(arg1.getContext(), FindDealsActivity.class);
-			myIntent.putExtra("dealOffer", ThriftUtil.serialize(dealOfferSummary.dealOffer));
-            myIntent.putExtra("dealOfferSummaryText", getSummaryText(dealOfferSummary));
-			startActivity(myIntent);
+            double price = dealOfferSummary.getDealOffer().getPrice();
+            if (price > 0)
+            {
+                Intent myIntent = new Intent(arg1.getContext(), FindDealsActivity.class);
+                myIntent.putExtra("dealOffer", ThriftUtil.serialize(dealOfferSummary.dealOffer));
+                myIntent.putExtra("dealOfferSummaryText", getSummaryText(dealOfferSummary));
+                startActivity(myIntent);
+            }
+            else
+            {
+                // if this is a free book, just download it
+                final DealOffer_t offer = dealOfferSummary.getDealOffer();
+                final PaymentTask task = new PaymentTask(offer, "", "", view.getContext(), client) {
+
+                    @Override
+                    protected void onPreExecute() {
+                        df = DialogFactory.getProgressDialog();
+                        df.show(getFragmentManager(), "dialog");
+                        this.errorMessage = null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(final TransactionResult_t transactionResult) {
+                        if (df != null && !df.isHidden()) {
+                            df.dismiss();
+                        }
+
+                        if (this.errorMessage == null) {
+                            if (transactionResult.isSuccess()) {
+                                String title = getResources().getString(R.string.payment_trans_success_title);
+                                String message = String.format(getResources().getString(R.string.free_book_trans_success_message), offer.getTitle());
+                                String label = getResources().getString(R.string.payment_trans_success_positive_label);
+                                df = DialogFactory.getAlertDialog(title, message, label, DiscoverDealsFragment.this);
+                                df.show(getFragmentManager(), "dialog");
+                            } else {
+                                popupErrorMessage(transactionResult.getMessage());
+                            }
+                        } else {
+                            popupErrorMessage(this.errorMessage);
+                        }
+                    }
+                };
+                task.execute();
+            }
 		}
 	};
 
